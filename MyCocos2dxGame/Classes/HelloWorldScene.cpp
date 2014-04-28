@@ -1,6 +1,12 @@
-#include "HelloWorldScene.h"
+﻿#include "HelloWorldScene.h"
+
+//USING_NS_CC;
+
+#include "cocos-ext.h" 
+#include "editor-support/cocostudio/cocostudio.h" 
 
 USING_NS_CC;
+USING_NS_CC_EXT;
 
 Scene* HelloWorld::createScene()
 {
@@ -50,7 +56,7 @@ bool HelloWorld::init()
 
     /////////////////////////////
     // 3. add your codes below...
-
+	/*
     // add a label shows "Hello World"
     // create and initialize a label
     
@@ -71,7 +77,15 @@ bool HelloWorld::init()
 
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
-    
+    */
+	Layer *uiLayer = Layer::create();
+	//layout
+	//auto myLayout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("testUI.ExportJson")); //alpha0中使用
+	auto myLayout = cocostudio::GUIReader::shareReader()->widgetFromJsonFile("testUI.ExportJson")); //alpha1中使用 
+	//Layout* myLayout = dynamic_cast<Layout*>(cocostudio::GUIReader::shareReader()->widgetFromJsonFile("cocosgui/UITest/UITest.json"));
+	//Layout* m_pLayout = dynamic_cast<Layout*>(cocostudio::GUIReader::shareReader()->widgetFromJsonFile("cocosgui/UITest/UITest.json"));
+	//m_pLayer->addWidget(m_pLayout);
+
     return true;
 }
 
