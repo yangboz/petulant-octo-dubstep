@@ -50,3 +50,7 @@ Run
 ### Build and run new project for win32 ###
 
     $ cocos run -p win32
+    
+### VS2013 cpnfigurations ###
+
+http://blog.csdn.net/fansongy/article/details/18366275
