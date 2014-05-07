@@ -2,11 +2,13 @@
 
 //USING_NS_CC;
 
-#include "cocos-ext.h" 
-#include "editor-support/cocostudio/cocostudio.h" 
+//#include "cocos-ext.h" 
+#include "CocosGUI.h"
+#include "cocos2d.h"
+#include "editor-support\cocostudio\CocoStudio.h"
 
 USING_NS_CC;
-USING_NS_CC_EXT;
+//USING_NS_CC_EXT;
 
 Scene* HelloWorld::createScene()
 {
@@ -78,13 +80,10 @@ bool HelloWorld::init()
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
     */
-	Layer *uiLayer = Layer::create();
-	//layout
-	//auto myLayout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("testUI.ExportJson")); //alpha0中使用
-	auto myLayout = cocostudio::GUIReader::shareReader()->widgetFromJsonFile("testUI.ExportJson")); //alpha1中使用 
-	//Layout* myLayout = dynamic_cast<Layout*>(cocostudio::GUIReader::shareReader()->widgetFromJsonFile("cocosgui/UITest/UITest.json"));
-	//Layout* m_pLayout = dynamic_cast<Layout*>(cocostudio::GUIReader::shareReader()->widgetFromJsonFile("cocosgui/UITest/UITest.json"));
-	//m_pLayer->addWidget(m_pLayout);
+	//Layer *uiLayer = Layer::create();
+	//Load Layout
+	auto uiLayer = cocostudio::GUIReader::getInstance()->widgetFromJsonFile("CocoStudioUI_1/CocoStudioUI_1.json");
+	addChild(uiLayer);
 
     return true;
 }
