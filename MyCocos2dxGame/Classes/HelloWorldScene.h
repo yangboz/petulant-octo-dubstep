@@ -17,6 +17,10 @@ public:
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+
+	//ChineseCharacters Wrapper
+	std::string HelloWorld::WStrToUTF8(const std::wstring &str);
+	void HelloWorld::WStrToUTF8Convert(std::string& dest, const std::wstring& src);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

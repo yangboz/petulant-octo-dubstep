@@ -58,32 +58,14 @@ bool HelloWorld::init()
 
     /////////////////////////////
     // 3. add your codes below...
-	/*
-    // add a label shows "Hello World"
-    // create and initialize a label
-    
-    auto label = LabelTTF::create("Hello World", "Arial", 24);
-    
-    // position the label on the center of the screen
-    label->setPosition(Point(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
 
-    // add the label as a child to this layer
-    this->addChild(label, 1);
-
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-
-    // position the sprite on the center of the screen
-    sprite->setPosition(Point(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
-    // add the sprite as a child to this layer
-    this->addChild(sprite, 0);
-    */
-	//Layer *uiLayer = Layer::create();
 	//Load Layout
-	auto uiLayer = cocostudio::GUIReader::getInstance()->widgetFromJsonFile("CocoStudioUI_1/CocoStudioUI_1.json");
-	addChild(uiLayer);
+	auto uiLayout = cocostudio::GUIReader::getInstance()->widgetFromJsonFile("CocoStudioUI_1/CocoStudioUI_1.json");
+	addChild(uiLayout);
+
+	//UIElements behaviour
+	ui::Button *button_verify = dynamic_cast<ui::Button*>(uiLayout->getChildByName("Button_verify"));
+	button_verify->setTitleText(WStrToUTF8(L"验证"));
 
     return true;
 }
@@ -101,4 +83,42 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif
+}
+
+//Chinese character warpper
+//! convert from wstring to UTF8 using self-coding-converting  
+void HelloWorld::WStrToUTF8Convert(std::string& dest, const std::wstring& src){
+	dest.clear();
+
+	for (size_t i = 0; i < src.size(); i++){
+		wchar_t w = src[i];
+		if (w <= 0x7f)
+			dest.push_back((char)w);
+		else if (w <= 0x7ff)
+		{
+			dest.push_back(0xc0 | ((w >> 6) & 0x1f));
+			dest.push_back(0x80 | (w & 0x3f));
+		}
+		else if (w <= 0xffff)
+		{
+			dest.push_back(0xe0 | ((w >> 12) & 0x0f));
+			dest.push_back(0x80 | ((w >> 6) & 0x3f));
+			dest.push_back(0x80 | (w & 0x3f));
+		}
+		else if (sizeof(wchar_t) > 2 && w <= 0x10ffff)
+		{
+			dest.push_back(0xf0 | ((w >> 18) & 0x07)); // wchar_t 4-bytes situation  
+			dest.push_back(0x80 | ((w >> 12) & 0x3f));
+			dest.push_back(0x80 | ((w >> 6) & 0x3f));
+			dest.push_back(0x80 | (w & 0x3f));
+		}
+		else
+			dest.push_back('?');
+	}
+}
+std::string HelloWorld::WStrToUTF8(const std::wstring &str)
+{
+	std::string result;
+	WStrToUTF8Convert(result, str);
+	return result;
 }
