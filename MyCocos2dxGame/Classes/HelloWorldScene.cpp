@@ -1,7 +1,5 @@
 ﻿#include "HelloWorldScene.h"
 
-//USING_NS_CC;
-
 //#include "cocos-ext.h" 
 #include "CocosGUI.h"
 #include "cocos2d.h"
@@ -9,6 +7,7 @@
 
 USING_NS_CC;
 //USING_NS_CC_EXT;
+using namespace ui;
 
 Scene* HelloWorld::createScene()
 {
@@ -64,8 +63,49 @@ bool HelloWorld::init()
 	addChild(uiLayout);
 
 	//UIElements behaviour
+	//Buttons
 	ui::Button *button_verify = dynamic_cast<ui::Button*>(uiLayout->getChildByName("Button_verify"));
 	button_verify->setTitleText(WStrToUTF8(L"验证"));
+	//ListView
+	ui::ListView *listView_certificates = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("ListView_certificates"));
+	listView_certificates->setDirection(SCROLLVIEW_DIR_VERTICAL);
+	//ListView item model
+	//
+	ui::Button *listView_default_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
+	listView_default_button->setTitleText(WStrToUTF8(L"护照"));
+	//
+	std::vector<std::string> _array_of_certs;
+	_array_of_certs.push_back(WStrToUTF8(L"驾驶证"));
+	_array_of_certs.push_back(WStrToUTF8(L"中国护照"));
+	_array_of_certs.push_back(WStrToUTF8(L"港澳通行证"));
+	_array_of_certs.push_back(WStrToUTF8(L"台湾通行证"));
+	_array_of_certs.push_back(WStrToUTF8(L"赴美签证"));
+	_array_of_certs.push_back(WStrToUTF8(L"申根签证"));
+	//listView_certificates->pushBackDefaultItem();
+
+	ssize_t count = _array_of_certs.size();
+	for (int j = 0; j < count; ++j) {
+		//insert custom item
+		ui::Button *custom_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
+		custom_button->setTitleText(_array_of_certs[j]);
+		custom_button->setScale9Enabled(true);
+		custom_button->setSize(listView_default_button->getSize());
+
+		Layout* custom_item = Layout::create();
+		custom_item->setSize(custom_button->getSize());
+		custom_button->setPosition(Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
+		custom_item->addChild(custom_button);
+		listView_certificates->pushBackCustomItem(custom_item);
+	}
+
+	//
+	ui::Layout *layout_listView = ui::Layout::create();
+	layout_listView->setTouchEnabled(true);
+	layout_listView->setSize(listView_default_button->getSize());
+	layout_listView->setPosition(Point(layout_listView->getSize().width / 2.0f, layout_listView->getSize().height / 2.0f));
+	layout_listView->addChild(listView_default_button);
+	//
+	listView_certificates->setItemModel(listView_default_button);
 
     return true;
 }
