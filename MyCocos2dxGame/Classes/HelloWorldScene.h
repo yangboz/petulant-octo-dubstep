@@ -1,7 +1,16 @@
 #ifndef __HELLOWORLD_SCENE_H__
 #define __HELLOWORLD_SCENE_H__
 
+#define COCOS2D_DEBUG 1
+
+//#include "cocos-ext.h" 
+#include "CocosGUI.h"
 #include "cocos2d.h"
+#include "editor-support\cocostudio\CocoStudio.h"
+
+USING_NS_CC;
+//USING_NS_CC_EXT;
+using namespace ui;
 
 class HelloWorld : public cocos2d::Layer
 {
@@ -15,12 +24,18 @@ public:
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
     
+	//EventHandlers
+	void onOpenButtonTouch(Object *pSender, ui::TouchEventType type);
+
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 
 	//ChineseCharacters Wrapper
-	std::string HelloWorld::WStrToUTF8(const std::wstring &str);
-	void HelloWorld::WStrToUTF8Convert(std::string& dest, const std::wstring& src);
+	std::string WStrToUTF8(const std::wstring &str);
+	void WStrToUTF8Convert(std::string& dest, const std::wstring& src);
+
+	//OpenFilePickerTask
+	void onOpenFilePicker();
 };
 
 #endif // __HELLOWORLD_SCENE_H__

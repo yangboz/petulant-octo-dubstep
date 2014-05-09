@@ -1,14 +1,5 @@
 ﻿#include "HelloWorldScene.h"
 
-//#include "cocos-ext.h" 
-#include "CocosGUI.h"
-#include "cocos2d.h"
-#include "editor-support\cocostudio\CocoStudio.h"
-
-USING_NS_CC;
-//USING_NS_CC_EXT;
-using namespace ui;
-
 Scene* HelloWorld::createScene()
 {
     // 'scene' is an autorelease object
@@ -64,23 +55,31 @@ bool HelloWorld::init()
 
 	//UIElements behaviour
 	//Buttons
-	ui::Button *button_verify = dynamic_cast<ui::Button*>(uiLayout->getChildByName("Button_verify"));
+	//
+	ui::Button *button_open = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_intro")->getChildByName("Button_open"));
+	button_open->setTitleText(WStrToUTF8(L"打开"));
+	button_open->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onOpenButtonTouch);
+	//
+	ui::Button *button_verify = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Button_verify"));
 	button_verify->setTitleText(WStrToUTF8(L"验证"));
+	//
+	ui::Button *button_more_certs = dynamic_cast<ui::Button*>(uiLayout->getChildByName("Button_more_certs"));
+	button_more_certs->setTitleText(WStrToUTF8(L"+ 添加常用尺寸"));
 	//ListView
 	ui::ListView *listView_certificates = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("ListView_certificates"));
 	listView_certificates->setDirection(SCROLLVIEW_DIR_VERTICAL);
 	//ListView item model
 	//
 	ui::Button *listView_default_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
-	listView_default_button->setTitleText(WStrToUTF8(L"护照"));
+	//listView_default_button->setTitleText(WStrToUTF8(L"护照"));
 	//
 	std::vector<std::string> _array_of_certs;
-	_array_of_certs.push_back(WStrToUTF8(L"驾驶证"));
-	_array_of_certs.push_back(WStrToUTF8(L"中国护照"));
-	_array_of_certs.push_back(WStrToUTF8(L"港澳通行证"));
-	_array_of_certs.push_back(WStrToUTF8(L"台湾通行证"));
-	_array_of_certs.push_back(WStrToUTF8(L"赴美签证"));
-	_array_of_certs.push_back(WStrToUTF8(L"申根签证"));
+	_array_of_certs.push_back(WStrToUTF8(L"驾驶证（220X320）"));
+	_array_of_certs.push_back(WStrToUTF8(L"中国护照 （480X330）"));
+	_array_of_certs.push_back(WStrToUTF8(L"港澳通行证（480X330）"));
+	_array_of_certs.push_back(WStrToUTF8(L"台湾通行证（480X330）"));
+	_array_of_certs.push_back(WStrToUTF8(L"赴美签证（500X500）"));
+	_array_of_certs.push_back(WStrToUTF8(L"申根签证（350X450）"));
 	//listView_certificates->pushBackDefaultItem();
 
 	ssize_t count = _array_of_certs.size();
@@ -125,6 +124,22 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 #endif
 }
 
+//EventHandlers
+void HelloWorld::onOpenButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onOpenButtonTouch,TOUCH_EVENT_ENDED!");
+		this->onOpenFilePicker();
+		break;
+	default:
+			break;
+	}
+}
+
 //Chinese character warpper
 //! convert from wstring to UTF8 using self-coding-converting  
 void HelloWorld::WStrToUTF8Convert(std::string& dest, const std::wstring& src){
@@ -161,4 +176,9 @@ std::string HelloWorld::WStrToUTF8(const std::wstring &str)
 	std::string result;
 	WStrToUTF8Convert(result, str);
 	return result;
+}
+
+void HelloWorld::onOpenFilePicker()
+{
+
 }
