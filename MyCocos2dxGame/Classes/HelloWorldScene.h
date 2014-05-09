@@ -12,6 +12,8 @@ USING_NS_CC;
 //USING_NS_CC_EXT;
 using namespace ui;
 
+
+
 class HelloWorld : public cocos2d::Layer
 {
 public:

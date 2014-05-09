@@ -1,5 +1,7 @@
 ﻿#include "HelloWorldScene.h"
 
+#include "FileOperation.h"
+
 Scene* HelloWorld::createScene()
 {
     // 'scene' is an autorelease object
@@ -178,7 +180,9 @@ std::string HelloWorld::WStrToUTF8(const std::wstring &str)
 	return result;
 }
 
+//@see http://www.cocos2d-x.org/wiki/How_to_read_and_write_file_on_different_platforms
+//@see http://msdn.microsoft.com/en-us/library/windows/apps/dn263165.aspx
 void HelloWorld::onOpenFilePicker()
 {
-
+	FileOperation::readFile();
 }
