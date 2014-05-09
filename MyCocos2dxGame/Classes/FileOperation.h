@@ -18,7 +18,7 @@ public:
 	static void saveFile(void);
 	static void readFile(std::wstring filePath);
 	static std::string getFilePath();
-	static std::wstring openFile();
+	static std::string openFile();
 	static std::vector<std::wstring> openFiles();
 };
 

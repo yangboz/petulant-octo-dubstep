@@ -72,16 +72,17 @@ string FileOperation::getFilePath()
 	return path;
 }
 
-std::wstring FileOperation::openFile()
+std::string FileOperation::openFile()
 {
 	HRESULT hr = S_OK;
 	//std::vector<std::wstring> filePaths;
 	std::wstring filePaths;
+	std::string filePath;
 
 	IFileOpenDialog *fileDlg = NULL;
 	hr = CoCreateInstance(CLSID_FileOpenDialog,
 		NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&fileDlg));
-	if (FAILED(hr)) return filePaths;
+	if (FAILED(hr)) return filePath;
 	ON_SCOPE_EXIT([&] { fileDlg->Release(); });
 
 	IKnownFolderManager *pkfm = NULL;
@@ -89,7 +90,7 @@ std::wstring FileOperation::openFile()
 		NULL,
 		CLSCTX_INPROC_SERVER,
 		IID_PPV_ARGS(&pkfm));
-	if (FAILED(hr)) return filePaths;
+	if (FAILED(hr)) return filePath;
 	ON_SCOPE_EXIT([&] { pkfm->Release(); });
 
 	IKnownFolder *pKnownFolder = NULL;
@@ -99,7 +100,7 @@ std::wstring FileOperation::openFile()
 
 	IShellItem *psi = NULL;
 	hr = pKnownFolder->GetShellItem(0, IID_PPV_ARGS(&psi));
-	if (FAILED(hr)) return filePaths;
+	if (FAILED(hr)) return filePath;
 	ON_SCOPE_EXIT([&] { psi->Release(); });
 
 	hr = fileDlg->AddPlace(psi, FDAP_BOTTOM);
@@ -132,8 +133,10 @@ std::wstring FileOperation::openFile()
 			pRets->Release();
 		}
 	}
-	CCLOG("Selected image file path: c \\n", filePaths.c_str());
-	return filePaths;
+	//
+	filePath = StringUtils::ws2s(filePaths);
+	CCLOG("Selected image file path: %s \\n", filePath);
+	return filePath;
 }
 
 std::vector<std::wstring> openFiles()

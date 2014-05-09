@@ -641,7 +641,7 @@
                 "options": {
                   "__type": "ImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
                   "classname": "ImageView",
-                  "name": "Image_9",
+                  "name": "Image_cert_origin",
                   "ZOrder": 0,
                   "actiontag": 9,
                   "anchorPointX": 0.5,

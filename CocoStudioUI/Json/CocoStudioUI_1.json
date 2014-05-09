@@ -10,7 +10,12 @@
   "designHeight": 640,
   "designWidth": 960,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "GUI/button.png",
+    "GUI/image.png",
+    "GUI/slider_bar.png",
+    "GUI/slider_bar_button.png"
+  ],
   "version": "1.4.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -636,7 +641,7 @@
                 "options": {
                   "__type": "ImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
                   "classname": "ImageView",
-                  "name": "Image_9",
+                  "name": "Image_cert_origin",
                   "ZOrder": 0,
                   "actiontag": 9,
                   "anchorPointX": 0.5,
@@ -900,7 +905,7 @@
       "classname": "Panel",
       "name": "Panel_main",
       "ZOrder": 0,
-      "actiontag": -1,
+      "actiontag": 1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "Panel",

@@ -17,7 +17,12 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>GUI/button.png</string>
+    <string>GUI/image.png</string>
+    <string>GUI/slider_bar.png</string>
+    <string>GUI/slider_bar_button.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>CocoStudioUI_1.json</CurrentUIJson>
 </UIProject>
