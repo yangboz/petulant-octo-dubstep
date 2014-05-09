@@ -38,6 +38,9 @@ public:
 
 	//OpenFilePickerTask
 	void onOpenFilePicker();
+
+private:
+	ui::Widget *uiLayout;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

@@ -53,7 +53,7 @@ bool HelloWorld::init()
     // 3. add your codes below...
 
 	//Load Layout
-	auto uiLayout = cocostudio::GUIReader::getInstance()->widgetFromJsonFile("CocoStudioUI_1/CocoStudioUI_1.json");
+	this->uiLayout = cocostudio::GUIReader::getInstance()->widgetFromJsonFile("CocoStudioUI_1/CocoStudioUI_1.json");
 	addChild(uiLayout);
 
 	//UIElements behaviour
@@ -183,8 +183,14 @@ std::string HelloWorld::WStrToUTF8(const std::wstring &str)
 
 //@see http://www.cocos2d-x.org/wiki/How_to_read_and_write_file_on_different_platforms
 //@see http://msdn.microsoft.com/en-us/library/windows/apps/dn263165.aspx
+//@see http://www.cocos2d-x.org/wiki/How_to_read_and_write_file_on_different_platforms
 void HelloWorld::onOpenFilePicker()
 {
-	FileOperation::openFile();
+	std::wstring filePath = FileOperation::openFile();
 	//MessageBox(NULL,"Welcome to Win32 Application Development!\n");
+	//Navigate to PageView_editor
+	ui::PageView *pageView = dynamic_cast<ui::PageView*>(this->uiLayout->getChildByName("PageView_editor"));
+	pageView->scrollToPage(1);
+	//Read image file
+	FileOperation::readFile(filePath);
 }

@@ -10,13 +10,16 @@
 
 #include "scope_guard.h"
 
+#include "StringUtils.h"
+
 class FileOperation
 {
 public:
 	static void saveFile(void);
-	static void readFile(void);
+	static void readFile(std::wstring filePath);
 	static std::string getFilePath();
-	static void openFile(void);
+	static std::wstring openFile();
+	static std::vector<std::wstring> openFiles();
 };
 
 #endif
