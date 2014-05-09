@@ -1,4 +1,4 @@
-// to enable CCLOG()
+﻿// to enable CCLOG()
 #define COCOS2D_DEBUG 1
 
 #include "cocos2d.h"
@@ -69,4 +69,65 @@ string FileOperation::getFilePath()
 #endif
 
 	return path;
+}
+
+void FileOperation::openFile()
+{
+	HRESULT hr = S_OK;
+	std::vector<std::wstring> filePaths;
+
+	IFileOpenDialog *fileDlg = NULL;
+	hr = CoCreateInstance(CLSID_FileOpenDialog,
+		NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&fileDlg));
+	//if (FAILED(hr)) return filePaths;
+	ON_SCOPE_EXIT([&] { fileDlg->Release(); });
+
+	IKnownFolderManager *pkfm = NULL;
+	hr = CoCreateInstance(CLSID_KnownFolderManager,
+		NULL,
+		CLSCTX_INPROC_SERVER,
+		IID_PPV_ARGS(&pkfm));
+	//if (FAILED(hr)) return filePaths;
+	ON_SCOPE_EXIT([&] { pkfm->Release(); });
+
+	IKnownFolder *pKnownFolder = NULL;
+	hr = pkfm->GetFolder(FOLDERID_PublicMusic, &pKnownFolder);
+	//if (FAILED(hr)) return filePaths;
+	ON_SCOPE_EXIT([&] { pKnownFolder->Release(); });
+
+	IShellItem *psi = NULL;
+	hr = pKnownFolder->GetShellItem(0, IID_PPV_ARGS(&psi));
+	//if (FAILED(hr)) return filePaths;
+	ON_SCOPE_EXIT([&] { psi->Release(); });
+
+	hr = fileDlg->AddPlace(psi, FDAP_BOTTOM);
+	COMDLG_FILTERSPEC rgSpec[] = {
+		{ L"音乐文件", L"*.mp3;*.wav;" }
+	};
+	fileDlg->SetFileTypes(1, rgSpec);
+
+	DWORD dwOptions;
+	fileDlg->GetOptions(&dwOptions);
+	fileDlg->SetOptions(dwOptions | FOS_ALLOWMULTISELECT);
+	hr = fileDlg->Show(NULL);
+	if (SUCCEEDED(hr)) {
+		IShellItemArray *pRets;
+		hr = fileDlg->GetResults(&pRets);
+		if (SUCCEEDED(hr)) {
+			DWORD count;
+			pRets->GetCount(&count);
+			for (DWORD i = 0; i < count; i++) {
+				IShellItem *pRet;
+				LPWSTR nameBuffer;
+				pRets->GetItemAt(i, &pRet);
+				pRet->GetDisplayName(SIGDN_DESKTOPABSOLUTEPARSING, &nameBuffer);
+				filePaths.push_back(std::wstring(nameBuffer));
+				pRet->Release();
+				CoTaskMemFree(nameBuffer);
+			}
+			pRets->Release();
+		}
+	}
+	//return filePaths;
+	CCLOG("Selected image files path: ", filePaths);
 }

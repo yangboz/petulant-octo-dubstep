@@ -2,6 +2,7 @@
 
 #include "FileOperation.h"
 
+
 Scene* HelloWorld::createScene()
 {
     // 'scene' is an autorelease object
@@ -184,5 +185,6 @@ std::string HelloWorld::WStrToUTF8(const std::wstring &str)
 //@see http://msdn.microsoft.com/en-us/library/windows/apps/dn263165.aspx
 void HelloWorld::onOpenFilePicker()
 {
-	FileOperation::readFile();
+	FileOperation::openFile();
+	//MessageBox(NULL,"Welcome to Win32 Application Development!\n");
 }
