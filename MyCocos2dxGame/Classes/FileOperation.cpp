@@ -25,7 +25,7 @@ void FileOperation::saveFile()
 void FileOperation::readFile(std::wstring filePath)
 {
 	//string path = getFilePath();
-	string path = StringUtils::ws2s(filePath);
+	string path = HW_StringUtils::ws2s(filePath);
 	FILE *fp = fopen(path.c_str(), "r");
 	char buf[50] = { 0 };
 
@@ -134,7 +134,7 @@ std::string FileOperation::openFile()
 		}
 	}
 	//
-	filePath = StringUtils::ws2s(filePaths);
+	filePath = HW_StringUtils::ws2s(filePaths);
 	CCLOG("Selected image file path: %s \\n", filePath);
 	return filePath;
 }

@@ -1,6 +1,723 @@
-﻿Build started 2014/5/9 23:51:24.
+﻿Build started 2014/5/12 22:57:25.
      1>Project "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\cocos2d.vcxproj" on node 2 (Build target(s)).
-     1>PreLinkEvent:
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\include" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\sqlite3\include" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\unzip" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\edtaa3func" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\tinyxml2" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\png\include\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\jpeg\include\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\tiff\include\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\webp\include\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\freetype2\include\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\win32-specific\icon\include" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\win32-specific\zlib\include" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\chipmunk\include\chipmunk" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\xxhash" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\renderer" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\ui" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\base" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\physics" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\math\kazmath" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\platform\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\platform\desktop" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\glfw3\include\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\win32-specific\gles\include\OGLES" /Z7 /nologo /W3 /WX- /MP /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _LIB /D COCOS2DXWIN32_EXPORTS /D GL_GLEXT_PROTOTYPES /D COCOS2D_DEBUG=1 /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS /D _VARIADIC_MAX=10 /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc120.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\..\external\edtaa3func\edtaa3func.cpp ..\..\external\tinyxml2\tinyxml2.cpp ..\..\external\unzip\ioapi.cpp ..\..\external\unzip\unzip.cpp ..\..\external\xxhash\xxhash.c ..\base\atitc.cpp ..\base\CCAffineTransform.cpp ..\base\CCAutoreleasePool.cpp ..\base\CCConsole.cpp ..\base\CCData.cpp ..\base\CCDataVisitor.cpp ..\base\CCGeometry.cpp ..\base\CCNS.cpp ..\base\CCRef.cpp ..\base\CCValue.cpp ..\base\etc1.cpp ..\base\s3tc.cpp ..\deprecated\CCArray.cpp ..\deprecated\CCDeprecated.cpp ..\deprecated\CCDictionary.cpp ..\deprecated\CCNotificationCenter.cpp ..\deprecated\CCSet.cpp ..\deprecated\CCString.cpp ..\math\kazmath\kazmath\aabb.c ..\math\kazmath\kazmath\GL\mat4stack.c ..\math\kazmath\kazmath\GL\matrix.c ..\math\kazmath\kazmath\mat3.c ..\math\kazmath\kazmath\mat4.c ..\math\kazmath\kazmath\neon_matrix_impl.c ..\math\kazmath\kazmath\plane.c ..\math\kazmath\kazmath\quaternion.c ..\math\kazmath\kazmath\ray2.c ..\math\kazmath\kazmath\ray3.c ..\math\kazmath\kazmath\utility.c ..\math\kazmath\kazmath\vec2.c ..\math\kazmath\kazmath\vec3.c ..\math\kazmath\kazmath\vec4.c ..\physics\CCPhysicsBody.cpp ..\physics\CCPhysicsContact.cpp ..\physics\CCPhysicsJoint.cpp ..\physics\CCPhysicsShape.cpp ..\physics\CCPhysicsWorld.cpp ..\physics\chipmunk\CCPhysicsBodyInfo_chipmunk.cpp ..\physics\chipmunk\CCPhysicsContactInfo_chipmunk.cpp ..\physics\chipmunk\CCPhysicsJointInfo_chipmunk.cpp ..\physics\chipmunk\CCPhysicsShapeInfo_chipmunk.cpp ..\physics\chipmunk\CCPhysicsWorldInfo_chipmunk.cpp base64.cpp CCAction.cpp CCActionCamera.cpp CCActionCatmullRom.cpp CCActionEase.cpp CCActionGrid.cpp CCActionGrid3D.cpp CCActionInstant.cpp CCActionInterval.cpp CCActionManager.cpp CCActionPageTurn3D.cpp CCActionProgressTimer.cpp CCActionTiledGrid.cpp CCActionTween.cpp CCAnimation.cpp CCAnimationCache.cpp CCAtlasNode.cpp ccCArray.cpp CCClippingNode.cpp CCComponent.cpp CCComponentContainer.cpp CCConfiguration.cpp CCDirector.cpp CCDrawingPrimitives.cpp CCDrawNode.cpp CCEvent.cpp CCEventAcceleration.cpp CCEventCustom.cpp CCEventDispatcher.cpp CCEventKeyboard.cpp CCEventListener.cpp CCEventListenerAcceleration.cpp CCEventListenerCustom.cpp CCEventListenerKeyboard.cpp CCEventListenerMouse.cpp CCEventListenerTouch.cpp CCEventMouse.cpp CCEventTouch.cpp CCFont.cpp CCFontAtlas.cpp CCFontAtlasCache.cpp CCFontCharMap.cpp CCFontFNT.cpp CCFontFreeType.cpp ccFPSImages.c CCGLProgram.cpp ccGLStateCache.cpp CCGrabber.cpp CCGrid.cpp CCNodeGrid.cpp CCIMEDispatcher.cpp CCLabel.cpp CCLabelAtlas.cpp CCLabelBMFont.cpp CCLabelTextFormatter.cpp CCLabelTTF.cpp CCLayer.cpp CCMenu.cpp CCMenuItem.cpp CCMotionStreak.cpp CCNode.cpp CCParallaxNode.cpp CCParticleBatchNode.cpp CCParticleExamples.cpp CCParticleSystem.cpp CCParticleSystemQuad.cpp CCProfiling.cpp CCProgressTimer.cpp CCRenderTexture.cpp CCScene.cpp CCScheduler.cpp CCScriptSupport.cpp CCShaderCache.cpp ccShaders.cpp CCSprite.cpp CCSpriteBatchNode.cpp CCSpriteFrame.cpp CCSpriteFrameCache.cpp CCTextFieldTTF.cpp CCTexture2D.cpp CCTextureAtlas.cpp CCTextureCache.cpp CCTileMapAtlas.cpp CCTMXLayer.cpp CCTMXObjectGroup.cpp CCTMXTiledMap.cpp CCTMXXMLParser.cpp CCTouch.cpp CCTransition.cpp CCTransitionPageTurn.cpp CCTransitionProgress.cpp ccTypes.cpp CCTweenFunction.cpp CCUserDefault.cpp ccUTF8.cpp ccUtils.cpp CCVertex.cpp cocos2d.cpp platform\CCGLViewProtocol.cpp platform\CCFileUtils.cpp platform\CCImage.cpp platform\CCSAXParser.cpp platform\CCThread.cpp platform\desktop\CCGLView.cpp platform\win32\CCApplication.cpp platform\win32\CCCommon.cpp platform\win32\CCDevice.cpp platform\win32\CCFileUtilsWin32.cpp platform\win32\CCStdC.cpp renderer\CCBatchCommand.cpp renderer\CCCustomCommand.cpp renderer\CCFrustum.cpp renderer\CCGroupCommand.cpp renderer\CCMaterialManager.cpp renderer\CCQuadCommand.cpp renderer\CCRenderCommand.cpp renderer\CCRenderer.cpp renderer\CCRenderMaterial.cpp TGAlib.cpp TransformUtils.cpp ZipUtils.cpp
+         edtaa3func.cpp
+         tinyxml2.cpp
+         ioapi.cpp
+         unzip.cpp
+         xxhash.c
+         atitc.cpp
+         CCAffineTransform.cpp
+     1>..\..\external\xxhash\xxhash.c(312): warning C4804: '/' : unsafe use of type 'bool' in operation
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\base\atitc.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\base\atitc.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCAutoreleasePool.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\base\CCAffineTransform.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\base\CCAffineTransform.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCConsole.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\base\CCConsole.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\base\CCConsole.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCData.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\base\CCAutoreleasePool.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\base\CCAutoreleasePool.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCDataVisitor.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\base\CCData.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\base\CCData.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCGeometry.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\base\CCDataVisitor.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\base\CCDataVisitor.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\base\CCGeometry.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\base\CCGeometry.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCNS.cpp
+         CCRef.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\base\CCNS.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\base\CCNS.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCValue.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\base\CCValue.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\base\CCRef.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\base\CCValue.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\base\CCRef.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         etc1.cpp
+         s3tc.cpp
+         CCArray.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\base\s3tc.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\base\s3tc.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\deprecated\CCArray.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\deprecated\CCArray.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCDeprecated.cpp
+         CCDictionary.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\deprecated\CCDictionary.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\deprecated\CCDictionary.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\deprecated\CCDeprecated.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\deprecated\CCDeprecated.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCNotificationCenter.cpp
+         CCSet.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\deprecated\CCNotificationCenter.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\deprecated\CCNotificationCenter.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCString.cpp
+         aabb.c
+         mat4stack.c
+         matrix.c
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\deprecated\CCString.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\deprecated\CCString.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         mat3.c
+         mat4.c
+         neon_matrix_impl.c
+         plane.c
+         quaternion.c
+         ray2.c
+         ray3.c
+         utility.c
+         vec2.c
+         vec3.c
+         vec4.c
+         CCPhysicsBody.cpp
+         CCPhysicsContact.cpp
+         CCPhysicsJoint.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\physics\CCPhysicsJoint.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\physics\CCPhysicsJoint.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\physics\CCPhysicsContact.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\physics\CCPhysicsContact.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\physics\CCPhysicsBody.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\physics\CCPhysicsBody.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(105): warning C4056: overflow in floating-point constant arithmetic (..\physics\CCPhysicsJoint.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(111): warning C4056: overflow in floating-point constant arithmetic (..\physics\CCPhysicsJoint.cpp)
+         CCPhysicsShape.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\physics\CCPhysicsShape.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\physics\CCPhysicsShape.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(105): warning C4056: overflow in floating-point constant arithmetic (..\physics\CCPhysicsBody.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(111): warning C4056: overflow in floating-point constant arithmetic (..\physics\CCPhysicsBody.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(105): warning C4056: overflow in floating-point constant arithmetic (..\physics\CCPhysicsContact.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(111): warning C4056: overflow in floating-point constant arithmetic (..\physics\CCPhysicsContact.cpp)
+         CCPhysicsWorld.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\physics\CCPhysicsWorld.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\physics\CCPhysicsWorld.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCPhysicsBodyInfo_chipmunk.cpp
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(105): warning C4056: overflow in floating-point constant arithmetic (..\physics\CCPhysicsShape.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(111): warning C4056: overflow in floating-point constant arithmetic (..\physics\CCPhysicsShape.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(105): warning C4056: overflow in floating-point constant arithmetic (..\physics\chipmunk\CCPhysicsBodyInfo_chipmunk.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(111): warning C4056: overflow in floating-point constant arithmetic (..\physics\chipmunk\CCPhysicsBodyInfo_chipmunk.cpp)
+         CCPhysicsContactInfo_chipmunk.cpp
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(105): warning C4056: overflow in floating-point constant arithmetic (..\physics\chipmunk\CCPhysicsContactInfo_chipmunk.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(111): warning C4056: overflow in floating-point constant arithmetic (..\physics\chipmunk\CCPhysicsContactInfo_chipmunk.cpp)
+         CCPhysicsJointInfo_chipmunk.cpp
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(105): warning C4056: overflow in floating-point constant arithmetic (..\physics\CCPhysicsWorld.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(111): warning C4056: overflow in floating-point constant arithmetic (..\physics\CCPhysicsWorld.cpp)
+         CCPhysicsShapeInfo_chipmunk.cpp
+         CCPhysicsWorldInfo_chipmunk.cpp
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(105): warning C4056: overflow in floating-point constant arithmetic (..\physics\chipmunk\CCPhysicsJointInfo_chipmunk.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(111): warning C4056: overflow in floating-point constant arithmetic (..\physics\chipmunk\CCPhysicsJointInfo_chipmunk.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(105): warning C4056: overflow in floating-point constant arithmetic (..\physics\chipmunk\CCPhysicsShapeInfo_chipmunk.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(111): warning C4056: overflow in floating-point constant arithmetic (..\physics\chipmunk\CCPhysicsShapeInfo_chipmunk.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(105): warning C4056: overflow in floating-point constant arithmetic (..\physics\chipmunk\CCPhysicsWorldInfo_chipmunk.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\external\chipmunk\include\chipmunk\cpBB.h(111): warning C4056: overflow in floating-point constant arithmetic (..\physics\chipmunk\CCPhysicsWorldInfo_chipmunk.cpp)
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\physics\chipmunk\CCPhysicsWorldInfo_chipmunk.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\physics\chipmunk\CCPhysicsWorldInfo_chipmunk.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         base64.cpp
+         CCAction.cpp
+         CCActionCamera.cpp
+         CCActionCatmullRom.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCActionCamera.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCActionCamera.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCActionCatmullRom.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCActionCatmullRom.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCAction.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCAction.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCActionEase.cpp
+         CCActionGrid.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCActionEase.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCActionEase.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCActionGrid.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCActionGrid.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCActionGrid3D.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCActionGrid3D.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCActionGrid3D.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCActionInstant.cpp
+         CCActionInterval.cpp
+         CCActionManager.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCActionInterval.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCActionInterval.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCActionInstant.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCActionInstant.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCActionManager.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCActionManager.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCActionPageTurn3D.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCActionPageTurn3D.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCActionPageTurn3D.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCActionProgressTimer.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCActionProgressTimer.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCActionProgressTimer.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCActionTiledGrid.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCActionTiledGrid.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCActionTiledGrid.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCActionTween.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCActionTween.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCActionTween.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCAnimation.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCAnimation.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCAnimation.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCAnimationCache.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCAnimationCache.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCAnimationCache.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCAtlasNode.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCAtlasNode.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCAtlasNode.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         ccCArray.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (ccCArray.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (ccCArray.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCClippingNode.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCClippingNode.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCClippingNode.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCComponent.cpp
+         CCComponentContainer.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCComponentContainer.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCComponentContainer.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCComponent.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCComponent.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCConfiguration.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCConfiguration.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCConfiguration.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCDirector.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCDirector.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCDirector.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCDrawingPrimitives.cpp
+         CCDrawNode.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCDrawNode.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCDrawNode.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCDrawingPrimitives.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCDrawingPrimitives.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCEvent.cpp
+         CCEventAcceleration.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCEventAcceleration.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCEventAcceleration.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCEventCustom.cpp
+         CCEventDispatcher.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCEventCustom.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCEventCustom.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCEventKeyboard.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCEventDispatcher.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCEventDispatcher.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCEventListener.cpp
+         CCEventListenerAcceleration.cpp
+         CCEventListenerCustom.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCEventListenerAcceleration.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCEventListenerAcceleration.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCEventListenerKeyboard.cpp
+         CCEventListenerMouse.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCEventListenerKeyboard.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCEventListenerKeyboard.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCEventListenerTouch.cpp
+         CCEventMouse.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCEventListenerTouch.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCEventListenerTouch.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCEventTouch.cpp
+         CCFont.cpp
+         CCFontAtlas.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCEventTouch.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCEventTouch.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCFont.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCFont.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCFontAtlas.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCFontAtlas.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCFontAtlasCache.cpp
+         CCFontCharMap.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCFontCharMap.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCFontCharMap.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCFontAtlasCache.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCFontAtlasCache.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCFontFNT.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCFontFNT.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCFontFNT.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCFontFreeType.cpp
+         ccFPSImages.c
+         CCGLProgram.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCFontFreeType.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCFontFreeType.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCGLProgram.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCGLProgram.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         ccGLStateCache.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (ccGLStateCache.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (ccGLStateCache.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCGrabber.cpp
+         CCGrid.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCGrid.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCGrid.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCGrabber.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCGrabber.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCNodeGrid.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCNodeGrid.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCNodeGrid.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCIMEDispatcher.cpp
+         CCLabel.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCIMEDispatcher.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCIMEDispatcher.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCLabel.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCLabel.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCLabelAtlas.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCLabelAtlas.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCLabelAtlas.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCLabelBMFont.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCLabelBMFont.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCLabelBMFont.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCLabelTextFormatter.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCLabelTextFormatter.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCLabelTextFormatter.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCLabelTTF.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCLabelTTF.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCLabelTTF.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCLayer.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCLayer.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCLayer.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCMenu.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCMenu.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCMenu.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCMenuItem.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCMenuItem.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCMenuItem.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCMotionStreak.cpp
+         CCNode.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCNode.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCNode.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCParallaxNode.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCParallaxNode.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCParallaxNode.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCMotionStreak.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCMotionStreak.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCParticleBatchNode.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCParticleBatchNode.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCParticleBatchNode.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCParticleExamples.cpp
+         CCParticleSystem.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCParticleExamples.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCParticleExamples.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCParticleSystem.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCParticleSystem.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCParticleSystemQuad.cpp
+         CCProfiling.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCParticleSystemQuad.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCParticleSystemQuad.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCProfiling.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCProfiling.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCProgressTimer.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCProgressTimer.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCProgressTimer.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCRenderTexture.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCRenderTexture.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCRenderTexture.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCScene.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCScene.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCScene.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCScheduler.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCScheduler.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCScheduler.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCScriptSupport.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCScriptSupport.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCScriptSupport.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCShaderCache.cpp
+         ccShaders.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCShaderCache.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCShaderCache.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCSprite.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCSprite.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCSprite.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCSpriteBatchNode.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCSpriteBatchNode.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCSpriteBatchNode.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCSpriteFrame.cpp
+         CCSpriteFrameCache.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCSpriteFrame.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCSpriteFrame.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCSpriteFrameCache.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCSpriteFrameCache.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCTextFieldTTF.cpp
+         CCTexture2D.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCTextFieldTTF.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCTextFieldTTF.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCTextureAtlas.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCTexture2D.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCTexture2D.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCTextureCache.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCTextureAtlas.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCTextureAtlas.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCTileMapAtlas.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCTileMapAtlas.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCTileMapAtlas.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCTextureCache.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCTextureCache.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCTMXLayer.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCTMXLayer.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCTMXLayer.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCTMXObjectGroup.cpp
+         CCTMXTiledMap.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCTMXTiledMap.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCTMXTiledMap.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCTMXObjectGroup.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCTMXObjectGroup.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCTMXXMLParser.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCTMXXMLParser.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCTMXXMLParser.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCTouch.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCTouch.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCTouch.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCTransition.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCTransition.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCTransition.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCTransitionPageTurn.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCTransitionPageTurn.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCTransitionPageTurn.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCTransitionProgress.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCTransitionProgress.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCTransitionProgress.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         ccTypes.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (ccTypes.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (ccTypes.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCTweenFunction.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCTweenFunction.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCTweenFunction.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCUserDefault.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCUserDefault.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCUserDefault.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         ccUTF8.cpp
+         ccUtils.cpp
+         CCVertex.cpp
+         cocos2d.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (ccUTF8.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (ccUTF8.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCGLViewProtocol.cpp
+         CCFileUtils.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (CCVertex.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (CCVertex.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (platform\CCGLViewProtocol.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (platform\CCGLViewProtocol.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (platform\CCFileUtils.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (platform\CCFileUtils.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCImage.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (platform\CCImage.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (platform\CCImage.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCSAXParser.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (platform\CCSAXParser.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (platform\CCSAXParser.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCThread.cpp
+         CCGLView.cpp
+         CCApplication.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (platform\CCThread.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (platform\CCThread.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (platform\win32\CCApplication.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (platform\win32\CCApplication.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCCommon.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (platform\win32\CCCommon.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (platform\win32\CCCommon.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (platform\desktop\CCGLView.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (platform\desktop\CCGLView.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCDevice.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (platform\win32\CCDevice.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (platform\win32\CCDevice.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCFileUtilsWin32.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (platform\win32\CCFileUtilsWin32.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (platform\win32\CCFileUtilsWin32.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCStdC.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (platform\win32\CCStdC.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (platform\win32\CCStdC.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCBatchCommand.cpp
+         CCCustomCommand.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (renderer\CCCustomCommand.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (renderer\CCCustomCommand.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\2d\platform\win32\CCFileUtilsWin32.h(102): warning C4996: 'cocos2d::FileUtils::getFileData': was declared deprecated (platform\win32\CCFileUtilsWin32.cpp)
+                 C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\platform/CCFileUtils.h(101) : see declaration of 'cocos2d::FileUtils::getFileData'
+         CCFrustum.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (renderer\CCFrustum.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (renderer\CCFrustum.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCGroupCommand.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (renderer\CCBatchCommand.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (renderer\CCBatchCommand.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCMaterialManager.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (renderer\CCGroupCommand.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (renderer\CCGroupCommand.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (renderer\CCMaterialManager.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (renderer\CCMaterialManager.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCQuadCommand.cpp
+         CCRenderCommand.cpp
+         CCRenderer.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (renderer\CCQuadCommand.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (renderer\CCQuadCommand.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (renderer\CCRenderCommand.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (renderer\CCRenderCommand.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (renderer\CCRenderer.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (renderer\CCRenderer.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+         CCRenderMaterial.cpp
+         TGAlib.cpp
+         TransformUtils.cpp
+         ZipUtils.cpp
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (TransformUtils.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (TransformUtils.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (TGAlib.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (TGAlib.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (ZipUtils.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2886) : see previous definition of '__useHeader'
+     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (ZipUtils.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sal.h(2896) : see previous definition of '__on_failure'
+       PreLinkEvent:
          if not exist "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\" mkdir "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
          xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\freetype2\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
          xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\glfw3\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
@@ -25,9 +742,177 @@
          2 File(s) copied
          2 File(s) copied
        Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libcocos2d.lib" /NOLOGO Debug.win32\edtaa3func.obj
+         Debug.win32\tinyxml2.obj
+         Debug.win32\ioapi.obj
+         Debug.win32\unzip.obj
+         Debug.win32\xxhash.obj
+         Debug.win32\atitc.obj
+         Debug.win32\CCAffineTransform.obj
+         Debug.win32\CCAutoreleasePool.obj
+         Debug.win32\CCConsole.obj
+         Debug.win32\CCData.obj
+         Debug.win32\CCDataVisitor.obj
+         Debug.win32\CCGeometry.obj
+         Debug.win32\CCNS.obj
+         Debug.win32\CCRef.obj
+         Debug.win32\CCValue.obj
+         Debug.win32\etc1.obj
+         Debug.win32\s3tc.obj
+         Debug.win32\CCArray.obj
+         Debug.win32\CCDeprecated.obj
+         Debug.win32\CCDictionary.obj
+         Debug.win32\CCNotificationCenter.obj
+         Debug.win32\CCSet.obj
+         Debug.win32\CCString.obj
+         Debug.win32\aabb.obj
+         Debug.win32\mat4stack.obj
+         Debug.win32\matrix.obj
+         Debug.win32\mat3.obj
+         Debug.win32\mat4.obj
+         Debug.win32\neon_matrix_impl.obj
+         Debug.win32\plane.obj
+         Debug.win32\quaternion.obj
+         Debug.win32\ray2.obj
+         Debug.win32\ray3.obj
+         Debug.win32\utility.obj
+         Debug.win32\vec2.obj
+         Debug.win32\vec3.obj
+         Debug.win32\vec4.obj
+         Debug.win32\CCPhysicsBody.obj
+         Debug.win32\CCPhysicsContact.obj
+         Debug.win32\CCPhysicsJoint.obj
+         Debug.win32\CCPhysicsShape.obj
+         Debug.win32\CCPhysicsWorld.obj
+         Debug.win32\CCPhysicsBodyInfo_chipmunk.obj
+         Debug.win32\CCPhysicsContactInfo_chipmunk.obj
+         Debug.win32\CCPhysicsJointInfo_chipmunk.obj
+         Debug.win32\CCPhysicsShapeInfo_chipmunk.obj
+         Debug.win32\CCPhysicsWorldInfo_chipmunk.obj
+         Debug.win32\base64.obj
+         Debug.win32\CCAction.obj
+         Debug.win32\CCActionCamera.obj
+         Debug.win32\CCActionCatmullRom.obj
+         Debug.win32\CCActionEase.obj
+         Debug.win32\CCActionGrid.obj
+         Debug.win32\CCActionGrid3D.obj
+         Debug.win32\CCActionInstant.obj
+         Debug.win32\CCActionInterval.obj
+         Debug.win32\CCActionManager.obj
+         Debug.win32\CCActionPageTurn3D.obj
+         Debug.win32\CCActionProgressTimer.obj
+         Debug.win32\CCActionTiledGrid.obj
+         Debug.win32\CCActionTween.obj
+         Debug.win32\CCAnimation.obj
+         Debug.win32\CCAnimationCache.obj
+         Debug.win32\CCAtlasNode.obj
+         Debug.win32\ccCArray.obj
+         Debug.win32\CCClippingNode.obj
+         Debug.win32\CCComponent.obj
+         Debug.win32\CCComponentContainer.obj
+         Debug.win32\CCConfiguration.obj
+         Debug.win32\CCDirector.obj
+         Debug.win32\CCDrawingPrimitives.obj
+         Debug.win32\CCDrawNode.obj
+         Debug.win32\CCEvent.obj
+         Debug.win32\CCEventAcceleration.obj
+         Debug.win32\CCEventCustom.obj
+         Debug.win32\CCEventDispatcher.obj
+         Debug.win32\CCEventKeyboard.obj
+         Debug.win32\CCEventListener.obj
+         Debug.win32\CCEventListenerAcceleration.obj
+         Debug.win32\CCEventListenerCustom.obj
+         Debug.win32\CCEventListenerKeyboard.obj
+         Debug.win32\CCEventListenerMouse.obj
+         Debug.win32\CCEventListenerTouch.obj
+         Debug.win32\CCEventMouse.obj
+         Debug.win32\CCEventTouch.obj
+         Debug.win32\CCFont.obj
+         Debug.win32\CCFontAtlas.obj
+         Debug.win32\CCFontAtlasCache.obj
+         Debug.win32\CCFontCharMap.obj
+         Debug.win32\CCFontFNT.obj
+         Debug.win32\CCFontFreeType.obj
+         Debug.win32\ccFPSImages.obj
+         Debug.win32\CCGLProgram.obj
+         Debug.win32\ccGLStateCache.obj
+         Debug.win32\CCGrabber.obj
+         Debug.win32\CCGrid.obj
+         Debug.win32\CCNodeGrid.obj
+         Debug.win32\CCIMEDispatcher.obj
+         Debug.win32\CCLabel.obj
+         Debug.win32\CCLabelAtlas.obj
+         Debug.win32\CCLabelBMFont.obj
+         Debug.win32\CCLabelTextFormatter.obj
+         Debug.win32\CCLabelTTF.obj
+         Debug.win32\CCLayer.obj
+         Debug.win32\CCMenu.obj
+         Debug.win32\CCMenuItem.obj
+         Debug.win32\CCMotionStreak.obj
+         Debug.win32\CCNode.obj
+         Debug.win32\CCParallaxNode.obj
+         Debug.win32\CCParticleBatchNode.obj
+         Debug.win32\CCParticleExamples.obj
+         Debug.win32\CCParticleSystem.obj
+         Debug.win32\CCParticleSystemQuad.obj
+         Debug.win32\CCProfiling.obj
+         Debug.win32\CCProgressTimer.obj
+         Debug.win32\CCRenderTexture.obj
+         Debug.win32\CCScene.obj
+         Debug.win32\CCScheduler.obj
+         Debug.win32\CCScriptSupport.obj
+         Debug.win32\CCShaderCache.obj
+         Debug.win32\ccShaders.obj
+         Debug.win32\CCSprite.obj
+         Debug.win32\CCSpriteBatchNode.obj
+         Debug.win32\CCSpriteFrame.obj
+         Debug.win32\CCSpriteFrameCache.obj
+         Debug.win32\CCTextFieldTTF.obj
+         Debug.win32\CCTexture2D.obj
+         Debug.win32\CCTextureAtlas.obj
+         Debug.win32\CCTextureCache.obj
+         Debug.win32\CCTileMapAtlas.obj
+         Debug.win32\CCTMXLayer.obj
+         Debug.win32\CCTMXObjectGroup.obj
+         Debug.win32\CCTMXTiledMap.obj
+         Debug.win32\CCTMXXMLParser.obj
+         Debug.win32\CCTouch.obj
+         Debug.win32\CCTransition.obj
+         Debug.win32\CCTransitionPageTurn.obj
+         Debug.win32\CCTransitionProgress.obj
+         Debug.win32\ccTypes.obj
+         Debug.win32\CCTweenFunction.obj
+         Debug.win32\CCUserDefault.obj
+         Debug.win32\ccUTF8.obj
+         Debug.win32\ccUtils.obj
+         Debug.win32\CCVertex.obj
+         Debug.win32\cocos2d.obj
+         Debug.win32\CCGLViewProtocol.obj
+         Debug.win32\CCFileUtils.obj
+         Debug.win32\CCImage.obj
+         Debug.win32\CCSAXParser.obj
+         Debug.win32\CCThread.obj
+         Debug.win32\CCGLView.obj
+         Debug.win32\CCApplication.obj
+         Debug.win32\CCCommon.obj
+         Debug.win32\CCDevice.obj
+         Debug.win32\CCFileUtilsWin32.obj
+         Debug.win32\CCStdC.obj
+         Debug.win32\CCBatchCommand.obj
+         Debug.win32\CCCustomCommand.obj
+         Debug.win32\CCFrustum.obj
+         Debug.win32\CCGroupCommand.obj
+         Debug.win32\CCMaterialManager.obj
+         Debug.win32\CCQuadCommand.obj
+         Debug.win32\CCRenderCommand.obj
+         Debug.win32\CCRenderer.obj
+         Debug.win32\CCRenderMaterial.obj
+         Debug.win32\TGAlib.obj
+         Debug.win32\TransformUtils.obj
+         Debug.win32\ZipUtils.obj
          cocos2d.vcxproj -> C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libcocos2d.lib
      1>Done Building Project "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\cocos2d.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.70
+Time Elapsed 00:02:48.92

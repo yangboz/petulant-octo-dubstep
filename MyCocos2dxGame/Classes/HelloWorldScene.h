@@ -8,6 +8,9 @@
 #include "cocos2d.h"
 #include "editor-support\cocostudio\CocoStudio.h"
 
+//
+#include "FileOperation.h"
+
 USING_NS_CC;
 //USING_NS_CC_EXT;
 using namespace ui;
@@ -29,10 +32,6 @@ public:
 
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
-
-	//ChineseCharacters Wrapper
-	std::string WStrToUTF8(const std::wstring &str);
-	void WStrToUTF8Convert(std::string& dest, const std::wstring& src);
 
 	//OpenFilePickerTask
 	void onOpenFilePicker();
