@@ -54,6 +54,10 @@ bool HelloWorld::init()
 	addChild(uiLayout);
 
 	//UIElements behaviour
+	//Labels、
+	
+	ui::TextField *lbl_list_view_cert = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("TextField_list_view_cert"));
+	lbl_list_view_cert->setText(HW_StringUtils::WStrToUTF8(L"常用尺寸"));
 	//Buttons
 	//
 	ui::Button *button_open = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_intro")->getChildByName("Button_open"));
@@ -62,6 +66,9 @@ bool HelloWorld::init()
 	//
 	ui::Button *button_verify = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Button_verify"));
 	button_verify->setTitleText(HW_StringUtils::WStrToUTF8(L"验证"));
+	//
+	ui::Button *button_reset = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Button_reset"));
+	button_reset->setTitleText(HW_StringUtils::WStrToUTF8(L"重置"));
 	//
 	ui::Button *button_more_certs = dynamic_cast<ui::Button*>(uiLayout->getChildByName("Button_more_certs"));
 	button_more_certs->setTitleText(HW_StringUtils::WStrToUTF8(L"+ 添加常用尺寸"));
