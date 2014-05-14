@@ -123,6 +123,7 @@ bool HelloWorld::init()
 	//
 	listView_certificates->setItemModel(listView_default_button);
 	//
+	this->listView_selected_index = 0;//Default index selection.
 	listView_certificates->addEventListenerListView(this, listvieweventselector(HelloWorld::onListViewItemSelected));
 	//
     return true;
@@ -206,12 +207,14 @@ void HelloWorld::onOpenFilePicker()
 	pageView->scrollToPage(1);
 	//Read image file
 	//FileOperation::readFile(filePath);
-	ui::ImageView *imageView_cert_origin = dynamic_cast<ui::ImageView*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Image_cert_origin"));
-	//imageView_cert_origin->loadTexture(filePath);
+	//ui::ImageView *imageView_cert_origin = dynamic_cast<ui::ImageView*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Image_cert_origin"));
+	ui::ImageView *imageView_cert_origin = ui::ImageView::create();
+	imageView_cert_origin->loadTexture(filePath);
 	//
 	//ScrollView with UIDragPanel
 	ui::ScrollView *scrollView_cert = dynamic_cast<ui::ScrollView*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("ScrollView_cert"));
 	cocos2d::CCSize size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[listView_selected_index];
-	scrollView_cert->setSize(size);
-	//scrollView_cert->addChild(imageView_cert_origin);
+	imageView_cert_origin->setSize(size);
+	scrollView_cert->addChild(imageView_cert_origin);
+    scrollView_cert->setBackGroundColor(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_COLORS[listView_selected_index]);	
 }

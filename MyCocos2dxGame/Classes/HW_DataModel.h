@@ -10,6 +10,8 @@ namespace HW_DataModel
 	public:
 		//default sizes of certificates
 		static const std::vector<cocos2d::Size> ARRAY_OF_CERT_SIZES;
+		//default colors of certificates
+		static const std::vector<cocos2d::Color3B> ARRAY_OF_CERT_COLORS;
 	private:
 	
 	};
