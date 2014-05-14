@@ -58,6 +58,18 @@ bool HelloWorld::init()
 	
 	ui::TextField *lbl_list_view_cert = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("TextField_list_view_cert"));
 	lbl_list_view_cert->setText(HW_StringUtils::WStrToUTF8(L"常用尺寸"));
+	//
+	ui::TextField *tl_panel_intro_note = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_intro")->getChildByName("TextField_panel_intro_notes"));
+	tl_panel_intro_note->setText(HW_StringUtils::WStrToUTF8(L"护照照片注意事项"));
+	//
+	ui::TextField *tl_panel_intro_opt_0= dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_intro")->getChildByName("TextField_panel_intro_opt_0"));
+	//tl_panel_intro_note->setText(HW_StringUtils::WStrToUTF8(L"护照照片注意事项"));
+	//
+	ui::TextField *tl_panel_intro_opt_1 = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_intro")->getChildByName("TextField_panel_intro_opt_1"));
+	//tl_panel_intro_note->setText(HW_StringUtils::WStrToUTF8(L"护照照片注意事项"));
+	//
+	ui::TextField *tl_panel_intro_opt_2 = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_intro")->getChildByName("TextField_panel_intro_opt_2"));
+	//tl_panel_intro_note->setText(HW_StringUtils::WStrToUTF8(L"护照照片注意事项"));
 	//Buttons
 	//
 	ui::Button *button_open = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_intro")->getChildByName("Button_open"));
@@ -69,9 +81,7 @@ bool HelloWorld::init()
 	//
 	ui::Button *button_reset = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Button_reset"));
 	button_reset->setTitleText(HW_StringUtils::WStrToUTF8(L"重置"));
-	//
-	ui::Button *button_more_certs = dynamic_cast<ui::Button*>(uiLayout->getChildByName("Button_more_certs"));
-	button_more_certs->setTitleText(HW_StringUtils::WStrToUTF8(L"+ 添加常用尺寸"));
+	button_reset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onResetButtonTouch);
 	//ListView
 	ui::ListView *listView_certificates = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("ListView_certificates"));
 	listView_certificates->setDirection(SCROLLVIEW_DIR_VERTICAL);
@@ -112,7 +122,9 @@ bool HelloWorld::init()
 	layout_listView->addChild(listView_default_button);
 	//
 	listView_certificates->setItemModel(listView_default_button);
-
+	//
+	listView_certificates->addEventListenerListView(this, listvieweventselector(HelloWorld::onListViewItemSelected));
+	//
     return true;
 }
 
@@ -147,6 +159,41 @@ void HelloWorld::onOpenButtonTouch(Object *pSender, ui::TouchEventType type)
 	}
 }
 
+void HelloWorld::onResetButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	ui::PageView *pageView = dynamic_cast<ui::PageView*>(this->uiLayout->getChildByName("PageView_editor"));
+	//
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onResetButtonTouch,TOUCH_EVENT_ENDED!");
+		//TODO:Reset function here:
+
+		//Navigate to PageView_editor
+		pageView->scrollToPage(0);
+		break;
+	default:
+		break;
+	}
+}
+
+void HelloWorld::onListViewItemSelected(Object *pSender, ui::ListViewEventType type)
+{
+	ui::ListView *listView = static_cast<ListView*>(pSender);
+	//
+	switch (type)
+	{
+	case LISTVIEW_ONSELECTEDITEM_END:
+		listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
+		CCLOG("listView selected child index: %d", listView_selected_index);
+		break;
+	default:
+		break;
+	}
+}
+
 //@see http://www.cocos2d-x.org/wiki/How_to_read_and_write_file_on_different_platforms
 //@see http://msdn.microsoft.com/en-us/library/windows/apps/dn263165.aspx
 //@see http://www.cocos2d-x.org/wiki/How_to_read_and_write_file_on_different_platforms
@@ -160,7 +207,11 @@ void HelloWorld::onOpenFilePicker()
 	//Read image file
 	//FileOperation::readFile(filePath);
 	ui::ImageView *imageView_cert_origin = dynamic_cast<ui::ImageView*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Image_cert_origin"));
-	imageView_cert_origin->loadTexture(filePath);
+	//imageView_cert_origin->loadTexture(filePath);
 	//
-	
+	//ScrollView with UIDragPanel
+	ui::ScrollView *scrollView_cert = dynamic_cast<ui::ScrollView*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("ScrollView_cert"));
+	cocos2d::CCSize size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[listView_selected_index];
+	scrollView_cert->setSize(size);
+	//scrollView_cert->addChild(imageView_cert_origin);
 }

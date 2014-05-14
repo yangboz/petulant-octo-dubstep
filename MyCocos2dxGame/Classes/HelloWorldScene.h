@@ -10,6 +10,7 @@
 
 //
 #include "FileOperation.h"
+#include "HW_DataModel.h"
 
 USING_NS_CC;
 //USING_NS_CC_EXT;
@@ -29,6 +30,8 @@ public:
     
 	//EventHandlers
 	void onOpenButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onResetButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
@@ -38,6 +41,8 @@ public:
 
 private:
 	ui::Widget *uiLayout;
+	//
+	int listView_selected_index;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
