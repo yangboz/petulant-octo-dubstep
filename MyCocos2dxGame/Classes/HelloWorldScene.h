@@ -32,6 +32,7 @@ public:
 	void onOpenButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onResetButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onListViewItemSelected(Object *pSender, ui::ListViewEventType type);
+	void onSliderValueChanged(Object *pSender, ui::SliderEventType type);
 
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
@@ -40,9 +41,27 @@ public:
 	void onOpenFilePicker();
 
 private:
-	ui::Widget *uiLayout;
+	ui::Widget *uiLayout;//MainLayout
+	//PageViews
+	ui::PageView *pageView_index;
+	ui::PageView *pageView_editor;
+	//Editor view related
+	ui::ScrollView *scrollView_editor;
+	ui::ImageView *imageView_cert_origin;
+	//Labels
+	ui::TextField *panel_index_lbl_size;
+	ui::TextField *panel_index_lbl_validate;
+	ui::TextField *panel_index_lbl_print;
+	//ListViews
+	ui::TextField *listView_index_lbl_size;
+	ui::TextField *listView_index_lbl_validate;
+	ui::TextField *listView_index_lbl_print;
+	ui::ListView *listView_index_size;
+	ui::ListView *listView_index_validate;
+	ui::ListView *listView_index_print;
 	//
 	int listView_selected_index;
+	int slider_changed_value;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

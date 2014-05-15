@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfGuidesProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GuidesProject>
+    <Project>CocoStudioUI_1</Project>
+    <GuidesList>
+      <GuidesInfo>
+        <GuidesName>VThumb</GuidesName>
+        <GuidesPosition>479.0738847520617</GuidesPosition>
+      </GuidesInfo>
+      <GuidesInfo>
+        <GuidesName>HThumb</GuidesName>
+        <GuidesPosition>318.24677794656628</GuidesPosition>
+      </GuidesInfo>
+      <GuidesInfo>
+        <GuidesName>HThumb</GuidesName>
+        <GuidesPosition>144.17270387249232</GuidesPosition>
+      </GuidesInfo>
+    </GuidesList>
+  </GuidesProject>
+</ArrayOfGuidesProject>

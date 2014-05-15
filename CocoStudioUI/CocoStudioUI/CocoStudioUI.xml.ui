@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectDir>C:\Users\yangboz\git\petulant-octo-dubstep\CocoStudioUI\CocoStudioUI</ProjectDir>
+  <Version>1.4.0.1</Version>
+  <Resources>C:\Users\yangboz\git\petulant-octo-dubstep\CocoStudioUI\CocoStudioUI\Resources</Resources>
+  <Name>CocoStudioUI</Name>
+  <JsonFileName>CocoStudioUI.json</JsonFileName>
+  <JsonFolder>C:\Users\yangboz\git\petulant-octo-dubstep\CocoStudioUI\CocoStudioUI\Json</JsonFolder>
+  <JsonList>
+    <string>CocoStudioUI_1.json</string>
+  </JsonList>
+  <CanvasSize>
+    <Width>1024</Width>
+    <Height>768</Height>
+  </CanvasSize>
+  <filePath>C:\Users\yangboz\git\petulant-octo-dubstep\CocoStudioUI\CocoStudioUI\CocoStudioUI.xml.ui</filePath>
+  <ProjectType>UIProject</ProjectType>
+  <ResRelativePath />
+  <imageFileList />
+  <imagePngList>
+    <string>GUI/button.png</string>
+    <string>GUI/slider_bar.png</string>
+    <string>GUI/slider_bar_button.png</string>
+  </imagePngList>
+  <JsonSuffix>.json</JsonSuffix>
+  <CurrentUIJson>CocoStudioUI_1.json</CurrentUIJson>
+</UIProject>

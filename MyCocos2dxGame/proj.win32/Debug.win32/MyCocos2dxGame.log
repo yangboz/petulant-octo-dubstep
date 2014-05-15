@@ -1,44 +1,28 @@
-﻿Build started 2014/5/14 14:58:27.
-     1>Project "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\MyCocos2dxGame.vcxproj" on node 4 (Build target(s)).
+﻿Build started 2014/5/15 10:53:29.
+     1>Project "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\MyCocos2dxGame.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\audio\include" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\chipmunk\include\chipmunk" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\extensions" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\extensions" /I..\Classes /I.. /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\renderer" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\ui" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\base" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\physics" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\math\kazmath" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\platform\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\platform\desktop" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\glfw3\include\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\win32-specific\gles\include\OGLES" /ZI /nologo /W3 /WX- /MP /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USE_MATH_DEFINES /D GL_GLEXT_PROTOTYPES /D CC_ENABLE_CHIPMUNK_INTEGRATION=1 /D COCOS2D_DEBUG=1 /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS /D _VARIADIC_MAX=10 /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc120.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\AppDelegate.cpp ..\Classes\FileOperation.cpp ..\Classes\HelloWorldScene.cpp ..\Classes\HW_DataModel.cpp ..\Classes\HW_StringUtils.cpp main.cpp
-         AppDelegate.cpp
-         FileOperation.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\audio\include" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\chipmunk\include\chipmunk" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\extensions" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\extensions" /I..\Classes /I.. /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\renderer" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\ui" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\base" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\physics" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\math\kazmath" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\platform\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\platform\desktop" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\glfw3\include\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\win32-specific\gles\include\OGLES" /ZI /nologo /W3 /WX- /MP /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USE_MATH_DEFINES /D GL_GLEXT_PROTOTYPES /D CC_ENABLE_CHIPMUNK_INTEGRATION=1 /D COCOS2D_DEBUG=1 /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS /D _VARIADIC_MAX=10 /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc120.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\HelloWorldScene.cpp
          HelloWorldScene.cpp
-         HW_DataModel.cpp
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\hw_datamodel.cpp(5): warning C4996: 'cocos2d::CCSizeMake': was declared deprecated
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(383) : see declaration of 'cocos2d::CCSizeMake'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\hw_datamodel.cpp(7): warning C4996: 'cocos2d::ccc3': was declared deprecated
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(415) : see declaration of 'cocos2d::ccc3'
-         HW_StringUtils.cpp
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\hw_stringutils.cpp(55): warning C4333: '>>' : right shift by too large amount, data loss
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(32): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(32): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(33): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(33): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(34): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(34): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(37): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(35): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(32): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(38): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(33): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(156): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(34): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(171): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(37): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(190): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(148): warning C4996: 'cocos2d::Object': was declared deprecated
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(205): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(163): warning C4996: 'cocos2d::Object': was declared deprecated
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(183): warning C4996: 'cocos2d::Object': was declared deprecated
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(220): warning C4996: 'cocos2d::CCSize': was declared deprecated
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(247): warning C4996: 'cocos2d::CCSize': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(773) : see declaration of 'cocos2d::CCSize'
-         main.cpp
-       ResourceCompile:
-         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /D _UNICODE /D UNICODE /l"0x0409" /nologo /fo"Debug.win32\game.res" game.rc 
        PreLinkEvent:
          if not exist "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\" mkdir "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
          xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\websockets\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
@@ -111,4 +95,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:31.89
+Time Elapsed 00:00:27.28
