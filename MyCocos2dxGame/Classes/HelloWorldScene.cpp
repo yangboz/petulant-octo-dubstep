@@ -25,8 +25,8 @@ bool HelloWorld::init()
         return false;
     }
     
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Point origin = Director::getInstance()->getVisibleOrigin();
+    cocos2d::Size visibleSize = Director::getInstance()->getVisibleSize();
+    cocos2d::Point origin = Director::getInstance()->getVisibleOrigin();
 
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
@@ -38,12 +38,12 @@ bool HelloWorld::init()
                                            "CloseSelected.png",
                                            CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
     
-	closeItem->setPosition(Point(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
+	closeItem->setPosition(cocos2d::Point(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
                                 origin.y + closeItem->getContentSize().height/2));
 
     // create menu, it's an autorelease object
     auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Point::ZERO);
+	menu->setPosition(cocos2d::Point::ZERO);
     this->addChild(menu, 1);
 
     /////////////////////////////
@@ -94,6 +94,7 @@ bool HelloWorld::init()
 	//
 	ui::Button *button_verify = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Button_verify"));
 	button_verify->setTitleText(HW_StringUtils::WStrToUTF8(L"验证"));
+	button_verify->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onValidateButtonTouch);
 	//
 	ui::Slider *slider_editor = dynamic_cast<ui::Slider*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Slider_editor"));
 	slider_editor->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onSliderValueChanged));
@@ -117,7 +118,7 @@ bool HelloWorld::init()
 
 		Layout* custom_item = Layout::create();
 		custom_item->setSize(custom_button->getSize());
-		custom_button->setPosition(Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
+		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
 		custom_item->addChild(custom_button);
 		listView_index_size->pushBackCustomItem(custom_item);
 	}
@@ -126,7 +127,7 @@ bool HelloWorld::init()
 	ui::Layout *layout_listView = ui::Layout::create();
 	layout_listView->setTouchEnabled(true);
 	layout_listView->setSize(listView_default_button->getSize());
-	layout_listView->setPosition(Point(layout_listView->getSize().width / 2.0f, layout_listView->getSize().height / 2.0f));
+	layout_listView->setPosition(cocos2d::Point(layout_listView->getSize().width / 2.0f, layout_listView->getSize().height / 2.0f));
 	layout_listView->addChild(listView_default_button);
 	//
 	listView_index_size->setItemModel(listView_default_button);
@@ -187,6 +188,23 @@ void HelloWorld::onResetButtonTouch(Object *pSender, ui::TouchEventType type)
 	}
 }
 
+void HelloWorld::onValidateButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onValidateButtonTouch,TOUCH_EVENT_ENDED!");
+		//TODO:Photo validate function call here:
+
+		break;
+	default:
+		break;
+	}
+}
+
+
 void HelloWorld::onListViewItemSelected(Object *pSender, ui::ListViewEventType type)
 {
 	ui::ListView *listView = static_cast<ListView*>(pSender);
@@ -240,8 +258,15 @@ void HelloWorld::onOpenFilePicker()
 	this->imageView_cert_origin->setSize(size);
 	//this->scrollView_editor->setInnerContainerSize(cocos2d::CCSizeMake(size.width*(slider_changed_value / 100), size.height*(slider_changed_value / 100));
 	this->scrollView_editor->addChild(this->imageView_cert_origin);
-	this->scrollView_editor->scrollToPercentBothDirection(Point(50, 50), 1, true);
+	this->scrollView_editor->scrollToPercentBothDirection(cocos2d::Point(50, 50), 1, true);
 	this->scrollView_editor->setBackGroundColorType(LAYOUT_COLOR_SOLID);
 	this->scrollView_editor->setBackGroundColor(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_COLORS[listView_selected_index]);
-	
+	//OpenCV handler here:
+	cv::Mat img = imread(filePath);
+	//Window display for testing.
+	/*
+	cv::namedWindow("image", CV_WINDOW_AUTOSIZE);
+	cv::imshow("image", img);
+	cv::waitKey();
+	*/
 }

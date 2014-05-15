@@ -65,7 +65,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)extensions;$(SolutionDir)cocostudio;$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos;</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)extensions;$(SolutionDir)cocostudio;$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos;C:\opencv\build\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
@@ -86,7 +86,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies);libExtensions.lib;libCocosStudio.lib</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);libExtensions.lib;libCocosStudio.lib;C:\opencv\build\x86\vc12\lib\opencv_core249d.lib;C:\opencv\build\x86\vc12\lib\opencv_highgui249d.lib;C:\opencv\build\x86\vc12\lib\opencv_imgproc249d.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>

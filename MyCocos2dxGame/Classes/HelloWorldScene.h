@@ -16,6 +16,9 @@ USING_NS_CC;
 //USING_NS_CC_EXT;
 using namespace ui;
 
+#include <opencv2\opencv.hpp>
+using namespace cv;
+
 class HelloWorld : public cocos2d::Layer
 {
 public:
@@ -31,6 +34,7 @@ public:
 	//EventHandlers
 	void onOpenButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onResetButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onValidateButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onSliderValueChanged(Object *pSender, ui::SliderEventType type);
 
