@@ -13,14 +13,15 @@ void OpenCvOperation::faceDetectAndDisplay(std::string filePath)
 	*/
 	//@see http://docs.opencv.org/doc/tutorials/objdetect/cascade_classifier/cascade_classifier.html
 	/** Global variables */
-	static std::string face_cascade_name = "../haarcascade_frontalface_alt.xml";
-	static std::string eyes_cascade_name = "../haarcascade_eye_tree_eyeglasses.xml";
+	static std::string face_cascade_name = "..//data//haarcascades//haarcascade_frontalface_alt.xml";
+	static std::string eyes_cascade_name = "..//data//haarcascades//haarcascade_eye_tree_eyeglasses.xml";
 	static CascadeClassifier face_cascade;
 	static CascadeClassifier eyes_cascade;
 	static std::string window_name = "Image_Face_detection";
 	//
 	if (!frame.empty())
 	{
+		
 		//-- 1. Load the cascades
 		if (!face_cascade.load(face_cascade_name)){ CCLOG("face_cascade(!)Error loading\n"); return; };
 		if (!eyes_cascade.load(eyes_cascade_name)){ CCLOG("eyes_cascade(!)Error loading\n"); return; };
