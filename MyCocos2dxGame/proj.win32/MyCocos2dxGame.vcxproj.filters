@@ -10,6 +10,12 @@
     <Filter Include="resource">
       <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\data">
+      <UniqueIdentifier>{d7f9e2c9-cbda-438b-98d4-77ee65c5c613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\data\haarcascades">
+      <UniqueIdentifier>{0c533116-19e4-4e0e-b454-d57d68f9d07f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -28,6 +34,9 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\HW_DataModel.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\OpenCvOperation.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,10 +62,21 @@
     <ClInclude Include="..\Classes\HW_DataModel.h">
       <Filter>Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\OpenCvOpeartion.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
       <Filter>resource</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Classes\data\haarcascades\haarcascade_eye.xml">
+      <Filter>Classes\data\haarcascades</Filter>
+    </Xml>
+    <Xml Include="..\Classes\data\haarcascades\haarcascade_eye_tree_eyeglasses.xml">
+      <Filter>Classes\data\haarcascades</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

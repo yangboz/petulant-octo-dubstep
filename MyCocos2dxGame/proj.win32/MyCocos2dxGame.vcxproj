@@ -142,6 +142,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\HW_DataModel.cpp" />
     <ClCompile Include="..\Classes\HW_StringUtils.cpp" />
+    <ClCompile Include="..\Classes\OpenCvOperation.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +150,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\FileOperation.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\HW_DataModel.h" />
+    <ClInclude Include="..\Classes\OpenCvOpeartion.h" />
     <ClInclude Include="..\Classes\scope_guard.h" />
     <ClInclude Include="..\Classes\HW_StringUtils.h" />
     <ClInclude Include="main.h" />
@@ -175,6 +177,10 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ProjectReference Include="..\cocos2d\external\chipmunk\proj.win32\chipmunk.vcxproj">
       <Project>{207bc7a9-ccf1-4f2f-a04d-45f72242ae25}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Classes\data\haarcascades\haarcascade_eye.xml" />
+    <Xml Include="..\Classes\data\haarcascades\haarcascade_eye_tree_eyeglasses.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

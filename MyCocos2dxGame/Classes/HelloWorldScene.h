@@ -11,17 +11,12 @@
 //
 #include "FileOperation.h"
 #include "HW_DataModel.h"
+#include "OpenCvOpeartion.h"
 
 USING_NS_CC;
 //USING_NS_CC_EXT;
 using namespace ui;
-//OpenCV core
-#include <opencv2\opencv.hpp>
-using namespace cv;
-//OpenCV face detection
-#include <opencv2\objdetect\objdetect.hpp>
-#include <opencv2\highgui\highgui.hpp>
-#include <opencv2\imgproc\imgproc.hpp>
+
 
 
 class HelloWorld : public cocos2d::Layer
@@ -48,8 +43,6 @@ public:
 
 	//OpenFilePickerTask
 	void onOpenFilePicker();
-	//OpenCV function header
-	void faceDetectAndDisplay(cv::Mat frame);
 
 private:
 	ui::Widget *uiLayout;//MainLayout
@@ -73,15 +66,7 @@ private:
 	//
 	int listView_selected_index;
 	int slider_changed_value;
-	//OpenCV related variables
-	//@see http://docs.opencv.org/doc/tutorials/objdetect/cascade_classifier/cascade_classifier.html
-	/** Global variables */
-	std::string face_cascade_name = "haarcascade_frontalface_alt.xml";
-	std::string eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
-	CascadeClassifier face_cascade;
-	CascadeClassifier eyes_cascade;
-	std::string window_name = "Image_Face_detection";
-	//cv::RNG rng(12345);
+
 };
 
 #endif // __HELLOWORLD_SCENE_H__
