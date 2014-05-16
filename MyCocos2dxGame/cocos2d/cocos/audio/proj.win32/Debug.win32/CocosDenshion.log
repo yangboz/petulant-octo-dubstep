@@ -1,23 +1,9 @@
-﻿Build started 2014/5/14 16:25:03.
-     1>Project "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\audio\proj.win32\CocosDenshion.vcxproj" on node 4 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\include" /I..\Include /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\renderer" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\ui" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\base" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\physics" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\math\kazmath" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\platform\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\platform\desktop" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\glfw3\include\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\win32-specific\gles\include\OGLES" /ZI /nologo /W3 /WX- /MP /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _CRT_SECURE_NO_WARNINGS /D _VARIADIC_MAX=10 /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc120.pdb" /Gd /TP /wd4251 /analyze- /errorReport:prompt ..\win32\MciPlayer.cpp ..\win32\SimpleAudioEngine.cpp
-         MciPlayer.cpp
-         SimpleAudioEngine.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\win32\MciPlayer.cpp)
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\sal.h(2886) : see previous definition of '__useHeader'
-     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\win32\MciPlayer.cpp)
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\sal.h(2896) : see previous definition of '__on_failure'
-     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader' : macro redefinition (..\win32\SimpleAudioEngine.cpp)
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\sal.h(2886) : see previous definition of '__useHeader'
-     1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure' : macro redefinition (..\win32\SimpleAudioEngine.cpp)
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\sal.h(2896) : see previous definition of '__on_failure'
-       Lib:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libAudio.lib" /NOLOGO Debug.win32\MciPlayer.obj
-         Debug.win32\SimpleAudioEngine.obj
+﻿Build started 2014/5/16 10:15:15.
+     1>Project "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\audio\proj.win32\CocosDenshion.vcxproj" on node 3 (Build target(s)).
+     1>Lib:
          CocosDenshion.vcxproj -> C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libAudio.lib
      1>Done Building Project "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\audio\proj.win32\CocosDenshion.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:02:57.21
+Time Elapsed 00:00:00.64
