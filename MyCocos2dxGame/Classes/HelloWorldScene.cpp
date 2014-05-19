@@ -70,7 +70,12 @@ bool HelloWorld::init()
 	this->listView_index_validate = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_validate")->getChildByName("ListView_validate"));
 	this->listView_index_print = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_print")->getChildByName("ListView_print"));
 	//Labels
-	listView_index_lbl_size->setText(HW_StringUtils::WStrToUTF8(L"常用尺寸"));
+	this->panel_index_lbl_size->setText(HW_StringUtils::WStrToUTF8(L"尺寸调节"));
+	this->panel_index_lbl_validate->setText(HW_StringUtils::WStrToUTF8(L"标准验证"));
+	this->panel_index_lbl_print->setText(HW_StringUtils::WStrToUTF8(L"照片打印"));
+	this->listView_index_lbl_size->setText(HW_StringUtils::WStrToUTF8(L"常用尺寸"));
+	this->listView_index_lbl_validate->setText(HW_StringUtils::WStrToUTF8(L"常用尺寸"));
+	this->listView_index_lbl_print->setText(HW_StringUtils::WStrToUTF8(L"纸张尺寸"));
 	//
 	ui::TextField *tl_panel_intro_note = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_intro")->getChildByName("TextField_panel_intro_notes"));
 	tl_panel_intro_note->setText(HW_StringUtils::WStrToUTF8(L"护照照片注意事项"));
@@ -96,6 +101,14 @@ bool HelloWorld::init()
 	button_verify->setTitleText(HW_StringUtils::WStrToUTF8(L"验证"));
 	button_verify->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onValidateButtonTouch);
 	//
+	ui::Button *button_typeset = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_validate")->getChildByName("Button_typeset"));
+	button_typeset->setTitleText(HW_StringUtils::WStrToUTF8(L"排版"));
+	button_typeset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onTypesetButtonTouch);
+	//
+	ui::Button *button_print = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_print")->getChildByName("Button_print"));
+	button_print->setTitleText(HW_StringUtils::WStrToUTF8(L"打印"));
+	button_print->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onPrintButtonTouch);
+	//
 	ui::Slider *slider_editor = dynamic_cast<ui::Slider*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Slider_editor"));
 	slider_editor->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onSliderValueChanged));
 	//
@@ -107,9 +120,23 @@ bool HelloWorld::init()
 	ui::Button *listView_default_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
 	//listView_default_button->setTitleText(StringUtils::WStrToUTF8(L"护照"));
 	//listView_certificates->pushBackDefaultItem();
+	ssize_t count_size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
+	for (int i = 0; i < count_size; ++i) {
+		//insert custom item
+		ui::Button *custom_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
+		custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i]);
+		custom_button->setScale9Enabled(true);
+		custom_button->setSize(listView_default_button->getSize());
 
-	ssize_t count = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
-	for (int j = 0; j < count; ++j) {
+		Layout* custom_item = Layout::create();
+		custom_item->setSize(custom_button->getSize());
+		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
+		custom_item->addChild(custom_button);
+		//
+		listView_index_size->pushBackCustomItem(custom_item);
+	}
+	ssize_t count_validate = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
+	for (int j = 0; j < count_validate; ++j) {
 		//insert custom item
 		ui::Button *custom_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
 		custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[j]);
@@ -120,22 +147,33 @@ bool HelloWorld::init()
 		custom_item->setSize(custom_button->getSize());
 		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
 		custom_item->addChild(custom_button);
-		listView_index_size->pushBackCustomItem(custom_item);
+		//
+		listView_index_validate->pushBackCustomItem(custom_item);
 	}
+	ssize_t count_print = HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS.size();
+	for (int k = 0; k < count_print; ++k) {
+		//insert custom item
+		ui::Button *custom_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
+		custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[k]);
+		custom_button->setScale9Enabled(true);
+		custom_button->setSize(listView_default_button->getSize());
 
+		Layout* custom_item = Layout::create();
+		custom_item->setSize(custom_button->getSize());
+		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
+		custom_item->addChild(custom_button);
+		//
+		listView_index_print->pushBackCustomItem(custom_item);
+	}
 	//
-	ui::Layout *layout_listView = ui::Layout::create();
-	layout_listView->setTouchEnabled(true);
-	layout_listView->setSize(listView_default_button->getSize());
-	layout_listView->setPosition(cocos2d::Point(layout_listView->getSize().width / 2.0f, layout_listView->getSize().height / 2.0f));
-	layout_listView->addChild(listView_default_button);
-	//
-	listView_index_size->setItemModel(listView_default_button);
+	this->listView_index_size->setItemModel(listView_default_button);
+	this->listView_index_validate->setItemModel(listView_default_button);
+	this->listView_index_print->setItemModel(listView_default_button);
 	//
 	this->listView_selected_index = 0;//Default index selection.
-	listView_index_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onListViewItemSelected));
-	//
-	
+	listView_index_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
+	listView_index_validate->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
+	listView_index_print->addEventListenerListView(this, listvieweventselector(HelloWorld::onPrintListViewItemSelected));
 	//
     return true;
 }
@@ -199,15 +237,46 @@ void HelloWorld::onValidateButtonTouch(Object *pSender, ui::TouchEventType type)
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onValidateButtonTouch,TOUCH_EVENT_ENDED!");
 		//TODO:Photo validate function call here:
-
+		this->pageView_editor->scrollToPage(2);
+		this->pageView_index->scrollToPage(1);
+		break;
+	default:
+		break;
+	}
+}
+void HelloWorld::onTypesetButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onTypesetButtonTouch,TOUCH_EVENT_ENDED!");
+		//TODO:Photo print function call here:
+		this->pageView_editor->scrollToPage(3);
+		this->pageView_index->scrollToPage(2);
+		break;
+	default:
+		break;
+	}
+}
+void HelloWorld::onPrintButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onPrintButtonTouch,TOUCH_EVENT_ENDED!");
+		//TODO:Photo system print function call here:
+		
 		break;
 	default:
 		break;
 	}
 }
 
-
-void HelloWorld::onListViewItemSelected(Object *pSender, ui::ListViewEventType type)
+void HelloWorld::onCertListViewItemSelected(Object *pSender, ui::ListViewEventType type)
 {
 	ui::ListView *listView = static_cast<ListView*>(pSender);
 	//
@@ -215,7 +284,22 @@ void HelloWorld::onListViewItemSelected(Object *pSender, ui::ListViewEventType t
 	{
 	case LISTVIEW_ONSELECTEDITEM_END:
 		listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
-		CCLOG("listView selected child index: %d", listView_selected_index);
+		CCLOG("listView_cert selected child index: %d", listView_selected_index);
+		break;
+	default:
+		break;
+	}
+}
+
+void HelloWorld::onPrintListViewItemSelected(Object *pSender, ui::ListViewEventType type)
+{
+	ui::ListView *listView = static_cast<ListView*>(pSender);
+	//
+	switch (type)
+	{
+	case LISTVIEW_ONSELECTEDITEM_END:
+		listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
+		CCLOG("listView_print selected child index: %d", listView_selected_index);
 		break;
 	default:
 		break;
@@ -250,6 +334,7 @@ void HelloWorld::onOpenFilePicker()
 	//MessageBox(NULL,"Welcome to Win32 Application Development!\n");
 	//Navigate to PageView_editor
 	this->pageView_editor->scrollToPage(1);
+	this->pageView_index->scrollToPage(1);
 	//Read image file
 	//FileOperation::readFile(filePath);
 	this->imageView_cert_origin = ui::ImageView::create();

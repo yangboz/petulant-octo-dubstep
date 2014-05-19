@@ -35,7 +35,10 @@ public:
 	void onOpenButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onResetButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onValidateButtonTouch(Object *pSender, ui::TouchEventType type);
-	void onListViewItemSelected(Object *pSender, ui::ListViewEventType type);
+	void onTypesetButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onPrintButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onCertListViewItemSelected(Object *pSender, ui::ListViewEventType type);
+	void onPrintListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onSliderValueChanged(Object *pSender, ui::SliderEventType type);
 
     // implement the "static create()" method manually
