@@ -13,11 +13,11 @@
 #include "HW_DataModel.h"
 #include "OpenCvOpeartion.h"
 
+#include "PopupLayer\PopupLayer.h"
+
 USING_NS_CC;
 //USING_NS_CC_EXT;
 using namespace ui;
-
-
 
 class HelloWorld : public cocos2d::Layer
 {
@@ -46,6 +46,8 @@ public:
 
 	//OpenFilePickerTask
 	void onOpenFilePicker();
+	//Popup layer testing
+	void popupLayerTesting();
 
 private:
 	ui::Widget *uiLayout;//MainLayout
@@ -70,6 +72,8 @@ private:
 	int listView_selected_index;
 	int slider_changed_value;
 
+	//Popup related
+	void popupButtonCallback(cocos2d::CCNode *pNode);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

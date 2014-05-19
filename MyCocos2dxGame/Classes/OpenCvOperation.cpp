@@ -21,7 +21,6 @@ void OpenCvOperation::faceDetectAndDisplay(std::string filePath)
 	//
 	if (!frame.empty())
 	{
-		
 		//-- 1. Load the cascades
 		if (!face_cascade.load(face_cascade_name)){ CCLOG("face_cascade(!)Error loading\n"); return; };
 		if (!eyes_cascade.load(eyes_cascade_name)){ CCLOG("eyes_cascade(!)Error loading\n"); return; };

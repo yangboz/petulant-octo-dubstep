@@ -10,6 +10,9 @@
     <Filter Include="resource">
       <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\PopupLayer">
+      <UniqueIdentifier>{369ca867-bc47-4fe3-9ed0-7b0310198014}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -32,6 +35,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\OpenCvOperation.cpp">
       <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PopupLayer\PopupLayer.cpp">
+      <Filter>Classes\PopupLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PopupLayer\CCScale9Sprite.cpp">
+      <Filter>Classes\PopupLayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +67,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\OpenCvOpeartion.h">
       <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PopupLayer\PopupLayer.h">
+      <Filter>Classes\PopupLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PopupLayer\CCScale9Sprite.h">
+      <Filter>Classes\PopupLayer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

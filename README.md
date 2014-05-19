@@ -54,3 +54,5 @@ Run
 ### VS2013 cpnfigurations ###
 
 http://blog.csdn.net/fansongy/article/details/18366275
+
+http://blog.csdn.net/marpools/article/details/18895129

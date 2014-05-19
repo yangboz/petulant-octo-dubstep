@@ -196,17 +196,25 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 //EventHandlers
 void HelloWorld::onOpenButtonTouch(Object *pSender, ui::TouchEventType type)
 {
+	//
 	switch (type)
 	{
 	case TOUCH_EVENT_BEGAN:
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onOpenButtonTouch,TOUCH_EVENT_ENDED!");
-		this->onOpenFilePicker();
+		//this->onOpenFilePicker();
+		//For popup testing
+		this->popupLayerTesting();
 		break;
 	default:
 			break;
 	}
+}
+
+void HelloWorld::popupButtonCallback(cocos2d::CCNode *pNode)
+{
+	CCLog("popup button call back. tag: %d", pNode->getTag());
 }
 
 void HelloWorld::onResetButtonTouch(Object *pSender, ui::TouchEventType type)
@@ -350,4 +358,20 @@ void HelloWorld::onOpenFilePicker()
 	this->scrollView_editor->setBackGroundColor(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_COLORS[listView_selected_index]);
 	//OpenCV handler here:
 	OpenCvOperation::faceDetectAndDisplay(filePath);
+}
+
+void HelloWorld::popupLayerTesting()
+{
+	//Testing code here:
+	PopupLayer *popup = PopupLayer::create("C:\\lena.png");
+	popup->setTitle("Popup!");
+	//popup->setContentSize(CCSizeMake(400, 360));
+	popup->setContentText("娇兰傲梅世人赏，却少幽芬暗里藏。不看百花共争艳，独爱疏樱一枝香。", 20, 50, 150);
+	// 设置回调函数，回调传回一个 CCNode 以获取 tag 判断点击的按钮  
+	// 这只是作为一种封装实现，如果使用 delegate 那就能够更灵活的控制参数了  
+	popup->setCallbackFunc(this, callfuncN_selector(HelloWorld::popupButtonCallback));
+	// 添加按钮，设置图片，文字，tag 信息  
+	popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "确定", 0);
+	popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "取消", 1);
+	this->addChild(popup);
 }
