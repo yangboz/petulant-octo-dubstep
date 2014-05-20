@@ -203,9 +203,9 @@ void HelloWorld::onOpenButtonTouch(Object *pSender, ui::TouchEventType type)
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onOpenButtonTouch,TOUCH_EVENT_ENDED!");
-		//this->onOpenFilePicker();
+		this->onOpenFilePicker();
 		//For popup testing
-		this->popupLayerTesting();
+		//this->popupLayerTesting();
 		break;
 	default:
 			break;
@@ -339,6 +339,8 @@ void HelloWorld::onSliderValueChanged(Object *pSender, ui::SliderEventType type)
 void HelloWorld::onOpenFilePicker()
 {
 	std::string filePath = FileOperation::openFile();
+	OpenCvOperation::iplImageAttributesCheck(filePath);
+	return;
 	//MessageBox(NULL,"Welcome to Win32 Application Development!\n");
 	//Navigate to PageView_editor
 	this->pageView_editor->scrollToPage(1);

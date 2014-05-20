@@ -12,6 +12,8 @@ using namespace cv;
 #include <opencv2\highgui\highgui.hpp>
 #include <opencv2\imgproc\imgproc.hpp>
 
+#include <opencv\cv.h>
+
 // to enable CCLOG()
 #define COCOS2D_DEBUG 1
 #include "cocos2d.h"
@@ -19,6 +21,10 @@ using namespace cv;
 class OpenCvOperation
 {
 public:
+	//IplImage attribute check
+	static void iplImageAttributesCheck(std::string filePath);
+	//cv::Mat image attribute check
+	static void cvMatImageAttributesCheck(std::string filePath);
 	//OpenCV function header
 	static void faceDetectAndDisplay(std::string filePath);
 private:

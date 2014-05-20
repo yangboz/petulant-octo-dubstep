@@ -135,7 +135,7 @@ std::string FileOperation::openFile()
 	}
 	//
 	filePath = HW_StringUtils::ws2s(filePaths);
-	CCLOG("Selected image file path: %s \\n", filePath);
+	CCLOG("Selected image file path: %s \\n", filePath.c_str());
 	return filePath;
 }
 
