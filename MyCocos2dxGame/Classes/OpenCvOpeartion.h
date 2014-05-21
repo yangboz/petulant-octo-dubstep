@@ -18,13 +18,17 @@ using namespace cv;
 #define COCOS2D_DEBUG 1
 #include "cocos2d.h"
 
+#include "HW_DataModel.h"
+#include "HW_UserDataModel.h"
+
 class OpenCvOperation
 {
 public:
+	//@see http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html
 	//IplImage attribute check
-	static void iplImageAttributesCheck(std::string filePath);
+	static bool iplImageAttributesCheck(std::string filePath);
 	//cv::Mat image attribute check
-	static void cvMatImageAttributesCheck(std::string filePath);
+	static bool cvMatImageAttributesCheck(std::string filePath);
 	//OpenCV function header
 	static void faceDetectAndDisplay(std::string filePath);
 private:

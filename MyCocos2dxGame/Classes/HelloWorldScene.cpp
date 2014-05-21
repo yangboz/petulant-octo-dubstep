@@ -170,7 +170,8 @@ bool HelloWorld::init()
 	this->listView_index_validate->setItemModel(listView_default_button);
 	this->listView_index_print->setItemModel(listView_default_button);
 	//
-	this->listView_selected_index = 0;//Default index selection.
+	HW_UserDataModel::Instance()->cur_listView_selected_index = 0;//Default index selection.
+	//
 	listView_index_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
 	listView_index_validate->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
 	listView_index_print->addEventListenerListView(this, listvieweventselector(HelloWorld::onPrintListViewItemSelected));
@@ -214,7 +215,7 @@ void HelloWorld::onOpenButtonTouch(Object *pSender, ui::TouchEventType type)
 
 void HelloWorld::popupButtonCallback(cocos2d::CCNode *pNode)
 {
-	CCLog("popup button call back. tag: %d", pNode->getTag());
+	CCLOG("popup button call back. tag: %d", pNode->getTag());
 }
 
 void HelloWorld::onResetButtonTouch(Object *pSender, ui::TouchEventType type)
@@ -291,8 +292,8 @@ void HelloWorld::onCertListViewItemSelected(Object *pSender, ui::ListViewEventTy
 	switch (type)
 	{
 	case LISTVIEW_ONSELECTEDITEM_END:
-		listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
-		CCLOG("listView_cert selected child index: %d", listView_selected_index);
+		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
+		CCLOG("listView_cert selected child index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
 		break;
 	default:
 		break;
@@ -306,8 +307,8 @@ void HelloWorld::onPrintListViewItemSelected(Object *pSender, ui::ListViewEventT
 	switch (type)
 	{
 	case LISTVIEW_ONSELECTEDITEM_END:
-		listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
-		CCLOG("listView_print selected child index: %d", listView_selected_index);
+		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
+		CCLOG("listView_print selected child index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
 		break;
 	default:
 		break;
@@ -339,8 +340,10 @@ void HelloWorld::onSliderValueChanged(Object *pSender, ui::SliderEventType type)
 void HelloWorld::onOpenFilePicker()
 {
 	std::string filePath = FileOperation::openFile();
-	OpenCvOperation::iplImageAttributesCheck(filePath);
-	return;
+	if(!OpenCvOperation::iplImageAttributesCheck(filePath))
+	{
+		MessageBox("Invalid image with attributes(width/height/size..)!", "Error");
+	}
 	//MessageBox(NULL,"Welcome to Win32 Application Development!\n");
 	//Navigate to PageView_editor
 	this->pageView_editor->scrollToPage(1);
@@ -351,13 +354,13 @@ void HelloWorld::onOpenFilePicker()
 	this->imageView_cert_origin->loadTexture(filePath);
 	//
 	//ScrollView with UIDragPanel
-	cocos2d::CCSize size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[listView_selected_index];
+	cocos2d::CCSize size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	this->imageView_cert_origin->setSize(size);
 	//this->scrollView_editor->setInnerContainerSize(cocos2d::CCSizeMake(size.width*(slider_changed_value / 100), size.height*(slider_changed_value / 100));
 	this->scrollView_editor->addChild(this->imageView_cert_origin);
 	this->scrollView_editor->scrollToPercentBothDirection(cocos2d::Point(50, 50), 1, true);
 	this->scrollView_editor->setBackGroundColorType(LAYOUT_COLOR_SOLID);
-	this->scrollView_editor->setBackGroundColor(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_COLORS[listView_selected_index]);
+	this->scrollView_editor->setBackGroundColor(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_COLORS[HW_UserDataModel::Instance()->cur_listView_selected_index]);
 	//OpenCV handler here:
 	OpenCvOperation::faceDetectAndDisplay(filePath);
 }
@@ -368,12 +371,12 @@ void HelloWorld::popupLayerTesting()
 	PopupLayer *popup = PopupLayer::create("C:\\lena.png");
 	popup->setTitle("Popup!");
 	//popup->setContentSize(CCSizeMake(400, 360));
-	popup->setContentText("娇兰傲梅世人赏，却少幽芬暗里藏。不看百花共争艳，独爱疏樱一枝香。", 20, 50, 150);
+	popup->setContentText("xxxxxxx，yyyyyyy。xxxxxxx，yyyyyyy。", 20, 50, 150);
 	// 设置回调函数，回调传回一个 CCNode 以获取 tag 判断点击的按钮  
 	// 这只是作为一种封装实现，如果使用 delegate 那就能够更灵活的控制参数了  
 	popup->setCallbackFunc(this, callfuncN_selector(HelloWorld::popupButtonCallback));
 	// 添加按钮，设置图片，文字，tag 信息  
-	popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "确定", 0);
-	popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "取消", 1);
+	popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "OK", 0);
+	popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "Cancel", 1);
 	this->addChild(popup);
 }

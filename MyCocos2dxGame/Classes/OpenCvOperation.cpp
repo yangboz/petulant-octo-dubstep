@@ -43,7 +43,7 @@ void OpenCvOperation::faceDetectAndDisplay(std::string filePath)
 	cvtColor(frame, frame_gray, CV_BGR2GRAY);
 	equalizeHist(frame_gray, frame_gray);
 	//-- Detect fullbody
-	vector<Rect> bodys;
+	vector<cv::Rect> bodys;
 	//cv::Mat frame_gray;
 
 	cvtColor(frame, frame_gray, CV_BGR2GRAY);
@@ -53,7 +53,7 @@ void OpenCvOperation::faceDetectAndDisplay(std::string filePath)
 	for (int j = 0; j < bodys.size(); j++)
 	{
 		cv::Point center(bodys[j].x + bodys[j].width*0.5, bodys[j].y + +bodys[j].height*0.5);
-		ellipse(frame, center, cv::Size(bodys[j].width*0.5, bodys[j].height*0.5), 0, 0, 360, cv::Scalar(255, 0, 255), 4, 8, 0);
+		cv::ellipse(frame, center, cv::Size(bodys[j].width*0.5, bodys[j].height*0.5), 0, 0, 360, cv::Scalar(255, 0, 255), 4, 8, 0);
 	}
 	//-- Detect faces
 	face_cascade.detectMultiScale(frame_gray, faces, 1.1, 2, 0 | CV_HAAR_SCALE_IMAGE, cv::Size(30, 30));
@@ -80,35 +80,43 @@ void OpenCvOperation::faceDetectAndDisplay(std::string filePath)
 	imshow(window_name, frame);
 }
 //IplImage attributes check
-void OpenCvOperation::iplImageAttributesCheck(std::string filePath)
+bool OpenCvOperation::iplImageAttributesCheck(std::string filePath)
 {
 	//Create an IplImage object *image
 	IplImage *image = cvLoadImage(filePath.c_str());
 	// Display Image Attributes by accessing a IplImage object's data members
-
-	CCLOG("Image filename: %s", filePath.c_str());
-
+	//CCLOG("Image filename: %s", filePath.c_str());
+	int targetWidth = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index].width;
+	int targetHeight = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index].height;
 	CCLOG("Width: %d",image->width);
 	CCLOG("Height: %d", image->height);
-
-	CCLOG("Pixel Depth: %d", image->depth);
-	CCLOG("Channels: %d", image->nChannels);
-
-	CCLOG("Width Step: %d", image->widthStep);
+	//CCLOG("Pixel Depth: %d", image->depth);
+	//CCLOG("Channels: %d", image->nChannels);
+	//CCLOG("Width Step: %d", image->widthStep);
 	CCLOG("Image Size: %d", image->imageSize);
+	int targetFileSizeMin = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_FILE_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index].width;
+	int targetFileSizeMax = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_FILE_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index].height;
+	//Sort of check conditions here.
+	bool widthChecker = (targetWidth <= image->width);
+	bool heightChecker = (targetHeight <= image->height);
+	bool fileSizeChecker = (targetFileSizeMin <= image->imageSize) && (targetFileSizeMax >= image->imageSize);
 	//Release
 	cvReleaseImage(&image);
+	//
+	//return widthChecker && heightChecker && fileSizeChecker;
+	return widthChecker && heightChecker;
 }
 
 //cvMat image attributes check
-void OpenCvOperation::cvMatImageAttributesCheck(std::string filePath)
+bool OpenCvOperation::cvMatImageAttributesCheck(std::string filePath)
 {
 	//
 	cv::Mat image = cv::imread(filePath);
 	if (!image.data)
 	{
-		
+		//TODO:image attributes check
 	};
 	//Be tidy
-	cvReleaseMat(image.data);
+	//cvReleaseMat(image);
+	return true;
 }

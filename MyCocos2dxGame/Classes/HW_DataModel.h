@@ -22,6 +22,8 @@ namespace HW_DataModel
 		static const std::vector<cocos2d::Size> ARRAY_OF_PRINT_SIZES;
 		//default labels of certificates
 		static const std::vector<std::string> ARRAY_OF_PRINT_LABELS;
+		//ImageAttributes validation
+		static const std::vector<cocos2d::Size> ARRAY_OF_CERT_FILE_SIZES;
 	private:
 	
 	};

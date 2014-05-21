@@ -142,6 +142,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\HW_DataModel.cpp" />
     <ClCompile Include="..\Classes\HW_StringUtils.cpp" />
+    <ClCompile Include="..\Classes\HW_UserDataModel.cpp" />
     <ClCompile Include="..\Classes\OpenCvOperation.cpp" />
     <ClCompile Include="..\Classes\PopupLayer\CCScale9Sprite.cpp" />
     <ClCompile Include="..\Classes\PopupLayer\PopupLayer.cpp" />
@@ -152,6 +153,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\FileOperation.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\HW_DataModel.h" />
+    <ClInclude Include="..\Classes\HW_UserDataModel.h" />
     <ClInclude Include="..\Classes\OpenCvOpeartion.h" />
     <ClInclude Include="..\Classes\PopupLayer\CCScale9Sprite.h" />
     <ClInclude Include="..\Classes\PopupLayer\PopupLayer.h" />

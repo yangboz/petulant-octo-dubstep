@@ -15,6 +15,8 @@
 
 #include "PopupLayer\PopupLayer.h"
 
+#include "HW_UserDataModel.h"
+
 USING_NS_CC;
 //USING_NS_CC_EXT;
 using namespace ui;
@@ -69,7 +71,6 @@ private:
 	ui::ListView *listView_index_validate;
 	ui::ListView *listView_index_print;
 	//
-	int listView_selected_index;
 	int slider_changed_value;
 
 	//Popup related
