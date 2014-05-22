@@ -42,6 +42,8 @@ public:
 	void onCertListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onPrintListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onSliderValueChanged(Object *pSender, ui::SliderEventType type);
+	void onWindowCloseButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onWindowMinButtonTouch(Object *pSender, ui::TouchEventType type);
 
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
@@ -53,7 +55,11 @@ public:
 
 private:
 	ui::Widget *uiLayout;//MainLayout
+	//Window buttons
+	ui::Button *btn_window_min;
+	ui::Button *btn_window_close;
 	//PageViews
+	ui::PageView *pageView_main;
 	ui::PageView *pageView_index;
 	ui::PageView *pageView_editor;
 	//Editor view related

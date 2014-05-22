@@ -18,10 +18,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
     if(!glview) {
         glview = GLView::create("HP Certificates Print");
         director->setOpenGLView(glview);
+		//Window customize
+		//glview->setFrameSize(800, 600);
+		glview->setDesignResolutionSize(800, 600, ResolutionPolicy::EXACT_FIT);
     }
 
     // turn on display FPS
-    director->setDisplayStats(true);
+    director->setDisplayStats(false);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);

@@ -10,14 +10,24 @@
     <string>CocoStudioUI_1.json</string>
   </JsonList>
   <CanvasSize>
-    <Width>960</Width>
-    <Height>640</Height>
+    <Width>800</Width>
+    <Height>600</Height>
   </CanvasSize>
   <filePath>C:\Users\yangboz\git\petulant-octo-dubstep\CocoStudioUI\CocoStudioUI.xml.ui</filePath>
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>pattern_window_background.png</string>
+    <string>infomation_photoguides.png</string>
+    <string>button_hidewindow.png</string>
+    <string>button_hidewindow_pd.png</string>
+    <string>button_closewindow.png</string>
+    <string>button_closewindow_pd.png</string>
+    <string>GUI/button.png</string>
+    <string>GUI/slider_bar.png</string>
+    <string>GUI/slider_bar_button.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>CocoStudioUI_1.json</CurrentUIJson>
 </UIProject>

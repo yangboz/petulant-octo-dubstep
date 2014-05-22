@@ -33,6 +33,7 @@ bool HelloWorld::init()
     //    you may modify it.
 
     // add a "close" icon to exit the progress. it's an autorelease object
+	/*
     auto closeItem = MenuItemImage::create(
                                            "CloseNormal.png",
                                            "CloseSelected.png",
@@ -45,14 +46,20 @@ bool HelloWorld::init()
     auto menu = Menu::create(closeItem, NULL);
 	menu->setPosition(cocos2d::Point::ZERO);
     this->addChild(menu, 1);
-
+	*/
     /////////////////////////////
     // 3. add your codes below...
 	//UIElements behaviour
 	//Load Layout
 	this->uiLayout = cocostudio::GUIReader::getInstance()->widgetFromJsonFile("CocoStudioUI_1/CocoStudioUI_1.json");
 	addChild(uiLayout);
+	//Window buttons
+	this->btn_window_min = dynamic_cast<ui::Button*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro")->getChildByName("Button_window_min"));
+	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
+	this->btn_window_close = dynamic_cast<ui::Button*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro")->getChildByName("Button_window_close"));
+	this->btn_window_close->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowCloseButtonTouch);
 	//PageViews(index,editor)
+ 	this->pageView_main = dynamic_cast<ui::PageView*>(this->uiLayout->getChildByName("PageView_main"));
 	this->pageView_index = dynamic_cast<ui::PageView*>(this->uiLayout->getChildByName("PageView_index"));
 	this->pageView_editor = dynamic_cast<ui::PageView*>(this->uiLayout->getChildByName("PageView_editor"));
 	//Editor view related
@@ -66,7 +73,8 @@ bool HelloWorld::init()
 	this->listView_index_lbl_size = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_size")->getChildByName("TextField_list_view_title"));
 	this->listView_index_lbl_validate = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_validate")->getChildByName("TextField_list_view_title"));
 	this->listView_index_lbl_print = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_print")->getChildByName("TextField_list_view_title"));
-	this->listView_index_size = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_size")->getChildByName("ListView_size"));
+	//this->listView_index_size = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_size")->getChildByName("ListView_size"));
+	this->listView_index_size = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro")->getChildByName("ListView_size"));
 	this->listView_index_validate = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_validate")->getChildByName("ListView_validate"));
 	this->listView_index_print = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_print")->getChildByName("ListView_print"));
 	//Labels
@@ -123,10 +131,12 @@ bool HelloWorld::init()
 	ssize_t count_size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
 	for (int i = 0; i < count_size; ++i) {
 		//insert custom item
-		ui::Button *custom_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
-		custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i]);
-		custom_button->setScale9Enabled(true);
-		custom_button->setSize(listView_default_button->getSize());
+		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/button_photosize_" + std::to_string(i) + ".png";
+		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/button_photosize_" + std::to_string(i) + "_pd.png";
+		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
+		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i]);
+		//custom_button->setScale9Enabled(true);
+		//custom_button->setSize(listView_default_button->getSize());
 
 		Layout* custom_item = Layout::create();
 		custom_item->setSize(custom_button->getSize());
@@ -328,6 +338,36 @@ void HelloWorld::onSliderValueChanged(Object *pSender, ui::SliderEventType type)
 		CCLOG("onSliderValueChanged,TOUCH_EVENT_ENDED,scale value: %f", scaleValue);
 		//this->imageView_cert_origin->setSize(cocos2d::CCSizeMake(size.width*slider_changed_value / 100, size.height*slider_changed_value / 100));
 		this->imageView_cert_origin->setScale(scaleValue);
+		break;
+	default:
+		break;
+	}
+}
+
+void HelloWorld::onWindowMinButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onWindowMinButtonTouch,TOUCH_EVENT_ENDED!");
+		//TODO:Windows minize function here:
+
+		break;
+	default:
+		break;
+	}
+}
+void HelloWorld::onWindowCloseButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onWindowCloseButtonTouch,TOUCH_EVENT_ENDED!");
+		Director::getInstance()->end();
 		break;
 	default:
 		break;
