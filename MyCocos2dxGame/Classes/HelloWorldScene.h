@@ -44,6 +44,7 @@ public:
 	void onSliderValueChanged(Object *pSender, ui::SliderEventType type);
 	void onWindowCloseButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onWindowMinButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onCertListViewItemButtonTouch(Object *pSender, ui::TouchEventType type);
 
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
@@ -60,19 +61,10 @@ private:
 	ui::Button *btn_window_close;
 	//PageViews
 	ui::PageView *pageView_main;
-	ui::PageView *pageView_index;
-	ui::PageView *pageView_editor;
 	//Editor view related
 	ui::ScrollView *scrollView_editor;
 	ui::ImageView *imageView_cert_origin;
-	//Labels
-	ui::TextField *panel_index_lbl_size;
-	ui::TextField *panel_index_lbl_validate;
-	ui::TextField *panel_index_lbl_print;
 	//ListViews
-	ui::TextField *listView_index_lbl_size;
-	ui::TextField *listView_index_lbl_validate;
-	ui::TextField *listView_index_lbl_print;
 	ui::ListView *listView_index_size;
 	ui::ListView *listView_index_validate;
 	ui::ListView *listView_index_print;

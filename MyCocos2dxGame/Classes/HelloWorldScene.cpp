@@ -60,53 +60,25 @@ bool HelloWorld::init()
 	this->btn_window_close->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowCloseButtonTouch);
 	//PageViews(index,editor)
  	this->pageView_main = dynamic_cast<ui::PageView*>(this->uiLayout->getChildByName("PageView_main"));
-	this->pageView_index = dynamic_cast<ui::PageView*>(this->uiLayout->getChildByName("PageView_index"));
-	this->pageView_editor = dynamic_cast<ui::PageView*>(this->uiLayout->getChildByName("PageView_editor"));
 	//Editor view related
-	this->scrollView_editor = dynamic_cast<ui::ScrollView*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("ScrollView_cert"));
+	this->scrollView_editor = dynamic_cast<ui::ScrollView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("ScrollView_cert"));
 	this->imageView_cert_origin = ui::ImageView::create();
-	//Labels
-	this->panel_index_lbl_size = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_size")->getChildByName("Panel_index_label"));
-	this->panel_index_lbl_validate = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_validate")->getChildByName("Panel_index_label"));
-	this->panel_index_lbl_print = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_print")->getChildByName("Panel_index_label"));
 	//ListViews
-	this->listView_index_lbl_size = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_size")->getChildByName("TextField_list_view_title"));
-	this->listView_index_lbl_validate = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_validate")->getChildByName("TextField_list_view_title"));
-	this->listView_index_lbl_print = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_print")->getChildByName("TextField_list_view_title"));
-	//this->listView_index_size = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_size")->getChildByName("ListView_size"));
 	this->listView_index_size = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro")->getChildByName("ListView_size"));
 	this->listView_index_validate = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_validate")->getChildByName("ListView_validate"));
 	this->listView_index_print = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_print")->getChildByName("ListView_print"));
-	//Labels
-	this->panel_index_lbl_size->setText(HW_StringUtils::WStrToUTF8(L"尺寸调节"));
-	this->panel_index_lbl_validate->setText(HW_StringUtils::WStrToUTF8(L"标准验证"));
-	this->panel_index_lbl_print->setText(HW_StringUtils::WStrToUTF8(L"照片打印"));
-	this->listView_index_lbl_size->setText(HW_StringUtils::WStrToUTF8(L"常用尺寸"));
-	this->listView_index_lbl_validate->setText(HW_StringUtils::WStrToUTF8(L"常用尺寸"));
-	this->listView_index_lbl_print->setText(HW_StringUtils::WStrToUTF8(L"纸张尺寸"));
+	//Buttons in PageViewMain->Panel_editor
 	//
-	ui::TextField *tl_panel_intro_note = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_intro")->getChildByName("TextField_panel_intro_notes"));
-	tl_panel_intro_note->setText(HW_StringUtils::WStrToUTF8(L"护照照片注意事项"));
-	//
-	ui::TextField *tl_panel_intro_opt_0= dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_intro")->getChildByName("TextField_panel_intro_opt_0"));
-	//tl_panel_intro_note->setText(HW_StringUtils::WStrToUTF8(L"护照照片注意事项"));
-	//
-	ui::TextField *tl_panel_intro_opt_1 = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_intro")->getChildByName("TextField_panel_intro_opt_1"));
-	//tl_panel_intro_note->setText(HW_StringUtils::WStrToUTF8(L"护照照片注意事项"));
-	//
-	ui::TextField *tl_panel_intro_opt_2 = dynamic_cast<ui::TextField*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_intro")->getChildByName("TextField_panel_intro_opt_2"));
-	//tl_panel_intro_note->setText(HW_StringUtils::WStrToUTF8(L"护照照片注意事项"));
-	//Buttons
-	//
-	ui::Button *button_open = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_intro")->getChildByName("Button_open"));
-	button_open->setTitleText(HW_StringUtils::WStrToUTF8(L"打开"));
+
+	ui::Button *button_open = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_open"));
+	//button_open->setTitleText(HW_StringUtils::WStrToUTF8(L"打开"));
 	button_open->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onOpenButtonTouch);
 	
 	//ui::ImageView *imageView_cert_origin = dynamic_cast<ui::ImageView*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Image_cert_origin"));
 	//this->imageView_cert_origin = ui::ImageView::create();
 	//
-	ui::Button *button_verify = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Button_verify"));
-	button_verify->setTitleText(HW_StringUtils::WStrToUTF8(L"验证"));
+	ui::Button *button_verify = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_verify"));
+	//button_verify->setTitleText(HW_StringUtils::WStrToUTF8(L"验证"));
 	button_verify->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onValidateButtonTouch);
 	//
 	ui::Button *button_typeset = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_validate")->getChildByName("Button_typeset"));
@@ -117,11 +89,11 @@ bool HelloWorld::init()
 	button_print->setTitleText(HW_StringUtils::WStrToUTF8(L"打印"));
 	button_print->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onPrintButtonTouch);
 	//
-	ui::Slider *slider_editor = dynamic_cast<ui::Slider*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Slider_editor"));
+	ui::Slider *slider_editor = dynamic_cast<ui::Slider*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Slider_editor"));
 	slider_editor->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onSliderValueChanged));
 	//
-	ui::Button *button_reset = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Button_reset"));
-	button_reset->setTitleText(HW_StringUtils::WStrToUTF8(L"重置"));
+	ui::Button *button_reset = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_reset"));
+	//button_reset->setTitleText(HW_StringUtils::WStrToUTF8(L"重置"));
 	button_reset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onResetButtonTouch);
 	//ListView item model
 	//
@@ -137,6 +109,7 @@ bool HelloWorld::init()
 		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i]);
 		//custom_button->setScale9Enabled(true);
 		//custom_button->setSize(listView_default_button->getSize());
+		custom_button->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onCertListViewItemButtonTouch);
 
 		Layout* custom_item = Layout::create();
 		custom_item->setSize(custom_button->getSize());
@@ -240,7 +213,7 @@ void HelloWorld::onResetButtonTouch(Object *pSender, ui::TouchEventType type)
 		//TODO:Reset function here:
 
 		//Navigate to PageView_editor
-		this->pageView_editor->scrollToPage(0);
+		this->pageView_main->scrollToPage(0);
 		break;
 	default:
 		break;
@@ -256,8 +229,7 @@ void HelloWorld::onValidateButtonTouch(Object *pSender, ui::TouchEventType type)
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onValidateButtonTouch,TOUCH_EVENT_ENDED!");
 		//TODO:Photo validate function call here:
-		this->pageView_editor->scrollToPage(2);
-		this->pageView_index->scrollToPage(1);
+
 		break;
 	default:
 		break;
@@ -272,8 +244,7 @@ void HelloWorld::onTypesetButtonTouch(Object *pSender, ui::TouchEventType type)
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onTypesetButtonTouch,TOUCH_EVENT_ENDED!");
 		//TODO:Photo print function call here:
-		this->pageView_editor->scrollToPage(3);
-		this->pageView_index->scrollToPage(2);
+
 		break;
 	default:
 		break;
@@ -304,6 +275,7 @@ void HelloWorld::onCertListViewItemSelected(Object *pSender, ui::ListViewEventTy
 	case LISTVIEW_ONSELECTEDITEM_END:
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		CCLOG("listView_cert selected child index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
+		this->pageView_main->scrollToPage(1);
 		break;
 	default:
 		break;
@@ -337,7 +309,10 @@ void HelloWorld::onSliderValueChanged(Object *pSender, ui::SliderEventType type)
 		scaleValue = (1.00 + slider_changed_value / 100.00);
 		CCLOG("onSliderValueChanged,TOUCH_EVENT_ENDED,scale value: %f", scaleValue);
 		//this->imageView_cert_origin->setSize(cocos2d::CCSizeMake(size.width*slider_changed_value / 100, size.height*slider_changed_value / 100));
-		this->imageView_cert_origin->setScale(scaleValue);
+		if (this->imageView_cert_origin)
+		{
+			this->imageView_cert_origin->setScale(scaleValue);
+		}
 		break;
 	default:
 		break;
@@ -374,31 +349,53 @@ void HelloWorld::onWindowCloseButtonTouch(Object *pSender, ui::TouchEventType ty
 	}
 }
 
+void HelloWorld::onCertListViewItemButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		CCLOG("onCertListViewItemButtonTouch,TOUCH_EVENT_BEGAN!");
+		//this->popupLayerTesting();
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onCertListViewItemButtonTouch,TOUCH_EVENT_ENDED!");
+		break;
+	default:
+		break;
+	}
+}
+
 //@see http://www.cocos2d-x.org/wiki/How_to_read_and_write_file_on_different_platforms
 //@see http://msdn.microsoft.com/en-us/library/windows/apps/dn263165.aspx
 //@see http://www.cocos2d-x.org/wiki/How_to_read_and_write_file_on_different_platforms
 void HelloWorld::onOpenFilePicker()
 {
 	std::string filePath = FileOperation::openFile();
+	if (filePath.size()==0)
+	{
+		return;//User cancel file picker;
+	}
 	if(!OpenCvOperation::iplImageAttributesCheck(filePath))
 	{
 		MessageBox("Invalid image with attributes(width/height/size..)!", "Error");
 	}
 	//MessageBox(NULL,"Welcome to Win32 Application Development!\n");
-	//Navigate to PageView_editor
-	this->pageView_editor->scrollToPage(1);
-	this->pageView_index->scrollToPage(1);
 	//Read image file
 	//FileOperation::readFile(filePath);
 	this->imageView_cert_origin = ui::ImageView::create();
 	this->imageView_cert_origin->loadTexture(filePath);
-	//
+	//TODO:Solid the parent panel
+	//ui::Layout *panel_editor = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_eitor"));
+	//panel_editor->setTouchEnabled(false);
+	//FIXME:fixed ImageView loadTexture issue.
+	//ui::ImageView *imageView_user_photo = dynamic_cast<ui::ImageView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Image_user_photo"));
+	//imageView_user_photo->loadTexture(filePath);
 	//ScrollView with UIDragPanel
 	cocos2d::CCSize size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	this->imageView_cert_origin->setSize(size);
 	//this->scrollView_editor->setInnerContainerSize(cocos2d::CCSizeMake(size.width*(slider_changed_value / 100), size.height*(slider_changed_value / 100));
 	this->scrollView_editor->addChild(this->imageView_cert_origin);
-	this->scrollView_editor->scrollToPercentBothDirection(cocos2d::Point(50, 50), 1, true);
+	//this->scrollView_editor->scrollToPercentBothDirection(cocos2d::Point(50, 50), 1, true);
 	this->scrollView_editor->setBackGroundColorType(LAYOUT_COLOR_SOLID);
 	this->scrollView_editor->setBackGroundColor(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_COLORS[HW_UserDataModel::Instance()->cur_listView_selected_index]);
 	//OpenCV handler here:

@@ -1,241 +1,141 @@
-﻿Build started 2014/5/22 11:39:18.
+﻿Build started 2014/5/22 15:05:34.
      1>Project "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\MyCocos2dxGame.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\audio\include" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\chipmunk\include\chipmunk" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\extensions" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\extensions" /I..\Classes /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\\" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\editor-support" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\renderer" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\ui" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\base" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\physics" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\math\kazmath" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\platform\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\platform\desktop" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\glfw3\include\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\win32-specific\gles\include\OGLES" /ZI /nologo /W3 /WX- /MP /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USE_MATH_DEFINES /D GL_GLEXT_PROTOTYPES /D CC_ENABLE_CHIPMUNK_INTEGRATION=1 /D COCOS2D_DEBUG=1 /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS /D _VARIADIC_MAX=10 /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc120.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\AppDelegate.cpp ..\Classes\HelloWorldScene.cpp
-         AppDelegate.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\audio\include" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\chipmunk\include\chipmunk" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\extensions" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\extensions" /I..\Classes /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\\" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\editor-support" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\renderer" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\ui" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\base" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\physics" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\math\kazmath" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\platform\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\platform\desktop" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\glfw3\include\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\win32-specific\gles\include\OGLES" /ZI /nologo /W3 /WX- /MP /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USE_MATH_DEFINES /D GL_GLEXT_PROTOTYPES /D CC_ENABLE_CHIPMUNK_INTEGRATION=1 /D COCOS2D_DEBUG=1 /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS /D _VARIADIC_MAX=10 /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc120.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\HelloWorldScene.cpp
          HelloWorldScene.cpp
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(12): warning C4996: 'cocos2d::CCNode': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(12): warning C4996: 'cocos2d::CCNode': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(565) : see declaration of 'cocos2d::CCNode'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(14): warning C4996: 'cocos2d::CCSpriteBatchNode': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(14): warning C4996: 'cocos2d::CCSpriteBatchNode': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(680) : see declaration of 'cocos2d::CCSpriteBatchNode'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(15): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(15): warning C4996: 'cocos2d::CCSprite': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(16): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(16): warning C4996: 'cocos2d::CCSprite': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(17): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(17): warning C4996: 'cocos2d::CCSprite': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(18): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(18): warning C4996: 'cocos2d::CCSprite': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(19): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(19): warning C4996: 'cocos2d::CCSprite': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(20): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(20): warning C4996: 'cocos2d::CCSprite': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(21): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(21): warning C4996: 'cocos2d::CCSprite': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(22): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(22): warning C4996: 'cocos2d::CCSprite': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(23): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(23): warning C4996: 'cocos2d::CCSprite': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(24): warning C4996: 'cocos2d::CCSize': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(24): warning C4996: 'cocos2d::CCSize': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(773) : see declaration of 'cocos2d::CCSize'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(25): warning C4996: 'cocos2d::CCRect': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(25): warning C4996: 'cocos2d::CCRect': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(774) : see declaration of 'cocos2d::CCRect'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(30): warning C4996: 'cocos2d::ccColor3B': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(30): warning C4996: 'cocos2d::ccColor3B': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(775) : see declaration of 'cocos2d::ccColor3B'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(775) : see declaration of 'cocos2d::ccColor3B'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(775) : see declaration of 'cocos2d::ccColor3B'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(33): warning C4996: 'cocos2d::CCRect': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(33): warning C4996: 'cocos2d::CCRect': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(774) : see declaration of 'cocos2d::CCRect'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(34): warning C4996: 'cocos2d::CCRect': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(34): warning C4996: 'cocos2d::CCRect': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(774) : see declaration of 'cocos2d::CCRect'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(774) : see declaration of 'cocos2d::CCRect'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(36): warning C4996: 'cocos2d::CCSize': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(36): warning C4996: 'cocos2d::CCSize': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(773) : see declaration of 'cocos2d::CCSize'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCRGBAProtocol': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCRGBAProtocol': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(567) : see declaration of 'cocos2d::CCRGBAProtocol'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCSpriteBatchNode': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCSpriteBatchNode': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(680) : see declaration of 'cocos2d::CCSpriteBatchNode'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCSprite': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCSize': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCSize': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(773) : see declaration of 'cocos2d::CCSize'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCRect': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCRect': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(774) : see declaration of 'cocos2d::CCRect'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::ccColor3B': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::ccColor3B': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(775) : see declaration of 'cocos2d::ccColor3B'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(567) : see declaration of 'cocos2d::CCRGBAProtocol'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(567) : see declaration of 'cocos2d::CCRGBAProtocol'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(20): warning C4996: 'cocos2d::CCLayer': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(20): warning C4996: 'cocos2d::CCLayer': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(682) : see declaration of 'cocos2d::CCLayer'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(36): warning C4996: 'cocos2d::CCObject': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(36): warning C4996: 'cocos2d::CCObject': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(536) : see declaration of 'cocos2d::CCObject'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(44): warning C4996: 'cocos2d::CCObject': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(44): warning C4996: 'cocos2d::CCObject': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(536) : see declaration of 'cocos2d::CCObject'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(50): warning C4996: 'cocos2d::CCObject': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(50): warning C4996: 'cocos2d::CCObject': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(536) : see declaration of 'cocos2d::CCObject'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(53): warning C4996: 'cocos2d::CCMenu': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(53): warning C4996: 'cocos2d::CCMenu': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(733) : see declaration of 'cocos2d::CCMenu'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(733) : see declaration of 'cocos2d::CCMenu'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(733) : see declaration of 'cocos2d::CCMenu'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(54): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(54): warning C4996: 'cocos2d::CCSprite': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(56): warning C4996: 'cocos2d::LabelTTF': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(56): warning C4996: 'cocos2d::LabelTTF': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\2d\cclabelttf.h(59) : see declaration of 'cocos2d::LabelTTF'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\2d\cclabelttf.h(59) : see declaration of 'cocos2d::LabelTTF'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\2d\cclabelttf.h(59) : see declaration of 'cocos2d::LabelTTF'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(57): warning C4996: 'cocos2d::LabelTTF': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(57): warning C4996: 'cocos2d::LabelTTF': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\2d\cclabelttf.h(59) : see declaration of 'cocos2d::LabelTTF'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\2d\cclabelttf.h(59) : see declaration of 'cocos2d::LabelTTF'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\2d\cclabelttf.h(59) : see declaration of 'cocos2d::LabelTTF'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(26): warning C4996: 'cocos2d::CCObject': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(26): warning C4996: 'cocos2d::CCObject': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(536) : see declaration of 'cocos2d::CCObject'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(26): warning C4996: 'cocos2d::CCMenu': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(26): warning C4996: 'cocos2d::CCMenu': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(733) : see declaration of 'cocos2d::CCMenu'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(733) : see declaration of 'cocos2d::CCMenu'
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(37): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(37): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(38): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(38): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(39): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(39): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(40): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(40): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(41): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(41): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(42): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(42): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(43): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(43): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(44): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(44): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(45): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(45): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(46): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(46): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(49): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\HelloWorldScene.cpp)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(47): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(208): warning C4996: 'cocos2d::Object': was declared deprecated
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(50): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(228): warning C4996: 'cocos2d::CCNode': was declared deprecated
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(181): warning C4996: 'cocos2d::Object': was declared deprecated
+                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(201): warning C4996: 'cocos2d::CCNode': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(565) : see declaration of 'cocos2d::CCNode'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(231): warning C4996: 'cocos2d::Object': was declared deprecated
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(204): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(250): warning C4996: 'cocos2d::Object': was declared deprecated
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(223): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(266): warning C4996: 'cocos2d::Object': was declared deprecated
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(238): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(282): warning C4996: 'cocos2d::Object': was declared deprecated
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(253): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(298): warning C4996: 'cocos2d::Object': was declared deprecated
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(269): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(313): warning C4996: 'cocos2d::Object': was declared deprecated
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(285): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(328): warning C4996: 'cocos2d::Object': was declared deprecated
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(300): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(347): warning C4996: 'cocos2d::Object': was declared deprecated
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(322): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(362): warning C4996: 'cocos2d::Object': was declared deprecated
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(337): warning C4996: 'cocos2d::Object': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(406): warning C4996: 'cocos2d::CCSize': was declared deprecated
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(352): warning C4996: 'cocos2d::Object': was declared deprecated
+                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(403): warning C4996: 'cocos2d::CCSize': was declared deprecated
                  c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(773) : see declaration of 'cocos2d::CCSize'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(414): warning C4566: character represented by universal-character-name '\uFF0C' cannot be represented in the current code page (1252)
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(414): warning C4566: character represented by universal-character-name '\u3002' cannot be represented in the current code page (1252)
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(12): warning C4996: 'cocos2d::CCNode': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(565) : see declaration of 'cocos2d::CCNode'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(14): warning C4996: 'cocos2d::CCSpriteBatchNode': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(680) : see declaration of 'cocos2d::CCSpriteBatchNode'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(15): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(16): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(17): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(18): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(19): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(20): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(21): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(22): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(23): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(24): warning C4996: 'cocos2d::CCSize': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(773) : see declaration of 'cocos2d::CCSize'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(25): warning C4996: 'cocos2d::CCRect': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(774) : see declaration of 'cocos2d::CCRect'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(30): warning C4996: 'cocos2d::ccColor3B': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(775) : see declaration of 'cocos2d::ccColor3B'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(775) : see declaration of 'cocos2d::ccColor3B'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(775) : see declaration of 'cocos2d::ccColor3B'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(33): warning C4996: 'cocos2d::CCRect': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(774) : see declaration of 'cocos2d::CCRect'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(34): warning C4996: 'cocos2d::CCRect': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(774) : see declaration of 'cocos2d::CCRect'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(774) : see declaration of 'cocos2d::CCRect'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(36): warning C4996: 'cocos2d::CCSize': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(773) : see declaration of 'cocos2d::CCSize'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCRGBAProtocol': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(567) : see declaration of 'cocos2d::CCRGBAProtocol'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCSpriteBatchNode': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(680) : see declaration of 'cocos2d::CCSpriteBatchNode'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCSize': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(773) : see declaration of 'cocos2d::CCSize'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::CCRect': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(774) : see declaration of 'cocos2d::CCRect'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\ccscale9sprite.h(37): warning C4996: 'cocos2d::ccColor3B': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(775) : see declaration of 'cocos2d::ccColor3B'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(567) : see declaration of 'cocos2d::CCRGBAProtocol'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(567) : see declaration of 'cocos2d::CCRGBAProtocol'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(20): warning C4996: 'cocos2d::CCLayer': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(682) : see declaration of 'cocos2d::CCLayer'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(36): warning C4996: 'cocos2d::CCObject': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(536) : see declaration of 'cocos2d::CCObject'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(44): warning C4996: 'cocos2d::CCObject': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(536) : see declaration of 'cocos2d::CCObject'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(50): warning C4996: 'cocos2d::CCObject': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(536) : see declaration of 'cocos2d::CCObject'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(53): warning C4996: 'cocos2d::CCMenu': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(733) : see declaration of 'cocos2d::CCMenu'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(733) : see declaration of 'cocos2d::CCMenu'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(733) : see declaration of 'cocos2d::CCMenu'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(54): warning C4996: 'cocos2d::CCSprite': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(56): warning C4996: 'cocos2d::LabelTTF': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\2d\cclabelttf.h(59) : see declaration of 'cocos2d::LabelTTF'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\2d\cclabelttf.h(59) : see declaration of 'cocos2d::LabelTTF'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\2d\cclabelttf.h(59) : see declaration of 'cocos2d::LabelTTF'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(57): warning C4996: 'cocos2d::LabelTTF': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\2d\cclabelttf.h(59) : see declaration of 'cocos2d::LabelTTF'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\2d\cclabelttf.h(59) : see declaration of 'cocos2d::LabelTTF'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\2d\cclabelttf.h(59) : see declaration of 'cocos2d::LabelTTF'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(26): warning C4996: 'cocos2d::CCObject': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(536) : see declaration of 'cocos2d::CCObject'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\popuplayer\popuplayer.h(26): warning C4996: 'cocos2d::CCMenu': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(733) : see declaration of 'cocos2d::CCMenu'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(733) : see declaration of 'cocos2d::CCMenu'
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(678) : see declaration of 'cocos2d::CCSprite'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(37): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(38): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(39): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(40): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(41): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(42): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(43): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(44): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(45): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(46): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.h(49): warning C4996: 'cocos2d::Object': was declared deprecated (..\Classes\AppDelegate.cpp)
-                 c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\cocos2d\cocos\deprecated\ccdeprecated.h(537) : see declaration of 'cocos2d::Object'
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(411): warning C4566: character represented by universal-character-name '\uFF0C' cannot be represented in the current code page (1252)
+     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\helloworldscene.cpp(411): warning C4566: character represented by universal-character-name '\u3002' cannot be represented in the current code page (1252)
        PreLinkEvent:
          if not exist "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\" mkdir "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
          xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\websockets\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
@@ -312,4 +212,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:26.97
+Time Elapsed 00:00:20.80

@@ -19,14 +19,15 @@
   <imageFileList />
   <imagePngList>
     <string>pattern_window_background.png</string>
+    <string>photosize_menu/pattern_photosize_tittle.png</string>
     <string>infomation_photoguides.png</string>
     <string>button_hidewindow.png</string>
     <string>button_hidewindow_pd.png</string>
     <string>button_closewindow.png</string>
     <string>button_closewindow_pd.png</string>
-    <string>GUI/button.png</string>
     <string>GUI/slider_bar.png</string>
     <string>GUI/slider_bar_button.png</string>
+    <string>GUI/button.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>CocoStudioUI_1.json</CurrentUIJson>
