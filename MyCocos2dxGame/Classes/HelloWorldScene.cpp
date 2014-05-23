@@ -395,11 +395,16 @@ void HelloWorld::onOpenFilePicker()
 	this->imageView_cert_origin->setSize(size);
 	//this->scrollView_editor->setInnerContainerSize(cocos2d::CCSizeMake(size.width*(slider_changed_value / 100), size.height*(slider_changed_value / 100));
 	this->scrollView_editor->addChild(this->imageView_cert_origin);
+	//cocos2d::CCPoint centerPoint = CCPointMake(centerPoint.x + this->imageView_cert_origin->getSize().width / 2, centerPoint.y + this->imageView_cert_origin->getSize().height / 2);
+	//this->imageView_cert_origin->setPosition(centerPoint);
+	//this->imageView_cert_origin->setAnchorPoint(centerPoint);
 	//this->scrollView_editor->scrollToPercentBothDirection(cocos2d::Point(50, 50), 1, true);
 	this->scrollView_editor->setBackGroundColorType(LAYOUT_COLOR_SOLID);
 	this->scrollView_editor->setBackGroundColor(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_COLORS[HW_UserDataModel::Instance()->cur_listView_selected_index]);
 	//OpenCV handler here:
 	OpenCvOperation::faceDetectAndDisplay(filePath);
+	//OpenCvOperation::fullbodyDetectAndDisplay_Haar(filePath);
+	//OpenCvOperation::fullbodyDetectAndDisplay_Hog(filePath);
 }
 
 void HelloWorld::popupLayerTesting()

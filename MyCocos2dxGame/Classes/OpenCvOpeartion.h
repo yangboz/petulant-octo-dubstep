@@ -11,6 +11,7 @@ using namespace cv;
 #include <opencv2\objdetect\objdetect.hpp>
 #include <opencv2\highgui\highgui.hpp>
 #include <opencv2\imgproc\imgproc.hpp>
+#include <opencv2\gpu\gpu.hpp>
 
 #include <opencv\cv.h>
 
@@ -31,6 +32,8 @@ public:
 	static bool cvMatImageAttributesCheck(std::string filePath);
 	//OpenCV function header
 	static void faceDetectAndDisplay(std::string filePath);
+	static void fullbodyDetectAndDisplay_Haar(std::string filePath);
+	static void fullbodyDetectAndDisplay_Hog(std::string filePath);
 private:
 	//OpenCV related variables
 };
