@@ -53,48 +53,45 @@ bool HelloWorld::init()
 	//Load Layout
 	this->uiLayout = cocostudio::GUIReader::getInstance()->widgetFromJsonFile("CocoStudioUI_1/CocoStudioUI_1.json");
 	addChild(uiLayout);
+	//PageViews(index,editor)
+	this->pageView_main = dynamic_cast<ui::PageView*>(this->uiLayout->getChildByName("PageView_main"));
 	//Window buttons
 	this->btn_window_min = dynamic_cast<ui::Button*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro")->getChildByName("Button_window_min"));
 	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
 	this->btn_window_close = dynamic_cast<ui::Button*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro")->getChildByName("Button_window_close"));
 	this->btn_window_close->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowCloseButtonTouch);
-	//PageViews(index,editor)
- 	this->pageView_main = dynamic_cast<ui::PageView*>(this->uiLayout->getChildByName("PageView_main"));
-	//Editor view related
+	//Buttons in PageViewMain->Panel_intro/Panel_editor/Panel_typeset
+	this->btn_zoom_in = dynamic_cast<ui::Button*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_zoom_in"));
+	this->btn_zoom_in->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onZoomInButtonTouch);
+	this->btn_zoom_out = dynamic_cast<ui::Button*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_zoom_out"));
+	this->btn_zoom_out->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onZoomOutButtonTouch);
+	this->btn_rotate = dynamic_cast<ui::Button*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_rotate"));
+	this->btn_rotate->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onRotateButtonTouch);
+	this->btn_open = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_open"));
+	//this->btn_open->setTitleText(HW_StringUtils::WStrToUTF8(L"打开"));
+	this->btn_open->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onOpenButtonTouch);
+	this->btn_verify = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_verify"));
+	//this->btn_verify->setTitleText(HW_StringUtils::WStrToUTF8(L"验证"));
+	this->btn_verify->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onVerifyButtonTouch);
+	this->btn_typeset = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_typeset")->getChildByName("Button_typeset"));
+	//this->btn_typeset->setTitleText(HW_StringUtils::WStrToUTF8(L"排版"));
+	this->btn_typeset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onTypesetButtonTouch);
+	this->btn_print = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_print")->getChildByName("Button_print"));
+	//this->btn_print->setTitleText(HW_StringUtils::WStrToUTF8(L"打印"));
+	this->btn_print->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onPrintButtonTouch);
+	this->btn_reset = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_reset"));
+	//this->btn_reset->setTitleText(HW_StringUtils::WStrToUTF8(L"重置"));
+	this->btn_reset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onResetButtonTouch);
+	//ImageViews
 	this->scrollView_editor = dynamic_cast<ui::ScrollView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("ScrollView_cert"));
 	this->imageView_cert_origin = NULL;
 	//ListViews
 	this->listView_index_size = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro")->getChildByName("ListView_size"));
-	this->listView_index_validate = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_validate")->getChildByName("ListView_validate"));
-	this->listView_index_print = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_print")->getChildByName("ListView_print"));
-	//Buttons in PageViewMain->Panel_editor
-	//
-
-	ui::Button *button_open = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_open"));
-	//button_open->setTitleText(HW_StringUtils::WStrToUTF8(L"打开"));
-	button_open->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onOpenButtonTouch);
-	
-	//ui::ImageView *imageView_cert_origin = dynamic_cast<ui::ImageView*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_editor")->getChildByName("Image_cert_origin"));
-	//this->imageView_cert_origin = ui::ImageView::create();
-	//
-	ui::Button *button_verify = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_verify"));
-	//button_verify->setTitleText(HW_StringUtils::WStrToUTF8(L"验证"));
-	button_verify->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onValidateButtonTouch);
-	//
-	ui::Button *button_typeset = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_validate")->getChildByName("Button_typeset"));
-	button_typeset->setTitleText(HW_StringUtils::WStrToUTF8(L"排版"));
-	button_typeset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onTypesetButtonTouch);
-	//
-	ui::Button *button_print = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_editor")->getChildByName("Panel_print")->getChildByName("Button_print"));
-	button_print->setTitleText(HW_StringUtils::WStrToUTF8(L"打印"));
-	button_print->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onPrintButtonTouch);
-	//
-	ui::Slider *slider_editor = dynamic_cast<ui::Slider*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Slider_editor"));
-	slider_editor->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onSliderValueChanged));
-	//
-	ui::Button *button_reset = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_reset"));
-	//button_reset->setTitleText(HW_StringUtils::WStrToUTF8(L"重置"));
-	button_reset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onResetButtonTouch);
+	this->listView_index_validate = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("ListView_size"));
+	this->listView_index_print = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_typeset")->getChildByName("ListView_size"));
+	//Sliders
+	this->slider_photo_size = dynamic_cast<ui::Slider*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Slider_editor"));
+	this->slider_photo_size->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onSliderValueChanged));
 	//ListView item model
 	this->assembleListViewOfPhotoSize();
 	//
@@ -159,7 +156,7 @@ void HelloWorld::onResetButtonTouch(Object *pSender, ui::TouchEventType type)
 	}
 }
 
-void HelloWorld::onValidateButtonTouch(Object *pSender, ui::TouchEventType type)
+void HelloWorld::onVerifyButtonTouch(Object *pSender, ui::TouchEventType type)
 {
 	switch (type)
 	{
@@ -304,6 +301,56 @@ void HelloWorld::onCertListViewItemButtonTouch(Object *pSender, ui::TouchEventTy
 	}
 }
 
+void HelloWorld::onZoomInButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	//
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onZoomInButtonTouch,TOUCH_EVENT_ENDED!");
+		//
+		this->slider_photo_size->setPercent(this->slider_changed_value++);
+		break;
+	default:
+		break;
+	}
+}
+
+void HelloWorld::onZoomOutButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	//
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onZoomOutButtonTouch,TOUCH_EVENT_ENDED!");
+		//
+		this->slider_photo_size->setPercent(this->slider_changed_value--);
+		break;
+	default:
+		break;
+	}
+}
+
+void HelloWorld::onRotateButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	//
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onRotateButtonTouch,TOUCH_EVENT_ENDED!");
+		//
+		this->imageView_cert_origin->setRotation(this->cur_roate_value+90.0f);
+		break;
+	default:
+		break;
+	}
+}
 //@see http://www.cocos2d-x.org/wiki/How_to_read_and_write_file_on_different_platforms
 //@see http://msdn.microsoft.com/en-us/library/windows/apps/dn263165.aspx
 //@see http://www.cocos2d-x.org/wiki/How_to_read_and_write_file_on_different_platforms
@@ -373,8 +420,8 @@ void HelloWorld::assembleListViewOfPhotoSize()
 	ssize_t count_size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
 	for (int i = 0; i < count_size; ++i) {
 		//insert custom item
-		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/button_photosize_" + std::to_string(i) + ".png";
-		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/button_photosize_" + std::to_string(i) + "_pd.png";
+		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i] + ".png";
+		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i] + "_pd.png";
 		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
 		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i]);
 		//custom_button->setScale9Enabled(true);
@@ -391,10 +438,12 @@ void HelloWorld::assembleListViewOfPhotoSize()
 	ssize_t count_validate = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
 	for (int j = 0; j < count_validate; ++j) {
 		//insert custom item
-		ui::Button *custom_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
-		custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[j]);
-		custom_button->setScale9Enabled(true);
-		custom_button->setSize(listView_default_button->getSize());
+		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[j] + ".png";
+		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[j] + "_pd.png";
+		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
+		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[j]);
+		//custom_button->setScale9Enabled(true);
+		//custom_button->setSize(listView_default_button->getSize());
 
 		Layout* custom_item = Layout::create();
 		custom_item->setSize(custom_button->getSize());
@@ -406,10 +455,12 @@ void HelloWorld::assembleListViewOfPhotoSize()
 	ssize_t count_print = HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS.size();
 	for (int k = 0; k < count_print; ++k) {
 		//insert custom item
-		ui::Button *custom_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
-		custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[k]);
-		custom_button->setScale9Enabled(true);
-		custom_button->setSize(listView_default_button->getSize());
+		const std::string btn_up_str = "CocoStudioUI_1/papersize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[k] + ".png";
+		const std::string btn_pd_str = "CocoStudioUI_1/papersize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[k] + "_pd.png";
+		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
+		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[k]);
+		//custom_button->setScale9Enabled(true);
+		//custom_button->setSize(listView_default_button->getSize());
 
 		Layout* custom_item = Layout::create();
 		custom_item->setSize(custom_button->getSize());

@@ -36,7 +36,7 @@ public:
 	//EventHandlers
 	void onOpenButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onResetButtonTouch(Object *pSender, ui::TouchEventType type);
-	void onValidateButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onVerifyButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onTypesetButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onPrintButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onCertListViewItemSelected(Object *pSender, ui::ListViewEventType type);
@@ -45,7 +45,9 @@ public:
 	void onWindowCloseButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onWindowMinButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onCertListViewItemButtonTouch(Object *pSender, ui::TouchEventType type);
-
+	void onZoomInButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onZoomOutButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onRotateButtonTouch(Object *pSender, ui::TouchEventType type);
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 
@@ -61,6 +63,14 @@ private:
 	//Window buttons
 	ui::Button *btn_window_min;
 	ui::Button *btn_window_close;
+	ui::Button *btn_zoom_in;
+	ui::Button *btn_zoom_out;
+	ui::Button *btn_rotate;
+	ui::Button *btn_open;
+	ui::Button *btn_reset;
+	ui::Button *btn_verify;
+	ui::Button *btn_typeset;
+	ui::Button *btn_print;
 	//PageViews
 	ui::PageView *pageView_main;
 	//Editor view related
@@ -70,8 +80,11 @@ private:
 	ui::ListView *listView_index_size;
 	ui::ListView *listView_index_validate;
 	ui::ListView *listView_index_print;
-	//
+	//Sliders
+	ui::Slider *slider_photo_size;
+	//Site variables
 	int slider_changed_value;
+	float cur_roate_value;
 
 	//Popup related
 	void popupButtonCallback(cocos2d::CCNode *pNode);

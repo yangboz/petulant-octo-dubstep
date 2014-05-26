@@ -23,7 +23,7 @@
     <string>background/button_hidewindow_pd.png</string>
     <string>background/button_closewindow.png</string>
     <string>background/button_closewindow_pd.png</string>
-    <string>background/pattern_window_background_03.png</string>
+    <string>background/pattern_window_background_02.png</string>
     <string>editphoto/pattern_slidingbar_h_bg.png</string>
     <string>editphoto/pattern_slidingbar_button.png</string>
     <string>editphoto/pattern_slidingbar_h.png</string>
@@ -36,8 +36,13 @@
     <string>editphoto/icon_roomin_pd.png</string>
     <string>editphoto/icon_roomout.png</string>
     <string>editphoto/icon_roomout_pd.png</string>
-    <string>GUI/slider_bar.png</string>
-    <string>GUI/slider_bar_button.png</string>
+    <string>editphoto/icon_rotate90.png</string>
+    <string>editphoto/icon_rotate90_pd.png</string>
+    <string>background/pattern_window_background_03.png</string>
+    <string>below_button/button_layout.png</string>
+    <string>below_button/button_layout_pd.png</string>
+    <string>below_button/button_printout.png</string>
+    <string>below_button/button_printout_pd.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>CocoStudioUI_1.json</CurrentUIJson>
