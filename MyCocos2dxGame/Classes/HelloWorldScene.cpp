@@ -62,9 +62,26 @@ bool HelloWorld::init()
 	this->panel_verify = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_verify"));
 	this->panel_typeset = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_typeset"));
 	//Window buttons
-	this->btn_window_min = dynamic_cast<ui::Button*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro")->getChildByName("Button_window_min"));
+	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_intro->getChildByName("Button_window_min"));
 	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
-	this->btn_window_close = dynamic_cast<ui::Button*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro")->getChildByName("Button_window_close"));
+	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_upload->getChildByName("Button_window_min"));
+	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
+	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_window_min"));
+	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
+	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_window_min"));
+	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
+	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_typeset->getChildByName("Button_window_min"));
+	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
+	//
+	this->btn_window_close = dynamic_cast<ui::Button*>(this->panel_intro->getChildByName("Button_window_close"));
+	this->btn_window_close->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowCloseButtonTouch);
+	this->btn_window_close = dynamic_cast<ui::Button*>(this->panel_upload->getChildByName("Button_window_close"));
+	this->btn_window_close->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowCloseButtonTouch);
+	this->btn_window_close = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_window_close"));
+	this->btn_window_close->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowCloseButtonTouch);
+	this->btn_window_close = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_window_close"));
+	this->btn_window_close->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowCloseButtonTouch);
+	this->btn_window_close = dynamic_cast<ui::Button*>(this->panel_typeset->getChildByName("Button_window_close"));
 	this->btn_window_close->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowCloseButtonTouch);
 	//Buttons in PageViewMain->Panel_intro/Panel_editor/Panel_typeset
 	this->btn_zoom_in = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_zoom_in"));
