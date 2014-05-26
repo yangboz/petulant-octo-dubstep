@@ -62,7 +62,7 @@ bool HelloWorld::init()
  	this->pageView_main = dynamic_cast<ui::PageView*>(this->uiLayout->getChildByName("PageView_main"));
 	//Editor view related
 	this->scrollView_editor = dynamic_cast<ui::ScrollView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("ScrollView_cert"));
-	this->imageView_cert_origin = ui::ImageView::create();
+	this->imageView_cert_origin = NULL;
 	//ListViews
 	this->listView_index_size = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro")->getChildByName("ListView_size"));
 	this->listView_index_validate = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_index")->getChildByName("Panel_index_validate")->getChildByName("ListView_validate"));
@@ -96,68 +96,7 @@ bool HelloWorld::init()
 	//button_reset->setTitleText(HW_StringUtils::WStrToUTF8(L"重置"));
 	button_reset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onResetButtonTouch);
 	//ListView item model
-	//
-	ui::Button *listView_default_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
-	//listView_default_button->setTitleText(StringUtils::WStrToUTF8(L"护照"));
-	//listView_certificates->pushBackDefaultItem();
-	ssize_t count_size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
-	for (int i = 0; i < count_size; ++i) {
-		//insert custom item
-		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/button_photosize_" + std::to_string(i) + ".png";
-		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/button_photosize_" + std::to_string(i) + "_pd.png";
-		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
-		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i]);
-		//custom_button->setScale9Enabled(true);
-		//custom_button->setSize(listView_default_button->getSize());
-		custom_button->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onCertListViewItemButtonTouch);
-
-		Layout* custom_item = Layout::create();
-		custom_item->setSize(custom_button->getSize());
-		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
-		custom_item->addChild(custom_button);
-		//
-		listView_index_size->pushBackCustomItem(custom_item);
-	}
-	ssize_t count_validate = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
-	for (int j = 0; j < count_validate; ++j) {
-		//insert custom item
-		ui::Button *custom_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
-		custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[j]);
-		custom_button->setScale9Enabled(true);
-		custom_button->setSize(listView_default_button->getSize());
-
-		Layout* custom_item = Layout::create();
-		custom_item->setSize(custom_button->getSize());
-		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
-		custom_item->addChild(custom_button);
-		//
-		listView_index_validate->pushBackCustomItem(custom_item);
-	}
-	ssize_t count_print = HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS.size();
-	for (int k = 0; k < count_print; ++k) {
-		//insert custom item
-		ui::Button *custom_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
-		custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[k]);
-		custom_button->setScale9Enabled(true);
-		custom_button->setSize(listView_default_button->getSize());
-
-		Layout* custom_item = Layout::create();
-		custom_item->setSize(custom_button->getSize());
-		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
-		custom_item->addChild(custom_button);
-		//
-		listView_index_print->pushBackCustomItem(custom_item);
-	}
-	//
-	this->listView_index_size->setItemModel(listView_default_button);
-	this->listView_index_validate->setItemModel(listView_default_button);
-	this->listView_index_print->setItemModel(listView_default_button);
-	//
-	HW_UserDataModel::Instance()->cur_listView_selected_index = 0;//Default index selection.
-	//
-	listView_index_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
-	listView_index_validate->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
-	listView_index_print->addEventListenerListView(this, listvieweventselector(HelloWorld::onPrintListViewItemSelected));
+	this->assembleListViewOfPhotoSize();
 	//
     return true;
 }
@@ -371,18 +310,22 @@ void HelloWorld::onCertListViewItemButtonTouch(Object *pSender, ui::TouchEventTy
 void HelloWorld::onOpenFilePicker()
 {
 	std::string filePath = FileOperation::openFile();
-	if (filePath.size()==0)
+	if (filePath.size() == 0)
 	{
 		return;//User cancel file picker;
 	}
-	if(!OpenCvOperation::iplImageAttributesCheck(filePath))
+	if (!OpenCvOperation::iplImageAttributesCheck(filePath))
 	{
 		MessageBox("Invalid image with attributes(width/height/size..)!", "Error");
 	}
 	//MessageBox(NULL,"Welcome to Win32 Application Development!\n");
 	//Read image file
 	//FileOperation::readFile(filePath);
-	this->imageView_cert_origin = ui::ImageView::create();
+	if (NULL == this->imageView_cert_origin)
+	{
+		this->imageView_cert_origin = ui::ImageView::create();
+		this->scrollView_editor->addChild(this->imageView_cert_origin);
+	}
 	this->imageView_cert_origin->loadTexture(filePath);
 	//TODO:Solid the parent panel
 	//ui::Layout *panel_editor = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_eitor"));
@@ -394,7 +337,6 @@ void HelloWorld::onOpenFilePicker()
 	cocos2d::CCSize size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	this->imageView_cert_origin->setSize(size);
 	//this->scrollView_editor->setInnerContainerSize(cocos2d::CCSizeMake(size.width*(slider_changed_value / 100), size.height*(slider_changed_value / 100));
-	this->scrollView_editor->addChild(this->imageView_cert_origin);
 	//cocos2d::CCPoint centerPoint = CCPointMake(centerPoint.x + this->imageView_cert_origin->getSize().width / 2, centerPoint.y + this->imageView_cert_origin->getSize().height / 2);
 	//this->imageView_cert_origin->setPosition(centerPoint);
 	//this->imageView_cert_origin->setAnchorPoint(centerPoint);
@@ -421,4 +363,69 @@ void HelloWorld::popupLayerTesting()
 	popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "OK", 0);
 	popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "Cancel", 1);
 	this->addChild(popup);
+}
+
+void HelloWorld::assembleListViewOfPhotoSize()
+{
+	ui::Button *listView_default_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
+	//listView_default_button->setTitleText(StringUtils::WStrToUTF8(L"护照"));
+	//listView_certificates->pushBackDefaultItem();
+	ssize_t count_size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
+	for (int i = 0; i < count_size; ++i) {
+		//insert custom item
+		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/button_photosize_" + std::to_string(i) + ".png";
+		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/button_photosize_" + std::to_string(i) + "_pd.png";
+		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
+		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i]);
+		//custom_button->setScale9Enabled(true);
+		//custom_button->setSize(listView_default_button->getSize());
+		custom_button->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onCertListViewItemButtonTouch);
+
+		Layout* custom_item = Layout::create();
+		custom_item->setSize(custom_button->getSize());
+		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
+		custom_item->addChild(custom_button);
+		//
+		listView_index_size->pushBackCustomItem(custom_item);
+	}
+	ssize_t count_validate = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
+	for (int j = 0; j < count_validate; ++j) {
+		//insert custom item
+		ui::Button *custom_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
+		custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[j]);
+		custom_button->setScale9Enabled(true);
+		custom_button->setSize(listView_default_button->getSize());
+
+		Layout* custom_item = Layout::create();
+		custom_item->setSize(custom_button->getSize());
+		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
+		custom_item->addChild(custom_button);
+		//
+		listView_index_validate->pushBackCustomItem(custom_item);
+	}
+	ssize_t count_print = HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS.size();
+	for (int k = 0; k < count_print; ++k) {
+		//insert custom item
+		ui::Button *custom_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
+		custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[k]);
+		custom_button->setScale9Enabled(true);
+		custom_button->setSize(listView_default_button->getSize());
+
+		Layout* custom_item = Layout::create();
+		custom_item->setSize(custom_button->getSize());
+		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
+		custom_item->addChild(custom_button);
+		//
+		listView_index_print->pushBackCustomItem(custom_item);
+	}
+	//
+	this->listView_index_size->setItemModel(listView_default_button);
+	this->listView_index_validate->setItemModel(listView_default_button);
+	this->listView_index_print->setItemModel(listView_default_button);
+	//
+	HW_UserDataModel::Instance()->cur_listView_selected_index = 0;//Default index selection.
+	//
+	listView_index_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
+	listView_index_validate->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
+	listView_index_print->addEventListenerListView(this, listvieweventselector(HelloWorld::onPrintListViewItemSelected));
 }

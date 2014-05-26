@@ -53,6 +53,8 @@ public:
 	void onOpenFilePicker();
 	//Popup layer testing
 	void popupLayerTesting();
+	//Assemble list view of photo size
+	void assembleListViewOfPhotoSize();
 
 private:
 	ui::Widget *uiLayout;//MainLayout

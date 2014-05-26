@@ -333,13 +333,33 @@ bool GLView::initWithRect(const std::string& viewName, Rect rect, float frameZoo
 
     _frameZoomFactor = frameZoomFactor;
 
-    glfwWindowHint(GLFW_RESIZABLE,GL_FALSE);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+	
 
     _mainWindow = glfwCreateWindow(rect.size.width * _frameZoomFactor,
                                    rect.size.height * _frameZoomFactor,
                                    _viewName.c_str(),
                                    _monitor,
                                    nullptr);
+	/*
+	// Gets the Desktop window
+	RECT desktopRect;
+	LPRECT lprRect;
+	desktopRect = *lprRect;
+	HWND hDesktop = GetDesktopWindow();
+	// Gets the Desktop window rect or screen resolution in pixels
+	GetWindowRect(hDesktop, &desktopRect);
+	//
+	DWORD dwStyle = WS_CAPTION | WS_POPUPWINDOW | WS_MINIMIZEBOX;  // Window Style
+	//
+	lprRect->bottom = rect.size.height;
+	lprRect->left = rect.getMinX();
+	lprRect->right = rect.size.width;
+	lprRect->top = rect.getMinY();
+	//
+	AdjustWindowRectEx(lprRect, dwStyle, FALSE, dwStyle);
+	*/
+	//
     glfwMakeContextCurrent(_mainWindow);
 
     glfwSetMouseButtonCallback(_mainWindow, GLFWEventHandler::onGLFWMouseCallBack);

@@ -46,7 +46,7 @@ void OpenCvOperation::faceDetectAndDisplay(std::string filePath)
 
 	for (size_t i = 0; i < faces.size(); i++)
 	{
-		cv::Point center(faces[i].x + faces[i].width*0.5, faces[i].y + faces[i].height*0.5);
+		cv::Point center(faces[i].x + faces[i].width*0.8, faces[i].y + faces[i].height*0.8);
 		//ellipse(frame, center, cv::Size(faces[i].width*0.5, faces[i].height*0.5), 0, 0, 360, cv::Scalar(255, 0, 255), 4, 8, 0);
 		cv::rectangle(frame, cv::Rect(faces[i].x, faces[i].y,faces[i].width, faces[i].height), cv::Scalar(255, 0, 255));
 
@@ -62,8 +62,22 @@ void OpenCvOperation::faceDetectAndDisplay(std::string filePath)
 			int radius = cvRound((eyes[j].width + eyes[j].height)*0.25);
 			circle(frame, center, radius, cv::Scalar(255, 0, 0), 4, 8, 0);
 		}
+
+		std::vector<cv::Rect> smiles;
+
+		//-- In each face, detect smiles
+		smile_cascade.detectMultiScale(faceROI, smiles, 1.1, 2, 0 | CV_HAAR_SCALE_IMAGE, cv::Size(30, 30));
+
+		for (size_t k = 0; k < smiles.size(); k++)
+		{
+			cv::Point center(faces[i].x + smiles[k].x + smiles[k].width*0.5, faces[i].y + smiles[k].y + smiles[k].height*0.5);
+			int radius = cvRound((smiles[k].width + smiles[k].height)*0.125);
+			//circle(frame, center, radius, cv::Scalar(255, 100, 0), 4, 8, 0);
+			cv::ellipse(frame, center, cv::Size(smiles[k].width*0.5, smiles[k].height*0.5), 0, 0, 360, cv::Scalar(255, 200, 0), 4, 8, 0);
+		}
 	}
-	//
+	//Save cropped image to file
+	//cv::imwrite()
 	//-- Show what you got
 	imshow(window_name, frame);
 }
