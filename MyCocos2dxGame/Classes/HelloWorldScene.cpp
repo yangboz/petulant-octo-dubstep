@@ -55,43 +55,48 @@ bool HelloWorld::init()
 	addChild(uiLayout);
 	//PageViews(index,editor)
 	this->pageView_main = dynamic_cast<ui::PageView*>(this->uiLayout->getChildByName("PageView_main"));
+	//Panels
+	this->panel_intro = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro"));
+	this->panel_upload = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_upload"));
+	this->panel_editor = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor"));
+	this->panel_verify = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_verify"));
+	this->panel_typeset = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_typeset"));
 	//Window buttons
 	this->btn_window_min = dynamic_cast<ui::Button*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro")->getChildByName("Button_window_min"));
 	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
 	this->btn_window_close = dynamic_cast<ui::Button*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro")->getChildByName("Button_window_close"));
 	this->btn_window_close->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowCloseButtonTouch);
 	//Buttons in PageViewMain->Panel_intro/Panel_editor/Panel_typeset
-	this->btn_zoom_in = dynamic_cast<ui::Button*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_zoom_in"));
+	this->btn_zoom_in = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_zoom_in"));
 	this->btn_zoom_in->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onZoomInButtonTouch);
-	this->btn_zoom_out = dynamic_cast<ui::Button*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_zoom_out"));
+	this->btn_zoom_out = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_zoom_out"));
 	this->btn_zoom_out->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onZoomOutButtonTouch);
-	this->btn_rotate = dynamic_cast<ui::Button*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_rotate"));
+	this->btn_rotate = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_rotate"));
 	this->btn_rotate->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onRotateButtonTouch);
-	this->btn_open = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_open"));
-	//this->btn_open->setTitleText(HW_StringUtils::WStrToUTF8(L"打开"));
-	this->btn_open->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onOpenButtonTouch);
-	this->btn_verify = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_verify"));
-	//this->btn_verify->setTitleText(HW_StringUtils::WStrToUTF8(L"验证"));
+	this->btn_upload = dynamic_cast<ui::Button*>(this->panel_upload->getChildByName("Button_upload"));
+	this->btn_upload->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onUploadButtonTouch);
+	this->btn_reupload = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_upload"));
+	this->btn_reupload->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onUploadButtonTouch);
+	this->btn_verify = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_verify"));
 	this->btn_verify->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onVerifyButtonTouch);
-	this->btn_typeset = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_typeset")->getChildByName("Button_typeset"));
-	//this->btn_typeset->setTitleText(HW_StringUtils::WStrToUTF8(L"排版"));
+	this->btn_typeset = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_typeset"));
 	this->btn_typeset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onTypesetButtonTouch);
-	this->btn_print = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_print")->getChildByName("Button_print"));
-	//this->btn_print->setTitleText(HW_StringUtils::WStrToUTF8(L"打印"));
+	this->btn_print = dynamic_cast<ui::Button*>(this->panel_typeset->getChildByName("Button_print"));
 	this->btn_print->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onPrintButtonTouch);
-	this->btn_reset = dynamic_cast<ui::Button*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Button_reset"));
-	//this->btn_reset->setTitleText(HW_StringUtils::WStrToUTF8(L"重置"));
+	this->btn_reset = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_reset"));
 	this->btn_reset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onResetButtonTouch);
 	//ImageViews
-	this->scrollView_editor = dynamic_cast<ui::ScrollView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("ScrollView_cert"));
+	this->scrollView_editor = dynamic_cast<ui::ScrollView*>(this->panel_editor->getChildByName("ScrollView_cert"));
 	this->imageView_cert_origin = NULL;
 	//ListViews
-	this->listView_index_size = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro")->getChildByName("ListView_size"));
-	this->listView_index_validate = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("ListView_size"));
-	this->listView_index_print = dynamic_cast<ui::ListView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_typeset")->getChildByName("ListView_size"));
+	this->listView_index_size = dynamic_cast<ui::ListView*>(this->panel_intro->getChildByName("ListView_size"));
+	this->listView_index_validate = dynamic_cast<ui::ListView*>(this->panel_editor->getChildByName("ListView_size"));
+	this->listView_index_print = dynamic_cast<ui::ListView*>(this->panel_typeset->getChildByName("ListView_size"));
 	//Sliders
-	this->slider_photo_size = dynamic_cast<ui::Slider*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Slider_editor"));
-	this->slider_photo_size->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onSliderValueChanged));
+	this->slider_photo_scale = dynamic_cast<ui::Slider*>(this->panel_editor->getChildByName("Slider_scale"));
+	this->slider_photo_scale->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onScaleSliderValueChanged));
+	this->slider_photo_move = dynamic_cast<ui::Slider*>(this->panel_editor->getChildByName("Slider_move"));
+	this->slider_photo_move->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onMoveSliderValueChanged));
 	//ListView item model
 	this->assembleListViewOfPhotoSize();
 	//
@@ -114,7 +119,7 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 }
 
 //EventHandlers
-void HelloWorld::onOpenButtonTouch(Object *pSender, ui::TouchEventType type)
+void HelloWorld::onUploadButtonTouch(Object *pSender, ui::TouchEventType type)
 {
 	//
 	switch (type)
@@ -122,7 +127,7 @@ void HelloWorld::onOpenButtonTouch(Object *pSender, ui::TouchEventType type)
 	case TOUCH_EVENT_BEGAN:
 		break;
 	case TOUCH_EVENT_ENDED:
-		CCLOG("onOpenButtonTouch,TOUCH_EVENT_ENDED!");
+		CCLOG("onUploadButtonTouch,TOUCH_EVENT_ENDED!");
 		this->onOpenFilePicker();
 		//For popup testing
 		//this->popupLayerTesting();
@@ -233,27 +238,51 @@ void HelloWorld::onPrintListViewItemSelected(Object *pSender, ui::ListViewEventT
 	}
 }
 
-void HelloWorld::onSliderValueChanged(Object *pSender, ui::SliderEventType type)
+void HelloWorld::onScaleSliderValueChanged(Object *pSender, ui::SliderEventType type)
 {
 	ui::Slider *slider = static_cast<ui::Slider*>(pSender);
 	//const cocos2d::Size size = this->imageView_cert_origin->getSize();
-	float scaleValue = 1.00;
+	float scaleValue;
 	switch (type)
 	{
 	case SLIDER_PERCENTCHANGED:
-		slider_changed_value = slider->getPercent();
-		scaleValue = (1.00 + slider_changed_value / 100.00);
-		CCLOG("onSliderValueChanged,TOUCH_EVENT_ENDED,scale value: %f", scaleValue);
+		scaleValue = slider->getPercent();
+		cur_scaled_value = (1.00 + scaleValue / 100.00);
+		CCLOG("onScaleSliderChanged,TOUCH_EVENT_ENDED,cur_scaled_value: %f", cur_scaled_value);
 		//this->imageView_cert_origin->setSize(cocos2d::CCSizeMake(size.width*slider_changed_value / 100, size.height*slider_changed_value / 100));
 		if (this->imageView_cert_origin)
 		{
-			this->imageView_cert_origin->setScale(scaleValue);
+			this->imageView_cert_origin->setScale(cur_scaled_value);
 		}
 		break;
 	default:
 		break;
 	}
 }
+void HelloWorld::onMoveSliderValueChanged(Object *pSender, ui::SliderEventType type)
+{
+	ui::Slider *slider = static_cast<ui::Slider*>(pSender);
+	//const cocos2d::Size size = this->imageView_cert_origin->getSize();
+	float movedValue;
+	float moveStepper = 1.0f;
+	const cocos2d::Point certImagePoint = this->imageView_cert_origin->getPosition();
+	switch (type)
+	{
+	case SLIDER_PERCENTCHANGED:
+		cur_moved_value = slider->getPercent();
+		movedValue = (cur_moved_value-50)*moveStepper;
+		CCLOG("onMoveSliderValueChanged,TOUCH_EVENT_ENDED,scale value: %f", movedValue);
+		//this->imageView_cert_origin->setSize(cocos2d::CCSizeMake(size.width*slider_changed_value / 100, size.height*slider_changed_value / 100));
+		if (this->imageView_cert_origin)
+		{
+			this->imageView_cert_origin->setPosition(cocos2d::CCPointMake(certImagePoint.x + movedValue, certImagePoint.y));
+		}
+		break;
+	default:
+		break;
+	}
+}
+
 
 void HelloWorld::onWindowMinButtonTouch(Object *pSender, ui::TouchEventType type)
 {
@@ -311,7 +340,7 @@ void HelloWorld::onZoomInButtonTouch(Object *pSender, ui::TouchEventType type)
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onZoomInButtonTouch,TOUCH_EVENT_ENDED!");
 		//
-		this->slider_photo_size->setPercent(this->slider_changed_value++);
+		this->slider_photo_scale->setPercent(this->cur_scaled_value++);
 		break;
 	default:
 		break;
@@ -328,7 +357,7 @@ void HelloWorld::onZoomOutButtonTouch(Object *pSender, ui::TouchEventType type)
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onZoomOutButtonTouch,TOUCH_EVENT_ENDED!");
 		//
-		this->slider_photo_size->setPercent(this->slider_changed_value--);
+		this->slider_photo_scale->setPercent(this->cur_scaled_value--);
 		break;
 	default:
 		break;
@@ -345,7 +374,7 @@ void HelloWorld::onRotateButtonTouch(Object *pSender, ui::TouchEventType type)
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onRotateButtonTouch,TOUCH_EVENT_ENDED!");
 		//
-		this->imageView_cert_origin->setRotation(this->cur_roate_value+90.0f);
+		this->imageView_cert_origin->setRotation(this->cur_roated_value + 90.0f);
 		break;
 	default:
 		break;

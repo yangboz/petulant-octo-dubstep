@@ -24,14 +24,21 @@
     <string>background/button_closewindow.png</string>
     <string>background/button_closewindow_pd.png</string>
     <string>background/pattern_window_background_02.png</string>
+    <string>below_button/button_uploadphoto.png</string>
+    <string>below_button/button_uploadphoto_pd.png</string>
+    <string>photo_33x48/pattern_upload_photo_frame_33X48.png</string>
+    <string>photo_33x48/pattern_upload_photo_guide_33X48.png</string>
+    <string>photo_33x48/pattern_upload_photo_notice_33X48.png</string>
+    <string>editphoto/pattern_loading_circle_02.png</string>
     <string>editphoto/pattern_slidingbar_h_bg.png</string>
     <string>editphoto/pattern_slidingbar_button.png</string>
     <string>editphoto/pattern_slidingbar_h.png</string>
     <string>below_button/button_undo.png</string>
     <string>below_button/button_undo_pd.png</string>
-    <string>GUI/button.png</string>
-    <string>below_button/button_uploadphoto.png</string>
-    <string>below_button/button_uploadphoto_pd.png</string>
+    <string>below_button/button_nextstep.png</string>
+    <string>below_button/button_nextstep_pd.png</string>
+    <string>below_button/button_re_uploadphoto.png</string>
+    <string>below_button/button_re_uploadphoto_pd.png</string>
     <string>editphoto/icon_roomin.png</string>
     <string>editphoto/icon_roomin_pd.png</string>
     <string>editphoto/icon_roomout.png</string>
@@ -39,10 +46,17 @@
     <string>editphoto/icon_rotate90.png</string>
     <string>editphoto/icon_rotate90_pd.png</string>
     <string>background/pattern_window_background_03.png</string>
-    <string>below_button/button_layout.png</string>
-    <string>below_button/button_layout_pd.png</string>
+    <string>below_button/button_savephoto.png</string>
+    <string>below_button/button_savephoto_pd.png</string>
     <string>below_button/button_printout.png</string>
     <string>below_button/button_printout_pd.png</string>
+    <string>photo_33x48/pattern_detected_photo_33X48_bg.png</string>
+    <string>editphoto/button_choosebg_white.png</string>
+    <string>editphoto/button_choosebg_selected.png</string>
+    <string>editphoto/button_choosebg_red.png</string>
+    <string>editphoto/button_choosebg_blue.png</string>
+    <string>photo_on_paper/pattern_photo_on_paper_4x6.png</string>
+    <string>photo_on_paper/pattern_photo_on_paper_5x7.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>CocoStudioUI_1.json</CurrentUIJson>

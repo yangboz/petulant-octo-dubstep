@@ -34,14 +34,15 @@ public:
     void menuCloseCallback(cocos2d::Ref* pSender);
     
 	//EventHandlers
-	void onOpenButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onUploadButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onResetButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onVerifyButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onTypesetButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onPrintButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onCertListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onPrintListViewItemSelected(Object *pSender, ui::ListViewEventType type);
-	void onSliderValueChanged(Object *pSender, ui::SliderEventType type);
+	void onScaleSliderValueChanged(Object *pSender, ui::SliderEventType type);
+	void onMoveSliderValueChanged(Object *pSender, ui::SliderEventType type);
 	void onWindowCloseButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onWindowMinButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onCertListViewItemButtonTouch(Object *pSender, ui::TouchEventType type);
@@ -66,13 +67,20 @@ private:
 	ui::Button *btn_zoom_in;
 	ui::Button *btn_zoom_out;
 	ui::Button *btn_rotate;
-	ui::Button *btn_open;
+	ui::Button *btn_upload;
+	ui::Button *btn_reupload;
 	ui::Button *btn_reset;
 	ui::Button *btn_verify;
 	ui::Button *btn_typeset;
 	ui::Button *btn_print;
 	//PageViews
 	ui::PageView *pageView_main;
+	//UILayouts
+	ui::Layout *panel_intro;
+	ui::Layout *panel_upload;
+	ui::Layout *panel_editor;
+	ui::Layout *panel_verify;
+	ui::Layout *panel_typeset;
 	//Editor view related
 	ui::ScrollView *scrollView_editor;
 	ui::ImageView *imageView_cert_origin;
@@ -81,10 +89,14 @@ private:
 	ui::ListView *listView_index_validate;
 	ui::ListView *listView_index_print;
 	//Sliders
-	ui::Slider *slider_photo_size;
+	ui::Slider *slider_photo_move;
+	ui::Slider *slider_photo_scale;
 	//Site variables
-	int slider_changed_value;
-	float cur_roate_value;
+	int slider_scale_changed_value;
+	int slider_move_changed_value;
+	float cur_roated_value;
+	float cur_moved_value;
+	float cur_scaled_value;
 
 	//Popup related
 	void popupButtonCallback(cocos2d::CCNode *pNode);
