@@ -107,6 +107,7 @@ bool HelloWorld::init()
 	this->imageView_cert_origin = NULL;
 	//ListViews
 	this->listView_index_size = dynamic_cast<ui::ListView*>(this->panel_intro->getChildByName("ListView_size"));
+	this->listView_upload_size = dynamic_cast<ui::ListView*>(this->panel_upload->getChildByName("ListView_size"));
 	this->listView_index_validate = dynamic_cast<ui::ListView*>(this->panel_editor->getChildByName("ListView_size"));
 	this->listView_index_print = dynamic_cast<ui::ListView*>(this->panel_typeset->getChildByName("ListView_size"));
 	//Sliders
@@ -114,6 +115,12 @@ bool HelloWorld::init()
 	this->slider_photo_scale->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onScaleSliderValueChanged));
 	this->slider_photo_move = dynamic_cast<ui::Slider*>(this->panel_editor->getChildByName("Slider_move"));
 	this->slider_photo_move->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onMoveSliderValueChanged));
+	//ProgressBar
+	this->progressBar_upload = dynamic_cast<ui::LoadingBar*>(this->panel_upload->getChildByName("Image_frame")->getChildByName("Image_background")->getChildByName("Image_foreground")->getChildByName("ProgressBar_verify"));
+	this->progressBar_upload->setVisible(false);
+	//Popups
+	this->popup_upload_photo_invalid = NULL;
+	this->popup_save_photo_success = NULL;
 	//ListView item model
 	this->assembleListViewOfPhotoSize();
 	//
@@ -145,9 +152,11 @@ void HelloWorld::onUploadButtonTouch(Object *pSender, ui::TouchEventType type)
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onUploadButtonTouch,TOUCH_EVENT_ENDED!");
+		//Remove popup at first
+		this->removePopupLayer();
+		this->progressBar_upload->setVisible(false);
+		//
 		this->onOpenFilePicker();
-		//For popup testing
-		//this->popupLayerTesting();
 		break;
 	default:
 			break;
@@ -402,6 +411,8 @@ void HelloWorld::onRotateButtonTouch(Object *pSender, ui::TouchEventType type)
 //@see http://www.cocos2d-x.org/wiki/How_to_read_and_write_file_on_different_platforms
 void HelloWorld::onOpenFilePicker()
 {
+	this->progressBar_upload->setVisible(true);
+	//
 	std::string filePath = FileOperation::openFile();
 	if (filePath.size() == 0)
 	{
@@ -409,7 +420,9 @@ void HelloWorld::onOpenFilePicker()
 	}
 	if (!OpenCvOperation::iplImageAttributesCheck(filePath))
 	{
-		MessageBox("Invalid image with attributes(width/height/size..)!", "Error");
+		//MessageBox("Invalid image with attributes(width/height/size..)!", "Error");
+		this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID);
+		return;
 	}
 	//MessageBox(NULL,"Welcome to Win32 Application Development!\n");
 	//Read image file
@@ -442,20 +455,53 @@ void HelloWorld::onOpenFilePicker()
 	//OpenCvOperation::fullbodyDetectAndDisplay_Hog(filePath);
 }
 
-void HelloWorld::popupLayerTesting()
+void HelloWorld::centerPopupLayer(const char *bgFilePath)
 {
-	//Testing code here:
-	PopupLayer *popup = PopupLayer::create("C:\\lena.png");
-	popup->setTitle("Popup!");
+	if (bgFilePath == HW_DataModel::HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS)
+	{
+		this->popup_save_photo_success = this->createPopupLayer(bgFilePath);
+		this->addChild(this->popup_save_photo_success);
+	}
+	else if (bgFilePath == HW_DataModel::HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID)
+	{
+		this->popup_upload_photo_invalid = this->createPopupLayer(bgFilePath);
+		this->addChild(this->popup_upload_photo_invalid);
+	}
+	else
+	{
+		MessageBox("Invalid popupLayer parameter!", "Error");
+		return;
+	}
+}
+
+PopupLayer* HelloWorld::createPopupLayer(const char *bgFilePath)
+{
+	PopupLayer *popup = PopupLayer::create(bgFilePath);
+	popup->setTitle("");//As required
 	//popup->setContentSize(CCSizeMake(400, 360));
-	popup->setContentText("xxxxxxx，yyyyyyy。xxxxxxx，yyyyyyy。", 20, 50, 150);
+	//popup->setContentText("xxxxxxx，yyyyyyy。xxxxxxx，yyyyyyy。", 20, 50, 150);
 	// 设置回调函数，回调传回一个 CCNode 以获取 tag 判断点击的按钮  
 	// 这只是作为一种封装实现，如果使用 delegate 那就能够更灵活的控制参数了  
-	popup->setCallbackFunc(this, callfuncN_selector(HelloWorld::popupButtonCallback));
+	//popup->setCallbackFunc(this, callfuncN_selector(HelloWorld::popupButtonCallback));
 	// 添加按钮，设置图片，文字，tag 信息  
-	popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "OK", 0);
-	popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "Cancel", 1);
-	this->addChild(popup);
+	//popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "OK", 0);
+	//popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "Cancel", 1);
+	return popup;
+}
+
+void HelloWorld::removePopupLayer()
+{
+	if (NULL != this->popup_upload_photo_invalid)
+	{
+		this->removeChild(this->popup_upload_photo_invalid);
+		this->popup_upload_photo_invalid = NULL;
+	}
+	//
+	if (NULL != this->popup_save_photo_success)
+	{
+		this->removeChild(this->popup_save_photo_success);
+		this->popup_save_photo_success = NULL;
+	}
 }
 
 void HelloWorld::assembleListViewOfPhotoSize()
@@ -480,6 +526,24 @@ void HelloWorld::assembleListViewOfPhotoSize()
 		custom_item->addChild(custom_button);
 		//
 		listView_index_size->pushBackCustomItem(custom_item);
+	}
+	ssize_t count_size_upload = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
+	for (int i = 0; i < count_size_upload; ++i) {
+		//insert custom item
+		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i] + ".png";
+		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i] + "_pd.png";
+		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
+		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i]);
+		//custom_button->setScale9Enabled(true);
+		//custom_button->setSize(listView_default_button->getSize());
+		custom_button->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onCertListViewItemButtonTouch);
+
+		Layout* custom_item = Layout::create();
+		custom_item->setSize(custom_button->getSize());
+		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
+		custom_item->addChild(custom_button);
+		//
+		listView_upload_size->pushBackCustomItem(custom_item);
 	}
 	ssize_t count_validate = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
 	for (int j = 0; j < count_validate; ++j) {

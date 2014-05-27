@@ -24,6 +24,9 @@ namespace HW_DataModel
 		static const std::vector<std::string> ARRAY_OF_PRINT_LABELS;
 		//ImageAttributes validation
 		static const std::vector<cocos2d::Size> ARRAY_OF_CERT_FILE_SIZES;
+		//Popup related
+		static const char* BG_FILE_OF_UPLOAD_PHOTO_INVALID;
+		static const char* BG_FILE_OF_SAVE_PHOTO_SUCCESS;
 	private:
 	
 	};

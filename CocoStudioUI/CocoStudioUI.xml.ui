@@ -39,6 +39,8 @@
     <string>below_button/button_nextstep_pd.png</string>
     <string>below_button/button_re_uploadphoto.png</string>
     <string>below_button/button_re_uploadphoto_pd.png</string>
+    <string>editphoto/pattern_slidingbar_v_bg.png</string>
+    <string>editphoto/pattern_slidingbar_v.png</string>
     <string>editphoto/icon_roomin.png</string>
     <string>editphoto/icon_roomin_pd.png</string>
     <string>editphoto/icon_roomout.png</string>

@@ -13,4 +13,7 @@ namespace HW_DataModel
 	const std::vector<std::string> HW_DataModel::ARRAY_OF_PRINT_LABELS = { "button_papersize_4x6", "button_papersize_5x7","button_papersize_a4"};
 	//default file sizes of certificates
 	const std::vector<cocos2d::Size> HW_DataModel::ARRAY_OF_CERT_FILE_SIZES = { cocos2d::CCSizeMake(14336, 30720), cocos2d::CCSizeMake(40960, 51200), cocos2d::CCSizeMake(40960, 51200), cocos2d::CCSizeMake(40960, 51200), cocos2d::CCSizeMake(40960, 51200), cocos2d::CCSizeMake(40960, 51200) };
+	//Popup related
+	const char* HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID = "CocoStudioUI_1/notification/pattern_notification_01.png";
+	const char* HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS = "CocoStudioUI_1/notification/pattern_notification_02.png";
 }

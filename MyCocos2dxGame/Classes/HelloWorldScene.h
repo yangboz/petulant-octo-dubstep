@@ -54,9 +54,10 @@ public:
 
 	//OpenFilePickerTask
 	void onOpenFilePicker();
-	//Popup layer testing
-	void popupLayerTesting();
-	//Assemble list view of photo size
+	//Popup layer related
+	void centerPopupLayer(const char *bgFilePath);
+	void removePopupLayer();
+	//Assemble list view of photo size model
 	void assembleListViewOfPhotoSize();
 
 private:
@@ -86,11 +87,17 @@ private:
 	ui::ImageView *imageView_cert_origin;
 	//ListViews
 	ui::ListView *listView_index_size;
+	ui::ListView *listView_upload_size;
 	ui::ListView *listView_index_validate;
 	ui::ListView *listView_index_print;
 	//Sliders
 	ui::Slider *slider_photo_move;
 	ui::Slider *slider_photo_scale;
+	//ProgressBar
+	ui::LoadingBar *progressBar_upload;
+	//Popups
+	PopupLayer *popup_upload_photo_invalid;
+	PopupLayer *popup_save_photo_success;
 	//Site variables
 	int slider_scale_changed_value;
 	int slider_move_changed_value;
@@ -99,6 +106,7 @@ private:
 	float cur_scaled_value;
 
 	//Popup related
+	PopupLayer* createPopupLayer(const char *bgFilePath);
 	void popupButtonCallback(cocos2d::CCNode *pNode);
 };
 
