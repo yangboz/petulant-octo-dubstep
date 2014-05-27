@@ -92,24 +92,38 @@ bool HelloWorld::init()
 	this->btn_rotate->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onRotateButtonTouch);
 	this->btn_upload = dynamic_cast<ui::Button*>(this->panel_upload->getChildByName("Button_upload"));
 	this->btn_upload->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onUploadButtonTouch);
-	this->btn_reupload = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_upload"));
-	this->btn_reupload->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onUploadButtonTouch);
-	this->btn_verify = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_verify"));
-	this->btn_verify->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onVerifyButtonTouch);
-	this->btn_typeset = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_typeset"));
-	this->btn_typeset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onTypesetButtonTouch);
+	this->btn_backto_upload = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_backto_upload"));
+	this->btn_backto_upload->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onUploadNaviButtonTouch);
+	this->btn_backto_editor = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_backto_editor"));
+	this->btn_backto_editor->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onEditorNaviButtonTouch);
+	this->btn_goto_verify = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_goto_verify"));
+	this->btn_goto_verify->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onVerifyNaviButtonTouch);
+	this->btn_backto_verify = dynamic_cast<ui::Button*>(this->panel_typeset->getChildByName("Button_backto_verify"));
+	this->btn_backto_verify->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onVerifyNaviButtonTouch);
+	this->btn_cancel_verify = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_cancel_verify"));
+	this->btn_cancel_verify->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onEditorNaviButtonTouch);
+	this->btn_goto_typeset = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_goto_typeset"));
+	this->btn_goto_typeset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onTypesetNaviButtonTouch);
 	this->btn_print = dynamic_cast<ui::Button*>(this->panel_typeset->getChildByName("Button_print"));
 	this->btn_print->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onPrintButtonTouch);
 	this->btn_reset = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_reset"));
 	this->btn_reset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onResetButtonTouch);
+	this->btn_save = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_save"));
+	this->btn_save->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onResetButtonTouch);
 	//ImageViews
-	this->scrollView_editor = dynamic_cast<ui::ScrollView*>(this->panel_editor->getChildByName("ScrollView_cert"));
-	this->imageView_cert_origin = NULL;
+	///Panel_upload
+	this->imageView_frame = dynamic_cast<ui::ImageView*>(this->panel_upload->getChildByName("Image_frame"));
+	this->imageView_back_ground = dynamic_cast<ui::ImageView*>(this->imageView_frame->getChildByName("Image_background"));
+	this->imageView_fore_ground = dynamic_cast<ui::ImageView*>(this->imageView_back_ground->getChildByName("Image_foreground"));
+	///Panel_editor
+	this->scrollView_editor = dynamic_cast<ui::ScrollView*>(this->panel_editor->getChildByName("ScrollView_editor"));
+	this->imageView_editor = dynamic_cast<ui::ImageView*>(this->scrollView_editor->getChildByName("Image_editor"));;
 	//ListViews
-	this->listView_index_size = dynamic_cast<ui::ListView*>(this->panel_intro->getChildByName("ListView_size"));
+	this->listView_intro_size = dynamic_cast<ui::ListView*>(this->panel_intro->getChildByName("ListView_size"));
 	this->listView_upload_size = dynamic_cast<ui::ListView*>(this->panel_upload->getChildByName("ListView_size"));
-	this->listView_index_validate = dynamic_cast<ui::ListView*>(this->panel_editor->getChildByName("ListView_size"));
-	this->listView_index_print = dynamic_cast<ui::ListView*>(this->panel_typeset->getChildByName("ListView_size"));
+	this->listView_editor_size = dynamic_cast<ui::ListView*>(this->panel_editor->getChildByName("ListView_size"));
+	this->listView_verify_size = dynamic_cast<ui::ListView*>(this->panel_verify->getChildByName("ListView_size"));
+	this->listView_typeset_size = dynamic_cast<ui::ListView*>(this->panel_typeset->getChildByName("ListView_size"));
 	//Sliders
 	this->slider_photo_scale = dynamic_cast<ui::Slider*>(this->panel_editor->getChildByName("Slider_scale"));
 	this->slider_photo_scale->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onScaleSliderValueChanged));
@@ -121,8 +135,8 @@ bool HelloWorld::init()
 	//Popups
 	this->popup_upload_photo_invalid = NULL;
 	this->popup_save_photo_success = NULL;
-	//ListView item model
-	this->assembleListViewOfPhotoSize();
+	//ListView set up.
+	this->setupListViews();
 	//
     return true;
 }
@@ -241,6 +255,7 @@ void HelloWorld::onCertListViewItemSelected(Object *pSender, ui::ListViewEventTy
 	{
 	case LISTVIEW_ONSELECTEDITEM_END:
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
+		this->cur_defined_size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
 		CCLOG("listView_cert selected child index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
 		this->pageView_main->scrollToPage(1);
 		break;
@@ -276,9 +291,9 @@ void HelloWorld::onScaleSliderValueChanged(Object *pSender, ui::SliderEventType 
 		cur_scaled_value = (1.00 + scaleValue / 100.00);
 		CCLOG("onScaleSliderChanged,TOUCH_EVENT_ENDED,cur_scaled_value: %f", cur_scaled_value);
 		//this->imageView_cert_origin->setSize(cocos2d::CCSizeMake(size.width*slider_changed_value / 100, size.height*slider_changed_value / 100));
-		if (this->imageView_cert_origin)
+		if (this->imageView_editor)
 		{
-			this->imageView_cert_origin->setScale(cur_scaled_value);
+			this->imageView_editor->setScale(cur_scaled_value);
 		}
 		break;
 	default:
@@ -291,7 +306,7 @@ void HelloWorld::onMoveSliderValueChanged(Object *pSender, ui::SliderEventType t
 	//const cocos2d::Size size = this->imageView_cert_origin->getSize();
 	float movedValue;
 	float moveStepper = 1.0f;
-	const cocos2d::Point certImagePoint = this->imageView_cert_origin->getPosition();
+	const cocos2d::Point certImagePoint = this->imageView_editor->getPosition();
 	switch (type)
 	{
 	case SLIDER_PERCENTCHANGED:
@@ -299,9 +314,9 @@ void HelloWorld::onMoveSliderValueChanged(Object *pSender, ui::SliderEventType t
 		movedValue = (cur_moved_value-50)*moveStepper;
 		CCLOG("onMoveSliderValueChanged,TOUCH_EVENT_ENDED,scale value: %f", movedValue);
 		//this->imageView_cert_origin->setSize(cocos2d::CCSizeMake(size.width*slider_changed_value / 100, size.height*slider_changed_value / 100));
-		if (this->imageView_cert_origin)
+		if (this->imageView_editor)
 		{
-			this->imageView_cert_origin->setPosition(cocos2d::CCPointMake(certImagePoint.x + movedValue, certImagePoint.y));
+			this->imageView_editor->setPosition(cocos2d::CCPointMake(certImagePoint.x + movedValue, certImagePoint.y));
 		}
 		break;
 	default:
@@ -400,7 +415,73 @@ void HelloWorld::onRotateButtonTouch(Object *pSender, ui::TouchEventType type)
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onRotateButtonTouch,TOUCH_EVENT_ENDED!");
 		//
-		this->imageView_cert_origin->setRotation(this->cur_roated_value + 90.0f);
+		this->imageView_editor->setRotation(this->cur_roated_value + 90.0f);
+		break;
+	default:
+		break;
+	}
+}
+///Navigation button related
+void HelloWorld::onUploadNaviButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	//
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onUploadNaviButtonTouch,TOUCH_EVENT_ENDED!");
+		//Back to Panel_upload
+		this->pageView_main->scrollToPage(PAGE_VIEW_UPLOAD);
+		//
+		break;
+	default:
+		break;
+	}
+}
+void HelloWorld::onEditorNaviButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	//
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onEditorNaviButtonTouch,TOUCH_EVENT_ENDED!");
+		//
+		this->pageView_main->scrollToPage(PAGE_VIEW_EDITOR);
+		break;
+	default:
+		break;
+	}
+}
+void HelloWorld::onVerifyNaviButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	//
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onVerifyNaviButtonTouch,TOUCH_EVENT_ENDED!");
+		//
+		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFY);
+		break;
+	default:
+		break;
+	}
+}
+void HelloWorld::onTypesetNaviButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	//
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onTypesetNaviButtonTouch,TOUCH_EVENT_ENDED!");
+		//
+		this->pageView_main->scrollToPage(PAGE_VIEW_TYPESET);
 		break;
 	default:
 		break;
@@ -413,46 +494,34 @@ void HelloWorld::onOpenFilePicker()
 {
 	this->progressBar_upload->setVisible(true);
 	//
-	std::string filePath = FileOperation::openFile();
-	if (filePath.size() == 0)
+	this->cur_photo_file_path = FileOperation::openFile();
+	if (this->cur_photo_file_path.size() == 0)
 	{
 		return;//User cancel file picker;
 	}
-	if (!OpenCvOperation::iplImageAttributesCheck(filePath))
+	if (!OpenCvOperation::iplImageAttributesCheck(this->cur_photo_file_path))
 	{
 		//MessageBox("Invalid image with attributes(width/height/size..)!", "Error");
 		this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID);
 		return;
 	}
-	//MessageBox(NULL,"Welcome to Win32 Application Development!\n");
+	//Image file on Panel_upload,go to panel_editor
+	this->pageView_main->scrollToPage(2);
 	//Read image file
 	//FileOperation::readFile(filePath);
-	if (NULL == this->imageView_cert_origin)
-	{
-		this->imageView_cert_origin = ui::ImageView::create();
-		this->scrollView_editor->addChild(this->imageView_cert_origin);
-	}
-	this->imageView_cert_origin->loadTexture(filePath);
+	this->imageView_editor->loadTexture(this->cur_photo_file_path);
 	//TODO:Solid the parent panel
 	//ui::Layout *panel_editor = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_eitor"));
 	//panel_editor->setTouchEnabled(false);
-	//FIXME:fixed ImageView loadTexture issue.
-	//ui::ImageView *imageView_user_photo = dynamic_cast<ui::ImageView*>(uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor")->getChildByName("Image_user_photo"));
-	//imageView_user_photo->loadTexture(filePath);
 	//ScrollView with UIDragPanel
-	cocos2d::CCSize size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
-	this->imageView_cert_origin->setSize(size);
-	//this->scrollView_editor->setInnerContainerSize(cocos2d::CCSizeMake(size.width*(slider_changed_value / 100), size.height*(slider_changed_value / 100));
-	//cocos2d::CCPoint centerPoint = CCPointMake(centerPoint.x + this->imageView_cert_origin->getSize().width / 2, centerPoint.y + this->imageView_cert_origin->getSize().height / 2);
-	//this->imageView_cert_origin->setPosition(centerPoint);
-	//this->imageView_cert_origin->setAnchorPoint(centerPoint);
-	//this->scrollView_editor->scrollToPercentBothDirection(cocos2d::Point(50, 50), 1, true);
-	this->scrollView_editor->setBackGroundColorType(LAYOUT_COLOR_SOLID);
-	this->scrollView_editor->setBackGroundColor(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_COLORS[HW_UserDataModel::Instance()->cur_listView_selected_index]);
+	//this->imageView_editor->setSize(definedSize);
+	this->scrollView_editor->setInnerContainerSize(this->cur_defined_size);
+	//this->scrollView_editor->setBackGroundColorType(LAYOUT_COLOR_SOLID);
+	//this->scrollView_editor->setBackGroundColor(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_COLORS[HW_UserDataModel::Instance()->cur_listView_selected_index]);
 	//OpenCV handler here:
-	OpenCvOperation::faceDetectAndDisplay(filePath);
-	//OpenCvOperation::fullbodyDetectAndDisplay_Haar(filePath);
-	//OpenCvOperation::fullbodyDetectAndDisplay_Hog(filePath);
+	//OpenCvOperation::faceDetectAndDisplay(this->cur_photo_file_path);
+	//OpenCvOperation::fullbodyDetectAndDisplay_Haar(this->cur_photo_file_path);
+	//OpenCvOperation::fullbodyDetectAndDisplay_Hog(this->cur_photo_file_path);
 }
 
 void HelloWorld::centerPopupLayer(const char *bgFilePath)
@@ -503,17 +572,17 @@ void HelloWorld::removePopupLayer()
 		this->popup_save_photo_success = NULL;
 	}
 }
-
-void HelloWorld::assembleListViewOfPhotoSize()
+//Set up list views with size values.
+void HelloWorld::setupListViews()
 {
-	ui::Button *listView_default_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
+	//ui::Button *listView_default_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
 	//listView_default_button->setTitleText(StringUtils::WStrToUTF8(L"护照"));
 	//listView_certificates->pushBackDefaultItem();
-	ssize_t count_size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
-	for (int i = 0; i < count_size; ++i) {
+	ssize_t count_size_intro = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
+	for (int ii = 0; ii < count_size_intro; ++ii) {
 		//insert custom item
-		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i] + ".png";
-		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i] + "_pd.png";
+		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ii] + ".png";
+		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ii] + "_pd.png";
 		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
 		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i]);
 		//custom_button->setScale9Enabled(true);
@@ -525,13 +594,13 @@ void HelloWorld::assembleListViewOfPhotoSize()
 		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
 		custom_item->addChild(custom_button);
 		//
-		listView_index_size->pushBackCustomItem(custom_item);
+		listView_intro_size->pushBackCustomItem(custom_item);
 	}
 	ssize_t count_size_upload = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
-	for (int i = 0; i < count_size_upload; ++i) {
+	for (int ij = 0; ij < count_size_upload; ++ij) {
 		//insert custom item
-		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i] + ".png";
-		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i] + "_pd.png";
+		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ij] + ".png";
+		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ij] + "_pd.png";
 		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
 		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i]);
 		//custom_button->setScale9Enabled(true);
@@ -545,11 +614,11 @@ void HelloWorld::assembleListViewOfPhotoSize()
 		//
 		listView_upload_size->pushBackCustomItem(custom_item);
 	}
-	ssize_t count_validate = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
-	for (int j = 0; j < count_validate; ++j) {
+	ssize_t count_editor = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
+	for (int ik = 0; ik < count_editor; ++ik) {
 		//insert custom item
-		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[j] + ".png";
-		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[j] + "_pd.png";
+		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ik] + ".png";
+		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ik] + "_pd.png";
 		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
 		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[j]);
 		//custom_button->setScale9Enabled(true);
@@ -560,13 +629,30 @@ void HelloWorld::assembleListViewOfPhotoSize()
 		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
 		custom_item->addChild(custom_button);
 		//
-		listView_index_validate->pushBackCustomItem(custom_item);
+		listView_editor_size->pushBackCustomItem(custom_item);
 	}
-	ssize_t count_print = HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS.size();
-	for (int k = 0; k < count_print; ++k) {
+	ssize_t count_verify = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
+	for (int il = 0; il < count_verify; ++il) {
 		//insert custom item
-		const std::string btn_up_str = "CocoStudioUI_1/papersize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[k] + ".png";
-		const std::string btn_pd_str = "CocoStudioUI_1/papersize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[k] + "_pd.png";
+		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[il] + ".png";
+		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[il] + "_pd.png";
+		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
+		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[j]);
+		//custom_button->setScale9Enabled(true);
+		//custom_button->setSize(listView_default_button->getSize());
+
+		Layout* custom_item = Layout::create();
+		custom_item->setSize(custom_button->getSize());
+		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
+		custom_item->addChild(custom_button);
+		//
+		listView_verify_size->pushBackCustomItem(custom_item);
+	}
+	ssize_t count_typeset = HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS.size();
+	for (int j = 0; j < count_typeset; ++j) {
+		//insert custom item
+		const std::string btn_up_str = "CocoStudioUI_1/papersize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[j] + ".png";
+		const std::string btn_pd_str = "CocoStudioUI_1/papersize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[j] + "_pd.png";
 		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
 		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[k]);
 		//custom_button->setScale9Enabled(true);
@@ -577,16 +663,21 @@ void HelloWorld::assembleListViewOfPhotoSize()
 		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
 		custom_item->addChild(custom_button);
 		//
-		listView_index_print->pushBackCustomItem(custom_item);
+		listView_typeset_size->pushBackCustomItem(custom_item);
 	}
 	//
-	this->listView_index_size->setItemModel(listView_default_button);
-	this->listView_index_validate->setItemModel(listView_default_button);
-	this->listView_index_print->setItemModel(listView_default_button);
+	/*
+	this->listView_intro_size->setItemModel(listView_default_button);
+	this->listView_upload_size->setItemModel(listView_default_button);
+	this->listView_editor_size->setItemModel(listView_default_button);
+	this->listView_verify_size->setItemModel(listView_default_button);
+	*/
 	//
 	HW_UserDataModel::Instance()->cur_listView_selected_index = 0;//Default index selection.
 	//
-	listView_index_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
-	listView_index_validate->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
-	listView_index_print->addEventListenerListView(this, listvieweventselector(HelloWorld::onPrintListViewItemSelected));
+	listView_intro_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
+	listView_upload_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
+	listView_editor_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
+	listView_verify_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
+	listView_typeset_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onPrintListViewItemSelected));
 }

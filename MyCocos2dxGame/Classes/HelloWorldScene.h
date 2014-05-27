@@ -21,6 +21,14 @@ USING_NS_CC;
 //USING_NS_CC_EXT;
 using namespace ui;
 
+//PageView name constants
+#define PAGE_VIEW_INTRO 0
+#define PAGE_VIEW_UPLOAD 1
+#define PAGE_VIEW_EDITOR 2
+#define PAGE_VIEW_VERIFY 3
+#define PAGE_VIEW_TYPESET 4
+
+
 class HelloWorld : public cocos2d::Layer
 {
 public:
@@ -35,9 +43,13 @@ public:
     
 	//EventHandlers
 	void onUploadButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onUploadNaviButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onResetButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onEditorNaviButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onVerifyButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onVerifyNaviButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onTypesetButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onTypesetNaviButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onPrintButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onCertListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onPrintListViewItemSelected(Object *pSender, ui::ListViewEventType type);
@@ -57,8 +69,8 @@ public:
 	//Popup layer related
 	void centerPopupLayer(const char *bgFilePath);
 	void removePopupLayer();
-	//Assemble list view of photo size model
-	void assembleListViewOfPhotoSize();
+	//Set up list views with size values
+	void setupListViews();
 
 private:
 	ui::Widget *uiLayout;//MainLayout
@@ -69,11 +81,15 @@ private:
 	ui::Button *btn_zoom_out;
 	ui::Button *btn_rotate;
 	ui::Button *btn_upload;
-	ui::Button *btn_reupload;
+	ui::Button *btn_backto_upload;
 	ui::Button *btn_reset;
-	ui::Button *btn_verify;
-	ui::Button *btn_typeset;
+	ui::Button *btn_backto_editor;
+	ui::Button *btn_goto_verify;
+	ui::Button *btn_backto_verify;
+	ui::Button *btn_cancel_verify;
+	ui::Button *btn_goto_typeset;
 	ui::Button *btn_print;
+	ui::Button *btn_save;
 	//PageViews
 	ui::PageView *pageView_main;
 	//UILayouts
@@ -82,14 +98,19 @@ private:
 	ui::Layout *panel_editor;
 	ui::Layout *panel_verify;
 	ui::Layout *panel_typeset;
+	//Upload view related
+	ui::ImageView *imageView_frame;
+	ui::ImageView *imageView_back_ground;
+	ui::ImageView *imageView_fore_ground;
 	//Editor view related
 	ui::ScrollView *scrollView_editor;
-	ui::ImageView *imageView_cert_origin;
+	ui::ImageView *imageView_editor;
 	//ListViews
-	ui::ListView *listView_index_size;
+	ui::ListView *listView_intro_size;
 	ui::ListView *listView_upload_size;
-	ui::ListView *listView_index_validate;
-	ui::ListView *listView_index_print;
+	ui::ListView *listView_editor_size;
+	ui::ListView *listView_verify_size;
+	ui::ListView *listView_typeset_size;
 	//Sliders
 	ui::Slider *slider_photo_move;
 	ui::Slider *slider_photo_scale;
@@ -104,6 +125,8 @@ private:
 	float cur_roated_value;
 	float cur_moved_value;
 	float cur_scaled_value;
+	std::string cur_photo_file_path;
+	cocos2d::CCSize cur_defined_size;
 
 	//Popup related
 	PopupLayer* createPopupLayer(const char *bgFilePath);
