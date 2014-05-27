@@ -279,6 +279,32 @@ void HelloWorld::onPrintListViewItemSelected(Object *pSender, ui::ListViewEventT
 	}
 }
 
+void HelloWorld::onUploadListViewItemSelected(Object *pSender, ui::ListViewEventType type)
+{
+	ui::ListView *listView = static_cast<ListView*>(pSender);
+	std::string forground_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FOREGROUND_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	std::string frame_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	std::string background_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_BACKGROUND_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	cocos2d::CCPoint frame_position = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	cocos2d::CCPoint background_position = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	//
+	switch (type)
+	{
+	case LISTVIEW_ONSELECTEDITEM_END:
+		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
+		CCLOG("onUploadListViewItemSelected index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
+		//Adjust the upload frame view displayment here:
+		this->imageView_fore_ground->loadTexture(forground_file_path);
+		this->imageView_back_ground->loadTexture(background_file_path);
+		//this->imageView_back_ground->setPosition(background_position);
+		this->imageView_frame->loadTexture(frame_file_path);
+		this->imageView_frame->setPosition(frame_position);
+		break;
+	default:
+		break;
+	}
+}
+
 void HelloWorld::onScaleSliderValueChanged(Object *pSender, ui::SliderEventType type)
 {
 	ui::Slider *slider = static_cast<ui::Slider*>(pSender);
@@ -506,7 +532,8 @@ void HelloWorld::onOpenFilePicker()
 		return;
 	}
 	//Image file on Panel_upload,go to panel_editor
-	this->pageView_main->scrollToPage(2);
+	//this->imageView_fore_ground->loadTexture(this->cur_photo_file_path); return;
+	this->pageView_main->scrollToPage(PAGE_VIEW_EDITOR);
 	//Read image file
 	//FileOperation::readFile(filePath);
 	this->imageView_editor->loadTexture(this->cur_photo_file_path);
@@ -676,7 +703,7 @@ void HelloWorld::setupListViews()
 	HW_UserDataModel::Instance()->cur_listView_selected_index = 0;//Default index selection.
 	//
 	listView_intro_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
-	listView_upload_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
+	listView_upload_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onUploadListViewItemSelected));
 	listView_editor_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
 	listView_verify_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
 	listView_typeset_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onPrintListViewItemSelected));

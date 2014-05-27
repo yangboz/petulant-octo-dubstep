@@ -40,27 +40,34 @@ public:
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
-    
-	//EventHandlers
+	//Buttons EventHandlers
 	void onUploadButtonTouch(Object *pSender, ui::TouchEventType type);
-	void onUploadNaviButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onResetButtonTouch(Object *pSender, ui::TouchEventType type);
-	void onEditorNaviButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onVerifyButtonTouch(Object *pSender, ui::TouchEventType type);
-	void onVerifyNaviButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onTypesetButtonTouch(Object *pSender, ui::TouchEventType type);
-	void onTypesetNaviButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onPrintButtonTouch(Object *pSender, ui::TouchEventType type);
-	void onCertListViewItemSelected(Object *pSender, ui::ListViewEventType type);
-	void onPrintListViewItemSelected(Object *pSender, ui::ListViewEventType type);
-	void onScaleSliderValueChanged(Object *pSender, ui::SliderEventType type);
-	void onMoveSliderValueChanged(Object *pSender, ui::SliderEventType type);
+	//Navigation buttons related
+	void onEditorNaviButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onUploadNaviButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onVerifyNaviButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onTypesetNaviButtonTouch(Object *pSender, ui::TouchEventType type);
+	//Window button related
 	void onWindowCloseButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onWindowMinButtonTouch(Object *pSender, ui::TouchEventType type);
-	void onCertListViewItemButtonTouch(Object *pSender, ui::TouchEventType type);
+	//Editor view related
+	///Slider related
+	void onScaleSliderValueChanged(Object *pSender, ui::SliderEventType type);
+	void onMoveSliderValueChanged(Object *pSender, ui::SliderEventType type);
+	///
 	void onZoomInButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onZoomOutButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onRotateButtonTouch(Object *pSender, ui::TouchEventType type);
+	///ListView related
+	void onCertListViewItemButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onCertListViewItemButtonSelected(Object *pSender, ui::TouchEventType type);
+	void onCertListViewItemSelected(Object *pSender, ui::ListViewEventType type);
+	void onUploadListViewItemSelected(Object *pSender, ui::ListViewEventType type);
+	void onPrintListViewItemSelected(Object *pSender, ui::ListViewEventType type);
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 
