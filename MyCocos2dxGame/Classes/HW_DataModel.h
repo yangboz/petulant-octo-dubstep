@@ -25,8 +25,8 @@ namespace HW_DataModel
 		static const std::vector<std::string> ARRAY_OF_EDITOR_FOREGROUND_LABELS;
 		static const std::vector<cocos2d::Point> ARRAY_OF_VERIFY_PHOTO_DISPLAY;
 		static const std::vector<cocos2d::Point> ARRAY_OF_VERIFY_SHADE_DISPLAY;
-		static const std::vector<std::string> ARRAY_OF_VERIFY_PHOTO_LABELS;
 		static const std::vector<std::string> ARRAY_OF_VERIFY_SHADE_LABELS;
+		static const std::vector<std::string> ARRAY_OF_VERIFY_GUIDE_LABELS;
 		//Size_print related
 		//default sizes of print
 		static const std::vector<cocos2d::Size> ARRAY_OF_PRINT_SIZES;

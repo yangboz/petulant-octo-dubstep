@@ -67,6 +67,7 @@ public:
 	void onCertListViewItemButtonSelected(Object *pSender, ui::TouchEventType type);
 	void onCertListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onUploadListViewItemSelected(Object *pSender, ui::ListViewEventType type);
+	void onEditorListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onPrintListViewItemSelected(Object *pSender, ui::ListViewEventType type);
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
@@ -112,6 +113,7 @@ private:
 	//Editor view related
 	ui::ScrollView *scrollView_editor;
 	ui::ImageView *imageView_editor;
+	ui::ImageView *imageView_guide;
 	//ListViews
 	ui::ListView *listView_intro_size;
 	ui::ListView *listView_upload_size;

@@ -117,7 +117,8 @@ bool HelloWorld::init()
 	this->imageView_fore_ground = dynamic_cast<ui::ImageView*>(this->imageView_back_ground->getChildByName("Image_foreground"));
 	///Panel_editor
 	this->scrollView_editor = dynamic_cast<ui::ScrollView*>(this->panel_editor->getChildByName("ScrollView_editor"));
-	this->imageView_editor = dynamic_cast<ui::ImageView*>(this->scrollView_editor->getChildByName("Image_editor"));;
+	this->imageView_guide = dynamic_cast<ui::ImageView*>(this->scrollView_editor->getChildByName("Image_guide"));
+	this->imageView_editor = dynamic_cast<ui::ImageView*>(this->scrollView_editor->getChildByName("Image_editor"));
 	//ListViews
 	this->listView_intro_size = dynamic_cast<ui::ListView*>(this->panel_intro->getChildByName("ListView_size"));
 	this->listView_upload_size = dynamic_cast<ui::ListView*>(this->panel_upload->getChildByName("ListView_size"));
@@ -299,6 +300,31 @@ void HelloWorld::onUploadListViewItemSelected(Object *pSender, ui::ListViewEvent
 		//this->imageView_back_ground->setPosition(background_position);
 		this->imageView_frame->loadTexture(frame_file_path);
 		this->imageView_frame->setPosition(frame_position);
+		break;
+	default:
+		break;
+	}
+}
+
+void HelloWorld::onEditorListViewItemSelected(Object *pSender, ui::ListViewEventType type)
+{
+	ui::ListView *listView = static_cast<ListView*>(pSender);
+	//
+	std::string guide_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_GUIDE_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	std::string scrollView_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_SHADE_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	cocos2d::CCPoint imageView_editor_position = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_PHOTO_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	cocos2d::CCPoint scrollView_position = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_SHADE_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	//
+	switch (type)
+	{
+	case LISTVIEW_ONSELECTEDITEM_END:
+		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
+		CCLOG("onUploadListViewItemSelected index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
+		//Adjust the editor frame view displayment here:
+		this->scrollView_editor->setBackGroundImage(scrollView_file_path);
+		//this->imageView_back_ground->setPosition(background_position);
+		this->imageView_guide->loadTexture(guide_file_path);
+		this->scrollView_editor->setPosition(scrollView_position);
 		break;
 	default:
 		break;
@@ -704,7 +730,7 @@ void HelloWorld::setupListViews()
 	//
 	listView_intro_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
 	listView_upload_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onUploadListViewItemSelected));
-	listView_editor_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
+	listView_editor_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onEditorListViewItemSelected));
 	listView_verify_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
 	listView_typeset_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onPrintListViewItemSelected));
 }
