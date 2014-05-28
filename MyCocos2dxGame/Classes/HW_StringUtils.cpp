@@ -28,7 +28,17 @@ std::wstring HW_StringUtils::s2ws(const std::string& s)
 	setlocale(LC_ALL, "C");
 	return result;
 }
+/*
+void HW_StringUtils::charTowchar(const char *chr, wchar_t *wchar, int size)
+{
+	MultiByteToWideChar(CP_ACP, 0, chr,strlen(chr) + 1, wchar, size / sizeof(wchar[0]));
+}
 
+void HW_StringUtils::wcharTochar(const wchar_t *wchar, char *chr, int length)
+{
+	WideCharToMultiByte(CP_ACP, 0, wchar, -1,chr, length, NULL, NULL);
+}
+*/
 //Chinese character warpper
 //! convert from wstring to UTF8 using self-coding-converting  
 void HW_StringUtils::WStrToUTF8Convert(std::string& dest, const std::wstring& src)

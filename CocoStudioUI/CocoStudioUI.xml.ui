@@ -48,6 +48,9 @@
     <string>Photo_22x32/pattern_edit_photo_frame_22x32.png</string>
     <string>GUI/image.png</string>
     <string>Photo_22x32/pattern_edit_photo_guide_22x32.png</string>
+    <string>Photo_22x32/pattern_upload_photo_guide_22x32.png</string>
+    <string>below_button/button_cancel.png</string>
+    <string>below_button/button_cancel_pd.png</string>
     <string>background/pattern_window_background_03.png</string>
     <string>below_button/button_savephoto.png</string>
     <string>below_button/button_savephoto_pd.png</string>
@@ -57,8 +60,6 @@
     <string>editphoto/button_choosebg_selected.png</string>
     <string>editphoto/button_choosebg_red.png</string>
     <string>editphoto/button_choosebg_blue.png</string>
-    <string>below_button/button_cancel.png</string>
-    <string>below_button/button_cancel_pd.png</string>
     <string>Photo_22x32/pattern_detected_photo_22x32.png</string>
     <string>photo_on_paper/pattern_photo_on_paper_5x7.png</string>
   </imagePngList>

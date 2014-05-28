@@ -17,6 +17,8 @@
 
 #include "HW_UserDataModel.h"
 
+//#include "PrintOperation.h"
+
 USING_NS_CC;
 //USING_NS_CC_EXT;
 using namespace ui;
@@ -25,8 +27,9 @@ using namespace ui;
 #define PAGE_VIEW_INTRO 0
 #define PAGE_VIEW_UPLOAD 1
 #define PAGE_VIEW_EDITOR 2
-#define PAGE_VIEW_VERIFY 3
-#define PAGE_VIEW_TYPESET 4
+#define PAGE_VIEW_VERIFING 3
+#define PAGE_VIEW_VERIFIED 4
+#define PAGE_VIEW_TYPESET 5
 
 
 class HelloWorld : public cocos2d::Layer
@@ -49,7 +52,8 @@ public:
 	//Navigation buttons related
 	void onEditorNaviButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onUploadNaviButtonTouch(Object *pSender, ui::TouchEventType type);
-	void onVerifyNaviButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onVerifiedNaviButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onTypesetNaviButtonTouch(Object *pSender, ui::TouchEventType type);
 	//Window button related
 	void onWindowCloseButtonTouch(Object *pSender, ui::TouchEventType type);
@@ -97,9 +101,9 @@ private:
 	ui::Button *btn_backto_upload;
 	ui::Button *btn_reset;
 	ui::Button *btn_backto_editor;
-	ui::Button *btn_goto_verify;
-	ui::Button *btn_backto_verify;
-	ui::Button *btn_cancel_verify;
+	ui::Button *btn_goto_verifing;
+	ui::Button *btn_backto_verified;
+	ui::Button *btn_cancel_verifing;
 	ui::Button *btn_goto_typeset;
 	ui::Button *btn_print;
 	ui::Button *btn_save;
@@ -112,7 +116,8 @@ private:
 	ui::Layout *panel_intro;
 	ui::Layout *panel_upload;
 	ui::Layout *panel_editor;
-	ui::Layout *panel_verify;
+	ui::Layout *panel_verifing;
+	ui::Layout *panel_verified;
 	ui::Layout *panel_typeset;
 	//Upload view related
 	ui::ImageView *imageView_frame;
@@ -123,13 +128,15 @@ private:
 	ui::ImageView *imageView_editor;
 	ui::ImageView *imageView_guide;
 	//Verify view relate
-	ui::ScrollView *scrollView_verify;
+	ui::ScrollView *scrollView_verified;
+	ui::ImageView *imageView_verifing;
 	ui::ImageView *imageView_verified;
 	//ListViews
 	ui::ListView *listView_intro_size;
 	ui::ListView *listView_upload_size;
 	ui::ListView *listView_editor_size;
-	ui::ListView *listView_verify_size;
+	ui::ListView *listView_verifing_size;
+	ui::ListView *listView_verified_size;
 	ui::ListView *listView_typeset_size;
 	//Sliders
 	ui::Slider *slider_photo_move;
@@ -147,6 +154,7 @@ private:
 	float cur_scaled_value;
 	std::string cur_photo_file_path;
 	cocos2d::CCSize cur_defined_size;
+	cocos2d::CCPoint ori_image_verified_pos;
 
 	//Popup related
 	PopupLayer* createPopupLayer(const char *bgFilePath);

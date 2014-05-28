@@ -59,7 +59,8 @@ bool HelloWorld::init()
 	this->panel_intro = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro"));
 	this->panel_upload = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_upload"));
 	this->panel_editor = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor"));
-	this->panel_verify = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_verify"));
+	this->panel_verifing = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_verifing"));
+	this->panel_verified = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_verified"));
 	this->panel_typeset = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_typeset"));
 	//Window buttons
 	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_intro->getChildByName("Button_window_min"));
@@ -68,7 +69,9 @@ bool HelloWorld::init()
 	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
 	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_window_min"));
 	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
-	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_window_min"));
+	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_verifing->getChildByName("Button_window_min"));
+	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
+	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_verified->getChildByName("Button_window_min"));
 	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
 	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_typeset->getChildByName("Button_window_min"));
 	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
@@ -79,7 +82,9 @@ bool HelloWorld::init()
 	this->btn_window_close->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowCloseButtonTouch);
 	this->btn_window_close = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_window_close"));
 	this->btn_window_close->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowCloseButtonTouch);
-	this->btn_window_close = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_window_close"));
+	this->btn_window_close = dynamic_cast<ui::Button*>(this->panel_verifing->getChildByName("Button_window_close"));
+	this->btn_window_close->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowCloseButtonTouch);
+	this->btn_window_close = dynamic_cast<ui::Button*>(this->panel_verified->getChildByName("Button_window_close"));
 	this->btn_window_close->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowCloseButtonTouch);
 	this->btn_window_close = dynamic_cast<ui::Button*>(this->panel_typeset->getChildByName("Button_window_close"));
 	this->btn_window_close->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowCloseButtonTouch);
@@ -94,27 +99,27 @@ bool HelloWorld::init()
 	this->btn_upload->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onUploadButtonTouch);
 	this->btn_backto_upload = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_backto_upload"));
 	this->btn_backto_upload->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onUploadNaviButtonTouch);
-	this->btn_backto_editor = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_backto_editor"));
+	this->btn_backto_editor = dynamic_cast<ui::Button*>(this->panel_verified->getChildByName("Button_backto_editor"));
 	this->btn_backto_editor->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onEditorNaviButtonTouch);
-	this->btn_goto_verify = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_goto_verify"));
-	this->btn_goto_verify->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onVerifyNaviButtonTouch);
-	this->btn_backto_verify = dynamic_cast<ui::Button*>(this->panel_typeset->getChildByName("Button_backto_verify"));
-	this->btn_backto_verify->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onVerifyNaviButtonTouch);
-	this->btn_cancel_verify = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_cancel_verify"));
-	this->btn_cancel_verify->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onEditorNaviButtonTouch);
-	this->btn_goto_typeset = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_goto_typeset"));
+	this->btn_goto_verifing = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_goto_verifing"));
+	this->btn_goto_verifing->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onVerifingNaviButtonTouch);
+	this->btn_backto_verified = dynamic_cast<ui::Button*>(this->panel_typeset->getChildByName("Button_backto_verified"));
+	this->btn_backto_verified->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onVerifiedNaviButtonTouch);
+	this->btn_cancel_verifing = dynamic_cast<ui::Button*>(this->panel_verifing->getChildByName("Button_cancel_verifing"));
+	this->btn_cancel_verifing->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onUploadNaviButtonTouch);
+	this->btn_goto_typeset = dynamic_cast<ui::Button*>(this->panel_verified->getChildByName("Button_goto_typeset"));
 	this->btn_goto_typeset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onTypesetNaviButtonTouch);
 	this->btn_print = dynamic_cast<ui::Button*>(this->panel_typeset->getChildByName("Button_print"));
 	this->btn_print->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onPrintButtonTouch);
 	this->btn_reset = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_reset"));
 	this->btn_reset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onResetButtonTouch);
-	this->btn_save = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_save"));
+	this->btn_save = dynamic_cast<ui::Button*>(this->panel_verified->getChildByName("Button_save"));
 	this->btn_save->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onSaveButtonTouch);
-	this->btn_red = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_red"));
+	this->btn_red = dynamic_cast<ui::Button*>(this->panel_verified->getChildByName("Button_red"));
 	this->btn_red->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onRedColouredButtonTouch);
-	this->btn_blue = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_blue"));
+	this->btn_blue = dynamic_cast<ui::Button*>(this->panel_verified->getChildByName("Button_blue"));
 	this->btn_blue->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onBlueColouredButtonTouch);
-	this->btn_white = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_white"));
+	this->btn_white = dynamic_cast<ui::Button*>(this->panel_verified->getChildByName("Button_white"));
 	this->btn_white->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWhiteColouredButtonTouch);
 	//ImageViews
 	///Panel_upload
@@ -125,14 +130,17 @@ bool HelloWorld::init()
 	this->scrollView_editor = dynamic_cast<ui::ScrollView*>(this->panel_editor->getChildByName("ScrollView_editor"));
 	this->imageView_guide = dynamic_cast<ui::ImageView*>(this->scrollView_editor->getChildByName("Image_guide"));
 	this->imageView_editor = dynamic_cast<ui::ImageView*>(this->scrollView_editor->getChildByName("Image_editor"));
-	///Panel_verify
-	this->scrollView_verify = dynamic_cast<ui::ScrollView*>(this->panel_verify->getChildByName("ScrollView_verify"));
-	this->imageView_verified = dynamic_cast<ui::ImageView*>(this->scrollView_verify->getChildByName("Image_verified"));
+	///Panel_verifing
+	this->imageView_verifing = dynamic_cast<ui::ImageView*>(this->panel_verifing->getChildByName("Image_verifing"));
+	///Panel_verified
+	this->scrollView_verified = dynamic_cast<ui::ScrollView*>(this->panel_verified->getChildByName("ScrollView_verified"));
+	this->imageView_verified = dynamic_cast<ui::ImageView*>(this->scrollView_verified->getChildByName("Image_verified"));
 	//ListViews
 	this->listView_intro_size = dynamic_cast<ui::ListView*>(this->panel_intro->getChildByName("ListView_size"));
 	this->listView_upload_size = dynamic_cast<ui::ListView*>(this->panel_upload->getChildByName("ListView_size"));
 	this->listView_editor_size = dynamic_cast<ui::ListView*>(this->panel_editor->getChildByName("ListView_size"));
-	this->listView_verify_size = dynamic_cast<ui::ListView*>(this->panel_verify->getChildByName("ListView_size"));
+	this->listView_verifing_size = dynamic_cast<ui::ListView*>(this->panel_verifing->getChildByName("ListView_size"));
+	this->listView_verified_size = dynamic_cast<ui::ListView*>(this->panel_verified->getChildByName("ListView_size"));
 	this->listView_typeset_size = dynamic_cast<ui::ListView*>(this->panel_typeset->getChildByName("ListView_size"));
 	//Sliders
 	this->slider_photo_scale = dynamic_cast<ui::Slider*>(this->panel_editor->getChildByName("Slider_scale"));
@@ -204,10 +212,8 @@ void HelloWorld::onResetButtonTouch(Object *pSender, ui::TouchEventType type)
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onResetButtonTouch,TOUCH_EVENT_ENDED!");
-		//TODO:Reset function here:
-
-		//Navigate to PageView_editor
-		this->pageView_main->scrollToPage(0);
+		//Navigate to PageView_intro
+		this->pageView_main->scrollToPage(PAGE_VIEW_INTRO);
 		break;
 	default:
 		break;
@@ -222,8 +228,8 @@ void HelloWorld::onVerifyButtonTouch(Object *pSender, ui::TouchEventType type)
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onValidateButtonTouch,TOUCH_EVENT_ENDED!");
-		//TODO:Photo validate function call here:
-
+		//Photo verify function call here:
+		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
 		break;
 	default:
 		break;
@@ -237,8 +243,8 @@ void HelloWorld::onTypesetButtonTouch(Object *pSender, ui::TouchEventType type)
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onTypesetButtonTouch,TOUCH_EVENT_ENDED!");
-		//TODO:Photo print function call here:
-
+		//Photo typeset function call here:
+		this->pageView_main->scrollToPage(PAGE_VIEW_TYPESET);
 		break;
 	default:
 		break;
@@ -253,7 +259,7 @@ void HelloWorld::onPrintButtonTouch(Object *pSender, ui::TouchEventType type)
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onPrintButtonTouch,TOUCH_EVENT_ENDED!");
 		//TODO:Photo system print function call here:
-		
+		//PrintOperation::print();
 		break;
 	default:
 		break;
@@ -269,7 +275,7 @@ void HelloWorld::onRedColouredButtonTouch(Object *pSender, ui::TouchEventType ty
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onRedColouredButtonTouch,TOUCH_EVENT_ENDED!");
 		//TODO:Photo editor with background color function here:
-		this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::RED);
+		this->scrollView_verified->setBackGroundColor(cocos2d::Color3B::RED);
 		break;
 	default:
 		break;
@@ -284,7 +290,7 @@ void HelloWorld::onBlueColouredButtonTouch(Object *pSender, ui::TouchEventType t
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onBlueColouredButtonTouch,TOUCH_EVENT_ENDED!");
 		//TODO:Photo editor with background color function here:
-		this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::BLUE);
+		this->scrollView_verified->setBackGroundColor(cocos2d::Color3B::BLUE);
 		break;
 	default:
 		break;
@@ -297,9 +303,9 @@ void HelloWorld::onWhiteColouredButtonTouch(Object *pSender, ui::TouchEventType 
 	case TOUCH_EVENT_BEGAN:
 		break;
 	case TOUCH_EVENT_ENDED:
-		CCLOG("onBlueColouredButtonTouch,TOUCH_EVENT_ENDED!");
+		CCLOG("onWhiteColouredButtonTouch,TOUCH_EVENT_ENDED!");
 		//TODO:Photo editor with background color function here:
-		this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::WHITE);
+		this->scrollView_verified->setBackGroundColor(cocos2d::Color3B::WHITE);
 		break;
 	default:
 		break;
@@ -347,6 +353,8 @@ void HelloWorld::onPrintListViewItemSelected(Object *pSender, ui::ListViewEventT
 	case LISTVIEW_ONSELECTEDITEM_END:
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		CCLOG("listView_print selected child index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
+		//TODO:Change print size image view here:
+
 		break;
 	default:
 		break;
@@ -431,18 +439,17 @@ void HelloWorld::onMoveSliderValueChanged(Object *pSender, ui::SliderEventType t
 	//const cocos2d::Size size = this->imageView_cert_origin->getSize();
 	float movedValue;
 	float moveStepper = 1.0f;
-	const cocos2d::Point certImagePoint = this->imageView_editor->getPosition();
-	float halfWidth = this->imageView_editor->getSize().width/2.0;
+	const cocos2d::Point orignalImagePoint = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	//
 	switch (type)
 	{
 	case SLIDER_PERCENTCHANGED:
-		cur_moved_value = slider->getPercent();
-		movedValue = (cur_moved_value - 50)*moveStepper;
+		movedValue = (slider->getPercent() - 50)*moveStepper;
 		CCLOG("onMoveSliderValueChanged,TOUCH_EVENT_ENDED,moved value: %f", movedValue);
 		//
 		if (this->imageView_editor)
 		{
-			this->imageView_editor->setPosition(cocos2d::CCPointMake(certImagePoint.x + movedValue, certImagePoint.y));
+			this->imageView_editor->setPosition(cocos2d::CCPointMake(orignalImagePoint.x + movedValue, orignalImagePoint.y));
 		}
 		break;
 	default:
@@ -450,7 +457,7 @@ void HelloWorld::onMoveSliderValueChanged(Object *pSender, ui::SliderEventType t
 	}
 }
 
-
+///Windows system buttons
 void HelloWorld::onWindowMinButtonTouch(Object *pSender, ui::TouchEventType type)
 {
 	switch (type)
@@ -480,7 +487,7 @@ void HelloWorld::onWindowCloseButtonTouch(Object *pSender, ui::TouchEventType ty
 		break;
 	}
 }
-
+///List view related
 void HelloWorld::onCertListViewItemButtonTouch(Object *pSender, ui::TouchEventType type)
 {
 	switch (type)
@@ -496,7 +503,7 @@ void HelloWorld::onCertListViewItemButtonTouch(Object *pSender, ui::TouchEventTy
 		break;
 	}
 }
-
+///Panel_editor related
 void HelloWorld::onZoomInButtonTouch(Object *pSender, ui::TouchEventType type)
 {
 	//
@@ -582,7 +589,7 @@ void HelloWorld::onEditorNaviButtonTouch(Object *pSender, ui::TouchEventType typ
 		break;
 	}
 }
-void HelloWorld::onVerifyNaviButtonTouch(Object *pSender, ui::TouchEventType type)
+void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType type)
 {
 	//
 	switch (type)
@@ -590,12 +597,30 @@ void HelloWorld::onVerifyNaviButtonTouch(Object *pSender, ui::TouchEventType typ
 	case TOUCH_EVENT_BEGAN:
 		break;
 	case TOUCH_EVENT_ENDED:
-		CCLOG("onVerifyNaviButtonTouch,TOUCH_EVENT_ENDED!");
+		CCLOG("onVerifingNaviButtonTouch,TOUCH_EVENT_ENDED!");
 		//
-		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFY);
+		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
+		break;
+	default:
+		break;
+	}
+}
+void HelloWorld::onVerifiedNaviButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	//
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onVerifiedNaviButtonTouch,TOUCH_EVENT_ENDED!");
+		//
+		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFIED);
 		//
 		this->imageView_verified->loadTexture(this->cur_photo_file_path);
-		this->scrollView_verify->setBackGroundColor(cocos2d::ccColor3B::WHITE);
+		this->scrollView_verified->setBackGroundColor(cocos2d::ccColor3B::WHITE);
+		//Keep state
+		this->ori_image_verified_pos = this->imageView_verified->getPosition();
 		break;
 	default:
 		break;
@@ -712,8 +737,8 @@ void HelloWorld::setupListViews()
 	ssize_t count_size_intro = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
 	for (int ii = 0; ii < count_size_intro; ++ii) {
 		//insert custom item
-		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ii] + ".png";
-		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ii] + "_pd.png";
+		const std::string btn_up_str = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ii] + ".png";
+		const std::string btn_pd_str = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ii] + "_pd.png";
 		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
 		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i]);
 		//custom_button->setScale9Enabled(true);
@@ -730,8 +755,8 @@ void HelloWorld::setupListViews()
 	ssize_t count_size_upload = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
 	for (int ij = 0; ij < count_size_upload; ++ij) {
 		//insert custom item
-		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ij] + ".png";
-		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ij] + "_pd.png";
+		const std::string btn_up_str = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ij] + ".png";
+		const std::string btn_pd_str = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ij] + "_pd.png";
 		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
 		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i]);
 		//custom_button->setScale9Enabled(true);
@@ -748,8 +773,8 @@ void HelloWorld::setupListViews()
 	ssize_t count_editor = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
 	for (int ik = 0; ik < count_editor; ++ik) {
 		//insert custom item
-		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ik] + ".png";
-		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ik] + "_pd.png";
+		const std::string btn_up_str = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ik] + ".png";
+		const std::string btn_pd_str = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[ik] + "_pd.png";
 		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
 		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[j]);
 		//custom_button->setScale9Enabled(true);
@@ -762,11 +787,11 @@ void HelloWorld::setupListViews()
 		//
 		listView_editor_size->pushBackCustomItem(custom_item);
 	}
-	ssize_t count_verify = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
-	for (int il = 0; il < count_verify; ++il) {
+	ssize_t count_verifing = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
+	for (int il = 0; il < count_verifing; ++il) {
 		//insert custom item
-		const std::string btn_up_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[il] + ".png";
-		const std::string btn_pd_str = "CocoStudioUI_1/photosize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[il] + "_pd.png";
+		const std::string btn_up_str = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[il] + ".png";
+		const std::string btn_pd_str = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[il] + "_pd.png";
 		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
 		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[j]);
 		//custom_button->setScale9Enabled(true);
@@ -777,13 +802,30 @@ void HelloWorld::setupListViews()
 		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
 		custom_item->addChild(custom_button);
 		//
-		listView_verify_size->pushBackCustomItem(custom_item);
+		listView_verifing_size->pushBackCustomItem(custom_item);
+	}
+	ssize_t count_verified = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();
+	for (int il = 0; il < count_verified; ++il) {
+		//insert custom item
+		const std::string btn_up_str = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[il] + ".png";
+		const std::string btn_pd_str = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[il] + "_pd.png";
+		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
+		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[j]);
+		//custom_button->setScale9Enabled(true);
+		//custom_button->setSize(listView_default_button->getSize());
+
+		Layout* custom_item = Layout::create();
+		custom_item->setSize(custom_button->getSize());
+		custom_button->setPosition(cocos2d::Point(custom_item->getSize().width / 2.0f, custom_item->getSize().height / 2.0f));
+		custom_item->addChild(custom_button);
+		//
+		listView_verified_size->pushBackCustomItem(custom_item);
 	}
 	ssize_t count_typeset = HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS.size();
 	for (int j = 0; j < count_typeset; ++j) {
 		//insert custom item
-		const std::string btn_up_str = "CocoStudioUI_1/papersize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[j] + ".png";
-		const std::string btn_pd_str = "CocoStudioUI_1/papersize_menu/" + HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[j] + "_pd.png";
+		const std::string btn_up_str = HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[j] + ".png";
+		const std::string btn_pd_str = HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[j] + "_pd.png";
 		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
 		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[k]);
 		//custom_button->setScale9Enabled(true);
@@ -809,6 +851,7 @@ void HelloWorld::setupListViews()
 	listView_intro_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
 	listView_upload_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onUploadListViewItemSelected));
 	listView_editor_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onEditorListViewItemSelected));
-	listView_verify_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
+	listView_verifing_size->setTouchEnabled(false);//Disable it for verifing.
+	listView_verified_size->setTouchEnabled(false);//Disable it for verified.
 	listView_typeset_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onPrintListViewItemSelected));
 }
