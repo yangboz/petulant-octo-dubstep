@@ -58,9 +58,11 @@ bool HelloWorld::init()
 	//Panels
 	this->panel_intro = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro"));
 	this->panel_upload = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_upload"));
+	this->panel_upload->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onPanelsTouch);
 	this->panel_editor = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_editor"));
 	this->panel_verifing = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_verifing"));
 	this->panel_verified = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_verified"));
+	this->panel_verified->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onPanelsTouch);
 	this->panel_typeset = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_typeset"));
 	//Window buttons
 	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_intro->getChildByName("Button_window_min"));
@@ -276,6 +278,7 @@ void HelloWorld::onRedColouredButtonTouch(Object *pSender, ui::TouchEventType ty
 		CCLOG("onRedColouredButtonTouch,TOUCH_EVENT_ENDED!");
 		//TODO:Photo editor with background color function here:
 		this->scrollView_verified->setBackGroundColor(cocos2d::Color3B::RED);
+		this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::RED);
 		break;
 	default:
 		break;
@@ -291,6 +294,7 @@ void HelloWorld::onBlueColouredButtonTouch(Object *pSender, ui::TouchEventType t
 		CCLOG("onBlueColouredButtonTouch,TOUCH_EVENT_ENDED!");
 		//TODO:Photo editor with background color function here:
 		this->scrollView_verified->setBackGroundColor(cocos2d::Color3B::BLUE);
+		this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::BLUE);
 		break;
 	default:
 		break;
@@ -306,6 +310,7 @@ void HelloWorld::onWhiteColouredButtonTouch(Object *pSender, ui::TouchEventType 
 		CCLOG("onWhiteColouredButtonTouch,TOUCH_EVENT_ENDED!");
 		//TODO:Photo editor with background color function here:
 		this->scrollView_verified->setBackGroundColor(cocos2d::Color3B::WHITE);
+		this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::WHITE);
 		break;
 	default:
 		break;
@@ -319,8 +324,10 @@ void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onSaveButtonTouch,TOUCH_EVENT_ENDED!");
-		//TODO:Save photo function call here:
-
+		//Save photo function call here:
+		FileOperation::saveFile();
+		//Popup notification
+		this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS);
 		break;
 	default:
 		break;
@@ -421,12 +428,12 @@ void HelloWorld::onScaleSliderValueChanged(Object *pSender, ui::SliderEventType 
 	{
 	case SLIDER_PERCENTCHANGED:
 		scaleValue = slider->getPercent();
-		cur_scaled_value = (1.00 + scaleValue / 100.00);
-		CCLOG("onScaleSliderChanged,TOUCH_EVENT_ENDED,cur_scaled_value: %f", cur_scaled_value);
+		this->cur_scaled_value = (1.00 + scaleValue / 100.00);
+		CCLOG("onScaleSliderChanged,TOUCH_EVENT_ENDED,cur_scaled_value: %f", this->cur_scaled_value);
 		//this->imageView_cert_origin->setSize(cocos2d::CCSizeMake(size.width*slider_changed_value / 100, size.height*slider_changed_value / 100));
 		if (this->imageView_editor)
 		{
-			this->imageView_editor->setScale(cur_scaled_value);
+			this->imageView_editor->setScale(this->cur_scaled_value);
 		}
 		break;
 	default:
@@ -456,7 +463,22 @@ void HelloWorld::onMoveSliderValueChanged(Object *pSender, ui::SliderEventType t
 		break;
 	}
 }
-
+///Panel related touch to dismiss popup layers
+void HelloWorld::onPanelsTouch(Object *pSender, ui::TouchEventType type)
+{
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onPanelsTouch,TOUCH_EVENT_ENDED!");
+		//Dismiss popuplayer function call here:
+		this->removePopupLayer();
+		break;
+	default:
+		break;
+	}
+}
 ///Windows system buttons
 void HelloWorld::onWindowMinButtonTouch(Object *pSender, ui::TouchEventType type)
 {
@@ -515,6 +537,10 @@ void HelloWorld::onZoomInButtonTouch(Object *pSender, ui::TouchEventType type)
 		CCLOG("onZoomInButtonTouch,TOUCH_EVENT_ENDED!");
 		//
 		this->slider_photo_scale->setPercent(this->cur_scaled_value++);
+		if (this->imageView_editor)
+		{
+			this->imageView_editor->setScale(this->cur_scaled_value);
+		}
 		break;
 	default:
 		break;
@@ -532,6 +558,11 @@ void HelloWorld::onZoomOutButtonTouch(Object *pSender, ui::TouchEventType type)
 		CCLOG("onZoomOutButtonTouch,TOUCH_EVENT_ENDED!");
 		//
 		this->slider_photo_scale->setPercent(this->cur_scaled_value--);
+		//
+		if (this->imageView_editor)
+		{
+			this->imageView_editor->setScale(this->cur_scaled_value);
+		}
 		break;
 	default:
 		break;
@@ -599,6 +630,10 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onVerifingNaviButtonTouch,TOUCH_EVENT_ENDED!");
 		//
+		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
+		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
+		OpenCvOperation::backgroundSubstraction_(this->cur_photo_file_path);
+		//
 		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
 		break;
 	default:
@@ -637,6 +672,8 @@ void HelloWorld::onTypesetNaviButtonTouch(Object *pSender, ui::TouchEventType ty
 		CCLOG("onTypesetNaviButtonTouch,TOUCH_EVENT_ENDED!");
 		//
 		this->pageView_main->scrollToPage(PAGE_VIEW_TYPESET);
+		//
+		this->imageView_verified->loadTexture(this->cur_photo_file_path);
 		break;
 	default:
 		break;

@@ -78,6 +78,8 @@ public:
 	void onUploadListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onEditorListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onPrintListViewItemSelected(Object *pSender, ui::ListViewEventType type);
+	///Panel touch related to dismiss the popup layers
+	void onPanelsTouch(Object *pSender, ui::TouchEventType type);
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 
