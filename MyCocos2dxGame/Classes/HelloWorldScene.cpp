@@ -109,7 +109,13 @@ bool HelloWorld::init()
 	this->btn_reset = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_reset"));
 	this->btn_reset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onResetButtonTouch);
 	this->btn_save = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_save"));
-	this->btn_save->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onResetButtonTouch);
+	this->btn_save->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onSaveButtonTouch);
+	this->btn_red = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_red"));
+	this->btn_red->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onRedColouredButtonTouch);
+	this->btn_blue = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_blue"));
+	this->btn_blue->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onBlueColouredButtonTouch);
+	this->btn_white = dynamic_cast<ui::Button*>(this->panel_verify->getChildByName("Button_white"));
+	this->btn_white->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWhiteColouredButtonTouch);
 	//ImageViews
 	///Panel_upload
 	this->imageView_frame = dynamic_cast<ui::ImageView*>(this->panel_upload->getChildByName("Image_frame"));
@@ -119,6 +125,9 @@ bool HelloWorld::init()
 	this->scrollView_editor = dynamic_cast<ui::ScrollView*>(this->panel_editor->getChildByName("ScrollView_editor"));
 	this->imageView_guide = dynamic_cast<ui::ImageView*>(this->scrollView_editor->getChildByName("Image_guide"));
 	this->imageView_editor = dynamic_cast<ui::ImageView*>(this->scrollView_editor->getChildByName("Image_editor"));
+	///Panel_verify
+	this->scrollView_verify = dynamic_cast<ui::ScrollView*>(this->panel_verify->getChildByName("ScrollView_verify"));
+	this->imageView_verified = dynamic_cast<ui::ImageView*>(this->scrollView_verify->getChildByName("Image_verified"));
 	//ListViews
 	this->listView_intro_size = dynamic_cast<ui::ListView*>(this->panel_intro->getChildByName("ListView_size"));
 	this->listView_upload_size = dynamic_cast<ui::ListView*>(this->panel_upload->getChildByName("ListView_size"));
@@ -138,7 +147,10 @@ bool HelloWorld::init()
 	this->popup_save_photo_success = NULL;
 	//ListView set up.
 	this->setupListViews();
-	//
+	//Default variables initialization
+	this->cur_moved_value = 0.0f;
+	this->cur_roated_value = 0.0f;
+	this->cur_scaled_value = 1.0f;
     return true;
 }
 
@@ -247,7 +259,68 @@ void HelloWorld::onPrintButtonTouch(Object *pSender, ui::TouchEventType type)
 		break;
 	}
 }
+///Verify view related
+void HelloWorld::onRedColouredButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onRedColouredButtonTouch,TOUCH_EVENT_ENDED!");
+		//TODO:Photo editor with background color function here:
+		this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::RED);
+		break;
+	default:
+		break;
+	}
+}
+void HelloWorld::onBlueColouredButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onBlueColouredButtonTouch,TOUCH_EVENT_ENDED!");
+		//TODO:Photo editor with background color function here:
+		this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::BLUE);
+		break;
+	default:
+		break;
+	}
+}
+void HelloWorld::onWhiteColouredButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onBlueColouredButtonTouch,TOUCH_EVENT_ENDED!");
+		//TODO:Photo editor with background color function here:
+		this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::WHITE);
+		break;
+	default:
+		break;
+	}
+}
+void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
+{
+	switch (type)
+	{
+	case TOUCH_EVENT_BEGAN:
+		break;
+	case TOUCH_EVENT_ENDED:
+		CCLOG("onSaveButtonTouch,TOUCH_EVENT_ENDED!");
+		//TODO:Save photo function call here:
 
+		break;
+	default:
+		break;
+	}
+}
+///
 void HelloWorld::onCertListViewItemSelected(Object *pSender, ui::ListViewEventType type)
 {
 	ui::ListView *listView = static_cast<ListView*>(pSender);
@@ -295,11 +368,11 @@ void HelloWorld::onUploadListViewItemSelected(Object *pSender, ui::ListViewEvent
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		CCLOG("onUploadListViewItemSelected index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
 		//Adjust the upload frame view displayment here:
+		this->imageView_frame->setPosition(frame_position);
+		//this->imageView_back_ground->setPosition(background_position);
 		this->imageView_fore_ground->loadTexture(forground_file_path);
 		this->imageView_back_ground->loadTexture(background_file_path);
-		//this->imageView_back_ground->setPosition(background_position);
 		this->imageView_frame->loadTexture(frame_file_path);
-		this->imageView_frame->setPosition(frame_position);
 		break;
 	default:
 		break;
@@ -359,13 +432,14 @@ void HelloWorld::onMoveSliderValueChanged(Object *pSender, ui::SliderEventType t
 	float movedValue;
 	float moveStepper = 1.0f;
 	const cocos2d::Point certImagePoint = this->imageView_editor->getPosition();
+	float halfWidth = this->imageView_editor->getSize().width/2.0;
 	switch (type)
 	{
 	case SLIDER_PERCENTCHANGED:
 		cur_moved_value = slider->getPercent();
-		movedValue = (cur_moved_value-50)*moveStepper;
-		CCLOG("onMoveSliderValueChanged,TOUCH_EVENT_ENDED,scale value: %f", movedValue);
-		//this->imageView_cert_origin->setSize(cocos2d::CCSizeMake(size.width*slider_changed_value / 100, size.height*slider_changed_value / 100));
+		movedValue = (cur_moved_value - 50)*moveStepper;
+		CCLOG("onMoveSliderValueChanged,TOUCH_EVENT_ENDED,moved value: %f", movedValue);
+		//
 		if (this->imageView_editor)
 		{
 			this->imageView_editor->setPosition(cocos2d::CCPointMake(certImagePoint.x + movedValue, certImagePoint.y));
@@ -467,7 +541,8 @@ void HelloWorld::onRotateButtonTouch(Object *pSender, ui::TouchEventType type)
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onRotateButtonTouch,TOUCH_EVENT_ENDED!");
 		//
-		this->imageView_editor->setRotation(this->cur_roated_value + 90.0f);
+		this->cur_roated_value += 90.0f;
+		this->imageView_editor->setRotation(this->cur_roated_value);
 		break;
 	default:
 		break;
@@ -518,6 +593,9 @@ void HelloWorld::onVerifyNaviButtonTouch(Object *pSender, ui::TouchEventType typ
 		CCLOG("onVerifyNaviButtonTouch,TOUCH_EVENT_ENDED!");
 		//
 		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFY);
+		//
+		this->imageView_verified->loadTexture(this->cur_photo_file_path);
+		this->scrollView_verify->setBackGroundColor(cocos2d::ccColor3B::WHITE);
 		break;
 	default:
 		break;

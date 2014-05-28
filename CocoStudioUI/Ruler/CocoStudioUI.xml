@@ -5,7 +5,7 @@
     <GuidesList>
       <GuidesInfo>
         <GuidesName>VThumb</GuidesName>
-        <GuidesPosition>479.0738847520617</GuidesPosition>
+        <GuidesPosition>397.8974141638264</GuidesPosition>
       </GuidesInfo>
       <GuidesInfo>
         <GuidesName>HThumb</GuidesName>
@@ -22,6 +22,18 @@
       <GuidesInfo>
         <GuidesName>HThumb</GuidesName>
         <GuidesPosition>497.73643854422164</GuidesPosition>
+      </GuidesInfo>
+      <GuidesInfo>
+        <GuidesName>VThumb</GuidesName>
+        <GuidesPosition>1196.875</GuidesPosition>
+      </GuidesInfo>
+      <GuidesInfo>
+        <GuidesName>VThumb</GuidesName>
+        <GuidesPosition>2238.4978070175439</GuidesPosition>
+      </GuidesInfo>
+      <GuidesInfo>
+        <GuidesName>HThumb</GuidesName>
+        <GuidesPosition>98.8754676968444</GuidesPosition>
       </GuidesInfo>
     </GuidesList>
   </GuidesProject>

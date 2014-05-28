@@ -62,6 +62,11 @@ public:
 	void onZoomInButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onZoomOutButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onRotateButtonTouch(Object *pSender, ui::TouchEventType type);
+	//Verify view related
+	void onRedColouredButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onBlueColouredButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onWhiteColouredButtonTouch(Object *pSender, ui::TouchEventType type);
+	void onSaveButtonTouch(Object *pSender, ui::TouchEventType type);
 	///ListView related
 	void onCertListViewItemButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onCertListViewItemButtonSelected(Object *pSender, ui::TouchEventType type);
@@ -98,6 +103,9 @@ private:
 	ui::Button *btn_goto_typeset;
 	ui::Button *btn_print;
 	ui::Button *btn_save;
+	ui::Button *btn_red;
+	ui::Button *btn_white;
+	ui::Button *btn_blue;
 	//PageViews
 	ui::PageView *pageView_main;
 	//UILayouts
@@ -114,6 +122,9 @@ private:
 	ui::ScrollView *scrollView_editor;
 	ui::ImageView *imageView_editor;
 	ui::ImageView *imageView_guide;
+	//Verify view relate
+	ui::ScrollView *scrollView_verify;
+	ui::ImageView *imageView_verified;
 	//ListViews
 	ui::ListView *listView_intro_size;
 	ui::ListView *listView_upload_size;
