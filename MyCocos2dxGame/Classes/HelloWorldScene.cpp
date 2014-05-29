@@ -139,13 +139,15 @@ bool HelloWorld::init()
 	///Panel_verified
 	this->scrollView_verified = dynamic_cast<ui::ScrollView*>(this->panel_verified->getChildByName("ScrollView_verified"));
 	this->imageView_verified = dynamic_cast<ui::ImageView*>(this->scrollView_verified->getChildByName("Image_verified"));
+	this->imageView_verified_result_0 = dynamic_cast<ui::ImageView*>(this->panel_verified->getChildByName("Image_verified_result_0"));
+	this->imageView_verified_result_1 = dynamic_cast<ui::ImageView*>(this->panel_verified->getChildByName("Image_verified_result_1"));
+	this->imageView_verified_result_2 = dynamic_cast<ui::ImageView*>(this->panel_verified->getChildByName("Image_verified_result_2"));
 	//ListViews
 	this->listView_intro_size = dynamic_cast<ui::ListView*>(this->panel_intro->getChildByName("ListView_size"));
 	this->listView_upload_size = dynamic_cast<ui::ListView*>(this->panel_upload->getChildByName("ListView_size"));
 	this->listView_editor_size = dynamic_cast<ui::ListView*>(this->panel_editor->getChildByName("ListView_size"));
 	this->listView_verifing_size = dynamic_cast<ui::ListView*>(this->panel_verifing->getChildByName("ListView_size"));
 	this->listView_verified_size = dynamic_cast<ui::ListView*>(this->panel_verified->getChildByName("ListView_size"));
-	this->listView_verified_results = dynamic_cast<ui::ListView*>(this->panel_verified->getChildByName("ListView_results"));
 	this->listView_typeset_size = dynamic_cast<ui::ListView*>(this->panel_typeset->getChildByName("ListView_size"));
 	//Sliders
 	this->slider_photo_scale = dynamic_cast<ui::Slider*>(this->panel_editor->getChildByName("Slider_scale"));
@@ -732,13 +734,20 @@ void HelloWorld::centerPopupLayer(const char *bgFilePath)
 {
 	if (bgFilePath == HW_DataModel::HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS)
 	{
-		this->popup_save_photo_success = this->createPopupLayer(bgFilePath);
-		this->addChild(this->popup_save_photo_success);
+		if (NULL == this->popup_save_photo_success)
+		{
+			this->popup_save_photo_success = this->createPopupLayer(bgFilePath);
+			this->addChild(this->popup_save_photo_success);
+		}
 	}
 	else if (bgFilePath == HW_DataModel::HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID)
 	{
-		this->popup_upload_photo_invalid = this->createPopupLayer(bgFilePath);
-		this->addChild(this->popup_upload_photo_invalid);
+		//
+		if (NULL == this->popup_upload_photo_invalid)
+		{
+			this->popup_upload_photo_invalid = this->createPopupLayer(bgFilePath);
+			this->addChild(this->popup_upload_photo_invalid);
+		}
 	}
 	else
 	{
@@ -909,4 +918,11 @@ void HelloWorld::changeCurrentInstructionImage()
 	std::string filePath =  HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_INSTRUCTION_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	this->imageView_instruction_upload->loadTexture(filePath);
 	this->imageView_instruction_editor->loadTexture(filePath);
+}
+//
+void HelloWorld::changeCurrentVerifiedResults()
+{
+	this->imageView_verified_result_0->loadTexture(HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_VALID_LABELS[0]);
+	this->imageView_verified_result_1->loadTexture(HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_VALID_LABELS[1]);
+	this->imageView_verified_result_2->loadTexture(HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_VALID_LABELS[2]);
 }

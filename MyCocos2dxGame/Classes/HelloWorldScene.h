@@ -141,8 +141,11 @@ private:
 	ui::ListView *listView_editor_size;
 	ui::ListView *listView_verifing_size;
 	ui::ListView *listView_verified_size;
-	ui::ListView *listView_verified_results;
 	ui::ListView *listView_typeset_size;
+	//Check list views
+	ui::ImageView *imageView_verified_result_0;//With background;
+	ui::ImageView *imageView_verified_result_1;//With face/pose;
+	ui::ImageView *imageView_verified_result_2;//With pixels;
 	//Sliders
 	ui::Slider *slider_photo_move;
 	ui::Slider *slider_photo_scale;
@@ -166,6 +169,7 @@ private:
 	PopupLayer* createPopupLayer(const char *bgFilePath);
 	void popupButtonCallback(cocos2d::CCNode *pNode);
 	void changeCurrentInstructionImage();
+	void changeCurrentVerifiedResults();
 };
 
 #endif // __HELLOWORLD_SCENE_H__
