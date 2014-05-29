@@ -17,9 +17,10 @@ namespace HW_DataModel
 		static const std::vector<cocos2d::Color3B> ARRAY_OF_CERT_COLORS;
 		//default labels of certificates
 		static const std::vector<std::string> ARRAY_OF_CERT_LABELS;
-		//default position of certificates for editor/verify display
+		//default position of certificates for upload/editor/verify display
 		static const std::vector<cocos2d::Point> ARRAY_OF_EDITOR_BACKGROUND_DISPLAY;
 		static const std::vector<cocos2d::Point> ARRAY_OF_EDITOR_FRAME_DISPLAY;
+		static const std::vector<std::string> ARRAY_OF_EDITOR_INSTRUCTION_LABELS;
 		static const std::vector<std::string> ARRAY_OF_EDITOR_BACKGROUND_LABELS;
 		static const std::vector<std::string> ARRAY_OF_EDITOR_FRAME_LABELS;
 		static const std::vector<std::string> ARRAY_OF_EDITOR_FOREGROUND_LABELS;

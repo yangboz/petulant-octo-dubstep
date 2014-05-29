@@ -7,6 +7,8 @@ namespace HW_DataModel
 	const std::vector<cocos2d::Color3B> HW_DataModel::ARRAY_OF_CERT_COLORS = { cocos2d::Color3B::RED, cocos2d::Color3B::BLUE, cocos2d::Color3B::WHITE, cocos2d::Color3B::RED, cocos2d::Color3B::BLUE, cocos2d::Color3B::WHITE };
 	//default labels of certificates
 	const std::vector<std::string> HW_DataModel::ARRAY_OF_CERT_LABELS = { "CocoStudioUI_1/photosize_menu/button_photosize_25_35", "CocoStudioUI_1/photosize_menu/button_photosize_22_32","CocoStudioUI_1/photosize_menu/button_photosize_33_48", "CocoStudioUI_1/photosize_menu/button_photosize_35_45","CocoStudioUI_1/photosize_menu/button_photosize_35_50","CocoStudioUI_1/photosize_menu/button_photosize_50_50"};
+	//default labels of certificates
+	const std::vector<std::string> HW_DataModel::ARRAY_OF_EDITOR_INSTRUCTION_LABELS = { "CocoStudioUI_1/background/text/infomation_editphoto_01.png", "CocoStudioUI_1/background/text/infomation_editphoto_02.png", "CocoStudioUI_1/background/text/infomation_editphoto_03.png", "CocoStudioUI_1/background/text/infomation_editphoto_04.png", "CocoStudioUI_1/background/text/infomation_editphoto_05.png", "CocoStudioUI_1/background/text/infomation_editphoto_06.png" };
 	//default sizes of print
 	const std::vector<cocos2d::Size> HW_DataModel::ARRAY_OF_PRINT_SIZES = { cocos2d::CCSizeMake(220, 320), cocos2d::CCSizeMake(480, 330), cocos2d::CCSizeMake(480, 330)};
 	//default labels of certificates

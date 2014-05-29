@@ -74,7 +74,7 @@ public:
 	///ListView related
 	void onCertListViewItemButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onCertListViewItemButtonSelected(Object *pSender, ui::TouchEventType type);
-	void onCertListViewItemSelected(Object *pSender, ui::ListViewEventType type);
+	void onIntroListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onUploadListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onEditorListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onPrintListViewItemSelected(Object *pSender, ui::ListViewEventType type);
@@ -125,10 +125,12 @@ private:
 	ui::ImageView *imageView_frame;
 	ui::ImageView *imageView_back_ground;
 	ui::ImageView *imageView_fore_ground;
+	ui::ImageView *imageView_instruction_upload;
 	//Editor view related
 	ui::ScrollView *scrollView_editor;
 	ui::ImageView *imageView_editor;
 	ui::ImageView *imageView_guide;
+	ui::ImageView *imageView_instruction_editor;
 	//Verify view relate
 	ui::ScrollView *scrollView_verified;
 	ui::ImageView *imageView_verifing;
@@ -139,6 +141,7 @@ private:
 	ui::ListView *listView_editor_size;
 	ui::ListView *listView_verifing_size;
 	ui::ListView *listView_verified_size;
+	ui::ListView *listView_verified_results;
 	ui::ListView *listView_typeset_size;
 	//Sliders
 	ui::Slider *slider_photo_move;
@@ -155,12 +158,14 @@ private:
 	float cur_moved_value;
 	float cur_scaled_value;
 	std::string cur_photo_file_path;
+	//
 	cocos2d::CCSize cur_defined_size;
 	cocos2d::CCPoint ori_image_verified_pos;
 
 	//Popup related
 	PopupLayer* createPopupLayer(const char *bgFilePath);
 	void popupButtonCallback(cocos2d::CCNode *pNode);
+	void changeCurrentInstructionImage();
 };
 
 #endif // __HELLOWORLD_SCENE_H__

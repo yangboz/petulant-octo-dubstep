@@ -128,10 +128,12 @@ bool HelloWorld::init()
 	this->imageView_frame = dynamic_cast<ui::ImageView*>(this->panel_upload->getChildByName("Image_frame"));
 	this->imageView_back_ground = dynamic_cast<ui::ImageView*>(this->imageView_frame->getChildByName("Image_background"));
 	this->imageView_fore_ground = dynamic_cast<ui::ImageView*>(this->imageView_back_ground->getChildByName("Image_foreground"));
+	this->imageView_instruction_upload = dynamic_cast<ui::ImageView*>(this->panel_upload->getChildByName("Image_instruction"));
 	///Panel_editor
 	this->scrollView_editor = dynamic_cast<ui::ScrollView*>(this->panel_editor->getChildByName("ScrollView_editor"));
 	this->imageView_guide = dynamic_cast<ui::ImageView*>(this->scrollView_editor->getChildByName("Image_guide"));
 	this->imageView_editor = dynamic_cast<ui::ImageView*>(this->scrollView_editor->getChildByName("Image_editor"));
+	this->imageView_instruction_editor = dynamic_cast<ui::ImageView*>(this->panel_editor->getChildByName("Image_instruction"));
 	///Panel_verifing
 	this->imageView_verifing = dynamic_cast<ui::ImageView*>(this->panel_verifing->getChildByName("Image_verifing"));
 	///Panel_verified
@@ -143,6 +145,7 @@ bool HelloWorld::init()
 	this->listView_editor_size = dynamic_cast<ui::ListView*>(this->panel_editor->getChildByName("ListView_size"));
 	this->listView_verifing_size = dynamic_cast<ui::ListView*>(this->panel_verifing->getChildByName("ListView_size"));
 	this->listView_verified_size = dynamic_cast<ui::ListView*>(this->panel_verified->getChildByName("ListView_size"));
+	this->listView_verified_results = dynamic_cast<ui::ListView*>(this->panel_verified->getChildByName("ListView_results"));
 	this->listView_typeset_size = dynamic_cast<ui::ListView*>(this->panel_typeset->getChildByName("ListView_size"));
 	//Sliders
 	this->slider_photo_scale = dynamic_cast<ui::Slider*>(this->panel_editor->getChildByName("Slider_scale"));
@@ -334,7 +337,7 @@ void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 	}
 }
 ///
-void HelloWorld::onCertListViewItemSelected(Object *pSender, ui::ListViewEventType type)
+void HelloWorld::onIntroListViewItemSelected(Object *pSender, ui::ListViewEventType type)
 {
 	ui::ListView *listView = static_cast<ListView*>(pSender);
 	//
@@ -344,7 +347,9 @@ void HelloWorld::onCertListViewItemSelected(Object *pSender, ui::ListViewEventTy
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		this->cur_defined_size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
 		CCLOG("listView_cert selected child index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
-		this->pageView_main->scrollToPage(1);
+		this->pageView_main->scrollToPage(PAGE_VIEW_UPLOAD);
+		//Dynamically change the instrcution image view content.
+		this->changeCurrentInstructionImage();
 		break;
 	default:
 		break;
@@ -377,6 +382,8 @@ void HelloWorld::onUploadListViewItemSelected(Object *pSender, ui::ListViewEvent
 	cocos2d::CCPoint frame_position = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	cocos2d::CCPoint background_position = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	//
+	std::string cur_instruction_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_INSTRUCTION_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	//
 	switch (type)
 	{
 	case LISTVIEW_ONSELECTEDITEM_END:
@@ -388,6 +395,8 @@ void HelloWorld::onUploadListViewItemSelected(Object *pSender, ui::ListViewEvent
 		this->imageView_fore_ground->loadTexture(forground_file_path);
 		this->imageView_back_ground->loadTexture(background_file_path);
 		this->imageView_frame->loadTexture(frame_file_path);
+		//Dynamically change the instrcution image view content.
+		this->changeCurrentInstructionImage();
 		break;
 	default:
 		break;
@@ -413,6 +422,8 @@ void HelloWorld::onEditorListViewItemSelected(Object *pSender, ui::ListViewEvent
 		//this->imageView_back_ground->setPosition(background_position);
 		this->imageView_guide->loadTexture(guide_file_path);
 		this->scrollView_editor->setPosition(scrollView_position);
+		//Dynamically change the instrcution image view content.
+		this->changeCurrentInstructionImage();
 		break;
 	default:
 		break;
@@ -589,6 +600,7 @@ void HelloWorld::onRotateButtonTouch(Object *pSender, ui::TouchEventType type)
 ///Navigation button related
 void HelloWorld::onUploadNaviButtonTouch(Object *pSender, ui::TouchEventType type)
 {
+	
 	//
 	switch (type)
 	{
@@ -598,7 +610,6 @@ void HelloWorld::onUploadNaviButtonTouch(Object *pSender, ui::TouchEventType typ
 		CCLOG("onUploadNaviButtonTouch,TOUCH_EVENT_ENDED!");
 		//Back to Panel_upload
 		this->pageView_main->scrollToPage(PAGE_VIEW_UPLOAD);
-		//
 		break;
 	default:
 		break;
@@ -885,10 +896,17 @@ void HelloWorld::setupListViews()
 	//
 	HW_UserDataModel::Instance()->cur_listView_selected_index = 0;//Default index selection.
 	//
-	listView_intro_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onCertListViewItemSelected));
+	listView_intro_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onIntroListViewItemSelected));
 	listView_upload_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onUploadListViewItemSelected));
 	listView_editor_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onEditorListViewItemSelected));
 	listView_verifing_size->setTouchEnabled(false);//Disable it for verifing.
 	listView_verified_size->setTouchEnabled(false);//Disable it for verified.
 	listView_typeset_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onPrintListViewItemSelected));
+}
+//
+void HelloWorld::changeCurrentInstructionImage()
+{
+	std::string filePath =  HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_INSTRUCTION_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	this->imageView_instruction_upload->loadTexture(filePath);
+	this->imageView_instruction_editor->loadTexture(filePath);
 }

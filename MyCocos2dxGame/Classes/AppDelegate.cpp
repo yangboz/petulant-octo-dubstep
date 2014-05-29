@@ -22,7 +22,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		//Window customize
 		//glview->setFrameSize(800, 600);
 		glview->setDesignResolutionSize(800, 600, ResolutionPolicy::EXACT_FIT);
-    }
+	}
 
     // turn on display FPS
     director->setDisplayStats(false);
