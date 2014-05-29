@@ -152,8 +152,8 @@ bool HelloWorld::init()
 	//Sliders
 	this->slider_photo_scale = dynamic_cast<ui::Slider*>(this->panel_editor->getChildByName("Slider_scale"));
 	this->slider_photo_scale->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onScaleSliderValueChanged));
-	this->slider_photo_move = dynamic_cast<ui::Slider*>(this->panel_editor->getChildByName("Slider_move"));
-	this->slider_photo_move->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onMoveSliderValueChanged));
+	this->slider_photo_rotate = dynamic_cast<ui::Slider*>(this->panel_editor->getChildByName("Slider_rotate"));
+	this->slider_photo_rotate->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onRotateSliderValueChanged));
 	//ProgressBar
 	this->progressBar_upload = dynamic_cast<ui::LoadingBar*>(this->panel_upload->getChildByName("Image_frame")->getChildByName("Image_background")->getChildByName("Image_foreground")->getChildByName("ProgressBar_verify"));
 	this->progressBar_upload->setVisible(false);
@@ -453,7 +453,7 @@ void HelloWorld::onScaleSliderValueChanged(Object *pSender, ui::SliderEventType 
 		break;
 	}
 }
-void HelloWorld::onMoveSliderValueChanged(Object *pSender, ui::SliderEventType type)
+void HelloWorld::onRotateSliderValueChanged(Object *pSender, ui::SliderEventType type)
 {
 	ui::Slider *slider = static_cast<ui::Slider*>(pSender);
 	//const cocos2d::Size size = this->imageView_cert_origin->getSize();

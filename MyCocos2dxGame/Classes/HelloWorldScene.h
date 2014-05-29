@@ -61,7 +61,7 @@ public:
 	//Editor view related
 	///Slider related
 	void onScaleSliderValueChanged(Object *pSender, ui::SliderEventType type);
-	void onMoveSliderValueChanged(Object *pSender, ui::SliderEventType type);
+	void onRotateSliderValueChanged(Object *pSender, ui::SliderEventType type);
 	///
 	void onZoomInButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onZoomOutButtonTouch(Object *pSender, ui::TouchEventType type);
@@ -147,7 +147,7 @@ private:
 	ui::ImageView *imageView_verified_result_1;//With face/pose;
 	ui::ImageView *imageView_verified_result_2;//With pixels;
 	//Sliders
-	ui::Slider *slider_photo_move;
+	ui::Slider *slider_photo_rotate;
 	ui::Slider *slider_photo_scale;
 	//ProgressBar
 	ui::LoadingBar *progressBar_upload;
