@@ -10,9 +10,9 @@ namespace HW_DataModel
 	//default labels of certificates
 	const std::vector<std::string> HW_DataModel::ARRAY_OF_EDITOR_INSTRUCTION_LABELS = { "CocoStudioUI_1/background/text/infomation_editphoto_01.png", "CocoStudioUI_1/background/text/infomation_editphoto_02.png", "CocoStudioUI_1/background/text/infomation_editphoto_03.png", "CocoStudioUI_1/background/text/infomation_editphoto_05.png", "CocoStudioUI_1/background/text/infomation_editphoto_04.png", "CocoStudioUI_1/background/text/infomation_editphoto_06.png" };
 	//default sizes of print
-	const std::vector<cocos2d::Size> HW_DataModel::ARRAY_OF_PRINT_SIZES = { cocos2d::CCSizeMake(220, 320), cocos2d::CCSizeMake(480, 330), cocos2d::CCSizeMake(480, 330)};
+	const std::vector<cocos2d::Size> HW_DataModel::ARRAY_OF_TYPESET_SIZES = { cocos2d::CCSizeMake(220, 320), cocos2d::CCSizeMake(480, 330), cocos2d::CCSizeMake(480, 330) };
 	//default labels of certificates
-	const std::vector<std::string> HW_DataModel::ARRAY_OF_PRINT_LABELS = { "CocoStudioUI_1/papersize_menu/button_papersize_4x6", "CocoStudioUI_1/papersize_menu/button_papersize_5x7","CocoStudioUI_1/papersize_menu/button_papersize_a4"};
+	const std::vector<std::string> HW_DataModel::ARRAY_OF_TYPESET_LABELS = { "CocoStudioUI_1/papersize_menu/button_papersize_4x6", "CocoStudioUI_1/papersize_menu/button_papersize_5x7","CocoStudioUI_1/papersize_menu/button_papersize_a4"};
 	//default file sizes of certificates
 	const std::vector<cocos2d::Size> HW_DataModel::ARRAY_OF_CERT_FILE_SIZES = { cocos2d::CCSizeMake(14336, 30720), cocos2d::CCSizeMake(40960, 51200), cocos2d::CCSizeMake(40960, 51200), cocos2d::CCSizeMake(40960, 51200), cocos2d::CCSizeMake(40960, 51200), cocos2d::CCSizeMake(40960, 51200) };
 	//Popup related
@@ -30,4 +30,6 @@ namespace HW_DataModel
 	const std::vector<std::string>  HW_DataModel::ARRAY_OF_VERIFY_SHADE_LABELS = { "CocoStudioUI_1/Photo_25x35/pattern_edit_photo_frame_25x35.png", "CocoStudioUI_1/Photo_22x32/pattern_edit_photo_frame_22x32.png", "CocoStudioUI_1/photo_33x48/pattern_edit_photo_frame_33x48.png", "CocoStudioUI_1/Photo_35x45/pattern_edit_photo_frame_35x45.png", "CocoStudioUI_1/Photo_35x50/pattern_edit_photo_frame_35x50.png", "CocoStudioUI_1/photo_50x50/pattern_edit_photo_frame_50x50.png" };
 	const std::vector<std::string>  HW_DataModel::ARRAY_OF_VERIFY_VALID_LABELS = { "CocoStudioUI_1/background/icon_checklist_pass.png", "CocoStudioUI_1/background/icon_checklist_pass.png", "CocoStudioUI_1/background/icon_checklist_pass.png" };
 	const std::vector<std::string>  HW_DataModel::ARRAY_OF_VERIFY_INVALID_LABELS = { "CocoStudioUI_1/background/icon_checklist_error.png", "CocoStudioUI_1/background/icon_checklist_error.png", "CocoStudioUI_1/background/icon_checklist_error.png"};
+	///Panel_typeset
+	const std::vector<std::string>  HW_DataModel::ARRAY_OF_TYPESET_FRAME_LABELS = { "CocoStudioUI_1/photo_on_paper/pattern_photo_on_paper_4x6.png", "CocoStudioUI_1/photo_on_paper/pattern_photo_on_paper_5x7.png", "CocoStudioUI_1/photo_on_paper/pattern_photo_on_paper_a4.png" };
 }

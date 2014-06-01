@@ -64,6 +64,9 @@ bool HelloWorld::init()
 	this->panel_verified = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_verified"));
 	this->panel_verified->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onPanelsTouch);
 	this->panel_typeset = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_typeset"));
+	//
+	this->pageView_main->setTouchEnabled(false);
+	this->panel_editor->setTouchEnabled(false);
 	//Window buttons
 	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_intro->getChildByName("Button_window_min"));
 	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
@@ -142,6 +145,10 @@ bool HelloWorld::init()
 	this->imageView_verified_result_0 = dynamic_cast<ui::ImageView*>(this->panel_verified->getChildByName("Image_verified_result_0"));
 	this->imageView_verified_result_1 = dynamic_cast<ui::ImageView*>(this->panel_verified->getChildByName("Image_verified_result_1"));
 	this->imageView_verified_result_2 = dynamic_cast<ui::ImageView*>(this->panel_verified->getChildByName("Image_verified_result_2"));
+	///Panel_typeset
+	TMXTiledMap *_typeset_tileMap = TMXTiledMap::create("..//data//tmx//200x200.tmx");
+	this->panel_typeset->addChild(_typeset_tileMap);
+	this->imageView_typeset_frame = dynamic_cast<ui::ImageView*>(this->panel_typeset->getChildByName("Image_typeset_background")->getChildByName("Image_typeset_foreground"));
 	//ListViews
 	this->listView_intro_size = dynamic_cast<ui::ListView*>(this->panel_intro->getChildByName("ListView_size"));
 	this->listView_upload_size = dynamic_cast<ui::ListView*>(this->panel_upload->getChildByName("ListView_size"));
@@ -361,17 +368,18 @@ void HelloWorld::onIntroListViewItemSelected(Object *pSender, ui::ListViewEventT
 	}
 }
 
-void HelloWorld::onPrintListViewItemSelected(Object *pSender, ui::ListViewEventType type)
+void HelloWorld::onTypesetListViewItemSelected(Object *pSender, ui::ListViewEventType type)
 {
 	ui::ListView *listView = static_cast<ListView*>(pSender);
+	HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
+	std::string background_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_TYPESET_FRAME_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	//
 	switch (type)
 	{
 	case LISTVIEW_ONSELECTEDITEM_END:
-		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		CCLOG("listView_print selected child index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
-		//TODO:Change print size image view here:
-
+		//Change print size image view here:
+		this->imageView_typeset_frame->loadTexture(background_file_path);
 		break;
 	default:
 		break;
@@ -381,6 +389,7 @@ void HelloWorld::onPrintListViewItemSelected(Object *pSender, ui::ListViewEventT
 void HelloWorld::onUploadListViewItemSelected(Object *pSender, ui::ListViewEventType type)
 {
 	ui::ListView *listView = static_cast<ListView*>(pSender);
+	HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 	std::string forground_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FOREGROUND_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	std::string frame_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	std::string background_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_BACKGROUND_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
@@ -392,7 +401,6 @@ void HelloWorld::onUploadListViewItemSelected(Object *pSender, ui::ListViewEvent
 	switch (type)
 	{
 	case LISTVIEW_ONSELECTEDITEM_END:
-		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		CCLOG("onUploadListViewItemSelected index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
 		//Adjust the upload frame view displayment here:
 		this->imageView_frame->setPosition(frame_position);
@@ -882,11 +890,11 @@ void HelloWorld::setupListViews()
 		//
 		listView_verified_size->pushBackCustomItem(custom_item);
 	}
-	ssize_t count_typeset = HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS.size();
+	ssize_t count_typeset = HW_DataModel::HW_DataModel::ARRAY_OF_TYPESET_SIZES.size();
 	for (int j = 0; j < count_typeset; ++j) {
 		//insert custom item
-		const std::string btn_up_str = HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[j] + ".png";
-		const std::string btn_pd_str = HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[j] + "_pd.png";
+		const std::string btn_up_str = HW_DataModel::HW_DataModel::ARRAY_OF_TYPESET_LABELS[j] + ".png";
+		const std::string btn_pd_str = HW_DataModel::HW_DataModel::ARRAY_OF_TYPESET_LABELS[j] + "_pd.png";
 		ui::Button *custom_button = ui::Button::create(btn_up_str, btn_pd_str);
 		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_PRINT_LABELS[k]);
 		//custom_button->setScale9Enabled(true);
@@ -914,7 +922,7 @@ void HelloWorld::setupListViews()
 	listView_editor_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onEditorListViewItemSelected));
 	listView_verifing_size->setTouchEnabled(false);//Disable it for verifing.
 	listView_verified_size->setTouchEnabled(false);//Disable it for verified.
-	listView_typeset_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onPrintListViewItemSelected));
+	listView_typeset_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onTypesetListViewItemSelected));
 }
 //
 void HelloWorld::changeCurrentInstructionImage()

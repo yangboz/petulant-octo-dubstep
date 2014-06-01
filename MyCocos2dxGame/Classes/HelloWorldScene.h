@@ -77,7 +77,7 @@ public:
 	void onIntroListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onUploadListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onEditorListViewItemSelected(Object *pSender, ui::ListViewEventType type);
-	void onPrintListViewItemSelected(Object *pSender, ui::ListViewEventType type);
+	void onTypesetListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	///Panel touch related to dismiss the popup layers
 	void onPanelsTouch(Object *pSender, ui::TouchEventType type);
     // implement the "static create()" method manually
@@ -131,10 +131,12 @@ private:
 	ui::ImageView *imageView_editor;
 	ui::ImageView *imageView_guide;
 	ui::ImageView *imageView_instruction_editor;
-	//Verify view relate
+	//Verify view related
 	ui::ScrollView *scrollView_verified;
 	ui::ImageView *imageView_verifing;
 	ui::ImageView *imageView_verified;
+	//Typeset view related
+	ui::ImageView *imageView_typeset_frame;
 	//ListViews
 	ui::ListView *listView_intro_size;
 	ui::ListView *listView_upload_size;

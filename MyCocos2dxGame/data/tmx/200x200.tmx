@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="2" height="2" tilewidth="200" tileheight="200">
+ <tileset firstgid="1" name="foreground" tilewidth="200" tileheight="200">
+  <image source="../../Resources/CocoStudioUI_1/photo_50x50/pattern_edit_photo_guide_50x50.png" width="204" height="204"/>
+ </tileset>
+ <layer name="background" width="2" height="2">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYETCAAA4AAU=
+  </data>
+ </layer>
+</map>

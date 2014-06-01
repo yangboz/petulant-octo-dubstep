@@ -30,16 +30,18 @@ namespace HW_DataModel
 		static const std::vector<std::string> ARRAY_OF_VERIFY_GUIDE_LABELS;
 		static const std::vector<std::string> ARRAY_OF_VERIFY_VALID_LABELS;
 		static const std::vector<std::string> ARRAY_OF_VERIFY_INVALID_LABELS;
-		//Size_print related
-		//default sizes of print
-		static const std::vector<cocos2d::Size> ARRAY_OF_PRINT_SIZES;
+		//Size_typeset related
+		//default sizes of typeset
+		static const std::vector<cocos2d::Size> ARRAY_OF_TYPESET_SIZES;
 		//default labels of certificates
-		static const std::vector<std::string> ARRAY_OF_PRINT_LABELS;
+		static const std::vector<std::string> ARRAY_OF_TYPESET_LABELS;
 		//ImageAttributes validation
 		static const std::vector<cocos2d::Size> ARRAY_OF_CERT_FILE_SIZES;
 		//Popup related
 		static const char* BG_FILE_OF_UPLOAD_PHOTO_INVALID;
 		static const char* BG_FILE_OF_SAVE_PHOTO_SUCCESS;
+		///Panel_typeset
+		static const std::vector<std::string> ARRAY_OF_TYPESET_FRAME_LABELS;
 	private:
 	
 	};
