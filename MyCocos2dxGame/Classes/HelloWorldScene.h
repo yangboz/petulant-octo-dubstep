@@ -137,6 +137,7 @@ private:
 	ui::ImageView *imageView_verified;
 	//Typeset view related
 	ui::ImageView *imageView_typeset_frame;
+	ui::ImageView *imageView_typeset_photos;
 	//ListViews
 	ui::ListView *listView_intro_size;
 	ui::ListView *listView_upload_size;

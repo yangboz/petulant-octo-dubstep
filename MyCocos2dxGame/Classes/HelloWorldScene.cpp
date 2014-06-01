@@ -146,9 +146,11 @@ bool HelloWorld::init()
 	this->imageView_verified_result_1 = dynamic_cast<ui::ImageView*>(this->panel_verified->getChildByName("Image_verified_result_1"));
 	this->imageView_verified_result_2 = dynamic_cast<ui::ImageView*>(this->panel_verified->getChildByName("Image_verified_result_2"));
 	///Panel_typeset
+	/*
 	TMXTiledMap *_typeset_tileMap = TMXTiledMap::create("..//data//tmx//200x200.tmx");
 	this->panel_typeset->addChild(_typeset_tileMap);
 	this->imageView_typeset_frame = dynamic_cast<ui::ImageView*>(this->panel_typeset->getChildByName("Image_typeset_background")->getChildByName("Image_typeset_foreground"));
+	*/
 	//ListViews
 	this->listView_intro_size = dynamic_cast<ui::ListView*>(this->panel_intro->getChildByName("ListView_size"));
 	this->listView_upload_size = dynamic_cast<ui::ListView*>(this->panel_upload->getChildByName("ListView_size"));
@@ -371,15 +373,26 @@ void HelloWorld::onIntroListViewItemSelected(Object *pSender, ui::ListViewEventT
 void HelloWorld::onTypesetListViewItemSelected(Object *pSender, ui::ListViewEventType type)
 {
 	ui::ListView *listView = static_cast<ListView*>(pSender);
-	HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
-	std::string background_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_TYPESET_FRAME_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	int cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
+	std::string background_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_TYPESET_FRAME_LABELS[cur_listView_selected_index];
+	//
+	Image *_photo = new Image();		
+	_photo->initWithImageFile(this->cur_photo_file_path);
+	Texture2D *_photoTexture = new Texture2D();
+	_photoTexture->initWithImage(_photo);
+	//
+	TMXTiledMap *_typeset_tileMap = TMXTiledMap::create("..//data//tmx//200x200.tmx");
+	TMXLayer *_foreground_layer = _typeset_tileMap->layerNamed("background");
 	//
 	switch (type)
 	{
 	case LISTVIEW_ONSELECTEDITEM_END:
-		CCLOG("listView_print selected child index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
-		//Change print size image view here:
+		CCLOG("listView_print selected child index: %d", cur_listView_selected_index);
+		//Change typeset (background) frame image view here:
 		this->imageView_typeset_frame->loadTexture(background_file_path);
+		//Change the typeset foreground image view here:
+		//this->panel_typeset->addChild(_typeset_tileMap);
+		//_foreground_layer->setTexture(_photoTexture);
 		break;
 	default:
 		break;
