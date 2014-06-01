@@ -329,8 +329,11 @@ void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onSaveButtonTouch,TOUCH_EVENT_ENDED!");
-		//Save photo function call here:
-		FileOperation::saveFile();
+		//
+		//Get user defined save photo path:
+		//FileOperation::saveFile();
+		//OpenCV add images(foreground,background):
+		OpenCvOperation::addingTwoImages("C:\\pattern_edit_photo_guide_22x32.png", "C:\\pattern_edit_photo_frame_22x32.png", "C:\\result_22x32.png");
 		//Popup notification
 		this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS);
 		break;
@@ -457,19 +460,19 @@ void HelloWorld::onRotateSliderValueChanged(Object *pSender, ui::SliderEventType
 {
 	ui::Slider *slider = static_cast<ui::Slider*>(pSender);
 	//const cocos2d::Size size = this->imageView_cert_origin->getSize();
-	float movedValue;
-	float moveStepper = 1.0f;
+	float rotatedValue;
+	float rotateStepper = 10.0f;
 	const cocos2d::Point orignalImagePoint = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	//
 	switch (type)
 	{
 	case SLIDER_PERCENTCHANGED:
-		movedValue = (slider->getPercent() - 50)*moveStepper;
-		CCLOG("onMoveSliderValueChanged,TOUCH_EVENT_ENDED,moved value: %f", movedValue);
+		rotatedValue = (slider->getPercent() - 50)*rotateStepper;
+		CCLOG("onMoveSliderValueChanged,TOUCH_EVENT_ENDED,rotated value: %f", rotatedValue);
 		//
 		if (this->imageView_editor)
 		{
-			this->imageView_editor->setPosition(cocos2d::CCPointMake(orignalImagePoint.x + movedValue, orignalImagePoint.y));
+			this->imageView_editor->setRotation(rotatedValue);
 		}
 		break;
 	default:
@@ -645,7 +648,8 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		//
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
-		OpenCvOperation::backgroundSubstraction_(this->cur_photo_file_path);
+		//OpenCvOperation::backgroundSubstraction_(this->cur_photo_file_path);
+		OpenCvOperation::foregroundGrabcut(this->cur_photo_file_path);
 		//
 		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
 		break;

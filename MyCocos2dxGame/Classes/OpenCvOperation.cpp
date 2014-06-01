@@ -262,6 +262,7 @@ void OpenCvOperation::backgroundSubstraction_MOG_2(std::string filePath)
 }
 void OpenCvOperation::backgroundSubstraction_(std::string filePath)
 {
+	//
 	cvNamedWindow("frameForeground", 1);
 	IplImage *image = 0, *frameTime1 = 0, *frameTime2 = 0, *frameForeground = 0, *img1 = 0, *img2 = 0;
 	//read the first file of the sequence
@@ -320,4 +321,54 @@ void OpenCvOperation::backgroundSubstraction_(std::string filePath)
 	//
 	//cvDestroyWindow("Camera");
 	//cvDestroyWindow("frameForeground");
+}
+//@see http://docs.opencv.org/trunk/doc/py_tutorials/py_imgproc/py_grabcut/py_grabcut.html
+void OpenCvOperation::foregroundGrabcut(std::string filePath)
+{
+	//
+	cv::Mat image = cv::imread(filePath);
+	// define bounding rectangle 
+	cv::Rect rectangle(0, 0, image.cols-2, image.rows-2);
+	cv::Mat result; // segmentation result (4 possible values)
+	cv::Mat bgModel, fgModel; // the models (internally used)
+	// GrabCut segmentation
+	cv::grabCut(image,    // input image
+		result,   // segmentation result
+		rectangle,// rectangle containing foreground 
+		bgModel, fgModel, // models
+		1,        // number of iterations
+		cv::GC_INIT_WITH_RECT); // use rectangle
+	CCLOG( "oks pa dito");
+	// Get the pixels marked as likely foreground
+	cv::compare(result, cv::GC_PR_FGD, result, cv::CMP_EQ);
+	// Generate output image
+	cv::Mat foreground(image.size(), CV_8UC3, cv::Scalar(255, 255, 255));
+	image.copyTo(foreground, result); // bg pixels not copied
+	// draw rectangle on original image
+	cv::rectangle(image, rectangle, cv::Scalar(255, 255, 255), 1);
+	cv::namedWindow("Image");
+	cv::imshow("Image", image);
+	// display result
+	cv::namedWindow("Segmented Image");
+	cv::imshow("Segmented Image", foreground);
+}
+//@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
+void OpenCvOperation::addingTwoImages(std::string filePath_0, std::string filePath_1, std::string dest)
+{
+	double alpha = 0.5; double beta;
+	Mat src1, src2, dst;
+	/// Read image ( same size, same type )
+	src1 = imread(filePath_0);
+	src2 = imread(filePath_1);
+
+	if (!src1.data) { CCLOG("Error loading src1 with filePath: \n",filePath_0); return; }
+	if (!src2.data) { CCLOG("Error loading src2 with filePath: \n",filePath_1); return; }
+
+	/// Create Windows
+	cv::namedWindow("Linear Blend", 1);
+
+	beta = (1.0 - alpha);
+	addWeighted(src1, alpha, src2, beta, 0.0, dst);
+
+	cv::imshow("Linear Blend", dst);
 }

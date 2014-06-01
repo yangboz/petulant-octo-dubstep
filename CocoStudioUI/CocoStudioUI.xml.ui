@@ -17,56 +17,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>background/pattern_window_background_01.png</string>
-    <string>background/button_hidewindow.png</string>
-    <string>background/button_hidewindow_pd.png</string>
-    <string>background/button_closewindow.png</string>
-    <string>background/button_closewindow_pd.png</string>
-    <string>background/pattern_window_background_02.png</string>
-    <string>background/text/infomation_editphoto_01.png</string>
-    <string>below_button/button_uploadphoto.png</string>
-    <string>below_button/button_uploadphoto_pd.png</string>
-    <string>Photo_25x35/pattern_upload_photo_frame_25x35.png</string>
-    <string>Photo_25x35/pattern_upload_photo_guide_25x35.png</string>
-    <string>Photo_25x35/pattern_upload_photo_notice_25x35.png</string>
-    <string>editphoto/pattern_loading_circle_02.png</string>
-    <string>editphoto/pattern_slidingbar_h_bg.png</string>
-    <string>editphoto/pattern_slidingbar_button.png</string>
-    <string>editphoto/pattern_slidingbar_h.png</string>
-    <string>below_button/button_undo.png</string>
-    <string>below_button/button_undo_pd.png</string>
-    <string>below_button/button_nextstep.png</string>
-    <string>below_button/button_nextstep_pd.png</string>
-    <string>below_button/button_re_uploadphoto.png</string>
-    <string>below_button/button_re_uploadphoto_pd.png</string>
-    <string>editphoto/icon_roomin.png</string>
-    <string>editphoto/icon_roomin_pd.png</string>
-    <string>editphoto/icon_roomout.png</string>
-    <string>editphoto/icon_roomout_pd.png</string>
-    <string>editphoto/icon_rotate90.png</string>
-    <string>editphoto/icon_rotate90_pd.png</string>
-    <string>Photo_22x32/pattern_edit_photo_frame_22x32.png</string>
-    <string>GUI/image.png</string>
-    <string>Photo_22x32/pattern_edit_photo_guide_22x32.png</string>
-    <string>background/text/pattern_detecting.png</string>
-    <string>Photo_22x32/pattern_upload_photo_guide_22x32.png</string>
-    <string>below_button/button_cancel.png</string>
-    <string>below_button/button_cancel_pd.png</string>
-    <string>background/pattern_window_background_03.png</string>
-    <string>background/icon_checklist_pass.png</string>
-    <string>background/text/pattern_detected.png</string>
-    <string>below_button/button_savephoto.png</string>
-    <string>below_button/button_savephoto_pd.png</string>
-    <string>below_button/button_printout.png</string>
-    <string>below_button/button_printout_pd.png</string>
-    <string>editphoto/button_choosebg_white.png</string>
-    <string>editphoto/button_choosebg_selected.png</string>
-    <string>editphoto/button_choosebg_red.png</string>
-    <string>editphoto/button_choosebg_blue.png</string>
-    <string>Photo_22x32/pattern_detected_photo_22x32.png</string>
-    <string>photo_on_paper/pattern_photo_on_paper_5x7.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>CocoStudioUI_1.json</CurrentUIJson>
 </UIProject>
