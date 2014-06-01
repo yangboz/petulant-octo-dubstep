@@ -4,6 +4,7 @@
 #include <string>
 
 //#include <stdio.h>
+using std::string;
 
 class HW_StringUtils
 {

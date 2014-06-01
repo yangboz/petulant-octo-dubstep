@@ -32,4 +32,6 @@ namespace HW_DataModel
 	const std::vector<std::string>  HW_DataModel::ARRAY_OF_VERIFY_INVALID_LABELS = { "CocoStudioUI_1/background/icon_checklist_error.png", "CocoStudioUI_1/background/icon_checklist_error.png", "CocoStudioUI_1/background/icon_checklist_error.png"};
 	///Panel_typeset
 	const std::vector<std::string>  HW_DataModel::ARRAY_OF_TYPESET_FRAME_LABELS = { "CocoStudioUI_1/photo_on_paper/pattern_photo_on_paper_4x6.png", "CocoStudioUI_1/photo_on_paper/pattern_photo_on_paper_5x7.png", "CocoStudioUI_1/photo_on_paper/pattern_photo_on_paper_a4.png" };
+	///Output file name
+	const std::string HW_DataModel::OUT_PUT_FILE_NAME = "\\HP_ID_Print_result_.jpg";
 }

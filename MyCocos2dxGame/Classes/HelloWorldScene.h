@@ -163,7 +163,11 @@ private:
 	float cur_roated_value;
 	float cur_moved_value;
 	float cur_scaled_value;
+	//File path for output result.
 	std::string cur_photo_file_path;
+	std::string cur_output_file_path;
+	std::string cur_foreground_file_path;
+	std::string cur_background_file_path;
 	//
 	cocos2d::CCSize cur_defined_size;
 	cocos2d::CCPoint ori_image_verified_pos;

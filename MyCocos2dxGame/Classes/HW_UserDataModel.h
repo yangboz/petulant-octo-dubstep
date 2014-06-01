@@ -3,6 +3,11 @@
 
 #include <stddef.h>// defines NULL
 
+#include <string>
+using namespace std;
+
+#include "HW_DataModel.h"
+
 class HW_UserDataModel
 {
 private:

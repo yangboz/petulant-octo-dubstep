@@ -7,21 +7,75 @@
 
 #include <windows.h>
 
+
 using namespace std;
 
-void FileOperation::saveFile()
+std::string FileOperation::saveFile()
 {
-	string path = getFilePath();
-	FILE *fp = fopen(path.c_str(), "w");
+	HRESULT hr = S_OK;
+	//std::vector<std::wstring> filePaths;
+	std::wstring filePaths;
+	std::string filePath;
 
-	if (!fp)
-	{
-		CCLOG("can not create file %s", path.c_str());
-		return;
+	IFileOpenDialog *fileDlg = NULL;
+	hr = CoCreateInstance(CLSID_FileOpenDialog,
+		NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&fileDlg));
+	if (FAILED(hr)) return filePath;
+	ON_SCOPE_EXIT([&] { fileDlg->Release(); });
+
+	IKnownFolderManager *pkfm = NULL;
+	hr = CoCreateInstance(CLSID_KnownFolderManager,
+		NULL,
+		CLSCTX_INPROC_SERVER,
+		IID_PPV_ARGS(&pkfm));
+	if (FAILED(hr)) return filePath;
+	ON_SCOPE_EXIT([&] { pkfm->Release(); });
+
+	IKnownFolder *pKnownFolder = NULL;
+	hr = pkfm->GetFolder(FOLDERID_PublicMusic, &pKnownFolder);
+	//if (FAILED(hr)) return filePaths;
+	ON_SCOPE_EXIT([&] { pKnownFolder->Release(); });
+
+	IShellItem *psi = NULL;
+	hr = pKnownFolder->GetShellItem(0, IID_PPV_ARGS(&psi));
+	if (FAILED(hr)) return filePath;
+	ON_SCOPE_EXIT([&] { psi->Release(); });
+
+	hr = fileDlg->AddPlace(psi, FDAP_BOTTOM);
+	COMDLG_FILTERSPEC rgSpec[] = {
+		{ L"图片文件", L"*.png;*.jpg;*.jpeg;*.gif;" }
+	};
+	fileDlg->SetFileTypes(1, rgSpec);
+
+	DWORD dwOptions;
+	fileDlg->GetOptions(&dwOptions);
+	//
+	fileDlg->SetOptions(dwOptions | FOS_PICKFOLDERS | FOS_OVERWRITEPROMPT);
+	hr = fileDlg->Show(NULL);
+	if (SUCCEEDED(hr)) {
+		IShellItemArray *pRets;
+		hr = fileDlg->GetResults(&pRets);
+		if (SUCCEEDED(hr)) {
+			DWORD count;
+			pRets->GetCount(&count);
+			for (DWORD i = 0; i < count; i++) {
+				IShellItem *pRet;
+				LPWSTR nameBuffer;
+				pRets->GetItemAt(i, &pRet);
+				pRet->GetDisplayName(SIGDN_DESKTOPABSOLUTEPARSING, &nameBuffer);
+				//filePaths.push_back(std::wstring(nameBuffer));
+				filePaths = std::wstring(nameBuffer);
+				pRet->Release();
+				CoTaskMemFree(nameBuffer);
+			}
+			pRets->Release();
+		}
 	}
+	//
+	filePath = HW_StringUtils::ws2s(filePaths);
+	CCLOG("Selected image file path: %s", filePath.c_str());
 
-	fputs("file example", fp);
-	fclose(fp);
+	return filePath;
 }
 
 void FileOperation::readFile(std::wstring filePath)
@@ -114,7 +168,7 @@ std::string FileOperation::openFile()
 	DWORD dwOptions;
 	fileDlg->GetOptions(&dwOptions);
 	//
-	fileDlg->SetOptions(dwOptions | FOS_FILEMUSTEXIST);
+	fileDlg->SetOptions(dwOptions | FOS_FILEMUSTEXIST );
 	hr = fileDlg->Show(NULL);
 	if (SUCCEEDED(hr)) {
 		IShellItemArray *pRets;
@@ -137,7 +191,7 @@ std::string FileOperation::openFile()
 	}
 	//
 	filePath = HW_StringUtils::ws2s(filePaths);
-	CCLOG("Selected image file path: %s \\n", filePath.c_str());
+	CCLOG("Selected image file path: %s", filePath.c_str());
 	return filePath;
 }
 

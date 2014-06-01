@@ -15,7 +15,7 @@
 class FileOperation
 {
 public:
-	static void saveFile(void);
+	static std::string saveFile();
 	static void readFile(std::wstring filePath);
 	static std::string getFilePath();
 	static std::string openFile();

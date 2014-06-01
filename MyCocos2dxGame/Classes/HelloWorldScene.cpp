@@ -340,10 +340,12 @@ void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 		CCLOG("onSaveButtonTouch,TOUCH_EVENT_ENDED!");
 		//
 		//Get user defined save photo path:
-		//FileOperation::saveFile();
+		this->cur_output_file_path = FileOperation::saveFile();
+		CCLOG("cur_output_file_folder: %s", this->cur_output_file_path.c_str());
+		CCLOG("Final fixed out put result file name is: %s", (this->cur_output_file_path + HW_DataModel::HW_DataModel::OUT_PUT_FILE_NAME).c_str());
 		//OpenCV add images(foreground,background):
-		OpenCvOperation::addingTwoImages("C:\\pattern_edit_photo_guide_22x32.png", "C:\\pattern_edit_photo_frame_22x32.png", "C:\\result_22x32.png");
-		//Popup notification
+		OpenCvOperation::addingTwoImages(this->cur_foreground_file_path, this->cur_background_file_path, this->cur_output_file_path);
+		//Popup notification.
 		this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS);
 		break;
 	default:
@@ -364,6 +366,7 @@ void HelloWorld::onIntroListViewItemSelected(Object *pSender, ui::ListViewEventT
 		this->pageView_main->scrollToPage(PAGE_VIEW_UPLOAD);
 		//Dynamically change the instrcution image view content.
 		this->changeCurrentInstructionImage();
+		//
 		break;
 	default:
 		break;
@@ -549,6 +552,8 @@ void HelloWorld::onWindowCloseButtonTouch(Object *pSender, ui::TouchEventType ty
 ///List view related
 void HelloWorld::onCertListViewItemButtonTouch(Object *pSender, ui::TouchEventType type)
 {
+
+	//
 	switch (type)
 	{
 	case TOUCH_EVENT_BEGAN:
