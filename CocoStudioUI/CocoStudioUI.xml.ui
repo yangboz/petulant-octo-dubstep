@@ -46,9 +46,9 @@
     <string>editphoto/icon_roomout_pd.png</string>
     <string>editphoto/icon_rotate90.png</string>
     <string>editphoto/icon_rotate90_pd.png</string>
-    <string>Photo_22x32/pattern_edit_photo_guide_22x32.png</string>
     <string>Photo_22x32/pattern_edit_photo_frame_22x32.png</string>
     <string>GUI/image.png</string>
+    <string>Photo_22x32/pattern_edit_photo_guide_22x32.png</string>
     <string>editphoto/pattern_slidingbar_v_bg.png</string>
     <string>editphoto/pattern_slidingbar_button_rotate90.png</string>
     <string>editphoto/pattern_slidingbar_v.png</string>

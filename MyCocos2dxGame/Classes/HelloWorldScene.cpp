@@ -55,6 +55,7 @@ bool HelloWorld::init()
 	addChild(uiLayout);
 	//PageViews(index,editor)
 	this->pageView_main = dynamic_cast<ui::PageView*>(this->uiLayout->getChildByName("PageView_main"));
+	this->pageView_main->addEventListenerPageView(this, pagevieweventselector(HelloWorld::onPageViewTurning));
 	//Panels
 	this->panel_intro = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_intro"));
 	this->panel_upload = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_upload"));
@@ -239,7 +240,7 @@ void HelloWorld::onVerifyButtonTouch(Object *pSender, ui::TouchEventType type)
 	case TOUCH_EVENT_BEGAN:
 		break;
 	case TOUCH_EVENT_ENDED:
-		CCLOG("onValidateButtonTouch,TOUCH_EVENT_ENDED!");
+		CCLOG("onVerifyButtonTouch,TOUCH_EVENT_ENDED!");
 		//Photo verify function call here:
 		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
 		break;
@@ -408,8 +409,8 @@ void HelloWorld::onUploadListViewItemSelected(Object *pSender, ui::ListViewEvent
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		CCLOG("onUploadListViewItemSelected index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
 		//Adjust the settings chnange effects.
-		this->applyUploadSettings();
-		this->applyEditorSettings();
+		this->applyUploadSettingChanges();
+		this->applyEditorSettingChanges();
 		//Dynamically change the instrcution image view content.
 		this->changeCurrentInstructionImage();
 		break;
@@ -428,8 +429,8 @@ void HelloWorld::onEditorListViewItemSelected(Object *pSender, ui::ListViewEvent
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		CCLOG("onUploadListViewItemSelected index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
 		//Adjust the settings chnange effects.
-		this->applyUploadSettings();
-		this->applyEditorSettings();
+		this->applyUploadSettingChanges();
+		this->applyEditorSettingChanges();
 		break;
 	default:
 		break;
@@ -491,6 +492,18 @@ void HelloWorld::onPanelsTouch(Object *pSender, ui::TouchEventType type)
 		CCLOG("onPanelsTouch,TOUCH_EVENT_ENDED!");
 		//Dismiss popuplayer function call here:
 		this->removePopupLayer();
+		break;
+	default:
+		break;
+	}
+}
+void HelloWorld::onPageViewTurning(Object *pSender, ui::PageViewEventType type)
+{
+	switch (type)
+	{
+	case PAGEVIEW_EVENT_TURNING:
+		CCLOG("onPageViewTurning,TOUCH_EVENT_ENDED!");
+		//
 		break;
 	default:
 		break;
@@ -654,7 +667,6 @@ void HelloWorld::onVerifiedNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		//
 		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFIED);
 		//
-		this->imageView_verified->loadTexture(this->cur_photo_file_path);
 		this->scrollView_verified->setBackGroundColor(cocos2d::ccColor3B::WHITE);
 		//Keep state
 		this->ori_image_verified_pos = this->imageView_verified->getPosition();
@@ -705,9 +717,10 @@ void HelloWorld::onOpenFilePicker()
 	//Read image file
 	//FileOperation::readFile(filePath);
 	this->imageView_editor->loadTexture(this->cur_photo_file_path);
+	this->imageView_verified->loadTexture(this->cur_photo_file_path);
 	//OpenCV handler here:
-	//OpenCvOperation::faceDetectAndDisplay(this->cur_photo_file_path);
-	OpenCvOperation::fullbodyDetectAndDisplay_Haar(this->cur_photo_file_path);
+	OpenCvOperation::faceDetectAndDisplay(this->cur_photo_file_path);
+	//OpenCvOperation::fullbodyDetectAndDisplay_Haar(this->cur_photo_file_path);
 	//OpenCvOperation::fullbodyDetectAndDisplay_Hog(this->cur_photo_file_path);
 }
 
@@ -908,7 +921,7 @@ void HelloWorld::changeCurrentVerifiedResults()
 	this->imageView_verified_result_2->loadTexture(HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_VALID_LABELS[2]);
 }
 //
-void HelloWorld::applyUploadSettings()
+void HelloWorld::applyUploadSettingChanges()
 {
 	//Panel_upload
 	std::string forground_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FOREGROUND_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
@@ -925,7 +938,7 @@ void HelloWorld::applyUploadSettings()
 	this->imageView_back_ground->loadTexture(background_file_path);
 	this->imageView_frame->loadTexture(frame_file_path);
 }
-void HelloWorld::applyEditorSettings()
+void HelloWorld::applyEditorSettingChanges()
 {
 	//Panel_editor
 	std::string guide_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_GUIDE_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];

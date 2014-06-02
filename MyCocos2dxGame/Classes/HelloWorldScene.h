@@ -80,6 +80,7 @@ public:
 	void onTypesetListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	///Panel touch related to dismiss the popup layers
 	void onPanelsTouch(Object *pSender, ui::TouchEventType type);
+	void onPageViewTurning(Object *pSender, ui::PageViewEventType type);
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 
@@ -177,8 +178,8 @@ private:
 	void popupButtonCallback(cocos2d::CCNode *pNode);
 	void changeCurrentInstructionImage();
 	void changeCurrentVerifiedResults();
-	void applyUploadSettings();
-	void applyEditorSettings();
+	void applyUploadSettingChanges();
+	void applyEditorSettingChanges();
 };
 
 #endif // __HELLOWORLD_SCENE_H__

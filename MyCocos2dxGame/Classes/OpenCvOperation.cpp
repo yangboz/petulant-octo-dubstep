@@ -338,19 +338,21 @@ void OpenCvOperation::foregroundGrabcut(std::string filePath)
 		bgModel, fgModel, // models
 		1,        // number of iterations
 		cv::GC_INIT_WITH_RECT); // use rectangle
-	CCLOG( "oks pa dito");
+	CCLOG( "cv::grabCut complete!");
 	// Get the pixels marked as likely foreground
 	cv::compare(result, cv::GC_PR_FGD, result, cv::CMP_EQ);
 	// Generate output image
-	cv::Mat foreground(image.size(), CV_8UC3, cv::Scalar(255, 255, 255));
+	cv::Mat foreground(image.size(), CV_8UC3, cv::Scalar(255, 255, 255,0));
 	image.copyTo(foreground, result); // bg pixels not copied
 	// draw rectangle on original image
-	cv::rectangle(image, rectangle, cv::Scalar(255, 255, 255), 1);
+	cv::rectangle(image, rectangle, cv::Scalar(255, 0, 255), 1);
 	cv::namedWindow("Image");
 	cv::imshow("Image", image);
 	// display result
 	cv::namedWindow("Segmented Image");
 	cv::imshow("Segmented Image", foreground);
+	//Save the result(image file)
+	OpenCvOperation::saveMatImageFile(foreground, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME);
 }
 //@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
 void OpenCvOperation::addingTwoImages(std::string filePath_0, std::string filePath_1, std::string dest)
@@ -378,6 +380,10 @@ bool OpenCvOperation::saveMatImageFile(cv::Mat image,std::string context)
 	bool saved = true;
 	//
 	saved = cv::imwrite(context, image);
+	// Set image quality to 100
+	//int imageParams[3] = { CV_IMWRITE_PNG_BILEVEL, 100, 0 };
+	// Save image
+	//saved = cvSaveImage(HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME, image, imageParams);
 	return saved;
 }
 bool OpenCvOperation::saveIplImageFile(IplImage image,std::string context)
