@@ -177,6 +177,8 @@ private:
 	void popupButtonCallback(cocos2d::CCNode *pNode);
 	void changeCurrentInstructionImage();
 	void changeCurrentVerifiedResults();
+	void changeUploadGuideImages();
+	void changeEditorGuideImages();
 };
 
 #endif // __HELLOWORLD_SCENE_H__

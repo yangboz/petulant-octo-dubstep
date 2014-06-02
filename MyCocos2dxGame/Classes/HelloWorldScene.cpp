@@ -134,7 +134,7 @@ bool HelloWorld::init()
 	this->imageView_instruction_upload = dynamic_cast<ui::ImageView*>(this->panel_upload->getChildByName("Image_instruction"));
 	///Panel_editor
 	this->scrollView_editor = dynamic_cast<ui::ScrollView*>(this->panel_editor->getChildByName("ScrollView_editor"));
-	this->imageView_guide = dynamic_cast<ui::ImageView*>(this->scrollView_editor->getChildByName("Image_guide"));
+	this->imageView_guide = dynamic_cast<ui::ImageView*>(this->panel_editor->getChildByName("Image_guide"));
 	this->imageView_editor = dynamic_cast<ui::ImageView*>(this->scrollView_editor->getChildByName("Image_editor"));
 	this->imageView_instruction_editor = dynamic_cast<ui::ImageView*>(this->panel_editor->getChildByName("Image_instruction"));
 	///Panel_verifing
@@ -146,11 +146,7 @@ bool HelloWorld::init()
 	this->imageView_verified_result_1 = dynamic_cast<ui::ImageView*>(this->panel_verified->getChildByName("Image_verified_result_1"));
 	this->imageView_verified_result_2 = dynamic_cast<ui::ImageView*>(this->panel_verified->getChildByName("Image_verified_result_2"));
 	///Panel_typeset
-	/*
-	TMXTiledMap *_typeset_tileMap = TMXTiledMap::create("..//data//tmx//200x200.tmx");
-	this->panel_typeset->addChild(_typeset_tileMap);
 	this->imageView_typeset_frame = dynamic_cast<ui::ImageView*>(this->panel_typeset->getChildByName("Image_typeset_background")->getChildByName("Image_typeset_foreground"));
-	*/
 	//ListViews
 	this->listView_intro_size = dynamic_cast<ui::ListView*>(this->panel_intro->getChildByName("ListView_size"));
 	this->listView_upload_size = dynamic_cast<ui::ListView*>(this->panel_upload->getChildByName("ListView_size"));
@@ -342,7 +338,7 @@ void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 		//Get user defined save photo path:
 		this->cur_output_file_path = FileOperation::saveFile();
 		CCLOG("cur_output_file_folder: %s", this->cur_output_file_path.c_str());
-		CCLOG("Final fixed out put result file name is: %s", (this->cur_output_file_path + HW_DataModel::HW_DataModel::OUT_PUT_FILE_NAME).c_str());
+		CCLOG("Final fixed out put result file name is: %s", (this->cur_output_file_path + HW_DataModel::HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME).c_str());
 		//OpenCV add images(foreground,background):
 		OpenCvOperation::addingTwoImages(this->cur_foreground_file_path, this->cur_background_file_path, this->cur_output_file_path);
 		//Popup notification.
@@ -405,25 +401,15 @@ void HelloWorld::onTypesetListViewItemSelected(Object *pSender, ui::ListViewEven
 void HelloWorld::onUploadListViewItemSelected(Object *pSender, ui::ListViewEventType type)
 {
 	ui::ListView *listView = static_cast<ListView*>(pSender);
-	HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
-	std::string forground_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FOREGROUND_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
-	std::string frame_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
-	std::string background_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_BACKGROUND_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
-	cocos2d::CCPoint frame_position = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
-	cocos2d::CCPoint background_position = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
-	//
-	std::string cur_instruction_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_INSTRUCTION_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	//
 	switch (type)
 	{
 	case LISTVIEW_ONSELECTEDITEM_END:
+		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		CCLOG("onUploadListViewItemSelected index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
-		//Adjust the upload frame view displayment here:
-		this->imageView_frame->setPosition(frame_position);
-		//this->imageView_back_ground->setPosition(background_position);
-		this->imageView_fore_ground->loadTexture(forground_file_path);
-		this->imageView_back_ground->loadTexture(background_file_path);
-		this->imageView_frame->loadTexture(frame_file_path);
+		//Adjust the guide image views;
+		this->changeUploadGuideImages();
+		this->changeEditorGuideImages();
 		//Dynamically change the instrcution image view content.
 		this->changeCurrentInstructionImage();
 		break;
@@ -436,23 +422,14 @@ void HelloWorld::onEditorListViewItemSelected(Object *pSender, ui::ListViewEvent
 {
 	ui::ListView *listView = static_cast<ListView*>(pSender);
 	//
-	std::string guide_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_GUIDE_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
-	std::string scrollView_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_SHADE_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
-	cocos2d::CCPoint imageView_editor_position = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_PHOTO_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
-	cocos2d::CCPoint scrollView_position = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_SHADE_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
-	//
 	switch (type)
 	{
 	case LISTVIEW_ONSELECTEDITEM_END:
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		CCLOG("onUploadListViewItemSelected index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
-		//Adjust the editor frame view displayment here:
-		this->scrollView_editor->setBackGroundImage(scrollView_file_path);
-		//this->imageView_back_ground->setPosition(background_position);
-		this->imageView_guide->loadTexture(guide_file_path);
-		this->scrollView_editor->setPosition(scrollView_position);
-		//Dynamically change the instrcution image view content.
-		this->changeCurrentInstructionImage();
+		//Adjust the guide image views;
+		this->changeUploadGuideImages();
+		this->changeEditorGuideImages();
 		break;
 	default:
 		break;
@@ -544,24 +521,6 @@ void HelloWorld::onWindowCloseButtonTouch(Object *pSender, ui::TouchEventType ty
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onWindowCloseButtonTouch,TOUCH_EVENT_ENDED!");
 		Director::getInstance()->end();
-		break;
-	default:
-		break;
-	}
-}
-///List view related
-void HelloWorld::onCertListViewItemButtonTouch(Object *pSender, ui::TouchEventType type)
-{
-
-	//
-	switch (type)
-	{
-	case TOUCH_EVENT_BEGAN:
-		CCLOG("onCertListViewItemButtonTouch,TOUCH_EVENT_BEGAN!");
-		//this->popupLayerTesting();
-		break;
-	case TOUCH_EVENT_ENDED:
-		CCLOG("onCertListViewItemButtonTouch,TOUCH_EVENT_ENDED!");
 		break;
 	default:
 		break;
@@ -756,7 +715,7 @@ void HelloWorld::onOpenFilePicker()
 	//this->scrollView_editor->setBackGroundColor(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_COLORS[HW_UserDataModel::Instance()->cur_listView_selected_index]);
 	//OpenCV handler here:
 	//OpenCvOperation::faceDetectAndDisplay(this->cur_photo_file_path);
-	//OpenCvOperation::fullbodyDetectAndDisplay_Haar(this->cur_photo_file_path);
+	OpenCvOperation::fullbodyDetectAndDisplay_Haar(this->cur_photo_file_path);
 	//OpenCvOperation::fullbodyDetectAndDisplay_Hog(this->cur_photo_file_path);
 }
 
@@ -830,7 +789,7 @@ void HelloWorld::setupListViews()
 		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i]);
 		//custom_button->setScale9Enabled(true);
 		//custom_button->setSize(listView_default_button->getSize());
-		custom_button->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onCertListViewItemButtonTouch);
+		//custom_button->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onCertListViewItemButtonTouch);
 
 		Layout* custom_item = Layout::create();
 		custom_item->setSize(custom_button->getSize());
@@ -848,7 +807,7 @@ void HelloWorld::setupListViews()
 		//custom_button->setTitleText(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS[i]);
 		//custom_button->setScale9Enabled(true);
 		//custom_button->setSize(listView_default_button->getSize());
-		custom_button->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onCertListViewItemButtonTouch);
+		//custom_button->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onCertListViewItemButtonTouch);
 
 		Layout* custom_item = Layout::create();
 		custom_item->setSize(custom_button->getSize());
@@ -955,4 +914,35 @@ void HelloWorld::changeCurrentVerifiedResults()
 	this->imageView_verified_result_0->loadTexture(HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_VALID_LABELS[0]);
 	this->imageView_verified_result_1->loadTexture(HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_VALID_LABELS[1]);
 	this->imageView_verified_result_2->loadTexture(HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_VALID_LABELS[2]);
+}
+//
+void HelloWorld::changeUploadGuideImages()
+{
+	//Panel_upload
+	std::string forground_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FOREGROUND_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	std::string frame_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	std::string background_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_BACKGROUND_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	cocos2d::CCPoint frame_position = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	cocos2d::CCPoint background_position = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	//
+	std::string cur_instruction_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_INSTRUCTION_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	//
+	this->imageView_frame->setPosition(frame_position);
+	//this->imageView_back_ground->setPosition(background_position);
+	this->imageView_fore_ground->loadTexture(forground_file_path);
+	this->imageView_back_ground->loadTexture(background_file_path);
+	this->imageView_frame->loadTexture(frame_file_path);
+}
+void HelloWorld::changeEditorGuideImages()
+{
+	//Panel_editor
+	std::string guide_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_GUIDE_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	std::string scrollView_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_SHADE_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	cocos2d::CCPoint imageView_editor_position = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_PHOTO_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	cocos2d::CCPoint scrollView_position = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_SHADE_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	//
+	this->scrollView_editor->setBackGroundImage(scrollView_file_path);
+	//this->imageView_back_ground->setPosition(background_position);
+	this->imageView_guide->loadTexture(guide_file_path);
+	this->scrollView_editor->setPosition(scrollView_position);
 }
