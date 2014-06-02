@@ -407,9 +407,9 @@ void HelloWorld::onUploadListViewItemSelected(Object *pSender, ui::ListViewEvent
 	case LISTVIEW_ONSELECTEDITEM_END:
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		CCLOG("onUploadListViewItemSelected index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
-		//Adjust the guide image views;
-		this->changeUploadGuideImages();
-		this->changeEditorGuideImages();
+		//Adjust the settings chnange effects.
+		this->applyUploadSettings();
+		this->applyEditorSettings();
 		//Dynamically change the instrcution image view content.
 		this->changeCurrentInstructionImage();
 		break;
@@ -427,9 +427,9 @@ void HelloWorld::onEditorListViewItemSelected(Object *pSender, ui::ListViewEvent
 	case LISTVIEW_ONSELECTEDITEM_END:
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		CCLOG("onUploadListViewItemSelected index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
-		//Adjust the guide image views;
-		this->changeUploadGuideImages();
-		this->changeEditorGuideImages();
+		//Adjust the settings chnange effects.
+		this->applyUploadSettings();
+		this->applyEditorSettings();
 		break;
 	default:
 		break;
@@ -705,14 +705,6 @@ void HelloWorld::onOpenFilePicker()
 	//Read image file
 	//FileOperation::readFile(filePath);
 	this->imageView_editor->loadTexture(this->cur_photo_file_path);
-	//TODO:Solid the parent panel
-	//ui::Layout *panel_editor = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_eitor"));
-	//panel_editor->setTouchEnabled(false);
-	//ScrollView with UIDragPanel
-	//this->imageView_editor->setSize(definedSize);
-	this->scrollView_editor->setInnerContainerSize(this->cur_defined_size);
-	//this->scrollView_editor->setBackGroundColorType(LAYOUT_COLOR_SOLID);
-	//this->scrollView_editor->setBackGroundColor(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_COLORS[HW_UserDataModel::Instance()->cur_listView_selected_index]);
 	//OpenCV handler here:
 	//OpenCvOperation::faceDetectAndDisplay(this->cur_photo_file_path);
 	OpenCvOperation::fullbodyDetectAndDisplay_Haar(this->cur_photo_file_path);
@@ -916,7 +908,7 @@ void HelloWorld::changeCurrentVerifiedResults()
 	this->imageView_verified_result_2->loadTexture(HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_VALID_LABELS[2]);
 }
 //
-void HelloWorld::changeUploadGuideImages()
+void HelloWorld::applyUploadSettings()
 {
 	//Panel_upload
 	std::string forground_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FOREGROUND_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
@@ -933,7 +925,7 @@ void HelloWorld::changeUploadGuideImages()
 	this->imageView_back_ground->loadTexture(background_file_path);
 	this->imageView_frame->loadTexture(frame_file_path);
 }
-void HelloWorld::changeEditorGuideImages()
+void HelloWorld::applyEditorSettings()
 {
 	//Panel_editor
 	std::string guide_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_GUIDE_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
@@ -945,4 +937,13 @@ void HelloWorld::changeEditorGuideImages()
 	//this->imageView_back_ground->setPosition(background_position);
 	this->imageView_guide->loadTexture(guide_file_path);
 	this->scrollView_editor->setPosition(scrollView_position);
+	//
+	//ui::Layout *panel_editor = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_eitor"));
+	//panel_editor->setTouchEnabled(false);
+	//ScrollView with UIDragPanel
+	//this->imageView_editor->setSize(definedSize);
+	this->cur_defined_size = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	this->scrollView_editor->setInnerContainerSize(this->cur_defined_size);
+	//this->scrollView_editor->setBackGroundColorType(LAYOUT_COLOR_SOLID);
+	//this->scrollView_editor->setBackGroundColor(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_COLORS[HW_UserDataModel::Instance()->cur_listView_selected_index]);
 }
