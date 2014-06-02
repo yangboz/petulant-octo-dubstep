@@ -45,6 +45,9 @@ public:
 	static void foregroundGrabcut(std::string filePath);
 	//@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
 	static void addingTwoImages(std::string filePath_0, std::string filePath_1, std::string dest);
+	//
+	static bool saveMatImageFile(cv::Mat image, std::string context);
+	static bool saveIplImageFile(IplImage image, std::string context);
 private:
 	//OpenCV related variables
 };

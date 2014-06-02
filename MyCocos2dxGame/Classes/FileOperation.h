@@ -15,11 +15,11 @@
 class FileOperation
 {
 public:
-	static std::string saveFile();
+	static std::string saveFileDialog();
 	static void readFile(std::wstring filePath);
 	static std::string getFilePath();
-	static std::string openFile();
-	static std::vector<std::wstring> openFiles();
+	static std::string openFileDialog();
+	static std::vector<std::wstring> openFilesDialog();
 };
 
 #endif

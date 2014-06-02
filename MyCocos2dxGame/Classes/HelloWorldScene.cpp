@@ -336,7 +336,7 @@ void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 		CCLOG("onSaveButtonTouch,TOUCH_EVENT_ENDED!");
 		//
 		//Get user defined save photo path:
-		this->cur_output_file_path = FileOperation::saveFile();
+		this->cur_output_file_path = FileOperation::saveFileDialog();
 		CCLOG("cur_output_file_folder: %s", this->cur_output_file_path.c_str());
 		CCLOG("Final fixed out put result file name is: %s", (this->cur_output_file_path + HW_DataModel::HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME).c_str());
 		//OpenCV add images(foreground,background):
@@ -688,7 +688,7 @@ void HelloWorld::onOpenFilePicker()
 {
 	this->progressBar_upload->setVisible(true);
 	//
-	this->cur_photo_file_path = FileOperation::openFile();
+	this->cur_photo_file_path = FileOperation::openFileDialog();
 	if (this->cur_photo_file_path.size() == 0)
 	{
 		return;//User cancel file picker;

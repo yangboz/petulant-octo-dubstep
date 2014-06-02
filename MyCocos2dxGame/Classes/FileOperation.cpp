@@ -10,7 +10,7 @@
 
 using namespace std;
 
-std::string FileOperation::saveFile()
+std::string FileOperation::saveFileDialog()
 {
 	HRESULT hr = S_OK;
 	//std::vector<std::wstring> filePaths;
@@ -128,7 +128,7 @@ string FileOperation::getFilePath()
 	return path;
 }
 
-std::string FileOperation::openFile()
+std::string FileOperation::openFileDialog()
 {
 	HRESULT hr = S_OK;
 	//std::vector<std::wstring> filePaths;
@@ -195,7 +195,7 @@ std::string FileOperation::openFile()
 	return filePath;
 }
 
-std::vector<std::wstring> openFiles()
+std::vector<std::wstring> openFilesDialog()
 {
 	HRESULT hr = S_OK;
 	std::vector<std::wstring> filePaths;

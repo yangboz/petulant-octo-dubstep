@@ -372,3 +372,18 @@ void OpenCvOperation::addingTwoImages(std::string filePath_0, std::string filePa
 
 	cv::imshow("Linear Blend", dst);
 }
+//
+bool OpenCvOperation::saveMatImageFile(cv::Mat image,std::string context)
+{
+	bool saved = true;
+	//
+	saved = cv::imwrite(context, image);
+	return saved;
+}
+bool OpenCvOperation::saveIplImageFile(IplImage image,std::string context)
+{
+	bool saved = true;
+	//TODO:
+
+	return saved;
+}
