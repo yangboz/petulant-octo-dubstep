@@ -138,7 +138,6 @@ private:
 	ui::ImageView *imageView_verified;
 	//Typeset view related
 	ui::ImageView *imageView_typeset_frame;
-	ui::ImageView *imageView_typeset_photos;
 	//ListViews
 	ui::ListView *listView_intro_size;
 	ui::ListView *listView_upload_size;
@@ -161,8 +160,10 @@ private:
 	//Site variables
 	int slider_scale_changed_value;
 	int slider_move_changed_value;
+	//
 	float cur_roated_value;
-	float cur_moved_value;
+	float cur_moved_value_x;
+	float cur_moved_value_y;
 	float cur_scaled_value;
 	//File path for output result.
 	std::string cur_photo_file_path;

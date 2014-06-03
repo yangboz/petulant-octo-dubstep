@@ -58,6 +58,9 @@
     <string>below_button/button_cancel.png</string>
     <string>below_button/button_cancel_pd.png</string>
     <string>background/icon_checklist_pass.png</string>
+    <string>editphoto/pattern_detacting_text_01.png</string>
+    <string>editphoto/pattern_detacting_text_02.png</string>
+    <string>editphoto/pattern_detacting_text_03.png</string>
     <string>background/text/pattern_detected.png</string>
     <string>below_button/button_savephoto.png</string>
     <string>below_button/button_savephoto_pd.png</string>

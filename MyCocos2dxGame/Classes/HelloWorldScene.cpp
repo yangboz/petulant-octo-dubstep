@@ -152,7 +152,7 @@ bool HelloWorld::init()
 	this->imageView_verified_result_1 = dynamic_cast<ui::ImageView*>(this->panel_verified->getChildByName("Image_verified_result_1"));
 	this->imageView_verified_result_2 = dynamic_cast<ui::ImageView*>(this->panel_verified->getChildByName("Image_verified_result_2"));
 	///Panel_typeset
-	this->imageView_typeset_frame = dynamic_cast<ui::ImageView*>(this->panel_typeset->getChildByName("Image_typeset_background")->getChildByName("Image_typeset_foreground"));
+	this->imageView_typeset_frame = dynamic_cast<ui::ImageView*>(this->panel_typeset->getChildByName("Image_typeset_frame"));
 	//ListViews
 	this->listView_intro_size = dynamic_cast<ui::ListView*>(this->panel_intro->getChildByName("ListView_size"));
 	this->listView_upload_size = dynamic_cast<ui::ListView*>(this->panel_upload->getChildByName("ListView_size"));
@@ -174,7 +174,6 @@ bool HelloWorld::init()
 	//ListView set up.
 	this->setupListViews();
 	//Default variables initialization
-	this->cur_moved_value = 0.0f;
 	this->cur_roated_value = 0.0f;
 	this->cur_scaled_value = 1.0f;
     return true;
@@ -386,8 +385,9 @@ void HelloWorld::onTypesetListViewItemSelected(Object *pSender, ui::ListViewEven
 	Texture2D *_photoTexture = new Texture2D();
 	_photoTexture->initWithImage(_photo);
 	//
-	TMXTiledMap *_typeset_tileMap = TMXTiledMap::create("..//data//tmx//200x200.tmx");
-	TMXLayer *_foreground_layer = _typeset_tileMap->layerNamed("background");
+	TMXTiledMap *_typeset_tileMap = NULL;
+	TMXLayer *_foreground_layer = NULL;
+	std::string cur_tileLayer_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_TYPESET_TMX_LABELS[cur_listView_selected_index];
 	//
 	switch (type)
 	{
@@ -396,7 +396,10 @@ void HelloWorld::onTypesetListViewItemSelected(Object *pSender, ui::ListViewEven
 		//Change typeset (background) frame image view here:
 		this->imageView_typeset_frame->loadTexture(background_file_path);
 		//Change the typeset foreground image view here:
+		_typeset_tileMap = TMXTiledMap::create(cur_tileLayer_file_path);
+		this->imageView_typeset_frame->removeAllChildren();
 		this->imageView_typeset_frame->addChild(_typeset_tileMap);
+		_foreground_layer = _typeset_tileMap->layerNamed("background");
 		_foreground_layer->setTexture(_photoTexture);
 		break;
 	default:
@@ -467,19 +470,18 @@ void HelloWorld::onRotateSliderValueChanged(Object *pSender, ui::SliderEventType
 {
 	ui::Slider *slider = static_cast<ui::Slider*>(pSender);
 	//const cocos2d::Size size = this->imageView_cert_origin->getSize();
-	float rotatedValue;
 	float rotateStepper = 10.0f;
 	const cocos2d::Point orignalImagePoint = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	//
 	switch (type)
 	{
 	case SLIDER_PERCENTCHANGED:
-		rotatedValue = (slider->getPercent() - 50)*rotateStepper;
-		CCLOG("onMoveSliderValueChanged,TOUCH_EVENT_ENDED,rotated value: %f", rotatedValue);
+		this->cur_roated_value = (slider->getPercent() - 50)*rotateStepper;
+		CCLOG("onMoveSliderValueChanged,TOUCH_EVENT_ENDED,rotated value: %f", this->cur_roated_value);
 		//
 		if (this->imageView_editor)
 		{
-			this->imageView_editor->setRotation(rotatedValue);
+			this->imageView_editor->setRotation(this->cur_roated_value);
 		}
 		break;
 	default:
@@ -650,6 +652,17 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		CCLOG("onVerifingNaviButtonTouch,TOUCH_EVENT_ENDED!");
 		//
 		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
+		//Photo transform handler here:
+		if (!OpenCvOperation::saveRoatedImgeFile(this->cur_roated_value, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME))
+		{
+			return;
+		}
+		/*
+		if (!OpenCvOperation::saveScaledImageFile (this->cur_roated_value, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME))
+		{
+			return;
+		}
+		*/
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_(this->cur_photo_file_path);

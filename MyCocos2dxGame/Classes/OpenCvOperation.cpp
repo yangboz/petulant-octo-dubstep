@@ -420,3 +420,25 @@ void OpenCvOperation::createAlphaMat(cv::Mat4b &mat)
 		}
 	}
 }
+///Save image file with transform
+bool OpenCvOperation::saveRoatedImgeFile(double angle, std::string context)
+{
+	bool saved = false;
+	//
+	cv::Mat src = cv::imread(context);
+	cv::Mat dst;
+	//Rotate an image
+	int len = std::max(src.cols, src.rows);
+	cv::Point2f pt(len / 2., len / 2.);
+	cv::Mat r = cv::getRotationMatrix2D(pt, -angle, 1.0);
+	cv::warpAffine(src, dst, r, cv::Size(len, len));
+	//
+	saved = cv::imwrite(context, dst);
+	return saved;
+}
+bool OpenCvOperation::saveScaledImageFile(double rate, std::string context)
+{
+	bool saved = false;
+	//
+	return saved;
+}

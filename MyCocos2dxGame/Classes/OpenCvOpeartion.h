@@ -46,6 +46,9 @@ public:
 	static bool foregroundGrabcut(std::string filePath);
 	//@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
 	static void addingTwoImages(std::string filePath_0, std::string filePath_1, std::string dest);
+	//Save image file with transform
+	static bool saveRoatedImgeFile(double angle, std::string context);
+	static bool saveScaledImageFile(double rate, std::string context);
 private:
 	//OpenCV related variables
 	//

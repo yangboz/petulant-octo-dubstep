@@ -42,6 +42,7 @@ namespace HW_DataModel
 		static const char* BG_FILE_OF_SAVE_PHOTO_SUCCESS;
 		///Panel_typeset
 		static const std::vector<std::string> ARRAY_OF_TYPESET_FRAME_LABELS;
+		static const std::vector<std::string> ARRAY_OF_TYPESET_TMX_LABELS;
 		///Output file name
 		static const std::string OUT_PUT_PRE_RESULT_FILE_NAME;
 		static const std::string OUT_PUT_FIN_RESULT_FILE_NAME;
