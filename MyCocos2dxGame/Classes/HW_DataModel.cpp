@@ -16,8 +16,9 @@ namespace HW_DataModel
 	//default file sizes of certificates
 	const std::vector<cocos2d::Size> HW_DataModel::ARRAY_OF_CERT_FILE_SIZES = { cocos2d::CCSizeMake(14336, 30720), cocos2d::CCSizeMake(40960, 51200), cocos2d::CCSizeMake(40960, 51200), cocos2d::CCSizeMake(40960, 51200), cocos2d::CCSizeMake(40960, 51200), cocos2d::CCSizeMake(40960, 51200) };
 	//Popup related
-	const char* HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID = "CocoStudioUI_1/notification/pattern_notification_01.png";
+	const char* HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID_SIZE = "CocoStudioUI_1/notification/pattern_notification_01.png";
 	const char* HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS = "CocoStudioUI_1/notification/pattern_notification_02.png";
+	const char* HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID_FACE = "CocoStudioUI_1/notification/pattern_notification_03.png";
 	//default position of certificates for editor/verify display
 	const std::vector<cocos2d::Point>  HW_DataModel::ARRAY_OF_EDITOR_BACKGROUND_DISPLAY = { cocos2d::CCPointMake(323, 187), cocos2d::CCPointMake(327, 187), cocos2d::CCPointMake(415, 187), cocos2d::CCPointMake(416, 187), cocos2d::CCPointMake(416, 187), cocos2d::CCPointMake(393, 187) };
 	const std::vector<cocos2d::Point>  HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY = { cocos2d::CCPointMake(800-321,450-185), cocos2d::CCPointMake(800-325,450-185), cocos2d::CCPointMake(900-413, 450-185), cocos2d::CCPointMake(900-414, 450-185), cocos2d::CCPointMake(900-414, 450-185), cocos2d::CCPointMake(900-391, 450-185) };

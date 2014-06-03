@@ -43,7 +43,7 @@ public:
 	//@see http://theembeddedsystems.blogspot.com/2011/05/background-subtraction-using-opencv.html
 	static void backgroundSubstraction_(std::string filePath);
 	//@see http://docs.opencv.org/trunk/doc/py_tutorials/py_imgproc/py_grabcut/py_grabcut.html
-	static bool foregroundGrabcut(std::string filePath);
+	static bool foregroundGrabcut(std::string filePath,bool display);
 	//@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
 	static void addingTwoImages(std::string filePath_0, std::string filePath_1, std::string dest);
 	//Save image file with transform

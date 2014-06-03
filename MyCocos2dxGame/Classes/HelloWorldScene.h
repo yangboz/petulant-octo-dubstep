@@ -31,6 +31,8 @@ using namespace ui;
 #define PAGE_VIEW_VERIFIED 4
 #define PAGE_VIEW_TYPESET 5
 
+//Debug level
+#define HW_OPENCV_DEBUG true
 
 class HelloWorld : public cocos2d::Layer
 {
@@ -45,7 +47,6 @@ public:
     void menuCloseCallback(cocos2d::Ref* pSender);
 	//Buttons EventHandlers
 	void onUploadButtonTouch(Object *pSender, ui::TouchEventType type);
-	void onResetButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onVerifyButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onTypesetButtonTouch(Object *pSender, ui::TouchEventType type);
 	void onPrintButtonTouch(Object *pSender, ui::TouchEventType type);
@@ -102,7 +103,6 @@ private:
 	ui::Button *btn_rotate;
 	ui::Button *btn_upload;
 	ui::Button *btn_backto_upload;
-	ui::Button *btn_reset;
 	ui::Button *btn_backto_editor;
 	ui::Button *btn_goto_verifing;
 	ui::Button *btn_backto_verified;
@@ -155,7 +155,8 @@ private:
 	//ProgressBar
 	ui::LoadingBar *progressBar_upload;
 	//Popups
-	PopupLayer *popup_upload_photo_invalid;
+	PopupLayer *popup_upload_photo_invalid_size;//FileSize,ImageSize;
+	PopupLayer *popup_upload_photo_invalid_face;//Not only 1 face detected;
 	PopupLayer *popup_save_photo_success;
 	//Site variables
 	int slider_scale_changed_value;

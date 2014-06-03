@@ -34,8 +34,6 @@
     <string>editphoto/pattern_slidingbar_h_bg.png</string>
     <string>editphoto/pattern_slidingbar_button.png</string>
     <string>editphoto/pattern_slidingbar_h.png</string>
-    <string>below_button/button_undo.png</string>
-    <string>below_button/button_undo_pd.png</string>
     <string>below_button/button_nextstep.png</string>
     <string>below_button/button_nextstep_pd.png</string>
     <string>below_button/button_re_uploadphoto.png</string>
@@ -64,6 +62,8 @@
     <string>background/text/pattern_detected.png</string>
     <string>below_button/button_savephoto.png</string>
     <string>below_button/button_savephoto_pd.png</string>
+    <string>below_button/button_undo.png</string>
+    <string>below_button/button_undo_pd.png</string>
     <string>below_button/button_layout.png</string>
     <string>below_button/button_layout_pd.png</string>
     <string>editphoto/button_choosebg_white.png</string>

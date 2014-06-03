@@ -1,11 +1,6 @@
-﻿Build started 2014/6/3 14:29:21.
+﻿Build started 2014/6/3 15:15:42.
      1>Project "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\MyCocos2dxGame.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\audio\include" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\chipmunk\include\chipmunk" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\extensions" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\extensions" /I..\Classes /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\\" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\editor-support" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\renderer" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\ui" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\base" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\physics" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\math\kazmath" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\platform\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\cocos\2d\platform\desktop" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\glfw3\include\win32" /I"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\win32-specific\gles\include\OGLES" /ZI /nologo /W3 /WX- /MP /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USE_MATH_DEFINES /D GL_GLEXT_PROTOTYPES /D CC_ENABLE_CHIPMUNK_INTEGRATION=1 /D COCOS2D_DEBUG=1 /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS /D _VARIADIC_MAX=10 /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc120.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\OpenCvOperation.cpp
-         OpenCvOperation.cpp
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\opencvoperation.cpp(144): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\yangboz\git\petulant-octo-dubstep\mycocos2dxgame\classes\opencvoperation.cpp(151): warning C4018: '<' : signed/unsigned mismatch
-       PreLinkEvent:
+     1>PreLinkEvent:
          if not exist "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\" mkdir "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
          xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\websockets\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
          :VCEnd
@@ -28,7 +23,8 @@
          "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libcocos2d.lib"
          "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libAudio.lib"
          "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libchipmunk.lib"
-     1>AppDelegate.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+         LINK : C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\MyCocos2dxGame.exe not found or not built by the last incremental link; performing full link
+     1>AppDelegate.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
      1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
      1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'libcmtd.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
      1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'msvcrt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
@@ -81,4 +77,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:25.52
+Time Elapsed 00:00:27.56

@@ -319,7 +319,7 @@ void OpenCvOperation::backgroundSubstraction_(std::string filePath)
 	//cvDestroyWindow("frameForeground");
 }
 //@see http://docs.opencv.org/trunk/doc/py_tutorials/py_imgproc/py_grabcut/py_grabcut.html
-bool OpenCvOperation::foregroundGrabcut(std::string filePath)
+bool OpenCvOperation::foregroundGrabcut(std::string filePath,bool display)
 {
 	//
 	cv::Mat image = cv::imread(filePath);
@@ -340,13 +340,16 @@ bool OpenCvOperation::foregroundGrabcut(std::string filePath)
 	// Generate output image
 	cv::Mat foreground(image.size(), CV_8UC3, cv::Scalar(255, 255, 255));
 	image.copyTo(foreground, result); // bg pixels not copied
-	// draw rectangle on original image
-	cv::rectangle(image, rectangle, cv::Scalar(255, 0, 255), 1);
-	cv::namedWindow("Image");
-	cv::imshow("Image", image);
-	// display result
-	cv::namedWindow("Segmented Image");
-	cv::imshow("Segmented Image", foreground);
+	if (display)
+	{
+		// draw rectangle on original image
+		cv::rectangle(image, rectangle, cv::Scalar(255, 0, 255), 1);
+		cv::namedWindow("Image");
+		cv::imshow("Image", image);
+		// display result
+		cv::namedWindow("Segmented Image");
+		cv::imshow("Segmented Image", foreground);
+	}
 	//@see http://answers.opencv.org/question/24463/how-to-remove-black-background-from-grabcut-output/
 	Mat dst;//(src.rows,src.cols,CV_8UC4);
 	Mat tmp, alpha;

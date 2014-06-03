@@ -38,7 +38,8 @@ namespace HW_DataModel
 		//ImageAttributes validation
 		static const std::vector<cocos2d::Size> ARRAY_OF_CERT_FILE_SIZES;
 		//Popup related
-		static const char* BG_FILE_OF_UPLOAD_PHOTO_INVALID;
+		static const char* BG_FILE_OF_UPLOAD_PHOTO_INVALID_SIZE;
+		static const char* BG_FILE_OF_UPLOAD_PHOTO_INVALID_FACE;
 		static const char* BG_FILE_OF_SAVE_PHOTO_SUCCESS;
 		///Panel_typeset
 		static const std::vector<std::string> ARRAY_OF_TYPESET_FRAME_LABELS;

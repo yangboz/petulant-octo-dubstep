@@ -122,8 +122,6 @@ bool HelloWorld::init()
 	this->btn_goto_typeset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onTypesetNaviButtonTouch);
 	this->btn_print = dynamic_cast<ui::Button*>(this->panel_typeset->getChildByName("Button_print"));
 	this->btn_print->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onPrintButtonTouch);
-	this->btn_reset = dynamic_cast<ui::Button*>(this->panel_editor->getChildByName("Button_reset"));
-	this->btn_reset->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onResetButtonTouch);
 	this->btn_save = dynamic_cast<ui::Button*>(this->panel_verified->getChildByName("Button_save"));
 	this->btn_save->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onSaveButtonTouch);
 	this->btn_red = dynamic_cast<ui::Button*>(this->panel_verified->getChildByName("Button_red"));
@@ -169,13 +167,16 @@ bool HelloWorld::init()
 	this->progressBar_upload = dynamic_cast<ui::LoadingBar*>(this->panel_upload->getChildByName("Image_frame")->getChildByName("Image_background")->getChildByName("Image_foreground")->getChildByName("ProgressBar_verify"));
 	this->progressBar_upload->setVisible(false);
 	//Popups
-	this->popup_upload_photo_invalid = NULL;
+	this->popup_upload_photo_invalid_size = NULL;
 	this->popup_save_photo_success = NULL;
+	this->popup_upload_photo_invalid_face = NULL;
 	//ListView set up.
 	this->setupListViews();
 	//Default variables initialization
 	this->cur_roated_value = 0.0f;
 	this->cur_scaled_value = 1.0f;
+	this->cur_moved_value_x = 0.0f;
+	this->cur_moved_value_y = 0.0f;
     return true;
 }
 
@@ -206,7 +207,6 @@ void HelloWorld::onUploadButtonTouch(Object *pSender, ui::TouchEventType type)
 		CCLOG("onUploadButtonTouch,TOUCH_EVENT_ENDED!");
 		//Remove popup at first
 		this->removePopupLayer();
-		this->progressBar_upload->setVisible(false);
 		//Turn to open file picker and verifing steps.
 		this->onOpenFilePicker();
 		break;
@@ -218,23 +218,6 @@ void HelloWorld::onUploadButtonTouch(Object *pSender, ui::TouchEventType type)
 void HelloWorld::popupButtonCallback(cocos2d::CCNode *pNode)
 {
 	CCLOG("popup button call back. tag: %d", pNode->getTag());
-}
-
-void HelloWorld::onResetButtonTouch(Object *pSender, ui::TouchEventType type)
-{
-	//
-	switch (type)
-	{
-	case TOUCH_EVENT_BEGAN:
-		break;
-	case TOUCH_EVENT_ENDED:
-		CCLOG("onResetButtonTouch,TOUCH_EVENT_ENDED!");
-		//Navigate to PageView_intro
-		this->pageView_main->scrollToPage(PAGE_VIEW_INTRO);
-		break;
-	default:
-		break;
-	}
 }
 
 void HelloWorld::onVerifyButtonTouch(Object *pSender, ui::TouchEventType type)
@@ -666,7 +649,7 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_(this->cur_photo_file_path);
-		if (OpenCvOperation::foregroundGrabcut(this->cur_photo_file_path))
+		if (OpenCvOperation::foregroundGrabcut(this->cur_photo_file_path, HW_OPENCV_DEBUG))
 		{
 			this->pageView_main->scrollToPage(PAGE_VIEW_VERIFIED);
 			this->imageView_verified->loadTexture(HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME);
@@ -729,14 +712,16 @@ void HelloWorld::onOpenFilePicker()
 	if (!OpenCvOperation::iplImageAttributesCheck(this->cur_photo_file_path))
 	{
 		//MessageBox("Invalid image with attributes(width/height/size..)!", "Error");
-		this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID);
+		this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID_SIZE);
 		return;
 	}
 	//OpenCV handler here:
-	int detectedFaces = OpenCvOperation::faceDetection(this->cur_photo_file_path,false);
+	int detectedFaces = OpenCvOperation::faceDetection(this->cur_photo_file_path, HW_OPENCV_DEBUG);
 	if (detectedFaces != 1)//Only one face required for certification photo.
 	{
-		return MessageBox("Required face invalid!", "ERROR");
+		//return MessageBox("Required face invalid!", "ERROR");
+		this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID_FACE);
+		return;
 	}
 	//OpenCvOperation::fullbodyDetectAndDisplay_Haar(this->cur_photo_file_path);
 	//OpenCvOperation::fullbodyDetectAndDisplay_Hog(this->cur_photo_file_path);
@@ -745,6 +730,8 @@ void HelloWorld::onOpenFilePicker()
 	this->pageView_main->scrollToPage(PAGE_VIEW_EDITOR);
 	//Read image file for Panel_editor
 	this->imageView_editor->loadTexture(this->cur_photo_file_path);
+	//Remove progress bar of upload
+	this->progressBar_upload->setVisible(false);
 }
 ///
 void HelloWorld::centerPopupLayer(const char *bgFilePath)
@@ -757,13 +744,22 @@ void HelloWorld::centerPopupLayer(const char *bgFilePath)
 			this->addChild(this->popup_save_photo_success);
 		}
 	}
-	else if (bgFilePath == HW_DataModel::HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID)
+	else if (bgFilePath == HW_DataModel::HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID_SIZE)
 	{
 		//
-		if (NULL == this->popup_upload_photo_invalid)
+		if (NULL == this->popup_upload_photo_invalid_size)
 		{
-			this->popup_upload_photo_invalid = this->createPopupLayer(bgFilePath);
-			this->addChild(this->popup_upload_photo_invalid);
+			this->popup_upload_photo_invalid_size = this->createPopupLayer(bgFilePath);
+			this->addChild(this->popup_upload_photo_invalid_size);
+		}
+	}
+	else if (bgFilePath == HW_DataModel::HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID_FACE)
+	{
+		//
+		if (NULL == this->popup_upload_photo_invalid_face)
+		{
+			this->popup_upload_photo_invalid_face = this->createPopupLayer(bgFilePath);
+			this->addChild(this->popup_upload_photo_invalid_face);
 		}
 	}
 	else
@@ -790,16 +786,22 @@ PopupLayer* HelloWorld::createPopupLayer(const char *bgFilePath)
 ///
 void HelloWorld::removePopupLayer()
 {
-	if (NULL != this->popup_upload_photo_invalid)
+	if (NULL != this->popup_upload_photo_invalid_size)
 	{
-		this->removeChild(this->popup_upload_photo_invalid);
-		this->popup_upload_photo_invalid = NULL;
+		this->removeChild(this->popup_upload_photo_invalid_size);
+		this->popup_upload_photo_invalid_size = NULL;
 	}
 	//
 	if (NULL != this->popup_save_photo_success)
 	{
 		this->removeChild(this->popup_save_photo_success);
 		this->popup_save_photo_success = NULL;
+	}
+	//
+	if (NULL != this->popup_upload_photo_invalid_face)
+	{
+		this->removeChild(this->popup_upload_photo_invalid_face);
+		this->popup_upload_photo_invalid_face = NULL;
 	}
 }
 //Set up list views with size values.
