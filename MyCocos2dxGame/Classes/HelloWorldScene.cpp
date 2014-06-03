@@ -65,9 +65,14 @@ bool HelloWorld::init()
 	this->panel_verified = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_verified"));
 	this->panel_verified->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onPanelsTouch);
 	this->panel_typeset = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_typeset"));
-	//
+	///
 	this->pageView_main->setTouchEnabled(false);
+	this->panel_intro->setTouchEnabled(false);
+	this->panel_upload->setTouchEnabled(false);
 	this->panel_editor->setTouchEnabled(false);
+	this->panel_verifing->setTouchEnabled(false);
+	this->panel_verified->setTouchEnabled(false);
+	this->panel_typeset->setTouchEnabled(false);
 	//Window buttons
 	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_intro->getChildByName("Button_window_min"));
 	this->btn_window_min->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onWindowMinButtonTouch);
@@ -203,7 +208,7 @@ void HelloWorld::onUploadButtonTouch(Object *pSender, ui::TouchEventType type)
 		//Remove popup at first
 		this->removePopupLayer();
 		this->progressBar_upload->setVisible(false);
-		//
+		//Turn to open file picker and verifing steps.
 		this->onOpenFilePicker();
 		break;
 	default:
@@ -391,8 +396,8 @@ void HelloWorld::onTypesetListViewItemSelected(Object *pSender, ui::ListViewEven
 		//Change typeset (background) frame image view here:
 		this->imageView_typeset_frame->loadTexture(background_file_path);
 		//Change the typeset foreground image view here:
-		//this->panel_typeset->addChild(_typeset_tileMap);
-		//_foreground_layer->setTexture(_photoTexture);
+		this->imageView_typeset_frame->addChild(_typeset_tileMap);
+		_foreground_layer->setTexture(_photoTexture);
 		break;
 	default:
 		break;
@@ -644,12 +649,15 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onVerifingNaviButtonTouch,TOUCH_EVENT_ENDED!");
 		//
+		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_(this->cur_photo_file_path);
-		OpenCvOperation::foregroundGrabcut(this->cur_photo_file_path);
-		//
-		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
+		if (OpenCvOperation::foregroundGrabcut(this->cur_photo_file_path))
+		{
+			this->pageView_main->scrollToPage(PAGE_VIEW_VERIFIED);
+			this->imageView_verified->loadTexture(HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME);
+		}
 		break;
 	default:
 		break;
@@ -687,7 +695,7 @@ void HelloWorld::onTypesetNaviButtonTouch(Object *pSender, ui::TouchEventType ty
 		//
 		this->pageView_main->scrollToPage(PAGE_VIEW_TYPESET);
 		//
-		this->imageView_verified->loadTexture(this->cur_photo_file_path);
+		this->imageView_verified->loadTexture(HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME);
 		break;
 	default:
 		break;
@@ -711,19 +719,21 @@ void HelloWorld::onOpenFilePicker()
 		this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID);
 		return;
 	}
+	//OpenCV handler here:
+	int detectedFaces = OpenCvOperation::faceDetection(this->cur_photo_file_path,false);
+	if (detectedFaces != 1)//Only one face required for certification photo.
+	{
+		return MessageBox("Required face invalid!", "ERROR");
+	}
+	//OpenCvOperation::fullbodyDetectAndDisplay_Haar(this->cur_photo_file_path);
+	//OpenCvOperation::fullbodyDetectAndDisplay_Hog(this->cur_photo_file_path);
 	//Image file on Panel_upload,go to panel_editor
 	//this->imageView_fore_ground->loadTexture(this->cur_photo_file_path); return;
 	this->pageView_main->scrollToPage(PAGE_VIEW_EDITOR);
-	//Read image file
-	//FileOperation::readFile(filePath);
+	//Read image file for Panel_editor
 	this->imageView_editor->loadTexture(this->cur_photo_file_path);
-	this->imageView_verified->loadTexture(this->cur_photo_file_path);
-	//OpenCV handler here:
-	OpenCvOperation::faceDetectAndDisplay(this->cur_photo_file_path);
-	//OpenCvOperation::fullbodyDetectAndDisplay_Haar(this->cur_photo_file_path);
-	//OpenCvOperation::fullbodyDetectAndDisplay_Hog(this->cur_photo_file_path);
 }
-
+///
 void HelloWorld::centerPopupLayer(const char *bgFilePath)
 {
 	if (bgFilePath == HW_DataModel::HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS)
@@ -749,7 +759,7 @@ void HelloWorld::centerPopupLayer(const char *bgFilePath)
 		return;
 	}
 }
-
+///
 PopupLayer* HelloWorld::createPopupLayer(const char *bgFilePath)
 {
 	PopupLayer *popup = PopupLayer::create(bgFilePath);
@@ -764,7 +774,7 @@ PopupLayer* HelloWorld::createPopupLayer(const char *bgFilePath)
 	//popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "Cancel", 1);
 	return popup;
 }
-
+///
 void HelloWorld::removePopupLayer()
 {
 	if (NULL != this->popup_upload_photo_invalid)
@@ -899,12 +909,14 @@ void HelloWorld::setupListViews()
 	//
 	HW_UserDataModel::Instance()->cur_listView_selected_index = 0;//Default index selection.
 	//
-	listView_intro_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onIntroListViewItemSelected));
-	listView_upload_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onUploadListViewItemSelected));
-	listView_editor_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onEditorListViewItemSelected));
-	listView_verifing_size->setTouchEnabled(false);//Disable it for verifing.
-	listView_verified_size->setTouchEnabled(false);//Disable it for verified.
-	listView_typeset_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onTypesetListViewItemSelected));
+	this->listView_intro_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onIntroListViewItemSelected));
+	this->listView_upload_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onUploadListViewItemSelected));
+	this->listView_editor_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onEditorListViewItemSelected));
+	//this->listView_verifing_size->setTouchEnabled(false);//Disable it for verifing.
+	//this->listView_verified_size->setTouchEnabled(false);//Disable it for verified.
+	this->listView_verifing_size->setEnabled(false);//Disable it for verifing.
+	this->listView_verified_size->setEnabled(false);//Disable it for verified.
+	this->listView_typeset_size->addEventListenerListView(this, listvieweventselector(HelloWorld::onTypesetListViewItemSelected));
 }
 //
 void HelloWorld::changeCurrentInstructionImage()

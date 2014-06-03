@@ -32,7 +32,8 @@ public:
 	//cv::Mat image attribute check
 	static bool cvMatImageAttributesCheck(std::string filePath);
 	//OpenCV function header
-	static void faceDetectAndDisplay(std::string filePath);
+	//static void faceDetectAndDisplay(std::string filePath);
+	static int faceDetection(std::string filePath, bool display);
 	static void fullbodyDetectAndDisplay_Haar(std::string filePath);
 	static void fullbodyDetectAndDisplay_Hog(std::string filePath);
 	//Background subtraction using MOG
@@ -42,7 +43,7 @@ public:
 	//@see http://theembeddedsystems.blogspot.com/2011/05/background-subtraction-using-opencv.html
 	static void backgroundSubstraction_(std::string filePath);
 	//@see http://docs.opencv.org/trunk/doc/py_tutorials/py_imgproc/py_grabcut/py_grabcut.html
-	static void foregroundGrabcut(std::string filePath);
+	static bool foregroundGrabcut(std::string filePath);
 	//@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
 	static void addingTwoImages(std::string filePath_0, std::string filePath_1, std::string dest);
 private:
@@ -50,6 +51,8 @@ private:
 	//
 	static bool saveMatImageFile(cv::Mat image, std::string context);
 	static bool saveIplImageFile(IplImage image, std::string context);
+	//PNG with alpha
+	static void createAlphaMat(cv::Mat4b &mat);
 };
 
 #endif
