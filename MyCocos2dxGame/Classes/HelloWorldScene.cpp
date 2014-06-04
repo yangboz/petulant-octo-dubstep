@@ -51,7 +51,7 @@ bool HelloWorld::init()
     // 3. add your codes below...
 	//UIElements behaviour
 	//Load Layout
-	this->uiLayout = cocostudio::GUIReader::getInstance()->widgetFromJsonFile("CocoStudioUI_1/CocoStudioUI_1.json");
+	this->uiLayout = cocostudio::GUIReader::getInstance()->widgetFromJsonFile("CocoStudioUI/CocoStudioUI.json");
 	addChild(uiLayout);
 	//PageViews(index,editor)
 	this->pageView_main = dynamic_cast<ui::PageView*>(this->uiLayout->getChildByName("PageView_main"));
@@ -346,8 +346,11 @@ void HelloWorld::onIntroListViewItemSelected(Object *pSender, ui::ListViewEventT
 	case LISTVIEW_ONSELECTEDITEM_END:
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		this->cur_defined_size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
-		CCLOG("listView_cert selected child index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
+		CCLOG("onIntroListViewItemSelected index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
 		this->pageView_main->scrollToPage(PAGE_VIEW_UPLOAD);
+		//Adjust the settings chnange effects.
+		this->applyUploadSettingChanges();
+		this->applyEditorSettingChanges();
 		//Dynamically change the instrcution image view content.
 		this->changeCurrentInstructionImage();
 		//
@@ -382,6 +385,7 @@ void HelloWorld::onTypesetListViewItemSelected(Object *pSender, ui::ListViewEven
 		_typeset_tileMap = TMXTiledMap::create(cur_tileLayer_file_path);
 		this->imageView_typeset_frame->removeAllChildren();
 		this->imageView_typeset_frame->addChild(_typeset_tileMap);
+		_typeset_tileMap->setPosition(cocos2d::CCPointMake(70,155));
 		_foreground_layer = _typeset_tileMap->layerNamed("background");
 		_foreground_layer->setTexture(_photoTexture);
 		break;
@@ -636,11 +640,11 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		//
 		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
 		//Photo transform handler here:
+		/*
 		if (!OpenCvOperation::saveRoatedImgeFile(this->cur_roated_value, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME))
 		{
 			return;
 		}
-		/*
 		if (!OpenCvOperation::saveScaledImageFile (this->cur_roated_value, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME))
 		{
 			return;
@@ -779,8 +783,8 @@ PopupLayer* HelloWorld::createPopupLayer(const char *bgFilePath)
 	// 这只是作为一种封装实现，如果使用 delegate 那就能够更灵活的控制参数了  
 	//popup->setCallbackFunc(this, callfuncN_selector(HelloWorld::popupButtonCallback));
 	// 添加按钮，设置图片，文字，tag 信息  
-	//popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "OK", 0);
-	//popup->addButton("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png", "Cancel", 1);
+	//popup->addButton("CocoStudioUI/GUI/button.png", "CocoStudioUI/GUI/button.png", "OK", 0);
+	//popup->addButton("CocoStudioUI/GUI/button.png", "CocoStudioUI/GUI/button.png", "Cancel", 1);
 	return popup;
 }
 ///
@@ -807,7 +811,7 @@ void HelloWorld::removePopupLayer()
 //Set up list views with size values.
 void HelloWorld::setupListViews()
 {
-	//ui::Button *listView_default_button = ui::Button::create("CocoStudioUI_1/GUI/button.png", "CocoStudioUI_1/GUI/button.png");
+	//ui::Button *listView_default_button = ui::Button::create("CocoStudioUI/GUI/button.png", "CocoStudioUI/GUI/button.png");
 	//listView_default_button->setTitleText(StringUtils::WStrToUTF8(L"护照"));
 	//listView_certificates->pushBackDefaultItem();
 	ssize_t count_size_intro = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_LABELS.size();

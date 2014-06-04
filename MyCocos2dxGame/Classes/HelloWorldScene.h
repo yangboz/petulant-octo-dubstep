@@ -31,7 +31,7 @@ using namespace ui;
 #define PAGE_VIEW_VERIFIED 4
 #define PAGE_VIEW_TYPESET 5
 
-//Debug level
+//OpenCV Debug level
 #define HW_OPENCV_DEBUG true
 
 class HelloWorld : public cocos2d::Layer

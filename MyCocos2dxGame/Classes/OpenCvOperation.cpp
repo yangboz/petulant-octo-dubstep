@@ -388,7 +388,7 @@ void OpenCvOperation::addingTwoImages(std::string filePath_0, std::string filePa
 //
 bool OpenCvOperation::saveMatImageFile(cv::Mat image,std::string context)
 {
-	bool saved = true;
+	bool saved = false;
 	/*
 	// Create mat with alpha channel
 	cv::Mat4b mat(640, 480);

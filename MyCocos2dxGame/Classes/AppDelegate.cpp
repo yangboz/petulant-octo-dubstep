@@ -16,7 +16,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-		glview = GLView::createWithRect("HP Certificates Print", CCRectMake(0, 0, 800, 600), 1.0f);
+		glview = GLView::createWithRect("HP ID Print", CCRectMake(0, 0, 800, 600), 1.0f);
 		//glview = GLView::createWithRect("HP Certificates Print",CCRectMake(0,0,800,600),1.0f);
         director->setOpenGLView(glview);
 		//Window customize
