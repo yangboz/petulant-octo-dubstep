@@ -17,7 +17,7 @@
 
 #include "HW_UserDataModel.h"
 
-//#include "PrintOperation.h"
+#include "PrintOperation.h"
 
 USING_NS_CC;
 //USING_NS_CC_EXT;

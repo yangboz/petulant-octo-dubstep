@@ -45,6 +45,10 @@
     <ClCompile Include="..\Classes\HW_UserDataModel.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
+    <ClCompile Include="PrintOperation.cpp" />
+    <ClCompile Include="..\Classes\PrintOperation.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -78,6 +82,10 @@
       <Filter>Classes\PopupLayer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HW_UserDataModel.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="PrintOperation.h" />
+    <ClInclude Include="..\Classes\PrintOperation.h">
       <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>

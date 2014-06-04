@@ -258,8 +258,8 @@ void HelloWorld::onPrintButtonTouch(Object *pSender, ui::TouchEventType type)
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onPrintButtonTouch,TOUCH_EVENT_ENDED!");
-		//TODO:Photo system print function call here:
-		//PrintOperation::print();
+		//Photo system print function call here:
+		PrintOperation::printDialog();
 		break;
 	default:
 		break;
