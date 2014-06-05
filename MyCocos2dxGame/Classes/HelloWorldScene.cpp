@@ -65,7 +65,7 @@ bool HelloWorld::init()
 	this->panel_verified = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_verified"));
 	this->panel_verified->addTouchEventListener(this, (ui::SEL_TouchEvent)&HelloWorld::onPanelsTouch);
 	this->panel_typeset = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_typeset"));
-	///
+	///Manually disable the panel.
 	this->pageView_main->setTouchEnabled(false);
 	this->panel_intro->setTouchEnabled(false);
 	this->panel_upload->setTouchEnabled(false);
@@ -164,8 +164,10 @@ bool HelloWorld::init()
 	this->slider_photo_rotate = dynamic_cast<ui::Slider*>(this->panel_editor->getChildByName("Slider_rotate"));
 	this->slider_photo_rotate->addEventListenerSlider(this, sliderpercentchangedselector(HelloWorld::onRotateSliderValueChanged));
 	//ProgressBar
-	this->progressBar_upload = dynamic_cast<ui::LoadingBar*>(this->panel_upload->getChildByName("Image_frame")->getChildByName("Image_background")->getChildByName("Image_foreground")->getChildByName("ProgressBar_verify"));
-	this->progressBar_upload->setVisible(false);
+	this->progressBar_upload = dynamic_cast<ui::LoadingBar*>(this->panel_upload->getChildByName("ProgressBar_upload"));
+	this->progressBar_upload->setPercent(0);
+	this->progressBar_verifing = dynamic_cast<ui::LoadingBar*>(this->panel_verifing->getChildByName("ProgressBar_verifing"));
+	this->progressBar_verifing->setPercent(0);
 	//Popups
 	this->popup_upload_photo_invalid_size = NULL;
 	this->popup_save_photo_success = NULL;
@@ -274,9 +276,9 @@ void HelloWorld::onRedColouredButtonTouch(Object *pSender, ui::TouchEventType ty
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onRedColouredButtonTouch,TOUCH_EVENT_ENDED!");
-		//TODO:Photo editor with background color function here:
+		//Photo editor with background color function here:
 		this->scrollView_verified->setBackGroundColor(cocos2d::Color3B::RED);
-		this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::RED);
+		//this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::RED);
 		break;
 	default:
 		break;
@@ -290,9 +292,9 @@ void HelloWorld::onBlueColouredButtonTouch(Object *pSender, ui::TouchEventType t
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onBlueColouredButtonTouch,TOUCH_EVENT_ENDED!");
-		//TODO:Photo editor with background color function here:
+		//Photo editor with background color function here:
 		this->scrollView_verified->setBackGroundColor(cocos2d::Color3B::BLUE);
-		this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::BLUE);
+		//this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::BLUE);
 		break;
 	default:
 		break;
@@ -306,9 +308,9 @@ void HelloWorld::onWhiteColouredButtonTouch(Object *pSender, ui::TouchEventType 
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onWhiteColouredButtonTouch,TOUCH_EVENT_ENDED!");
-		//TODO:Photo editor with background color function here:
+		//Photo editor with background color function here:
 		this->scrollView_verified->setBackGroundColor(cocos2d::Color3B::WHITE);
-		this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::WHITE);
+		//this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::WHITE);
 		break;
 	default:
 		break;
@@ -316,6 +318,8 @@ void HelloWorld::onWhiteColouredButtonTouch(Object *pSender, ui::TouchEventType 
 }
 void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 {
+	cocos2d::Size definedSize;
+	std::string definedFolderFilePath;
 	switch (type)
 	{
 	case TOUCH_EVENT_BEGAN:
@@ -324,10 +328,16 @@ void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 		CCLOG("onSaveButtonTouch,TOUCH_EVENT_ENDED!");
 		//
 		//Get user defined save photo path:
-		this->cur_output_file_path = FileOperation::saveFileDialog();
+		definedFolderFilePath = FileOperation::saveFileDialog();
+		this->cur_output_file_path = definedFolderFilePath + HW_DataModel::HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME;
 		CCLOG("cur_output_file_folder: %s", this->cur_output_file_path.c_str());
-		CCLOG("Final fixed out put result file name is: %s", (this->cur_output_file_path + HW_DataModel::HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME).c_str());
+		CCLOG("Final fixed out put result file name is: %s", (this->cur_output_file_path + HW_DataModel::HW_DataModel::OUT_PUT_FIN_RESULT_FILE_NAME).c_str());
+		//OpenCV save colored background image file:
+		definedSize = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
+		CCLOG("current user defined frame size is:(%f,%f)", definedSize.width, definedSize.height);
+		OpenCvOperation::saveColoredImageFile(cv::Scalar(255, 0, 0), (int)definedSize.width, (int)definedSize.height, this->cur_output_file_path);
 		//OpenCV add images(foreground,background):
+		this->cur_foreground_file_path = HW_DataModel::HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME;
 		OpenCvOperation::addingTwoImages(this->cur_foreground_file_path, this->cur_background_file_path, this->cur_output_file_path);
 		//Popup notification.
 		this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS);
@@ -639,6 +649,7 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		CCLOG("onVerifingNaviButtonTouch,TOUCH_EVENT_ENDED!");
 		//
 		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
+		this->progressBar_verifing->setPercent(50);
 		//Photo transform handler here:
 		/*
 		if (!OpenCvOperation::saveRoatedImgeFile(this->cur_roated_value, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME))
@@ -655,6 +666,7 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		//OpenCvOperation::backgroundSubstraction_(this->cur_photo_file_path);
 		if (OpenCvOperation::foregroundGrabcut(this->cur_photo_file_path, HW_OPENCV_DEBUG))
 		{
+			this->progressBar_verifing->setPercent(100);
 			this->pageView_main->scrollToPage(PAGE_VIEW_VERIFIED);
 			this->imageView_verified->loadTexture(HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME);
 		}
@@ -706,27 +718,34 @@ void HelloWorld::onTypesetNaviButtonTouch(Object *pSender, ui::TouchEventType ty
 //@see http://www.cocos2d-x.org/wiki/How_to_read_and_write_file_on_different_platforms
 void HelloWorld::onOpenFilePicker()
 {
-	this->progressBar_upload->setVisible(true);
+	this->progressBar_upload->setPercent(10);
 	//
 	this->cur_photo_file_path = FileOperation::openFileDialog();
 	if (this->cur_photo_file_path.size() == 0)
 	{
+		this->progressBar_upload->setPercent(0);
 		return;//User cancel file picker;
 	}
+	this->progressBar_upload->setPercent(50);
 	if (!OpenCvOperation::iplImageAttributesCheck(this->cur_photo_file_path))
 	{
 		//MessageBox("Invalid image with attributes(width/height/size..)!", "Error");
 		this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID_SIZE);
+		this->progressBar_upload->setPercent(0);
 		return;
 	}
+	this->progressBar_upload->setPercent(90);
 	//OpenCV handler here:
 	int detectedFaces = OpenCvOperation::faceDetection(this->cur_photo_file_path, HW_OPENCV_DEBUG);
 	if (detectedFaces != 1)//Only one face required for certification photo.
 	{
 		//return MessageBox("Required face invalid!", "ERROR");
 		this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_UPLOAD_PHOTO_INVALID_FACE);
+		this->progressBar_upload->setPercent(0);
 		return;
 	}
+	//All steps of panel_upload has complete.
+	this->progressBar_upload->setPercent(100);
 	//OpenCvOperation::fullbodyDetectAndDisplay_Haar(this->cur_photo_file_path);
 	//OpenCvOperation::fullbodyDetectAndDisplay_Hog(this->cur_photo_file_path);
 	//Image file on Panel_upload,go to panel_editor
@@ -734,8 +753,6 @@ void HelloWorld::onOpenFilePicker()
 	this->pageView_main->scrollToPage(PAGE_VIEW_EDITOR);
 	//Read image file for Panel_editor
 	this->imageView_editor->loadTexture(this->cur_photo_file_path);
-	//Remove progress bar of upload
-	this->progressBar_upload->setVisible(false);
 }
 ///
 void HelloWorld::centerPopupLayer(const char *bgFilePath)

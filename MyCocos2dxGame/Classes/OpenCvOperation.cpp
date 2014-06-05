@@ -366,24 +366,24 @@ bool OpenCvOperation::foregroundGrabcut(std::string filePath,bool display)
 	return OpenCvOperation::saveMatImageFile(dst, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME);
 }
 //@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
-void OpenCvOperation::addingTwoImages(std::string filePath_0, std::string filePath_1, std::string dest)
+void OpenCvOperation::addingTwoImages(std::string filePath_foreground, std::string filePath_background, std::string dest)
 {
 	double alpha = 0.5; double beta;
 	Mat src1, src2, dst;
 	/// Read image ( same size, same type )
-	src1 = imread(filePath_0);
-	src2 = imread(filePath_1);
+	src1 = imread(filePath_foreground);
+	src2 = imread(filePath_background);
 
-	if (!src1.data) { CCLOG("Error loading src1 with filePath: \n",filePath_0); return; }
-	if (!src2.data) { CCLOG("Error loading src2 with filePath: \n",filePath_1); return; }
+	if (!src1.data) { CCLOG("Error loading foreground with filePath: %s", filePath_foreground.c_str()); return; }
+	if (!src2.data) { CCLOG("Error loading background with filePath: %s", filePath_background.c_str()); return; }
 
 	/// Create Windows
-	cv::namedWindow("Linear Blend", 1);
+	cv::namedWindow("Linear Blend(AddImages)", 1);
 
 	beta = (1.0 - alpha);
 	addWeighted(src1, alpha, src2, beta, 0.0, dst);
 
-	cv::imshow("Linear Blend", dst);
+	cv::imshow("Linear Blend(AddImages)", dst);
 }
 //
 bool OpenCvOperation::saveMatImageFile(cv::Mat image,std::string context)
@@ -443,5 +443,16 @@ bool OpenCvOperation::saveScaledImageFile(double rate, std::string context)
 {
 	bool saved = false;
 	//
+	return saved;
+}
+//Save image file with solid color
+bool OpenCvOperation::saveColoredImageFile(cv::Scalar colorScalar,int width,int height, std::string context)
+{
+	bool saved = false;
+	//
+	IplImage *image = cvCreateImage(cvSize(width, height), 8, 3);
+	cv::Mat matImage = cvarrToMat(image);
+	matImage.setTo(colorScalar);
+	saved = imwrite(context, matImage);
 	return saved;
 }

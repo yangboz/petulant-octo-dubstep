@@ -154,6 +154,7 @@ private:
 	ui::Slider *slider_photo_scale;
 	//ProgressBar
 	ui::LoadingBar *progressBar_upload;
+	ui::LoadingBar *progressBar_verifing;
 	//Popups
 	PopupLayer *popup_upload_photo_invalid_size;//FileSize,ImageSize;
 	PopupLayer *popup_upload_photo_invalid_face;//Not only 1 face detected;

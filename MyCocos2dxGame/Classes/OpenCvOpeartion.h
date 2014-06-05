@@ -45,10 +45,12 @@ public:
 	//@see http://docs.opencv.org/trunk/doc/py_tutorials/py_imgproc/py_grabcut/py_grabcut.html
 	static bool foregroundGrabcut(std::string filePath,bool display);
 	//@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
-	static void addingTwoImages(std::string filePath_0, std::string filePath_1, std::string dest);
+	static void addingTwoImages(std::string filePath_foreground, std::string filePath_background, std::string dest);
 	//Save image file with transform
 	static bool saveRoatedImgeFile(double angle, std::string context);
 	static bool saveScaledImageFile(double rate, std::string context);
+	//Save image file with solid color
+	static bool saveColoredImageFile(cv::Scalar colorScalar, int width, int height, std::string context);
 private:
 	//OpenCV related variables
 	//

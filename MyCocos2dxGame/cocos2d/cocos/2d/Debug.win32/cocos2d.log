@@ -1,4 +1,4 @@
-﻿Build started 2014/6/4 11:23:06.
+﻿Build started 2014/6/5 16:28:49.
      1>Project "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\cocos2d.vcxproj" on node 2 (Build target(s)).
      1>PreLinkEvent:
          if not exist "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\" mkdir "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
@@ -30,4 +30,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.66
+Time Elapsed 00:00:00.82

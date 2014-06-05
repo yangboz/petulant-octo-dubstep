@@ -1,5 +1,6 @@
-﻿Build started 2014/6/4 11:23:06.
+﻿Build started 2014/6/5 16:28:49.
      1>Project "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\MyCocos2dxGame.vcxproj" on node 2 (Build target(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of PrintOperation.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are ..\Classes\PrintOperation.cpp, PrintOperation.cpp.
      1>PreLinkEvent:
          if not exist "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\" mkdir "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
          xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\websockets\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
@@ -16,7 +17,9 @@
          Debug.win32\OpenCvOperation.obj
          Debug.win32\CCScale9Sprite.obj
          Debug.win32\PopupLayer.obj
+         Debug.win32\PrintOperation.obj
          Debug.win32\main.obj
+         Debug.win32\PrintOperation.obj
          "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libCocosStudio.lib"
          "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libGUI.lib"
          "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libExtensions.lib"
@@ -24,6 +27,7 @@
          "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libAudio.lib"
          "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libchipmunk.lib"
      1>AppDelegate.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+     1>Debug.win32\PrintOperation.obj : warning LNK4042: object specified more than once; extras ignored
      1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
      1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'libcmtd.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
      1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'msvcrt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
@@ -76,4 +80,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:14.26
+Time Elapsed 00:00:15.15
