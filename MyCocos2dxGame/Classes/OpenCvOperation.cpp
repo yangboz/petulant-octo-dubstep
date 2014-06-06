@@ -319,7 +319,7 @@ void OpenCvOperation::backgroundSubstraction_(std::string filePath)
 	//cvDestroyWindow("frameForeground");
 }
 //@see http://docs.opencv.org/trunk/doc/py_tutorials/py_imgproc/py_grabcut/py_grabcut.html
-bool OpenCvOperation::foregroundGrabcut(std::string filePath,bool display)
+bool OpenCvOperation::foregroundGrabcut(std::string filePath, int width, int height, bool display)
 {
 	//
 	cv::Mat image = cv::imread(filePath);
@@ -362,8 +362,11 @@ bool OpenCvOperation::foregroundGrabcut(std::string filePath,bool display)
 
 	Mat rgba[4] = { rgb[0], rgb[1], rgb[2], alpha };
 	merge(rgba, 4, dst);
+	//Resize the Mat
+	Mat resized;
+	cv::resize(dst, resized, cvSize(width, height));
 	//Save the result(image file)
-	return OpenCvOperation::saveMatImageFile(dst, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME);
+	return OpenCvOperation::saveMatImageFile(resized, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME);
 }
 //@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
 bool OpenCvOperation::addingTwoImages(std::string filePath_foreground, std::string filePath_background, std::string dest, bool display)

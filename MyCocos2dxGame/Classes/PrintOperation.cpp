@@ -80,3 +80,7 @@ void PrintOperation::onPrint(CDC *pdc, CPrintInfo *pInfo)
 
 }
 */
+void PrintOperation::printJpegImage(std::string context)
+{
+	
+}

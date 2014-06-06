@@ -71,7 +71,7 @@ bool HelloWorld::init()
 	this->panel_upload->setTouchEnabled(false);
 	this->panel_editor->setTouchEnabled(false);
 	this->panel_verifing->setTouchEnabled(false);
-	this->panel_verified->setTouchEnabled(false);
+	//this->panel_verified->setTouchEnabled(false);
 	this->panel_typeset->setTouchEnabled(false);
 	//Window buttons
 	this->btn_window_min = dynamic_cast<ui::Button*>(this->panel_intro->getChildByName("Button_window_min"));
@@ -322,7 +322,7 @@ void HelloWorld::onWhiteColouredButtonTouch(Object *pSender, ui::TouchEventType 
 }
 void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 {
-	cocos2d::Size definedSize;
+	cocos2d::Size definedSize = HelloWorld::getUserDefinedSize();
 	std::string definedFolderFilePath;
 	switch (type)
 	{
@@ -330,14 +330,11 @@ void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onSaveButtonTouch,TOUCH_EVENT_ENDED!");
-		//
 		//Get user defined save photo path:
 		definedFolderFilePath = FileOperation::saveFileDialog();
 		this->cur_output_file_path = definedFolderFilePath + HW_DataModel::HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME;
 		CCLOG("cur_output_file_folder: %s", this->cur_output_file_path.c_str());
 		//OpenCV save colored background image file:
-		definedSize = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
-		CCLOG("current user defined frame size is:(%f,%f)", definedSize.width, definedSize.height);
 		if (!OpenCvOperation::saveColoredImageFile(this->cur_colored_value, (int)definedSize.width, (int)definedSize.height, HW_DataModel::HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME.c_str()))
 		{
 			MessageBox("Save background image file failure!", "ERROR");
@@ -392,7 +389,7 @@ void HelloWorld::onTypesetListViewItemSelected(Object *pSender, ui::ListViewEven
 	std::string background_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_TYPESET_FRAME_LABELS[cur_listView_selected_index];
 	//
 	Image *_photo = new Image();		
-	_photo->initWithImageFile(this->cur_photo_file_path);
+	_photo->initWithImageFile(this->cur_output_file_path);
 	Texture2D *_photoTexture = new Texture2D();
 	_photoTexture->initWithImage(_photo);
 	//
@@ -410,7 +407,7 @@ void HelloWorld::onTypesetListViewItemSelected(Object *pSender, ui::ListViewEven
 		_typeset_tileMap = TMXTiledMap::create(cur_tileLayer_file_path);
 		this->imageView_typeset_frame->removeAllChildren();
 		this->imageView_typeset_frame->addChild(_typeset_tileMap);
-		_typeset_tileMap->setPosition(cocos2d::CCPointMake(70,155));
+		_typeset_tileMap->setPosition(cocos2d::CCPointMake(70,150));
 		_foreground_layer = _typeset_tileMap->layerNamed("background");
 		_foreground_layer->setTexture(_photoTexture);
 		break;
@@ -655,6 +652,7 @@ void HelloWorld::onEditorNaviButtonTouch(Object *pSender, ui::TouchEventType typ
 }
 void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType type)
 {
+	cocos2d::Size definedSize = HelloWorld::getUserDefinedSize();
 	//
 	switch (type)
 	{
@@ -679,7 +677,7 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_(this->cur_photo_file_path);
-		if (OpenCvOperation::foregroundGrabcut(this->cur_photo_file_path, HW_OPENCV_DEBUG))
+		if (OpenCvOperation::foregroundGrabcut(this->cur_photo_file_path,(int)definedSize.width,(int)definedSize.height, HW_OPENCV_DEBUG))
 		{
 			this->progressBar_verifing->setPercent(100);
 			this->pageView_main->scrollToPage(PAGE_VIEW_VERIFIED);
@@ -1022,4 +1020,11 @@ void HelloWorld::applyEditorSettingChanges()
 	this->scrollView_editor->setInnerContainerSize(this->cur_defined_size);
 	//this->scrollView_editor->setBackGroundColorType(LAYOUT_COLOR_SOLID);
 	//this->scrollView_editor->setBackGroundColor(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_COLORS[HW_UserDataModel::Instance()->cur_listView_selected_index]);
+}
+///Utility functions
+cocos2d::Size HelloWorld::getUserDefinedSize()
+{
+	cocos2d::Size definedSize = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	CCLOG("current user defined frame size is:(%f,%f)", definedSize.width, definedSize.height);
+	return definedSize;
 }

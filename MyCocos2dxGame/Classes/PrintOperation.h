@@ -13,6 +13,8 @@ class PrintOperation
 public:
 	//@see http://cplusplusblogsbyrex.blogspot.com/2012/07/open-print-dialog-using-c.html
 	static void printDialog();
+	//
+	static void printJpegImage(std::string context);
 private:
 	//Print related variables
 	//static void onPrint(CDC *pdc, CPrintInfo *pInfo);

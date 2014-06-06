@@ -189,6 +189,8 @@ private:
 	void changeCurrentVerifiedResults();
 	void applyUploadSettingChanges();
 	void applyEditorSettingChanges();
+	//Utility functions
+	cocos2d::Size getUserDefinedSize();
 };
 
 #endif // __HELLOWORLD_SCENE_H__
