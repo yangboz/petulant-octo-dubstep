@@ -338,15 +338,21 @@ void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 		//OpenCV save colored background image file:
 		definedSize = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
 		CCLOG("current user defined frame size is:(%f,%f)", definedSize.width, definedSize.height);
-		if (OpenCvOperation::saveColoredImageFile(this->cur_colored_value, (int)definedSize.width, (int)definedSize.height, HW_DataModel::HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME.c_str()))
+		if (!OpenCvOperation::saveColoredImageFile(this->cur_colored_value, (int)definedSize.width, (int)definedSize.height, HW_DataModel::HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME.c_str()))
 		{
-			//Popup notification.
-			this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS);
+			MessageBox("Save background image file failure!", "ERROR");
 		}
-		//OpenCV add images(foreground,background):
-		this->cur_foreground_file_path = HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME.c_str();
-		this->cur_background_file_path = HW_DataModel::HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME.c_str();
-		OpenCvOperation::addingTwoImages(this->cur_foreground_file_path, this->cur_background_file_path, this->cur_output_file_path);//Default to success.
+		else
+		{
+			//OpenCV add images(foreground,background):
+			this->cur_foreground_file_path = HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME.c_str();
+			this->cur_background_file_path = HW_DataModel::HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME.c_str();
+			if (OpenCvOperation::addingTwoImages(this->cur_foreground_file_path, this->cur_background_file_path, this->cur_output_file_path,HW_OPENCV_DEBUG))
+			{
+				//Popup notification.
+				this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS);
+			}
+		}
 		break;
 	default:
 		break;
@@ -360,6 +366,9 @@ void HelloWorld::onIntroListViewItemSelected(Object *pSender, ui::ListViewEventT
 	switch (type)
 	{
 	case LISTVIEW_ONSELECTEDITEM_END:
+		//Testing code here:
+		//OpenCvOperation::addingTwoImages("C:\\HP_ID_Print_output_foreground_.jpg", "C:\\HP_ID_Print_output_background_.png", "C:\\HP_ID_Print_output_result_fin_.png",HW_OPENCV_DEBUG);
+		//
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		this->cur_defined_size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
 		CCLOG("onIntroListViewItemSelected index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);

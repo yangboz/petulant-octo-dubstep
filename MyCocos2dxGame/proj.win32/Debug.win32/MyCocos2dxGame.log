@@ -1,4 +1,4 @@
-﻿Build started 2014/6/6 11:41:33.
+﻿Build started 2014/6/6 14:43:53.
      1>Project "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\MyCocos2dxGame.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of PrintOperation.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are ..\Classes\PrintOperation.cpp, PrintOperation.cpp.
      1>PreLinkEvent:
@@ -26,7 +26,6 @@
          "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libcocos2d.lib"
          "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libAudio.lib"
          "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libchipmunk.lib"
-         LINK : C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\MyCocos2dxGame.exe not found or not built by the last incremental link; performing full link
      1>AppDelegate.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
      1>Debug.win32\PrintOperation.obj : warning LNK4042: object specified more than once; extras ignored
      1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
@@ -81,4 +80,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:14.43
+Time Elapsed 00:00:14.61

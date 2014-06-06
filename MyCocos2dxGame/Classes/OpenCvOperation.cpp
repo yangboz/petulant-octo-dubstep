@@ -366,24 +366,30 @@ bool OpenCvOperation::foregroundGrabcut(std::string filePath,bool display)
 	return OpenCvOperation::saveMatImageFile(dst, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME);
 }
 //@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
-void OpenCvOperation::addingTwoImages(std::string filePath_foreground, std::string filePath_background, std::string dest)
+bool OpenCvOperation::addingTwoImages(std::string filePath_foreground, std::string filePath_background, std::string dest, bool display)
 {
-	double alpha = 0.5; double beta;
+	double alpha = 1.0; double beta;
 	Mat src1, src2, dst;
 	/// Read image ( same size, same type )
 	src1 = imread(filePath_foreground);
 	src2 = imread(filePath_background);
 
-	if (!src1.data) { CCLOG("Error loading foreground with filePath: %s", filePath_foreground.c_str()); return; }
-	if (!src2.data) { CCLOG("Error loading background with filePath: %s", filePath_background.c_str()); return; }
-
-	/// Create Windows
-	cv::namedWindow("Linear Blend(AddImages)", 1);
-
-	beta = (1.0 - alpha);
-	addWeighted(src1, alpha, src2, beta, 0.0, dst);
-
-	cv::imshow("Linear Blend(AddImages)", dst);
+	if (!src1.data) { CCLOG("Error loading foreground with filePath: %s", filePath_foreground.c_str()); return false; }
+	if (!src2.data) { CCLOG("Error loading background with filePath: %s", filePath_background.c_str()); return false; }
+	
+	//beta = (1.0 - alpha);
+	beta = 1.0;
+	//addWeighted(src1, alpha, src2, beta, 0.0, dst);
+	addWeighted(src1, alpha, src2, beta, 0.0, dst);//Notice:same width/height required.
+	//
+	if (display)
+	{
+		/// Create Windows
+		cv::namedWindow("Linear Blend(AddImages)", 1);
+		cv::imshow("Linear Blend(AddImages)", dst);
+	}
+	//Save the result(image file)
+	return OpenCvOperation::saveMatImageFile(dst, dest);
 }
 //
 bool OpenCvOperation::saveMatImageFile(cv::Mat image,std::string context)
