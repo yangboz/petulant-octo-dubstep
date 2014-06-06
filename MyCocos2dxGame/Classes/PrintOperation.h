@@ -7,15 +7,20 @@ using namespace std;
 //#include "windows.h"
 
 #include "HW_StringUtils.h"
+//OpenCV core
+#include <opencv2\opencv.hpp>
+using namespace cv;
+//OpenCV face detection
+#include <opencv2\highgui\highgui.hpp>
+#include <opencv\cv.h>
 
 class PrintOperation
 {
 public:
 	//@see http://cplusplusblogsbyrex.blogspot.com/2012/07/open-print-dialog-using-c.html
-	static void printDialog();
+	static LPWSTR printDialog();
 	//
-	static void printJpegImage(std::string context);
-private:
+	static void printJpegImage(IplImage *image, LPWSTR context);
 	//Print related variables
 	//static void onPrint(CDC *pdc, CPrintInfo *pInfo);
 };

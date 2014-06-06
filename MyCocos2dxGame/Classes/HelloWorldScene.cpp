@@ -255,6 +255,8 @@ void HelloWorld::onTypesetButtonTouch(Object *pSender, ui::TouchEventType type)
 }
 void HelloWorld::onPrintButtonTouch(Object *pSender, ui::TouchEventType type)
 {
+	LPWSTR localPrinterName = NULL;
+	IplImage *image;//cvLoadImage(this->cur_output_file_path.c_str());
 	switch (type)
 	{
 	case TOUCH_EVENT_BEGAN:
@@ -262,7 +264,16 @@ void HelloWorld::onPrintButtonTouch(Object *pSender, ui::TouchEventType type)
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onPrintButtonTouch,TOUCH_EVENT_ENDED!");
 		//Photo system print function call here:
-		PrintOperation::printDialog();
+		localPrinterName = PrintOperation::printDialog();
+		if (NULL != localPrinterName)
+		{
+			image = cvLoadImage(this->cur_output_file_path.c_str());
+			PrintOperation::printJpegImage(image, localPrinterName);
+		}
+		else
+		{
+			MessageBox("Local printer invalid!", "ERROR");
+		}
 		break;
 	default:
 		break;

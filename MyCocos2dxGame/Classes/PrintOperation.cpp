@@ -4,7 +4,7 @@
 #define COCOS2D_DEBUG 1
 #include "cocos2d.h"
 
-void PrintOperation::printDialog()
+LPWSTR PrintOperation::printDialog()
 {
 	BOOL            printDlgReturn = FALSE;
 	HDC                printerDC = NULL;
@@ -73,6 +73,7 @@ void PrintOperation::printDialog()
 	{
 		// The user cancelled out of the print dialog box.
 	}
+	return localPrinterName;
 }
 /*
 void PrintOperation::onPrint(CDC *pdc, CPrintInfo *pInfo)
@@ -80,7 +81,26 @@ void PrintOperation::onPrint(CDC *pdc, CPrintInfo *pInfo)
 
 }
 */
-void PrintOperation::printJpegImage(std::string context)
+void PrintOperation::printJpegImage(IplImage *image, LPWSTR context)
 {
-	
+	HANDLE print_handle;
+	DOC_INFO_1 docinfo1;
+	DWORD bytes_written;
+
+	docinfo1.pDocName = (LPTSTR)L"HP_ID_Print.jpg";
+	docinfo1.pOutputFile = NULL;
+	docinfo1.pDatatype = (LPTSTR)L"RAW";
+
+	BOOL bool1, bool2, bool3, bool4;
+
+	//bool1 = OpenPrinter((LPTSTR)L"csi01p107.asiapacific.hpqcorp.net", &print_handle, NULL);
+	bool1 = OpenPrinter(context, &print_handle, NULL);
+	bool2 = StartDocPrinter(print_handle, 1, (LPBYTE)&docinfo1);
+
+	bool3 = StartPagePrinter(print_handle);
+	bool4 = WritePrinter(print_handle, (LPVOID)image->imageData, (DWORD)image->imageSize, &bytes_written);
+	EndPagePrinter(print_handle);
+	EndDocPrinter(print_handle);
+
+	ClosePrinter(print_handle);
 }
