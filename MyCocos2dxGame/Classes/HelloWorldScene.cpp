@@ -179,6 +179,7 @@ bool HelloWorld::init()
 	this->cur_scaled_value = 1.0f;
 	this->cur_moved_value_x = 0.0f;
 	this->cur_moved_value_y = 0.0f;
+	this->cur_colored_value = BG_COLOR_WHITE;
     return true;
 }
 
@@ -279,6 +280,7 @@ void HelloWorld::onRedColouredButtonTouch(Object *pSender, ui::TouchEventType ty
 		//Photo editor with background color function here:
 		this->scrollView_verified->setBackGroundColor(cocos2d::Color3B::RED);
 		//this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::RED);
+		this->cur_colored_value = BG_COLOR_RED;//Store user defined value for background.
 		break;
 	default:
 		break;
@@ -295,6 +297,7 @@ void HelloWorld::onBlueColouredButtonTouch(Object *pSender, ui::TouchEventType t
 		//Photo editor with background color function here:
 		this->scrollView_verified->setBackGroundColor(cocos2d::Color3B::BLUE);
 		//this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::BLUE);
+		this->cur_colored_value = BG_COLOR_BLUE;//Store user defined value for background.
 		break;
 	default:
 		break;
@@ -311,6 +314,7 @@ void HelloWorld::onWhiteColouredButtonTouch(Object *pSender, ui::TouchEventType 
 		//Photo editor with background color function here:
 		this->scrollView_verified->setBackGroundColor(cocos2d::Color3B::WHITE);
 		//this->scrollView_editor->setBackGroundColor(cocos2d::Color3B::WHITE);
+		this->cur_colored_value = BG_COLOR_WHITE;//Store user defined value for background.
 		break;
 	default:
 		break;
@@ -335,7 +339,7 @@ void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 		//OpenCV save colored background image file:
 		definedSize = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
 		CCLOG("current user defined frame size is:(%f,%f)", definedSize.width, definedSize.height);
-		OpenCvOperation::saveColoredImageFile(cv::Scalar(255, 0, 0), (int)definedSize.width, (int)definedSize.height, this->cur_output_file_path);
+		OpenCvOperation::saveColoredImageFile(this->cur_colored_value, (int)definedSize.width, (int)definedSize.height, this->cur_output_file_path);
 		//OpenCV add images(foreground,background):
 		this->cur_foreground_file_path = HW_DataModel::HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME;
 		OpenCvOperation::addingTwoImages(this->cur_foreground_file_path, this->cur_background_file_path, this->cur_output_file_path);

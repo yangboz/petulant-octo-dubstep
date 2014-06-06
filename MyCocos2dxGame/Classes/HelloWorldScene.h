@@ -34,6 +34,11 @@ using namespace ui;
 //OpenCV Debug level
 #define HW_OPENCV_DEBUG true
 
+//Design color constants
+#define BG_COLOR_WHITE cv::Scalar(255,255,255)
+#define BG_COLOR_RED cv::Scalar(0,0,255)
+#define BG_COLOR_BLUE cv::Scalar(255,0,0)
+
 class HelloWorld : public cocos2d::Layer
 {
 public:
@@ -167,6 +172,7 @@ private:
 	float cur_moved_value_x;
 	float cur_moved_value_y;
 	float cur_scaled_value;
+	cv::Scalar cur_colored_value;
 	//File path for output result.
 	std::string cur_photo_file_path;
 	std::string cur_output_file_path;
