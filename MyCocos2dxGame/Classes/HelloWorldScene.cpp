@@ -333,18 +333,20 @@ void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 		//
 		//Get user defined save photo path:
 		definedFolderFilePath = FileOperation::saveFileDialog();
-		this->cur_output_file_path = definedFolderFilePath + HW_DataModel::HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME;
+		this->cur_output_file_path = definedFolderFilePath + HW_DataModel::HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME;
 		CCLOG("cur_output_file_folder: %s", this->cur_output_file_path.c_str());
-		CCLOG("Final fixed out put result file name is: %s", (this->cur_output_file_path + HW_DataModel::HW_DataModel::OUT_PUT_FIN_RESULT_FILE_NAME).c_str());
 		//OpenCV save colored background image file:
 		definedSize = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
 		CCLOG("current user defined frame size is:(%f,%f)", definedSize.width, definedSize.height);
-		OpenCvOperation::saveColoredImageFile(this->cur_colored_value, (int)definedSize.width, (int)definedSize.height, this->cur_output_file_path);
+		if (OpenCvOperation::saveColoredImageFile(this->cur_colored_value, (int)definedSize.width, (int)definedSize.height, HW_DataModel::HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME.c_str()))
+		{
+			//Popup notification.
+			this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS);
+		}
 		//OpenCV add images(foreground,background):
-		this->cur_foreground_file_path = HW_DataModel::HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME;
-		OpenCvOperation::addingTwoImages(this->cur_foreground_file_path, this->cur_background_file_path, this->cur_output_file_path);
-		//Popup notification.
-		this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS);
+		this->cur_foreground_file_path = HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME.c_str();
+		this->cur_background_file_path = HW_DataModel::HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME.c_str();
+		OpenCvOperation::addingTwoImages(this->cur_foreground_file_path, this->cur_background_file_path, this->cur_output_file_path);//Default to success.
 		break;
 	default:
 		break;

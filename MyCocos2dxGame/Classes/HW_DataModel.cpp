@@ -36,7 +36,7 @@ namespace HW_DataModel
 	const std::vector<std::string>  HW_DataModel::ARRAY_OF_TYPESET_TMX_LABELS = { "..//data//tmx//305x220.tmx", "..//data//tmx//450x300.tmx", "..//data//tmx//465x330.tmx" };
 	///Output file name
 	const std::string HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME = "\\HP_ID_Print_result_pre.jpg";
-	const std::string HW_DataModel::OUT_PUT_FIN_RESULT_FILE_NAME = "HP_ID_Print_result_fin.jpg";
+	const std::string HW_DataModel::OUT_PUT_FIN_RESULT_FILE_NAME = "\\HP_ID_Print_result_fin.jpg";
 	const std::string HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME = "HP_ID_Print_output_foreground_.png";//e.g:"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\Resources"
-	const std::string HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME = "\\HP_ID_Print_output_background_.png";
+	const std::string HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME = "HP_ID_Print_output_background_.png";
 }
