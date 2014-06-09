@@ -32,7 +32,7 @@ using namespace ui;
 #define PAGE_VIEW_TYPESET 5
 
 //OpenCV Debug level
-#define HW_OPENCV_DEBUG true
+#define HW_OPENCV_DEBUG false
 
 //Design color constants
 #define BG_COLOR_WHITE cv::Scalar(255,255,255)
