@@ -255,7 +255,7 @@ void HelloWorld::onTypesetButtonTouch(Object *pSender, ui::TouchEventType type)
 }
 void HelloWorld::onPrintButtonTouch(Object *pSender, ui::TouchEventType type)
 {
-	LPWSTR localPrinterName = NULL;
+	std::string localPrinterName;
 	IplImage *image;//cvLoadImage(this->cur_output_file_path.c_str());
 	switch (type)
 	{
@@ -265,10 +265,11 @@ void HelloWorld::onPrintButtonTouch(Object *pSender, ui::TouchEventType type)
 		CCLOG("onPrintButtonTouch,TOUCH_EVENT_ENDED!");
 		//Photo system print function call here:
 		localPrinterName = PrintOperation::printDialog();
-		if (NULL != localPrinterName)
+		if (NULL != localPrinterName.c_str())
 		{
-			image = cvLoadImage(this->cur_output_file_path.c_str());
-			PrintOperation::printJpegImage(image, localPrinterName);
+			//image = cvLoadImage(this->cur_output_file_path.c_str());
+			//PrintOperation::printJpegImage(image, localPrinterName);
+			PrintOperation::printCommand(this->cur_output_file_path);
 		}
 		else
 		{
@@ -376,6 +377,7 @@ void HelloWorld::onIntroListViewItemSelected(Object *pSender, ui::ListViewEventT
 	case LISTVIEW_ONSELECTEDITEM_END:
 		//Testing code here:
 		//OpenCvOperation::addingTwoImages("C:\\HP_ID_Print_output_foreground_.jpg", "C:\\HP_ID_Print_output_background_.png", "C:\\HP_ID_Print_output_result_fin_.png",HW_OPENCV_DEBUG);
+		//PrintOperation::printCommand(this->cur_output_file_path);
 		//
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		this->cur_defined_size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];

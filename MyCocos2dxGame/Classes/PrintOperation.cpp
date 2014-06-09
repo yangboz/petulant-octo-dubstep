@@ -4,7 +4,7 @@
 #define COCOS2D_DEBUG 1
 #include "cocos2d.h"
 
-LPWSTR PrintOperation::printDialog()
+std::string PrintOperation::printDialog()
 {
 	BOOL            printDlgReturn = FALSE;
 	HDC                printerDC = NULL;
@@ -73,7 +73,9 @@ LPWSTR PrintOperation::printDialog()
 	{
 		// The user cancelled out of the print dialog box.
 	}
-	return localPrinterName;
+	std::wstring wstr(localPrinterName);
+	std::string str(wstr.begin(), wstr.end());
+	return str;
 }
 /*
 void PrintOperation::onPrint(CDC *pdc, CPrintInfo *pInfo)
@@ -81,7 +83,7 @@ void PrintOperation::onPrint(CDC *pdc, CPrintInfo *pInfo)
 
 }
 */
-void PrintOperation::printJpegImage(IplImage *image, LPWSTR context)
+void PrintOperation::printJpegImage(IplImage *image, std::string context)
 {
 	HANDLE print_handle;
 	DOC_INFO_1 docinfo1;
@@ -94,7 +96,7 @@ void PrintOperation::printJpegImage(IplImage *image, LPWSTR context)
 	BOOL bool1, bool2, bool3, bool4;
 
 	//bool1 = OpenPrinter((LPTSTR)L"csi01p107.asiapacific.hpqcorp.net", &print_handle, NULL);
-	bool1 = OpenPrinter(context, &print_handle, NULL);
+	bool1 = OpenPrinter((LPTSTR)context.c_str(), &print_handle, NULL);
 	bool2 = StartDocPrinter(print_handle, 1, (LPBYTE)&docinfo1);
 
 	bool3 = StartPagePrinter(print_handle);
@@ -103,4 +105,18 @@ void PrintOperation::printJpegImage(IplImage *image, LPWSTR context)
 	EndDocPrinter(print_handle);
 
 	ClosePrinter(print_handle);
+}
+
+bool PrintOperation::printCommand(std::string context)
+{
+	//@see http://www.ehow.com/list_6520303_microsoft-paint-command-line-options.html
+	//std::string  command = "C:\\Windows\\System32\\mspaint.exe C:\\lena.png /p";
+	std::string command = "C:\\Windows\\System32\\mspaint.exe " + context + " /p";
+	//system("CLS");
+	CCLOG("PrintOperation::printCommand cmd:%s", command.c_str());
+	int result = system(command.c_str());
+	//Sleep(5000);
+	//system("PAUSE");
+	CCLOG("PrintOperation::printCommand result:%i",result);
+	return (bool)result;
 }

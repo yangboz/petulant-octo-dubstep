@@ -18,11 +18,12 @@ class PrintOperation
 {
 public:
 	//@see http://cplusplusblogsbyrex.blogspot.com/2012/07/open-print-dialog-using-c.html
-	static LPWSTR printDialog();
+	static std::string printDialog();
 	//
-	static void printJpegImage(IplImage *image, LPWSTR context);
+	static void printJpegImage(IplImage *image, std::string context);
 	//Print related variables
 	//static void onPrint(CDC *pdc, CPrintInfo *pInfo);
+	static bool printCommand(std::string context);
 };
 
 #endif
