@@ -23,7 +23,7 @@ public:
 	static void printJpegImage(IplImage *image, std::string context);//TBC
 	//Print related variables
 	//static void onPrint(CDC *pdc, CPrintInfo *pInfo);
-	static bool printCommand(std::string context);
+	static bool printCommand(std::string imageFilePath,std::string printerName);
 };
 
 #endif

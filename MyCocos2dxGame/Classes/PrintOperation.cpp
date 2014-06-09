@@ -22,7 +22,7 @@ std::string PrintOperation::printDialog()
 		// Don't allow separate print to file.
 		// Remove these flags if you want to support this feature.
 		| PD_HIDEPRINTTOFILE
-		| PD_DISABLEPRINTTOFILE
+		| PD_DISABLEPRINTTOFILE 
 		// Don't allow selecting individual document pages to print.
 		// Remove this flag if you want to support this feature.
 		| PD_NOSELECTION;
@@ -53,7 +53,8 @@ std::string PrintOperation::printDialog()
 				(LPVOID)returnedDevmode,
 				returnedDevmode->dmSize);
 
-			localPrinterName = localDevmode->dmDeviceName;
+			//	const CCHDEVICENAME = 32;
+			localPrinterName = localDevmode->dmDeviceName;//Note: that this name may be truncated to fit in the dmDeviceName array.
 
 
 			localNumberOfCopies = printDlgInfo.nCopies;
@@ -109,11 +110,12 @@ void PrintOperation::printJpegImage(IplImage *image, std::string context)
 	ClosePrinter(print_handle);
 }
 
-bool PrintOperation::printCommand(std::string context)
+bool PrintOperation::printCommand(std::string imageFilePath, std::string printerName)
 {
 	//@see http://www.ehow.com/list_6520303_microsoft-paint-command-line-options.html
 	//std::string  command = "C:\\Windows\\System32\\mspaint.exe C:\\lena.png /p";
-	std::string command = "C:\\Windows\\System32\\mspaint.exe " + context + " /p";
+	std::string command = "C:\\Windows\\System32\\mspaint.exe " + imageFilePath + " /pt " + printerName;
+	//std::string command = "C:\\Windows\\System32\\mspaint.exe " + imageFilePath + " /pt ";
 	//system("CLS");
 	CCLOG("PrintOperation::printCommand cmd:%s", command.c_str());
 	int result = system(command.c_str());
