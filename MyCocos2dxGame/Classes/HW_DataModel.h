@@ -44,6 +44,7 @@ namespace HW_DataModel
 		///Panel_typeset
 		static const std::vector<std::string> ARRAY_OF_TYPESET_FRAME_LABELS;
 		static const std::vector<std::string> ARRAY_OF_TYPESET_TMX_LABELS;
+		static const std::vector<cocos2d::Size> ARRAY_OF_TYPESET_TMX_SIZES;
 		///Output file name
 		static const std::string OUT_PUT_PRE_RESULT_FILE_NAME;
 		static const std::string OUT_PUT_FIN_RESULT_FILE_NAME;

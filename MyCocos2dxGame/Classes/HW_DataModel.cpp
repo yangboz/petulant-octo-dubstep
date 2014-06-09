@@ -34,6 +34,7 @@ namespace HW_DataModel
 	///Panel_typeset
 	const std::vector<std::string>  HW_DataModel::ARRAY_OF_TYPESET_FRAME_LABELS = { "CocoStudioUI/photo_on_paper/pattern_photo_on_paper_4x6.png", "CocoStudioUI/photo_on_paper/pattern_photo_on_paper_5x7.png", "CocoStudioUI/photo_on_paper/pattern_photo_on_paper_a4.png" };
 	const std::vector<std::string>  HW_DataModel::ARRAY_OF_TYPESET_TMX_LABELS = { "..//data//tmx//305x220.tmx", "..//data//tmx//450x300.tmx", "..//data//tmx//465x330.tmx" };
+	const std::vector<cocos2d::Size> HW_DataModel::ARRAY_OF_TYPESET_TMX_SIZES = { cocos2d::CCSizeMake(2, 2), cocos2d::CCSizeMake(3, 2), cocos2d::CCSizeMake(3, 2)};
 	///Output file name
 	const std::string HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME = "\\HP_ID_Print_result_pre.png";
 	const std::string HW_DataModel::OUT_PUT_FIN_RESULT_FILE_NAME = "\\HP_ID_Print_result_fin.png";

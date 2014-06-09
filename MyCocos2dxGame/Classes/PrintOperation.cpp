@@ -72,7 +72,9 @@ std::string PrintOperation::printDialog()
 	else
 	{
 		// The user cancelled out of the print dialog box.
+		return "";
 	}
+	//
 	std::wstring wstr(localPrinterName);
 	std::string str(wstr.begin(), wstr.end());
 	return str;

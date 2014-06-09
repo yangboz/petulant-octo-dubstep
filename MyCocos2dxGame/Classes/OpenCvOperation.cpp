@@ -465,3 +465,66 @@ bool OpenCvOperation::saveColoredImageFile(cv::Scalar colorScalar,int width,int 
 	saved = imwrite(context, matImage);
 	return saved;
 }
+//@see http://funwithkinect.blogspot.com.br/2012/02/copying-and-tiling-with-opencv.html
+bool OpenCvOperation::tilingImages(int row, int column, std::string context, std::string outputDest,bool display)
+{
+	bool saved = false;
+	//create a new image pointer to point to the source image
+	IplImage *img = cvLoadImage(context.c_str(), 1);
+	//take care of non existent source images
+	if (!img)
+	{
+		MessageBox(" Image could not be loaded, check if file exists!", "ERROR");
+		return false;
+	}
+
+
+	//let us say, u want to tile this m times horizontally, and n times vertically
+	// calculate size of new image
+
+	int newWidth = img->width * column;
+	int newHeight = img->height *row;
+
+	// Create a new image to store the tiled image
+	// 2nd parameter is the pixel size and 3rd parmeter is the number of
+	// channels(R,G,B)
+
+	IplImage *newImg = cvCreateImage(cvSize(newWidth, newHeight), IPL_DEPTH_8U, 3);
+
+
+	// loop counters
+	int left_top_x = 0;
+	int left_top_y = 0;
+
+	//loop from starting position to end
+	for (; left_top_y < newHeight; left_top_x += (img->width))
+	{
+		if (left_top_x >= newWidth)
+		{
+			left_top_x = -img->width;
+			left_top_y += img->height;
+			continue;
+		}
+		// set the desired region of interest        
+		cvSetImageROI(newImg, cvRect(left_top_x, left_top_y, img->width, img->height));
+		// copy to that region
+		cvCopy(img, newImg);
+		// reset region of interest
+		cvResetImageROI(newImg);
+	}
+	// show images of happy faces :)
+	if (display)
+	{
+		cvNamedWindow("TiliedImage");
+		cvShowImage("TiliedImage", newImg);
+	}
+	try
+	{
+		saved = cvSaveImage(outputDest.c_str(), newImg);
+	}
+	catch (...)
+	{
+		MessageBox("Destination file name invalid!","ERROR");
+	}
+	return saved;
+}

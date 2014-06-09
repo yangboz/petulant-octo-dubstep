@@ -51,6 +51,8 @@ public:
 	static bool saveScaledImageFile(double rate, std::string context);
 	//Save image file with solid color
 	static bool saveColoredImageFile(cv::Scalar colorScalar, int width, int height, std::string context);
+	//@see http://funwithkinect.blogspot.com.br/2012/02/copying-and-tiling-with-opencv.html
+	static bool tilingImages(int row, int column, std::string context, std::string outputDest, bool display);
 private:
 	//OpenCV related variables
 	//

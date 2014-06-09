@@ -176,6 +176,7 @@ private:
 	//File path for output result.
 	std::string cur_photo_file_path;
 	std::string cur_output_file_path;
+	std::string cur_output_tiled_file_path;
 	std::string cur_foreground_file_path;
 	std::string cur_background_file_path;
 	//

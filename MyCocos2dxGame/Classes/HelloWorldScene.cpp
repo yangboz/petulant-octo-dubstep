@@ -257,23 +257,35 @@ void HelloWorld::onPrintButtonTouch(Object *pSender, ui::TouchEventType type)
 {
 	std::string localPrinterName;
 	IplImage *image;//cvLoadImage(this->cur_output_file_path.c_str());
+	int tiledRows;
+	int tiledColumns;
+	//
 	switch (type)
 	{
 	case TOUCH_EVENT_BEGAN:
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onPrintButtonTouch,TOUCH_EVENT_ENDED!");
+		//Save the tiling image file at first.
+		tiledRows = HW_DataModel::HW_DataModel::ARRAY_OF_TYPESET_TMX_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index].height;
+		tiledColumns = HW_DataModel::HW_DataModel::ARRAY_OF_TYPESET_TMX_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index].width;
+		if (!OpenCvOperation::tilingImages(tiledRows, tiledColumns, this->cur_output_file_path, this->cur_output_tiled_file_path, HW_OPENCV_DEBUG))
+		{
+			MessageBox("Save tiled images failure!", "ERROR");
+			return;
+		}
 		//Photo system print function call here:
 		localPrinterName = PrintOperation::printDialog();
-		if (NULL != localPrinterName.c_str())
+		if ( "" != localPrinterName.c_str())
 		{
-			//image = cvLoadImage(this->cur_output_file_path.c_str());
+			//image = cvLoadImage(this->cur_output_tiled_file_path.c_str());
 			//PrintOperation::printJpegImage(image, localPrinterName);
-			PrintOperation::printCommand(this->cur_output_file_path);
+			PrintOperation::printCommand(this->cur_output_tiled_file_path);
 		}
 		else
 		{
 			MessageBox("Local printer invalid!", "ERROR");
+			return;
 		}
 		break;
 	default:
@@ -345,6 +357,7 @@ void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 		//Get user defined save photo path:
 		definedFolderFilePath = FileOperation::saveFileDialog();
 		this->cur_output_file_path = definedFolderFilePath + HW_DataModel::HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME;
+		this->cur_output_tiled_file_path = definedFolderFilePath + HW_DataModel::HW_DataModel::OUT_PUT_FIN_RESULT_FILE_NAME;
 		CCLOG("cur_output_file_folder: %s", this->cur_output_file_path.c_str());
 		//OpenCV save colored background image file:
 		if (!OpenCvOperation::saveColoredImageFile(this->cur_colored_value, (int)definedSize.width, (int)definedSize.height, HW_DataModel::HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME.c_str()))
@@ -377,6 +390,7 @@ void HelloWorld::onIntroListViewItemSelected(Object *pSender, ui::ListViewEventT
 	case LISTVIEW_ONSELECTEDITEM_END:
 		//Testing code here:
 		//OpenCvOperation::addingTwoImages("C:\\HP_ID_Print_output_foreground_.jpg", "C:\\HP_ID_Print_output_background_.png", "C:\\HP_ID_Print_output_result_fin_.png",HW_OPENCV_DEBUG);
+		//OpenCvOperation::tilingImages(2, 2, "C:\\lena.png", "C:\\lena_.png", HW_OPENCV_DEBUG);
 		//PrintOperation::printCommand(this->cur_output_file_path);
 		//
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());

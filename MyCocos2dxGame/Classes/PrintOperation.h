@@ -19,8 +19,8 @@ class PrintOperation
 public:
 	//@see http://cplusplusblogsbyrex.blogspot.com/2012/07/open-print-dialog-using-c.html
 	static std::string printDialog();
-	//
-	static void printJpegImage(IplImage *image, std::string context);
+	//@see http://www.codeproject.com/Articles/8916/Printing-Architecture
+	static void printJpegImage(IplImage *image, std::string context);//TBC
 	//Print related variables
 	//static void onPrint(CDC *pdc, CPrintInfo *pInfo);
 	static bool printCommand(std::string context);
