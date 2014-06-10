@@ -3,7 +3,7 @@
 
 [Setup]
 AppName = "HP_ID_Print_App"
-AppVersion = 0.0.2
+AppVersion = 0.0.3
 DefaultDirName = "C:\HP_ID_Print_App\"
 AppCopyright = Copyright 2013 HP, Corp.
 AppPublisher = HP, Corp.
@@ -12,8 +12,11 @@ AppPublisherURL = http://www.hp.com
 [Types]
 
 [Files]
-Source: "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\*.*"; DestDir: "{app}\"; Flags :ignoreversion recursesubdirs; CopyMode: alwaysoverwrite;
-Source: "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\data\*.*"; DestDir: "{app}\data"; Flags :ignoreversion recursesubdirs; CopyMode: alwaysoverwrite;
+Source: "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\*.exe"; DestDir: "{app}\"; Flags :ignoreversion recursesubdirs; CopyMode: alwaysoverwrite;
+Source: "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\game.res"; DestDir: "{app}\"; Flags :ignoreversion recursesubdirs; CopyMode: alwaysoverwrite;
+Source: "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\Resources\data\*.*"; DestDir: "{app}\data"; Flags :ignoreversion recursesubdirs; CopyMode: alwaysoverwrite;
+Source: "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\Resources\CocoStudioUI\*.*"; DestDir: "{app}\CocoStudioUI"; Flags :ignoreversion recursesubdirs; CopyMode: alwaysoverwrite;
+Source: "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\dlls\*.*"; DestDir: "{app}\"; Flags :ignoreversion recursesubdirs; CopyMode: alwaysoverwrite;
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files 
 
 [Tasks] 
