@@ -43,7 +43,7 @@ public:
 	//@see http://theembeddedsystems.blogspot.com/2011/05/background-subtraction-using-opencv.html
 	static void backgroundSubstraction_(std::string filePath);
 	//@see http://docs.opencv.org/trunk/doc/py_tutorials/py_imgproc/py_grabcut/py_grabcut.html
-	static bool foregroundGrabcut(std::string filePath, int width, int height, bool display);
+	static bool foregroundGrabcut(std::string filePath, int width, int height, bool display, bool interactive);
 	//@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
 	static bool addingTwoImages(std::string filePath_foreground, std::string filePath_background, std::string dest, bool display);
 	//Save image file with transform
@@ -53,6 +53,8 @@ public:
 	static bool saveColoredImageFile(cv::Scalar colorScalar, int width, int height, std::string context);
 	//@see http://funwithkinect.blogspot.com.br/2012/02/copying-and-tiling-with-opencv.html
 	static bool tilingImages(int row, int column, std::string context, std::string outputDest, bool display);
+	//@see http://blog.csdn.net/chenjiazhou12/article/details/29222619
+	static void on_mouse(int event, int x, int y, int flags, void* param);
 private:
 	//OpenCV related variables
 	//

@@ -702,8 +702,9 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_(this->cur_photo_file_path);
-		if (OpenCvOperation::foregroundGrabcut(this->cur_photo_file_path,(int)definedSize.width,(int)definedSize.height, HW_OPENCV_DEBUG))
+		if (OpenCvOperation::foregroundGrabcut(this->cur_photo_file_path, (int)definedSize.width, (int)definedSize.height, HW_OPENCV_DEBUG,HW_OPENCV_GRABCUT_INTERACTIVE))
 		{
+			
 			this->progressBar_verifing->setPercent(100);
 			this->pageView_main->scrollToPage(PAGE_VIEW_VERIFIED);
 			this->imageView_verified->loadTexture(HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME);

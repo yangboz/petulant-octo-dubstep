@@ -19,6 +19,8 @@
 
 #include "PrintOperation.h"
 
+#include "GCApplication.h"
+
 USING_NS_CC;
 //USING_NS_CC_EXT;
 using namespace ui;
@@ -33,6 +35,8 @@ using namespace ui;
 
 //OpenCV Debug level
 #define HW_OPENCV_DEBUG false
+///OpenCV Grabcut interactive level
+#define HW_OPENCV_GRABCUT_INTERACTIVE false
 
 //Design color constants
 #define BG_COLOR_WHITE cv::Scalar(255,255,255)
@@ -192,6 +196,7 @@ private:
 	void applyEditorSettingChanges();
 	//Utility functions
 	cocos2d::Size getUserDefinedSize();
+
 };
 
 #endif // __HELLOWORLD_SCENE_H__
