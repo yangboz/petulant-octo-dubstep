@@ -208,8 +208,6 @@ void HelloWorld::onUploadButtonTouch(Object *pSender, ui::TouchEventType type)
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onUploadButtonTouch,TOUCH_EVENT_ENDED!");
-		//Remove popup at first
-		this->removePopupLayer();
 		//Turn to open file picker and verifing steps.
 		this->onOpenFilePicker();
 		break;
@@ -276,7 +274,7 @@ void HelloWorld::onPrintButtonTouch(Object *pSender, ui::TouchEventType type)
 		}
 		//Photo system print function call here:
 		localPrinterName = PrintOperation::printDialog();
-		if ( "" != localPrinterName.c_str())
+		if ( "" != localPrinterName)
 		{
 			//image = cvLoadImage(this->cur_output_tiled_file_path.c_str());
 			//PrintOperation::printJpegImage(image, localPrinterName);
@@ -535,8 +533,6 @@ void HelloWorld::onPanelsTouch(Object *pSender, ui::TouchEventType type)
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onPanelsTouch,TOUCH_EVENT_ENDED!");
-		//Dismiss popuplayer function call here:
-		this->removePopupLayer();
 		break;
 	default:
 		break;
@@ -830,6 +826,8 @@ void HelloWorld::centerPopupLayer(const char *bgFilePath)
 		MessageBox("Invalid popupLayer parameter!", "Error");
 		return;
 	}
+	//Schedule to remove the popuplayer
+	this->schedule(schedule_selector(HelloWorld::removePopupLayer), 3, 1, 1);
 }
 ///
 PopupLayer* HelloWorld::createPopupLayer(const char *bgFilePath)
@@ -847,8 +845,9 @@ PopupLayer* HelloWorld::createPopupLayer(const char *bgFilePath)
 	return popup;
 }
 ///
-void HelloWorld::removePopupLayer()
+void HelloWorld::removePopupLayer(float interval)
 {
+	CCLOG("Scheduled for removePopupLayer:%f",interval);
 	if (NULL != this->popup_upload_photo_invalid_size)
 	{
 		this->removeChild(this->popup_upload_photo_invalid_size);

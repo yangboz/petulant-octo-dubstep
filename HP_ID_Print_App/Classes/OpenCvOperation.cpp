@@ -12,9 +12,9 @@ int OpenCvOperation::faceDetection(std::string filePath, bool display)
 	cv::Mat frame = imread(filePath);
 	//@see http://docs.opencv.org/doc/tutorials/objdetect/cascade_classifier/cascade_classifier.html
 	/** Global variables */
-	static std::string face_cascade_name = "..//data//haarcascades//haarcascade_frontalface_alt_tree.xml";
-	static std::string eyes_cascade_name = "..//data//haarcascades//haarcascade_eye.xml";
-	static std::string smile_cascade_name = "..//data//haarcascades//haarcascade_smile.xml";
+	static std::string face_cascade_name = "data//haarcascades//haarcascade_frontalface_alt_tree.xml";
+	static std::string eyes_cascade_name = "data//haarcascades//haarcascade_eye.xml";
+	static std::string smile_cascade_name = "data//haarcascades//haarcascade_smile.xml";
 	//
 	static CascadeClassifier face_cascade;
 	static CascadeClassifier eyes_cascade;
@@ -117,8 +117,8 @@ void OpenCvOperation::fullbodyDetectAndDisplay_Haar(std::string filePath)
 	*/
 	//@see http://docs.opencv.org/doc/tutorials/objdetect/cascade_classifier/cascade_classifier.html
 	/** Global variables */
-	static std::string fullbody_cascade_name = "..//data//haarcascades//haarcascade_fullbody.xml";
-	static std::string upperbody_cascade_name = "..//data//haarcascades//haarcascade_upperbody.xml";
+	static std::string fullbody_cascade_name = "data//haarcascades//haarcascade_fullbody.xml";
+	static std::string upperbody_cascade_name = "data//haarcascades//haarcascade_upperbody.xml";
 	//
 	static CascadeClassifier fullbody_cascade;
 	static CascadeClassifier upperbody_cascade;

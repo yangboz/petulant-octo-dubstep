@@ -1,17 +1,17 @@
-﻿Build started 2014/6/9 16:22:42.
-     1>Project "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\cocos2d.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2014/6/10 10:38:10.
+     1>Project "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\cocos\2d\cocos2d.vcxproj" on node 2 (Build target(s)).
      1>PreLinkEvent:
-         if not exist "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\" mkdir "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
-         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\freetype2\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
-         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\glfw3\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
-         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\curl\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
-         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\jpeg\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
-         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\png\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
-         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\tiff\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
-         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\webp\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
-         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\win32-specific\zlib\prebuilt\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
-         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\win32-specific\icon\prebuilt\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
-         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\..\..\external\win32-specific\gles\prebuilt\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\"
+         if not exist "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\" mkdir "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\"
+         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\cocos\2d\..\..\external\freetype2\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\"
+         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\cocos\2d\..\..\external\glfw3\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\"
+         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\cocos\2d\..\..\external\curl\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\"
+         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\cocos\2d\..\..\external\jpeg\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\"
+         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\cocos\2d\..\..\external\png\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\"
+         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\cocos\2d\..\..\external\tiff\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\"
+         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\cocos\2d\..\..\external\webp\prebuilt\win32\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\"
+         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\cocos\2d\..\..\external\win32-specific\zlib\prebuilt\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\"
+         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\cocos\2d\..\..\external\win32-specific\icon\prebuilt\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\"
+         xcopy /Y /Q "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\cocos\2d\..\..\external\win32-specific\gles\prebuilt\*.*" "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\"
          
          :VCEnd
          1 File(s) copied
@@ -25,9 +25,9 @@
          2 File(s) copied
          2 File(s) copied
        Lib:
-         cocos2d.vcxproj -> C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\proj.win32\Debug.win32\libcocos2d.lib
-     1>Done Building Project "C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\cocos2d\cocos\2d\cocos2d.vcxproj" (Build target(s)).
+         cocos2d.vcxproj -> C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\libcocos2d.lib
+     1>Done Building Project "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\cocos\2d\cocos2d.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.77
+Time Elapsed 00:00:01.15

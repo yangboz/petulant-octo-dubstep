@@ -150,7 +150,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\PopupLayer\PopupLayer.cpp" />
     <ClCompile Include="..\Classes\PrintOperation.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PrintOperation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -165,7 +164,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\scope_guard.h" />
     <ClInclude Include="..\Classes\HW_StringUtils.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="PrintOperation.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />

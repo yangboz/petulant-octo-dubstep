@@ -94,7 +94,7 @@ public:
 	void onOpenFilePicker();
 	//Popup layer related
 	void centerPopupLayer(const char *bgFilePath);
-	void removePopupLayer();
+	void removePopupLayer(float interval);
 	//Set up list views with size values
 	void setupListViews();
 
