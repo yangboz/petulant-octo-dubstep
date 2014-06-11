@@ -815,10 +815,24 @@ bool OpenCvOperation::saveMovedImageFile(double offsetX, double offsetY, std::st
 	//free mem
 	return saved;
 }
-bool OpenCvOperation::saveTransformedImageFile(double angle, double zoom, double centerX, double centerY, std::string src, std::string dst)
+bool OpenCvOperation::saveTransformedImageFile(double angle, double scale, double offsetX, double offsetY, std::string src, std::string dst)
 {
 	bool saved = false;
 	//
+	IplImage *srcImage = cvLoadImage(src.c_str());
+	IplImage *imageTransformed = cvCloneImage(srcImage);
+
+	CvMat* rot_mat = cvCreateMat(2, 3, CV_32FC1);
+
+	// Compute revolution matrix
+	CvPoint2D32f core = cvPoint2D32f(cvGetSize(imageTransformed).width / 2 + offsetX, cvGetSize(imageTransformed).height / 2 + offsetY);
+	cv2DRotationMatrix(core, angle, scale, rot_mat);
+
+	// Do a transformation
+	cvWarpAffine(srcImage, imageTransformed, rot_mat);
+	//
+	saved = OpenCvOperation::saveIplImageFile(imageTransformed, dst);
+	//free mem
 	return saved;
 }
 //Save image file with solid color

@@ -52,7 +52,7 @@ public:
 	static bool saveMovedImageFile(double offsetX, double offsetY, std::string src, std::string dst);
 	//OpenCV image free transform with rotate/scale/move
 	//@see http://opencv-tutorial.com/introduction/rotate-image-video/
-	static bool saveTransformedImageFile(double angle, double zoom, double centerX,double centerY,std::string src, std::string dst);
+	static bool saveTransformedImageFile(double angle, double scale, double offsetX, double offsetY, std::string src, std::string dst);
 	//Save image file with solid color
 	static bool saveColoredImageFile(cv::Scalar colorScalar, int width, int height, std::string context);
 	//@see http://funwithkinect.blogspot.com.br/2012/02/copying-and-tiling-with-opencv.html

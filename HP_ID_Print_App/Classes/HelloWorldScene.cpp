@@ -265,8 +265,9 @@ void HelloWorld::onPrintButtonTouch(Object *pSender, ui::TouchEventType type)
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onPrintButtonTouch,TOUCH_EVENT_ENDED!");
 		//Save the tiling image file at first.
-		tiledRows = HW_DataModel::HW_DataModel::ARRAY_OF_TYPESET_TMX_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index].height;
-		tiledColumns = HW_DataModel::HW_DataModel::ARRAY_OF_TYPESET_TMX_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index].width;
+		tiledRows = HelloWorld::getCalculatedTileRows();
+		tiledColumns = HelloWorld::getCalculatedTileCols();
+		CCLOG("tiledRows:%i,tiledColumns:%i", tiledRows, tiledColumns);
 		if (!OpenCvOperation::tilingImages(tiledRows, tiledColumns, this->cur_output_file_path, this->cur_output_tiled_file_path, HW_OPENCV_DEBUG))
 		{
 			MessageBox("Save tiled images failure!", "ERROR");
@@ -687,7 +688,11 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		//
 		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
 		this->progressBar_verifing->setPercent(50);
-		//Photo transform handler here:
+		//Photo transform handlers here:
+		this->cur_moved_value_x = this->imageView_editor->getTouchMovePos().x;
+		this->cur_moved_value_y = this->scrollView_editor->getTouchMovePos().y;
+		CCLOG("cur_moved_value_x:%f,cur_moved_value_y:%f",this->cur_moved_value_x,this->cur_moved_value_y);
+		/*
 		if (!OpenCvOperation::saveRotatedImgeFile(this->cur_roated_value, this->cur_photo_file_path, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_ROTATED_FILE_NAME))
 		{
 			return;
@@ -696,9 +701,13 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		{
 			return;
 		}
-		this->cur_moved_value_x = this->imageView_editor->getTouchMovePos().x;
-		this->cur_moved_value_y = this->scrollView_editor->getTouchMovePos().y;
+		
 		if (!OpenCvOperation::saveMovedImageFile(this->cur_moved_value_x, this->cur_moved_value_y, this->cur_photo_file_path, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_MOVED_FILE_NAME))
+		{
+			return;
+		}
+		*/
+		if (!OpenCvOperation::saveTransformedImageFile(this->cur_roated_value, this->cur_scaled_value, this->cur_moved_value_x, this->cur_moved_value_y, this->cur_photo_file_path, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_TRANSFORMED_FILE_NAME))
 		{
 			return;
 		}
@@ -1059,4 +1068,23 @@ cocos2d::Size HelloWorld::getUserDefinedSize()
 	cocos2d::Size definedSize = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	CCLOG("current user defined frame size is:(%f,%f)", definedSize.width, definedSize.height);
 	return definedSize;
+}
+int HelloWorld::getCalculatedTileRows()
+{
+	int row = 1;
+	cocos2d::Size definedSize = HelloWorld::getUserDefinedSize();
+	cocos2d::Size cellSize = HW_DataModel::HW_DataModel::ARRAY_OF_TYPESET_TMX_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	row = (int)cellSize.height % (int)definedSize.height;
+	//
+	return row;
+}
+int HelloWorld::getCalculatedTileCols()
+{
+	int col = 1;
+	//
+	cocos2d::Size definedSize = HelloWorld::getUserDefinedSize();
+	cocos2d::Size cellSize = HW_DataModel::HW_DataModel::ARRAY_OF_TYPESET_TMX_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	col = (int)cellSize.width % (int)definedSize.width;
+	//
+	return col;
 }

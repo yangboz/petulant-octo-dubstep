@@ -52,6 +52,7 @@ namespace HW_DataModel
 		static const std::string OUT_PUT_FOREGROUND_ROTATED_FILE_NAME;
 		static const std::string OUT_PUT_FOREGROUND_SCALED_FILE_NAME;
 		static const std::string OUT_PUT_FOREGROUND_MOVED_FILE_NAME;
+		static const std::string OUT_PUT_FOREGROUND_TRANSFORMED_FILE_NAME;
 		static const std::string OUT_PUT_BACKGROUND_FILE_NAME;
 	private:
 	

@@ -196,7 +196,8 @@ private:
 	void applyEditorSettingChanges();
 	//Utility functions
 	cocos2d::Size getUserDefinedSize();
-
+	int getCalculatedTileRows();
+	int getCalculatedTileCols();
 };
 
 #endif // __HELLOWORLD_SCENE_H__
