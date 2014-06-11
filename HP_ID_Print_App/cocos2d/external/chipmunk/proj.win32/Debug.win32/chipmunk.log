@@ -1,9 +1,38 @@
-﻿Build started 2014/6/10 10:33:44.
+﻿Build started 2014/6/11 10:39:19.
      1>Project "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\external\chipmunk\proj.win32\chipmunk.vcxproj" on node 3 (Build target(s)).
      1>Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\libchipmunk.lib" /NOLOGO Debug.win32\chipmunk.obj
+         Debug.win32\cpArbiter.obj
+         Debug.win32\cpArray.obj
+         Debug.win32\cpBB.obj
+         Debug.win32\cpBBTree.obj
+         Debug.win32\cpBody.obj
+         Debug.win32\cpCollision.obj
+         Debug.win32\cpHashSet.obj
+         Debug.win32\cpPolyShape.obj
+         Debug.win32\cpShape.obj
+         Debug.win32\cpSpace.obj
+         Debug.win32\cpSpaceComponent.obj
+         Debug.win32\cpSpaceHash.obj
+         Debug.win32\cpSpaceQuery.obj
+         Debug.win32\cpSpaceStep.obj
+         Debug.win32\cpSpatialIndex.obj
+         Debug.win32\cpSweep1D.obj
+         Debug.win32\cpVect.obj
+         Debug.win32\cpConstraint.obj
+         Debug.win32\cpDampedRotarySpring.obj
+         Debug.win32\cpDampedSpring.obj
+         Debug.win32\cpGearJoint.obj
+         Debug.win32\cpGrooveJoint.obj
+         Debug.win32\cpPinJoint.obj
+         Debug.win32\cpPivotJoint.obj
+         Debug.win32\cpRatchetJoint.obj
+         Debug.win32\cpRotaryLimitJoint.obj
+         Debug.win32\cpSimpleMotor.obj
+         Debug.win32\cpSlideJoint.obj
          chipmunk.vcxproj -> C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\libchipmunk.lib
      1>Done Building Project "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\external\chipmunk\proj.win32\chipmunk.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.16
+Time Elapsed 00:00:15.01

@@ -695,13 +695,21 @@ bool OpenCvOperation::saveMatImageFile(cv::Mat image,std::string context)
 	//int imageParams[3] = { CV_IMWRITE_PNG_BILEVEL, 100, 0 };
 	// Save image
 	//saved = cvSaveImage(HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME.c_str(), image, imageParams);
+	//free mem
+	image.release();
+	//
 	return saved;
 }
-bool OpenCvOperation::saveIplImageFile(IplImage image,std::string context)
+bool OpenCvOperation::saveIplImageFile(IplImage *image,std::string context)
 {
 	bool saved = true;
-	//TODO:
-
+	//
+	cv::Mat matImage = cvarrToMat(image);
+	saved = imwrite(context, matImage);
+	//free mem
+	cvReleaseImage(&image);
+	matImage.release();
+	//
 	return saved;
 }
 void OpenCvOperation::createAlphaMat(cv::Mat4b &mat)
@@ -717,10 +725,11 @@ void OpenCvOperation::createAlphaMat(cv::Mat4b &mat)
 	}
 }
 ///Save image file with transform
-bool OpenCvOperation::saveRoatedImgeFile(double angle, std::string context)
+bool OpenCvOperation::saveRoatedImgeFile(double angle, std::string src, std::string dst)
 {
 	bool saved = false;
-	//
+	//Using normal OpenCV warpAffine function
+	/*
 	cv::Mat src = cv::imread(context);
 	cv::Mat dst;
 	//Rotate an image
@@ -730,9 +739,49 @@ bool OpenCvOperation::saveRoatedImgeFile(double angle, std::string context)
 	cv::warpAffine(src, dst, r, cv::Size(len, len));
 	//
 	saved = cv::imwrite(context, dst);
+	*/
+	//@see http://www.shervinemami.info/imageTransforms.html
+	// Rotate the image clockwise (or counter-clockwise if negative).
+	// Remember to free the returned image.
+	// Create a map_matrix, where the left 2x2 matrix
+	// is the transform and the right 2x1 is the dimensions.
+	IplImage *srcImage = cvLoadImage(src.c_str());
+	float m[6];
+	CvMat M = cvMat(2, 3, CV_32F, m);
+	int w = srcImage->width;
+	int h = srcImage->height;
+	float angleRadians = angle * ((float)CV_PI / 180.0f);
+	m[0] = (float)(cos(angleRadians));
+	m[1] = (float)(sin(angleRadians));
+	m[3] = -m[1];
+	m[4] = m[0];
+	m[2] = w*0.5f;
+	m[5] = h*0.5f;
+
+	// Make a spare image for the result
+	CvSize sizeRotated;
+	sizeRotated.width = cvRound(w);
+	sizeRotated.height = cvRound(h);
+
+	// Rotate
+	IplImage *imageRotated = cvCreateImage(sizeRotated,
+		srcImage->depth, srcImage->nChannels);
+
+	// Transform the image
+	cvGetQuadrangleSubPix(srcImage, imageRotated, &M);
+	//
+	saved = OpenCvOperation::saveIplImageFile(imageRotated, dst);
+	//free mem
+	
 	return saved;
 }
-bool OpenCvOperation::saveScaledImageFile(double rate, std::string context)
+bool OpenCvOperation::saveScaledImageFile(double rate, std::string src, std::string dst)
+{
+	bool saved = false;
+	//
+	return saved;
+}
+bool OpenCvOperation::saveMovedImageFile(double x, double y, std::string src, std::string dst)
 {
 	bool saved = false;
 	//

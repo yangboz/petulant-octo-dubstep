@@ -39,5 +39,8 @@ namespace HW_DataModel
 	const std::string HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME = "\\HP_ID_Print_result_pre.png";
 	const std::string HW_DataModel::OUT_PUT_FIN_RESULT_FILE_NAME = "\\HP_ID_Print_result_fin.png";
 	const std::string HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME = "HP_ID_Print_output_foreground_.png";//e.g:"C:\Users\yangboz\git\petulant-octo-dubstep\MyCocos2dxGame\Resources"
+	const std::string HW_DataModel::OUT_PUT_FOREGROUND_ROTATED_FILE_NAME = "HP_ID_Print_output_foreground_rotated_.png";
+	const std::string HW_DataModel::OUT_PUT_FOREGROUND_SCALED_FILE_NAME = "HP_ID_Print_output_foreground_scaled_.png";
+	const std::string HW_DataModel::OUT_PUT_FOREGROUND_MOVED_FILE_NAME = "HP_ID_Print_output_foreground_moved_.png";
 	const std::string HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME = "HP_ID_Print_output_background_.png";
 }

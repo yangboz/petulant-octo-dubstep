@@ -689,14 +689,19 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
 		this->progressBar_verifing->setPercent(50);
 		//Photo transform handler here:
-		/*
-		if (!OpenCvOperation::saveRoatedImgeFile(this->cur_roated_value, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME))
+		if (!OpenCvOperation::saveRoatedImgeFile(this->cur_roated_value, this->cur_photo_file_path, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_ROTATED_FILE_NAME))
 		{
 			return;
 		}
+		/*
 		if (!OpenCvOperation::saveScaledImageFile (this->cur_roated_value, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME))
 		{
 			return;
+		}
+		
+		if (!OpenCvOperation::saveMovedImageFile(this->cur_moved_value_x, this->cur_moved_value_y, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME))
+		{
+		return;
 		}
 		*/
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
