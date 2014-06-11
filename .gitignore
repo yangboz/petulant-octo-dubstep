@@ -23,3 +23,7 @@
 # Temporary files
 *.sdf
 *.opensdf
+*.idb
+*.pdb
+*.ilk
+*.log

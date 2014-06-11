@@ -168,7 +168,7 @@ private:
 	PopupLayer *popup_upload_photo_invalid_size;//FileSize,ImageSize;
 	PopupLayer *popup_upload_photo_invalid_face;//Not only 1 face detected;
 	PopupLayer *popup_save_photo_success;
-	//Site variables
+	//Silder variables
 	int slider_scale_changed_value;
 	int slider_move_changed_value;
 	//

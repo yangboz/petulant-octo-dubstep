@@ -779,6 +779,20 @@ bool OpenCvOperation::saveScaledImageFile(double rate, std::string src, std::str
 {
 	bool saved = false;
 	//
+	IplImage *srcImage = cvLoadImage(src.c_str());
+	IplImage *imageScaled = cvCloneImage(srcImage);
+
+	CvMat* rot_mat = cvCreateMat(2, 3, CV_32FC1);
+
+	// Compute revolution matrix
+	CvPoint2D32f core = cvPoint2D32f(cvGetSize(imageScaled).width / 2, cvGetSize(imageScaled).height / 2);
+	cv2DRotationMatrix(core, 1.0, rate, rot_mat);
+
+	// Do a transformation
+	cvWarpAffine(srcImage, imageScaled, rot_mat);
+	//
+	saved = OpenCvOperation::saveIplImageFile(imageScaled, dst);
+	//free mem
 	return saved;
 }
 bool OpenCvOperation::saveMovedImageFile(double x, double y, std::string src, std::string dst)

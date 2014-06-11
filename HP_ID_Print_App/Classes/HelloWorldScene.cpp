@@ -485,12 +485,11 @@ void HelloWorld::onScaleSliderValueChanged(Object *pSender, ui::SliderEventType 
 {
 	ui::Slider *slider = static_cast<ui::Slider*>(pSender);
 	//const cocos2d::Size size = this->imageView_cert_origin->getSize();
-	float scaleValue;
+	float scaleStepper = 0.01f;
 	switch (type)
 	{
 	case SLIDER_PERCENTCHANGED:
-		scaleValue = slider->getPercent();
-		this->cur_scaled_value = (1.00 + scaleValue / 100.00);
+		this->cur_scaled_value = 1.0f + (slider->getPercent() - 50)*scaleStepper;
 		CCLOG("onScaleSliderChanged,TOUCH_EVENT_ENDED,cur_scaled_value: %f", this->cur_scaled_value);
 		//this->imageView_cert_origin->setSize(cocos2d::CCSizeMake(size.width*slider_changed_value / 100, size.height*slider_changed_value / 100));
 		if (this->imageView_editor)
@@ -693,13 +692,12 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		{
 			return;
 		}
-		/*
-		if (!OpenCvOperation::saveScaledImageFile (this->cur_roated_value, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME))
+		if (!OpenCvOperation::saveScaledImageFile(this->cur_scaled_value, this->cur_photo_file_path, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_SCALED_FILE_NAME))
 		{
 			return;
 		}
-		
-		if (!OpenCvOperation::saveMovedImageFile(this->cur_moved_value_x, this->cur_moved_value_y, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME))
+		/*
+		if (!OpenCvOperation::saveMovedImageFile(this->cur_moved_value_x, this->cur_moved_value_y, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_MOVED_FILE_NAME))
 		{
 		return;
 		}
