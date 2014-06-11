@@ -725,7 +725,7 @@ void OpenCvOperation::createAlphaMat(cv::Mat4b &mat)
 	}
 }
 ///Save image file with transform
-bool OpenCvOperation::saveRoatedImgeFile(double angle, std::string src, std::string dst)
+bool OpenCvOperation::saveRotatedImgeFile(double angle, std::string src, std::string dst)
 {
 	bool saved = false;
 	//Using normal OpenCV warpAffine function
@@ -795,7 +795,27 @@ bool OpenCvOperation::saveScaledImageFile(double rate, std::string src, std::str
 	//free mem
 	return saved;
 }
-bool OpenCvOperation::saveMovedImageFile(double x, double y, std::string src, std::string dst)
+bool OpenCvOperation::saveMovedImageFile(double offsetX, double offsetY, std::string src, std::string dst)
+{
+	bool saved = false;
+	//
+	IplImage *srcImage = cvLoadImage(src.c_str());
+	IplImage *imageScaled = cvCloneImage(srcImage);
+
+	CvMat* rot_mat = cvCreateMat(2, 3, CV_32FC1);
+
+	// Compute revolution matrix
+	CvPoint2D32f core = cvPoint2D32f(cvGetSize(imageScaled).width / 2 + offsetX, cvGetSize(imageScaled).height / 2 + offsetY);
+	cv2DRotationMatrix(core, 1.0, 1.0, rot_mat);
+
+	// Do a transformation
+	cvWarpAffine(srcImage, imageScaled, rot_mat);
+	//
+	saved = OpenCvOperation::saveIplImageFile(imageScaled, dst);
+	//free mem
+	return saved;
+}
+bool OpenCvOperation::saveTransformedImageFile(double angle, double zoom, double centerX, double centerY, std::string src, std::string dst)
 {
 	bool saved = false;
 	//

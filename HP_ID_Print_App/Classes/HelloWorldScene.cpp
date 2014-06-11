@@ -505,7 +505,7 @@ void HelloWorld::onRotateSliderValueChanged(Object *pSender, ui::SliderEventType
 {
 	ui::Slider *slider = static_cast<ui::Slider*>(pSender);
 	//const cocos2d::Size size = this->imageView_cert_origin->getSize();
-	float rotateStepper = 10.0f;
+	float rotateStepper = 5.0f;
 	const cocos2d::Point orignalImagePoint = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	//
 	switch (type)
@@ -688,7 +688,7 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
 		this->progressBar_verifing->setPercent(50);
 		//Photo transform handler here:
-		if (!OpenCvOperation::saveRoatedImgeFile(this->cur_roated_value, this->cur_photo_file_path, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_ROTATED_FILE_NAME))
+		if (!OpenCvOperation::saveRotatedImgeFile(this->cur_roated_value, this->cur_photo_file_path, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_ROTATED_FILE_NAME))
 		{
 			return;
 		}
@@ -696,12 +696,12 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		{
 			return;
 		}
-		/*
-		if (!OpenCvOperation::saveMovedImageFile(this->cur_moved_value_x, this->cur_moved_value_y, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_MOVED_FILE_NAME))
+		this->cur_moved_value_x = this->imageView_editor->getTouchMovePos().x;
+		this->cur_moved_value_y = this->scrollView_editor->getTouchMovePos().y;
+		if (!OpenCvOperation::saveMovedImageFile(this->cur_moved_value_x, this->cur_moved_value_y, this->cur_photo_file_path, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_MOVED_FILE_NAME))
 		{
-		return;
+			return;
 		}
-		*/
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_(this->cur_photo_file_path);

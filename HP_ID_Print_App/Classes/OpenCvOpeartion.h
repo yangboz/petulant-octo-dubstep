@@ -47,9 +47,12 @@ public:
 	//@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
 	static bool addingTwoImages(std::string filePath_foreground, std::string filePath_background, std::string dest, bool display);
 	//Save image file with transform
-	static bool saveRoatedImgeFile(double angle, std::string src, std::string dst);
+	static bool saveRotatedImgeFile(double angle, std::string src, std::string dst);
 	static bool saveScaledImageFile(double rate, std::string src, std::string dst);
-	static bool saveMovedImageFile(double x, double y, std::string src, std::string dst);
+	static bool saveMovedImageFile(double offsetX, double offsetY, std::string src, std::string dst);
+	//OpenCV image free transform with rotate/scale/move
+	//@see http://opencv-tutorial.com/introduction/rotate-image-video/
+	static bool saveTransformedImageFile(double angle, double zoom, double centerX,double centerY,std::string src, std::string dst);
 	//Save image file with solid color
 	static bool saveColoredImageFile(cv::Scalar colorScalar, int width, int height, std::string context);
 	//@see http://funwithkinect.blogspot.com.br/2012/02/copying-and-tiling-with-opencv.html
