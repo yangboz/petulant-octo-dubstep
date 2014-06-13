@@ -51,7 +51,7 @@ Run
 
     $ cocos run -p win32
     
-### VS2013 cpnfigurations ###
+### VS2013 configurations ###
 
 http://blog.csdn.net/fansongy/article/details/18366275
 
