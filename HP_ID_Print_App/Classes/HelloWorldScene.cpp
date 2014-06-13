@@ -283,7 +283,7 @@ void HelloWorld::onPrintButtonTouch(Object *pSender, ui::TouchEventType type)
 		}
 		else
 		{
-			MessageBox("Local printer invalid!", "ERROR");
+			//MessageBox("Local printer invalid!", "ERROR");
 			return;
 		}
 		break;
@@ -393,15 +393,18 @@ void HelloWorld::onIntroListViewItemSelected(Object *pSender, ui::ListViewEventT
 		//OpenCvOperation::addingTwoImages("C:\\HP_ID_Print_output_foreground_.jpg", "C:\\HP_ID_Print_output_background_.png", "C:\\HP_ID_Print_output_result_fin_.png",HW_OPENCV_DEBUG);
 		//OpenCvOperation::tilingImages(2, 2, "C:\\lena.png", "C:\\lena_.png", HW_OPENCV_DEBUG);
 		//PrintOperation::printCommand("C:\\lena.png", localPrinterName);
+		//OpenCvOperation::edgeDetection("C:\\lena.png",true);
+		//OpenCvOperation::maxContourDetection("C:\\Users\\yangboz\\Desktop\\Cert_photos\\Passport_photo_2x2_inch.jpg", true);
+		//OpenCvOperation::contoursDetection("C:\\lena.png", true);
 		//
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		this->cur_defined_size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
 		CCLOG("onIntroListViewItemSelected index: %d", HW_UserDataModel::Instance()->cur_listView_selected_index);
 		this->pageView_main->scrollToPage(PAGE_VIEW_UPLOAD);
-		//Adjust the settings chnange effects.
+		//Adjust the settings change effects.
 		this->applyUploadSettingChanges();
 		this->applyEditorSettingChanges();
-		//Dynamically change the instrcution image view content.
+		//Dynamically change the instruction image view content.
 		this->changeCurrentInstructionImage();
 		//
 		break;
@@ -707,6 +710,7 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 			return;
 		}
 		*/
+		//OpenCvOperation::edgeDetection(this->cur_photo_file_path, true);
 		if (!OpenCvOperation::saveTransformedImageFile(this->cur_roated_value, this->cur_scaled_value, this->cur_moved_value_x, this->cur_moved_value_y, this->cur_photo_file_path, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_TRANSFORMED_FILE_NAME))
 		{
 			return;

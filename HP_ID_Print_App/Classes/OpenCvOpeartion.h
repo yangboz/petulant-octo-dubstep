@@ -36,6 +36,12 @@ public:
 	static int faceDetection(std::string filePath, bool display);
 	static void fullbodyDetectAndDisplay_Haar(std::string filePath);
 	static void fullbodyDetectAndDisplay_Hog(std::string filePath);
+	//@see http://stackoverflow.com/questions/11987483/opencvs-canny-edge-detection-in-c
+	static void edgeDetection(std::string filePath, bool display);
+	//@see http://blog.csdn.net/yangtrees/article/details/7482587
+	static void maxContourDetection(std::string filePath, bool display);
+	//@see http://docs.opencv.org/doc/tutorials/imgproc/shapedescriptors/bounding_rects_circles/bounding_rects_circles.html
+	static void contoursDetection(std::string filePath, bool display);
 	//Background subtraction using MOG
 	//@see http://stackoverflow.com/questions/19221877/opencv-how-to-use-createbackgroundsubtractormog
 	static void backgroundSubstraction_MOG_1(std::string filePath);

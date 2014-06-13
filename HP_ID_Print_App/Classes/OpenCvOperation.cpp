@@ -653,6 +653,7 @@ bool OpenCvOperation::foregroundGrabcut(std::string filePath, int width, int hei
 	return OpenCvOperation::saveMatImageFile(resized, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME);
 }
 //@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
+//@see http://eric-yuan.me/poisson-blending/
 bool OpenCvOperation::addingTwoImages(std::string filePath_foreground, std::string filePath_background, std::string dest, bool display)
 {
 	double alpha = 1.0; double beta;
@@ -913,4 +914,158 @@ bool OpenCvOperation::tilingImages(int row, int column, std::string context, std
 void OpenCvOperation::on_mouse(int event, int x, int y, int flags, void* param)
 {
 	gcapp.mouseClick(event, x, y, flags, param);
+}
+//@see http://stackoverflow.com/questions/11987483/opencvs-canny-edge-detection-in-c
+void OpenCvOperation::edgeDetection(std::string filePath, bool display)
+{
+	cv::Mat image = cv::imread(filePath);
+	cv::Mat contours;
+	cv::Mat gray_image;
+
+	//cvtColor(image, gray_image, CV_RGB2GRAY);
+	std::vector<cv::Mat> channels;
+	cv::Mat hsv;
+	cv::cvtColor(image, hsv, CV_RGB2HSV);
+	cv::split(hsv, channels);
+	gray_image = channels[0];
+
+	cv::Canny(image, contours, 10, 350);
+
+	if (display)
+	{
+		cv::namedWindow("Image");
+		cv::imshow("Image", image);
+
+		cv::namedWindow("Gray");
+		cv::imshow("Gray", gray_image);
+
+		cv::namedWindow("Canny");
+		cv::imshow("Canny", contours);
+	}
+}
+//@see http://blog.csdn.net/yangtrees/article/details/7482587
+void OpenCvOperation::maxContourDetection(std::string filePath, bool display)
+{
+	IplImage* src;
+	src = cvLoadImage(filePath.c_str(), CV_LOAD_IMAGE_GRAYSCALE);
+	IplImage* dst = cvCreateImage(cvGetSize(src), 8, 3);
+	CvMemStorage* storage = cvCreateMemStorage(0);
+	CvSeq* contour = 0;
+	cvThreshold(src, src, 120, 255, CV_THRESH_BINARY);//二值化  
+	if (display)
+	{
+		cvNamedWindow("Source", 1);
+		cvShowImage("Source", src);
+	}
+	//提取轮廓  
+	cvFindContours(src, storage, &contour, sizeof(CvContour), CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
+	cvZero(dst);//清空数组  
+	CvSeq* _contour = contour;
+	double maxarea = 0;
+	double minarea = 100;
+	int n = -1, m = 0;//n为面积最大轮廓索引，m为迭代索引  
+	for (; contour != 0; contour = contour->h_next)
+	{
+
+		double tmparea = fabs(cvContourArea(contour));
+		if (tmparea < minarea)
+		{
+			cvSeqRemove(contour, 0); //删除面积小于设定值的轮廓  
+			continue;
+		}
+		CvRect aRect = cvBoundingRect(contour, 0);
+		if ((aRect.width / aRect.height)<1)
+		{
+			cvSeqRemove(contour, 0); //删除宽高比例小于设定值的轮廓  
+			continue;
+		}
+		if (tmparea > maxarea)
+		{
+			maxarea = tmparea;
+			n = m;
+		}
+		m++;
+		//  CvScalar color = CV_RGB( rand()&255, rand()&255, rand()&255 );//创建一个色彩值  
+		CvScalar color = CV_RGB(0, 255, 255);
+
+		//max_level 绘制轮廓的最大等级。如果等级为0，绘制单独的轮廓。如果为1，绘制轮廓及在其后的相同的级别下轮廓。  
+		//如果值为2，所有的轮廓。如果等级为2，绘制所有同级轮廓及所有低一级轮廓，诸此种种。  
+		//如果值为负数，函数不绘制同级轮廓，但会升序绘制直到级别为abs(max_level)-1的子轮廓。   
+		cvDrawContours(dst, contour, color, color, -1, 1, 8);//绘制外部和内部的轮廓  
+	}
+	contour = _contour; /*int k=0;*/
+	int count = 0;
+	for (; contour != 0; contour = contour->h_next)
+	{
+		count++;
+		double tmparea = fabs(cvContourArea(contour));
+		if (tmparea == maxarea /*k==n*/)
+		{
+			CvScalar color = CV_RGB(255, 0, 0);
+			cvDrawContours(dst, contour, color, color, -1, 1, 8);
+		}
+		/*k++;*/
+	}
+	CCLOG("The total number of contours is:%d", count);
+	if (display)
+	{
+		cvNamedWindow("Contours", 1);
+		cvShowImage("Contours", dst);
+	}
+}
+//
+void OpenCvOperation::contoursDetection(std::string filePath, bool display)
+{
+	Mat src; Mat src_gray;
+	int thresh = 100;
+	int max_thresh = 255;
+	RNG rng(12345);
+	/// Load source image and convert it to gray
+	src = imread(filePath);
+
+	/// Convert image to gray and blur it
+	cvtColor(src, src_gray, CV_BGR2GRAY);
+	blur(src_gray, src_gray, cv::Size(3, 3));
+
+	/// Create Window
+	char* source_window = "Source";
+	namedWindow(source_window, CV_WINDOW_AUTOSIZE);
+	imshow(source_window, src);
+	//
+	Mat threshold_output;
+	vector<vector<cv::Point> > contours;
+	vector<Vec4i> hierarchy;
+
+	/// Detect edges using Threshold
+	threshold(src_gray, threshold_output, thresh, 255, THRESH_BINARY);
+	/// Find contours
+	findContours(threshold_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
+
+	/// Approximate contours to polygons + get bounding rects and circles
+	vector<vector<cv::Point> > contours_poly(contours.size());
+	vector<cv::Rect> boundRect(contours.size());
+	vector<Point2f>center(contours.size());
+	vector<float>radius(contours.size());
+
+	for (int i = 0; i < contours.size(); i++)
+	{
+		approxPolyDP(Mat(contours[i]), contours_poly[i], 3, true);
+		boundRect[i] = boundingRect(Mat(contours_poly[i]));
+		minEnclosingCircle((Mat)contours_poly[i], center[i], radius[i]);
+	}
+
+
+	/// Draw polygonal contour + bonding rects + circles
+	Mat drawing = Mat::zeros(threshold_output.size(), CV_8UC3);
+	for (int i = 0; i < contours.size(); i++)
+	{
+		Scalar color = Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
+		drawContours(drawing, contours_poly, i, color, 1, 8, vector<Vec4i>(), 0, cv::Point());
+		rectangle(drawing, boundRect[i].tl(), boundRect[i].br(), color, 2, 8, 0);
+		circle(drawing, center[i], (int)radius[i], color, 2, 8, 0);
+	}
+
+	/// Show in a window
+	namedWindow("Contours", CV_WINDOW_AUTOSIZE);
+	imshow("Contours", drawing);
 }
