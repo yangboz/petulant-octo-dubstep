@@ -42,6 +42,8 @@ public:
 	static void maxContourDetection(std::string filePath, bool display);
 	//@see http://docs.opencv.org/doc/tutorials/imgproc/shapedescriptors/bounding_rects_circles/bounding_rects_circles.html
 	static void contoursDetection(std::string filePath, bool display);
+	//@see http://shervinemami.info/shirtDetection.html
+	static void shirtDetection(std::string filePath, bool display);
 	//Background subtraction using MOG
 	//@see http://stackoverflow.com/questions/19221877/opencv-how-to-use-createbackgroundsubtractormog
 	static void backgroundSubstraction_MOG_1(std::string filePath);

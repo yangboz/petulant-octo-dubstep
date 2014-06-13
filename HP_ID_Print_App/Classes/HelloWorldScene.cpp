@@ -1066,7 +1066,7 @@ void HelloWorld::applyEditorSettingChanges()
 	//this->imageView_guide->setPosition(imageView_guide_position);
 	//this->imageView_editor->setPosition(imageView_editor_position);
 	CCLOG("this->imageView_editor->getPosition().x:%f,y:%f", this->imageView_editor->getPosition().x, this->imageView_editor->getPosition().y);
-	//this->imageView_editor->setPosition(imageView_editor_position);
+	this->imageView_editor->setPosition(imageView_editor_position);
 	//ScrollView with UIDragPanel
 	this->scrollView_editor->setBackGroundImage(scrollView_file_path);
 	CCLOG("this->scrollView_editor->getPosition().x:%f,y:%f", this->scrollView_editor->getPosition().x, this->scrollView_editor->getPosition().y);

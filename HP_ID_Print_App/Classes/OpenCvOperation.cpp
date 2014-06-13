@@ -316,6 +316,9 @@ int OpenCvOperation::faceDetection(std::string filePath, bool display)
 		//-- Show what you got
 		imshow(window_name, frame);
 	}
+	// Free resources.
+	//cvReleaseHaarClassifierCascade(&face_cascade);
+	//
 	return faces.size();
 }
 //IplImage attributes check
@@ -1013,7 +1016,7 @@ void OpenCvOperation::maxContourDetection(std::string filePath, bool display)
 		cvShowImage("Contours", dst);
 	}
 }
-//
+//@see http://docs.opencv.org/doc/tutorials/imgproc/shapedescriptors/bounding_rects_circles/bounding_rects_circles.html
 void OpenCvOperation::contoursDetection(std::string filePath, bool display)
 {
 	Mat src; Mat src_gray;
@@ -1068,4 +1071,9 @@ void OpenCvOperation::contoursDetection(std::string filePath, bool display)
 	/// Show in a window
 	namedWindow("Contours", CV_WINDOW_AUTOSIZE);
 	imshow("Contours", drawing);
+}
+//@see http://shervinemami.info/shirtDetection.html
+void OpenCvOperation::shirtDetection(std::string filePath, bool display)
+{
+
 }
