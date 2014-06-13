@@ -18,12 +18,16 @@ namespace HW_DataModel
 		//default labels of certificates
 		static const std::vector<std::string> ARRAY_OF_CERT_LABELS;
 		//default position of certificates for upload/editor/verify display
+		///Panel_Editor && Panel_Upload
+		static const std::vector<cocos2d::Point> ARRAY_OF_EDITOR_FOREGROUND_DISPLAY;
 		static const std::vector<cocos2d::Point> ARRAY_OF_EDITOR_BACKGROUND_DISPLAY;
 		static const std::vector<cocos2d::Point> ARRAY_OF_EDITOR_FRAME_DISPLAY;
 		static const std::vector<std::string> ARRAY_OF_EDITOR_INSTRUCTION_LABELS;
 		static const std::vector<std::string> ARRAY_OF_EDITOR_BACKGROUND_LABELS;
 		static const std::vector<std::string> ARRAY_OF_EDITOR_FRAME_LABELS;
 		static const std::vector<std::string> ARRAY_OF_EDITOR_FOREGROUND_LABELS;
+		///Panel_Verify
+		static const std::vector<cocos2d::Point> ARRAY_OF_VERIFY_GUIDE_DISPLAY;
 		static const std::vector<cocos2d::Point> ARRAY_OF_VERIFY_PHOTO_DISPLAY;
 		static const std::vector<cocos2d::Point> ARRAY_OF_VERIFY_SHADE_DISPLAY;
 		static const std::vector<std::string> ARRAY_OF_VERIFY_SHADE_LABELS;

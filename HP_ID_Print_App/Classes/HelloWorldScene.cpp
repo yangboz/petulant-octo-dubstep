@@ -1025,19 +1025,27 @@ void HelloWorld::changeCurrentVerifiedResults()
 //
 void HelloWorld::applyUploadSettingChanges()
 {
+	this->progressBar_upload->setPercent(0);
 	//Panel_upload
 	std::string forground_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FOREGROUND_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	std::string frame_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	std::string background_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_BACKGROUND_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	cocos2d::CCPoint frame_position = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
-	cocos2d::CCPoint background_position = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	cocos2d::CCPoint foreground_position = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FOREGROUND_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	cocos2d::CCPoint background_position = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_BACKGROUND_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	//
 	std::string cur_instruction_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_INSTRUCTION_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	//
-	this->imageView_frame->setPosition(frame_position);
-	//this->imageView_back_ground->setPosition(background_position);
 	this->imageView_fore_ground->loadTexture(forground_file_path);
+	//CCLOG("this->imageView_fore_ground->getPosition().x:%f,y:%f",this->imageView_fore_ground->getPosition().x, this->imageView_fore_ground->getPosition().y);
+	this->imageView_fore_ground->setPosition(foreground_position);
+	//
 	this->imageView_back_ground->loadTexture(background_file_path);
+	//CCLOG("this->imageView_back_ground->getPosition().x:%f,y:%f", this->imageView_back_ground->getPosition().x, this->imageView_back_ground->getPosition().y);
+	this->imageView_back_ground->setPosition(background_position);
+	//
+	this->imageView_frame->setPosition(frame_position);
+	//CCLOG("this->imageView_frame->getPosition().x:%f,y:%f", this->imageView_frame->getPosition().x, this->imageView_frame->getPosition().y);
 	this->imageView_frame->loadTexture(frame_file_path);
 }
 void HelloWorld::applyEditorSettingChanges()
@@ -1045,22 +1053,24 @@ void HelloWorld::applyEditorSettingChanges()
 	//Panel_editor
 	std::string guide_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_GUIDE_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	std::string scrollView_file_path = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_SHADE_LABELS[HW_UserDataModel::Instance()->cur_listView_selected_index];
+	cocos2d::CCPoint imageView_guide_position = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_GUIDE_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	cocos2d::CCPoint imageView_editor_position = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_PHOTO_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	cocos2d::CCPoint scrollView_position = HW_DataModel::HW_DataModel::ARRAY_OF_VERIFY_SHADE_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	//
-	this->scrollView_editor->setBackGroundImage(scrollView_file_path);
-	//this->imageView_back_ground->setPosition(background_position);
 	this->imageView_guide->loadTexture(guide_file_path);
-	this->scrollView_editor->setPosition(scrollView_position);
-	//
-	//ui::Layout *panel_editor = dynamic_cast<ui::Layout*>(this->uiLayout->getChildByName("PageView_main")->getChildByName("Panel_eitor"));
-	//panel_editor->setTouchEnabled(false);
+	CCLOG("this->imageView_guide->getPosition().x:%f,y:%f", this->imageView_guide->getPosition().x, this->imageView_guide->getPosition().y);
+	//this->imageView_guide->setPosition(imageView_guide_position);
+	//this->imageView_editor->setPosition(imageView_editor_position);
+	CCLOG("this->imageView_editor->getPosition().x:%f,y:%f", this->imageView_editor->getPosition().x, this->imageView_editor->getPosition().y);
+	//this->imageView_editor->setPosition(imageView_editor_position);
 	//ScrollView with UIDragPanel
+	this->scrollView_editor->setBackGroundImage(scrollView_file_path);
+	CCLOG("this->scrollView_editor->getPosition().x:%f,y:%f", this->scrollView_editor->getPosition().x, this->scrollView_editor->getPosition().y);
+	//this->scrollView_editor->setPosition(scrollView_position);
 	//this->imageView_editor->setSize(definedSize);
 	this->cur_defined_size = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	this->scrollView_editor->setInnerContainerSize(this->cur_defined_size);
-	//this->scrollView_editor->setBackGroundColorType(LAYOUT_COLOR_SOLID);
-	//this->scrollView_editor->setBackGroundColor(HW_DataModel::HW_DataModel::ARRAY_OF_CERT_COLORS[HW_UserDataModel::Instance()->cur_listView_selected_index]);
+
 }
 ///Utility functions
 cocos2d::Size HelloWorld::getUserDefinedSize()
