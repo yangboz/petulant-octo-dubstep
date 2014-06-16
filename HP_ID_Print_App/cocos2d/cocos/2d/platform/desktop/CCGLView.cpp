@@ -344,20 +344,21 @@ bool GLView::initWithRect(const std::string& viewName, Rect rect, float frameZoo
 	/*
 	// Gets the Desktop window
 	RECT desktopRect;
-	LPRECT lprRect;
+	LPRECT lprRect = new RECT;
 	desktopRect = *lprRect;
 	HWND hDesktop = GetDesktopWindow();
 	// Gets the Desktop window rect or screen resolution in pixels
 	GetWindowRect(hDesktop, &desktopRect);
 	//
-	DWORD dwStyle = WS_CAPTION | WS_POPUPWINDOW | WS_MINIMIZEBOX;  // Window Style
+	DWORD dwStyle = WS_CAPTION | WS_POPUPWINDOW | WS_MINIMIZEBOX ;  // Window Style
+	//DWORD dwStyle = WS_VISIBLE | WS_POPUP | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;  // Window Style
 	//
 	lprRect->bottom = rect.size.height;
 	lprRect->left = rect.getMinX();
 	lprRect->right = rect.size.width;
 	lprRect->top = rect.getMinY();
 	//
-	AdjustWindowRectEx(lprRect, dwStyle, FALSE, dwStyle);
+	bool result = AdjustWindowRectEx(lprRect, dwStyle, FALSE, dwStyle);
 	*/
 	//
     glfwMakeContextCurrent(_mainWindow);
