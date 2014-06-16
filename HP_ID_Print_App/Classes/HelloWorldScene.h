@@ -101,7 +101,10 @@ public:
 	void removePopupLayer(float interval);
 	//Set up list views with size values
 	void setupListViews();
-
+	//Verify functions
+	bool onVerify_Background();
+	bool onVerify_Clothing();
+	bool onVerify_Resolutiony();
 private:
 	ui::Widget *uiLayout;//MainLayout
 	//Window buttons

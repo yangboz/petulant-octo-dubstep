@@ -662,6 +662,13 @@ bool OpenCvOperation::foregroundGrabcut(std::string filePath, int width, int hei
 	//Save the result(image file)
 	return OpenCvOperation::saveMatImageFile(resized, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME);
 }
+bool OpenCvOperation::foregroundGrabcut_GMM(std::string filePath, int width, int height, bool display)
+{
+	bool result = false;
+	//
+	//
+	return result;
+}
 //@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
 //@see http://eric-yuan.me/poisson-blending/
 bool OpenCvOperation::addingTwoImages(std::string filePath_foreground, std::string filePath_background, std::string dest, bool display)

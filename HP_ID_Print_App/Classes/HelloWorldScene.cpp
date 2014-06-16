@@ -1105,3 +1105,22 @@ int HelloWorld::getCalculatedTileCols()
 	//
 	return col;
 }
+//Verify functions
+bool HelloWorld::onVerify_Background()
+{
+	bool result = true;
+	//
+	return result;
+}
+bool HelloWorld::onVerify_Clothing()
+{
+	bool result = true;
+	//
+	return result;
+}
+bool HelloWorld::onVerify_Resolutiony()
+{
+	bool result = true;
+	//
+	return result;
+}

@@ -55,6 +55,8 @@ public:
 	static void backgroundSubstraction_(std::string filePath);
 	//@see http://docs.opencv.org/trunk/doc/py_tutorials/py_imgproc/py_grabcut/py_grabcut.html
 	static bool foregroundGrabcut(std::string filePath, int width, int height, bool display, bool interactive);
+	//@see http://www.morethantechnical.com/2010/05/05/bust-out-your-own-graphcut-based-image-segmentation-with-opencv-w-code/
+	static bool foregroundGrabcut_GMM(std::string filePath, int width, int height, bool display);
 	//@see http://docs.opencv.org/doc/tutorials/core/adding_images/adding_images.html
 	static bool addingTwoImages(std::string filePath_foreground, std::string filePath_background, std::string dest, bool display);
 	//Save image file with transform
