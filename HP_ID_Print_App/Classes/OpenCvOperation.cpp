@@ -13,6 +13,13 @@ const Scalar GREEN = Scalar(0, 255, 0);
 const int BGD_KEY = CV_EVENT_FLAG_CTRLKEY;
 const int FGD_KEY = CV_EVENT_FLAG_SHIFTKEY;
 
+// Various color types for detected shirt colors.
+enum  { cBLACK = 0, cWHITE, cGREY, cRED, cORANGE, cYELLOW, cGREEN, cAQUA, cBLUE, cPURPLE, cPINK, NUM_COLOR_TYPES };
+char* sCTypes[NUM_COLOR_TYPES] = { "Black", "White", "Grey", "Red", "Orange", "Yellow", "Green", "Aqua", "Blue", "Purple", "Pink" };
+uchar cCTHue[NUM_COLOR_TYPES] = { 0, 0, 0, 0, 20, 30, 55, 85, 115, 138, 161 };
+uchar cCTSat[NUM_COLOR_TYPES] = { 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255 };
+uchar cCTVal[NUM_COLOR_TYPES] = { 0, 255, 120, 255, 255, 255, 255, 255, 255, 255, 255 };
+
 static void getBinMask(const Mat& comMask, Mat& binMask)
 {
 	if (comMask.empty() || comMask.type() != CV_8UC1)
@@ -247,7 +254,7 @@ GCApplication gcapp;
 
 //OpenCV function header
 //void OpenCvOperation::faceDetectAndDisplay(std::string filePath)
-int OpenCvOperation::faceDetection(std::string filePath, bool display)
+vector<cv::Rect> OpenCvOperation::faceDetection(std::string filePath, bool display)
 {
 	//
 	cv::Mat frame = imread(filePath);
@@ -262,17 +269,17 @@ int OpenCvOperation::faceDetection(std::string filePath, bool display)
 	static CascadeClassifier smile_cascade;
 	static std::string window_name = "Image_Face_detection";
 	//
+	std::vector<cv::Rect> faces;
+	Mat frame_gray;
+	//
 	if (!frame.empty())
 	{
 		//-- 1. Load the cascades
-		if (!face_cascade.load(face_cascade_name)){ CCLOG("face_cascade(!)Error loading\n"); return -1; };
+		if (!face_cascade.load(face_cascade_name)){ CCLOG("face_cascade(!)Error loading\n"); return faces; };
 		//if (!eyes_cascade.load(eyes_cascade_name)){ CCLOG("eyes_cascade(!)Error loading\n"); return; };
 		//if (!smile_cascade.load(smile_cascade_name)){ CCLOG("smile_cascade(!)Error loading\n"); return; };
 	}
-
-	std::vector<cv::Rect> faces;
-	Mat frame_gray;
-
+	//
 	cvtColor(frame, frame_gray, CV_BGR2GRAY);
 	equalizeHist(frame_gray, frame_gray);
 	//-- Detect faces
@@ -319,7 +326,7 @@ int OpenCvOperation::faceDetection(std::string filePath, bool display)
 	// Free resources.
 	//cvReleaseHaarClassifierCascade(&face_cascade);
 	//
-	return faces.size();
+	return faces;
 }
 //IplImage attributes check
 bool OpenCvOperation::iplImageAttributesCheck(std::string filePath)
@@ -1073,7 +1080,210 @@ void OpenCvOperation::contoursDetection(std::string filePath, bool display)
 	imshow("Contours", drawing);
 }
 //@see http://shervinemami.info/shirtDetection.html
-void OpenCvOperation::shirtDetection(std::string filePath, bool display)
+char* OpenCvOperation::shirtDetection(std::string filePath, bool display)
 {
+	// Open the image, either as greyscale or color
+	IplImage* imageIn = cvLoadImage(filePath.c_str(), CV_LOAD_IMAGE_UNCHANGED);
+	IplImage* imageDisplay = cvCloneImage(imageIn);
+	char* shirtColor;
+	//
+	vector<cv::Rect> rectFaces = OpenCvOperation::faceDetection(filePath, display);
+	// Process each detected face
+	CCLOG("Detecting shirt colors below the faces.");
+	for (int r = 0; r<rectFaces.size(); r++) {
+		float initialConfidence = 1.0f;
+		int bottom;
+		cv::Rect rectFace = rectFaces[r];
+		drawRectangle(imageDisplay, rectFace, CV_RGB(255, 0, 0));
 
+		// Create the shirt region, to be below the detected face and of similar size.
+		float SHIRT_DY = 1.2f;	// Distance from top of face to top of shirt region, based on detected face height.
+		float SHIRT_SCALE_X = 0.6f;	// Width of shirt region compared to the detected face
+		float SHIRT_SCALE_Y = 0.6f;	// Height of shirt region compared to the detected face
+		CvRect rectShirt;
+		rectShirt.x = rectFace.x + (int)(0.5f * (1.0f - SHIRT_SCALE_X) * (float)rectFace.width);
+		rectShirt.y = rectFace.y + (int)(SHIRT_DY * (float)rectFace.height) + (int)(0.5f * (1.0f - SHIRT_SCALE_Y) * (float)rectFace.height);
+		rectShirt.width = (int)(SHIRT_SCALE_X * rectFace.width);
+		rectShirt.height = (int)(SHIRT_SCALE_Y * rectFace.height);
+		CCLOG("Shirt region is from %d,%d to %d,%d",rectShirt.x,rectShirt.y,rectShirt.x + rectShirt.width - 1,rectShirt.y + rectShirt.height - 1);
+
+		// If the shirt region goes partly below the image, try just a little below the face
+		bottom = rectShirt.y + rectShirt.height - 1;
+		if (bottom > imageIn->height - 1) {
+			SHIRT_DY = 0.95f;	// Distance from top of face to top of shirt region, based on detected face height.
+			SHIRT_SCALE_Y = 0.3f;	// Height of shirt region compared to the detected face
+			// Use a higher shirt region
+			rectShirt.y = rectFace.y + (int)(SHIRT_DY * (float)rectFace.height) + (int)(0.5f * (1.0f - SHIRT_SCALE_Y) * (float)rectFace.height);
+			rectShirt.height = (int)(SHIRT_SCALE_Y * rectFace.height);
+			initialConfidence = initialConfidence * 0.5f;	// Since we are using a smaller region, we are less confident about the results now.
+			CCLOG("Warning: Shirt region goes past the end of the image. Trying to reduce the shirt region position to ",rectShirt.y," with a height of ",rectShirt.height);
+		}
+
+		// Try once again if it is partly below the image.
+		bottom = rectShirt.y + rectShirt.height - 1;
+		if (bottom > imageIn->height - 1) {
+			bottom = imageIn->height - 1;	// Limit the bottom
+			rectShirt.height = bottom - (rectShirt.y - 1);	// Adjust the height to use the new bottom
+			initialConfidence = initialConfidence * 0.7f;	// Since we are using a smaller region, we are less confident about the results now.
+			CCLOG("Warning: Shirt region still goes past the end of the image. Trying to reduce the shirt region height to ",rectShirt.height);
+		}
+
+		// Make sure the shirt region is in the image
+		if (rectShirt.height <= 1) {
+			CCLOG("Warning: Shirt region is not in the image at all, so skipping this face." );
+		}
+		else {
+
+			// Show the shirt region
+			drawRectangle(imageDisplay, rectShirt, CV_RGB(255, 255, 255));
+
+			// Convert the shirt region from RGB colors to HSV colors
+			//cout << "Converting shirt region to HSV" << endl;
+			IplImage *imageShirt = cropRectangle(imageIn, rectShirt);
+			IplImage *imageShirtHSV = cvCreateImage(cvGetSize(imageShirt), 8, 3);
+			cvCvtColor(imageShirt, imageShirtHSV, CV_BGR2HSV);	// (note that OpenCV stores RGB images in B,G,R order.
+			if (!imageShirtHSV) {
+				CCLOG("ERROR: Couldn't convert Shirt image from BGR2HSV.");
+				exit(1);
+			}
+
+			//cout << "Determining color type of the shirt" << endl;
+			int h = imageShirtHSV->height;				// Pixel height
+			int w = imageShirtHSV->width;				// Pixel width
+			int rowSize = imageShirtHSV->widthStep;		// Size of row in bytes, including extra padding
+			char *imOfs = imageShirtHSV->imageData;	// Pointer to the start of the image HSV pixels.
+			// Create an empty tally of pixel counts for each color type
+			int tallyColors[NUM_COLOR_TYPES];
+			for (int i = 0; i<NUM_COLOR_TYPES; i++)
+				tallyColors[i] = 0;
+			// Scan the shirt image to find the tally of pixel colors
+			for (int y = 0; y<h; y++) {
+				for (int x = 0; x<w; x++) {
+					// Get the HSV pixel components
+					uchar H = *(uchar*)(imOfs + y*rowSize + x * 3 + 0);	// Hue
+					uchar S = *(uchar*)(imOfs + y*rowSize + x * 3 + 1);	// Saturation
+					uchar V = *(uchar*)(imOfs + y*rowSize + x * 3 + 2);	// Value (Brightness)
+
+					// Determine what type of color the HSV pixel is.
+					int ctype = getPixelColorType(H, S, V);
+					// Keep count of these colors.
+					tallyColors[ctype]++;
+				}
+			}
+
+			// Print a report about color types, and find the max tally
+			//cout << "Number of pixels found using each color type (out of " << (w*h) << ":\n";
+			int tallyMaxIndex = 0;
+			int tallyMaxCount = -1;
+			int pixels = w * h;
+			for (int i = 0; i<NUM_COLOR_TYPES; i++) {
+				int v = tallyColors[i];
+				CCLOG("%s,%d %, ",sCTypes[i],(v * 100 / pixels));
+				if (v > tallyMaxCount) {
+					tallyMaxCount = tallyColors[i];
+					tallyMaxIndex = i;
+				}
+			}
+			cout << endl;
+			int percentage = initialConfidence * (tallyMaxCount * 100 / pixels);
+			shirtColor = sCTypes[tallyMaxIndex];
+			CCLOG("Color of shirt: %s (%d % confidence).", shirtColor, percentage);
+
+			// Display the color type over the shirt in the image.
+			CvFont font;
+			//cvInitFont(&font,CV_FONT_HERSHEY_PLAIN,0.55,0.7, 0,1,CV_AA);	// For OpenCV 1.1
+			cvInitFont(&font, CV_FONT_HERSHEY_PLAIN, 0.8, 1.0, 0, 1, CV_AA);	// For OpenCV 2.0
+			char text[256];
+			sprintf_s(text, sizeof(text)-1, "%d%%", percentage);
+			cvPutText(imageDisplay, sCTypes[tallyMaxIndex], cvPoint(rectShirt.x, rectShirt.y + rectShirt.height + 12), &font, CV_RGB(255, 0, 0));
+			cvPutText(imageDisplay, text, cvPoint(rectShirt.x, rectShirt.y + rectShirt.height + 24), &font, CV_RGB(255, 0, 0));
+
+
+			// Free resources.
+			cvReleaseImage(&imageShirtHSV);
+			cvReleaseImage(&imageShirt);
+		}//end if valid height
+	}//end for loop
+
+	if (display)
+	{
+		// Display the RGB debugging image
+		cvNamedWindow("Shirt_Detection", 1);
+		cvShowImage("Shirt_Detection", imageDisplay);
+	}
+	return shirtColor;
+}
+// Determine what type of color the HSV pixel is. Returns the colorType between 0 and NUM_COLOR_TYPES.
+int  OpenCvOperation::getPixelColorType(int H, int S, int V)
+{
+	int color;
+	if (V < 75)
+		color = cBLACK;
+	else if (V > 190 && S < 27)
+		color = cWHITE;
+	else if (S < 53 && V < 185)
+		color = cGREY;
+	else {	// Is a color
+		if (H < 14)
+			color = cRED;
+		else if (H < 25)
+			color = cORANGE;
+		else if (H < 34)
+			color = cYELLOW;
+		else if (H < 73)
+			color = cGREEN;
+		else if (H < 102)
+			color = cAQUA;
+		else if (H < 127)
+			color = cBLUE;
+		else if (H < 149)
+			color = cPURPLE;
+		else if (H < 175)
+			color = cPINK;
+		else	// full circle 
+			color = cRED;	// back to Red
+	}
+	return color;
+}
+// Returns a new image that is a cropped version of the original image. 
+IplImage* OpenCvOperation::cropRectangle(IplImage *img, CvRect region)
+{
+	IplImage *imageTmp, *imageRGB;
+	CvSize size;
+	size.height = img->height;
+	size.width = img->width;
+
+	if (img->depth != IPL_DEPTH_8U) {
+		std::cerr << "ERROR: Unknown image depth of " << img->depth << " given in cropRectangle() instead of 8." << std::endl;
+		exit(1);
+	}
+
+	// First create a new (color or greyscale) IPL Image and copy contents of img into it.
+	imageTmp = cvCreateImage(size, IPL_DEPTH_8U, img->nChannels);
+	cvCopy(img, imageTmp);
+
+	// Create a new image of the detected region
+	//printf("Cropping image at x = %d, y = %d...", faces[i].x, faces[i].y);
+	//printf("Setting region of interest...");
+	// Set region of interest to that surrounding the face
+	cvSetImageROI(imageTmp, region);
+	// Copy region of interest (i.e. face) into a new iplImage (imageRGB) and return it
+	size.width = region.width;
+	size.height = region.height;
+	imageRGB = cvCreateImage(size, IPL_DEPTH_8U, img->nChannels);
+	cvCopy(imageTmp, imageRGB);	// Copy just the region.
+
+	cvReleaseImage(&imageTmp);
+	return imageRGB;
+}
+
+
+// Draw a rectangle around the given object (defaults to a red color)
+void OpenCvOperation::drawRectangle(IplImage *img, CvRect face, CvScalar col)	{
+	CvPoint p1, p2;
+	p1.x = face.x;
+	p1.y = face.y;
+	p2.x = face.x + face.width;
+	p2.y = face.y + face.height;
+	cvRectangle(img, p1, p2, col, 2);
 }

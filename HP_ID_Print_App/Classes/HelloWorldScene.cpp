@@ -231,6 +231,8 @@ void HelloWorld::onVerifyButtonTouch(Object *pSender, ui::TouchEventType type)
 		CCLOG("onVerifyButtonTouch,TOUCH_EVENT_ENDED!");
 		//Photo verify function call here:
 		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
+		//Kind of verify function call here:
+
 		break;
 	default:
 		break;
@@ -396,6 +398,7 @@ void HelloWorld::onIntroListViewItemSelected(Object *pSender, ui::ListViewEventT
 		//OpenCvOperation::edgeDetection("C:\\lena.png",true);
 		//OpenCvOperation::maxContourDetection("C:\\Users\\yangboz\\Desktop\\Cert_photos\\Passport_photo_2x2_inch.jpg", true);
 		//OpenCvOperation::contoursDetection("C:\\lena.png", true);
+		//OpenCvOperation::shirtDetection("C:\\Users\\yangboz\\Desktop\\Cert_photos\\Passport_photo_2x2_inch.jpg", true);
 		//
 		HW_UserDataModel::Instance()->cur_listView_selected_index = static_cast<int>(listView->getCurSelectedIndex());
 		this->cur_defined_size = HW_DataModel::HW_DataModel::ARRAY_OF_CERT_SIZES[HW_UserDataModel::Instance()->cur_listView_selected_index];
@@ -791,7 +794,7 @@ void HelloWorld::onOpenFilePicker()
 	}
 	this->progressBar_upload->setPercent(90);
 	//OpenCV handler here:
-	int detectedFaces = OpenCvOperation::faceDetection(this->cur_photo_file_path, HW_OPENCV_DEBUG);
+	int detectedFaces = OpenCvOperation::faceDetection(this->cur_photo_file_path, HW_OPENCV_DEBUG).size();
 	if (detectedFaces != 1)//Only one face required for certification photo.
 	{
 		//return MessageBox("Required face invalid!", "ERROR");

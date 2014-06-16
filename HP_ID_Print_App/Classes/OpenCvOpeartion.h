@@ -23,6 +23,9 @@ using namespace cv;
 #include "HW_DataModel.h"
 #include "HW_UserDataModel.h"
 
+// If trying to debug the color detector code, enable SHOW_DEBUG_IMAGE:
+#define SHOW_DEBUG_IMAGE
+
 class OpenCvOperation
 {
 public:
@@ -33,7 +36,7 @@ public:
 	static bool cvMatImageAttributesCheck(std::string filePath);
 	//OpenCV function header
 	//static void faceDetectAndDisplay(std::string filePath);
-	static int faceDetection(std::string filePath, bool display);
+	static vector<cv::Rect> faceDetection(std::string filePath, bool display);
 	static void fullbodyDetectAndDisplay_Haar(std::string filePath);
 	static void fullbodyDetectAndDisplay_Hog(std::string filePath);
 	//@see http://stackoverflow.com/questions/11987483/opencvs-canny-edge-detection-in-c
@@ -43,7 +46,7 @@ public:
 	//@see http://docs.opencv.org/doc/tutorials/imgproc/shapedescriptors/bounding_rects_circles/bounding_rects_circles.html
 	static void contoursDetection(std::string filePath, bool display);
 	//@see http://shervinemami.info/shirtDetection.html
-	static void shirtDetection(std::string filePath, bool display);
+	static char* shirtDetection(std::string filePath, bool display);
 	//Background subtraction using MOG
 	//@see http://stackoverflow.com/questions/19221877/opencv-how-to-use-createbackgroundsubtractormog
 	static void backgroundSubstraction_MOG_1(std::string filePath);
@@ -67,6 +70,7 @@ public:
 	static bool tilingImages(int row, int column, std::string context, std::string outputDest, bool display);
 	//@see http://blog.csdn.net/chenjiazhou12/article/details/29222619
 	static void on_mouse(int event, int x, int y, int flags, void* param);
+	
 private:
 	//OpenCV related variables
 	//
@@ -74,6 +78,14 @@ private:
 	static bool saveIplImageFile(IplImage *image, std::string context);
 	//PNG with alpha
 	static void createAlphaMat(cv::Mat4b &mat);
+	
+	// Determine what type of color the HSV pixel is. Returns the colorType between 0 and NUM_COLOR_TYPES.
+	static int getPixelColorType(int H, int S, int V);
+	// Returns a new image that is a cropped version of the original image. 
+	// Remember to free the new image later.
+	static IplImage* cropRectangle(IplImage *img, CvRect region);
+	// Draw a rectangle around the given object (use CV_RGB(200,0,0) for red color)
+	static void drawRectangle(IplImage *img, CvRect face, CvScalar col);
 };
 
 #endif
