@@ -29,10 +29,15 @@ THE SOFTWARE.
 #include "CCRef.h"
 #include "platform/CCCommon.h"
 #include "platform/CCGLViewProtocol.h"
+
 #include "glfw3.h"
+
+#include <comdef.h>
+#include <OleIdl.h>
 
 NS_CC_BEGIN
 
+//class CC_DLL GLView : public GLViewProtocol, public Ref, public IDropTarget
 class CC_DLL GLView : public GLViewProtocol, public Ref
 {
 public:
@@ -77,6 +82,16 @@ public:
     /** Check whether retina display is enabled. */
     bool isRetinaEnabled() { return _isRetinaEnabled; };
 
+public:
+	/* IDropTarget*/
+	//@see http://www.codeproject.com/Articles/485/The-Complete-Idiots-Guide-to-Writing-Shell-Exten
+	STDMETHODIMP DragEnter(IDataObject* pDataObj, DWORD grfKeyState,POINTL pt, DWORD* pdwEffect);
+	STDMETHODIMP DragOver(DWORD grfKeyState, POINTL pt, DWORD* pdwEffect)
+	{
+		return E_NOTIMPL;
+	}
+	STDMETHODIMP DragLeave();
+	STDMETHODIMP Drop(IDataObject* pDataObj, DWORD grfKeyState,POINTL pt, DWORD* pdwEffect);
 protected:
     GLView();
     virtual ~GLView();

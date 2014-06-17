@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
 Copyright (c) 2010-2012 cocos2d-x.org
 Copyright (c) 2013-2014 Chukong Technologies Inc.
 
@@ -346,12 +346,12 @@ bool GLView::initWithRect(const std::string& viewName, Rect rect, float frameZoo
 	RECT desktopRect;
 	LPRECT lprRect = new RECT;
 	desktopRect = *lprRect;
-	HWND hDesktop = GetDesktopWindow();
+	HWND hDesktop = GetActiveWindow();
 	// Gets the Desktop window rect or screen resolution in pixels
 	GetWindowRect(hDesktop, &desktopRect);
 	//
-	DWORD dwStyle = WS_CAPTION | WS_POPUPWINDOW | WS_MINIMIZEBOX ;  // Window Style
-	//DWORD dwStyle = WS_VISIBLE | WS_POPUP | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;  // Window Style
+	//DWORD dwStyle = WS_CAPTION | WS_POPUPWINDOW | WS_MINIMIZEBOX ;  // Window Style
+	DWORD dwStyle = WS_BORDER;  // Window Style
 	//
 	lprRect->bottom = rect.size.height;
 	lprRect->left = rect.getMinX();
@@ -360,6 +360,11 @@ bool GLView::initWithRect(const std::string& viewName, Rect rect, float frameZoo
 	//
 	bool result = AdjustWindowRectEx(lprRect, dwStyle, FALSE, dwStyle);
 	*/
+	//////////////////////////////////////////////////////////////////////////
+	HWND hDesktop = GetActiveWindow();
+	DragAcceptFiles(hDesktop, TRUE); 
+	//HRESULT result =  RegisterDragDrop(hDesktop, this);
+	//////////////////////////////////////////////////////////////////////////
 	//
     glfwMakeContextCurrent(_mainWindow);
 
@@ -371,6 +376,7 @@ bool GLView::initWithRect(const std::string& viewName, Rect rect, float frameZoo
     glfwSetWindowPosCallback(_mainWindow, GLFWEventHandler::onGLFWWindowPosCallback);
     glfwSetFramebufferSizeCallback(_mainWindow, GLFWEventHandler::onGLFWframebuffersize);
     glfwSetWindowSizeCallback(_mainWindow, GLFWEventHandler::onGLFWWindowSizeFunCallback);
+	//glfwSetDropCallback(_mainWindow,GLFWEventHandler::onGLFWWindowDropFunCallback);
 
     setFrameSize(rect.size.width, rect.size.height);
 
@@ -804,6 +810,31 @@ bool GLView::initGlew()
 #endif // (CC_TARGET_PLATFORM != CC_PLATFORM_MAC)
 
     return true;
+}
+
+STDMETHODIMP GLView::DragEnter(IDataObject *pDataObj, DWORD grfKeyState, POINTL pt, DWORD *pdwEffect)
+{
+	if (NULL == pDataObj)
+	{
+		return E_INVALIDARG;
+	}
+	return S_OK;
+}
+
+STDMETHODIMP GLView::DragLeave(void)
+{
+	return S_OK;
+}
+
+STDMETHODIMP GLView::Drop(IDataObject *pDataObj, DWORD grfKeyState, POINTL pt, DWORD *pdwEffect)
+{
+	if (NULL == pDataObj)
+	{
+		return E_INVALIDARG;
+	}
+
+	POINT ppt = { pt.x, pt.y };
+	return S_OK;
 }
 
 NS_CC_END // end of namespace cocos2d;

@@ -232,7 +232,9 @@ void HelloWorld::onVerifyButtonTouch(Object *pSender, ui::TouchEventType type)
 		//Photo verify function call here:
 		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFING);
 		//Kind of verify function call here:
-
+		HelloWorld::onVerify_Background();
+		HelloWorld::onVerify_Clothing();
+		HelloWorld::onVerify_Resolutiony();
 		break;
 	default:
 		break;
