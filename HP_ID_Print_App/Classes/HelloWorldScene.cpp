@@ -787,6 +787,11 @@ void HelloWorld::onOpenFilePicker()
 		return;//User cancel file picker;
 	}
 	this->progressBar_upload->setPercent(50);
+	//TODO:ChineseCharacter issue;
+	//this->pageView_main->scrollToPage(PAGE_VIEW_EDITOR);
+	//this->imageView_editor->loadTexture(this->cur_photo_file_path);
+	//return;
+	//
 	if (!OpenCvOperation::iplImageAttributesCheck(this->cur_photo_file_path))
 	{
 		//MessageBox("Invalid image with attributes(width/height/size..)!", "Error");

@@ -2,14 +2,13 @@
 #define __HW_STRING_UTILS_H__
 
 #include <string>
-
-//#include <stdio.h>
-using std::string;
+//
+using namespace std;
 
 class HW_StringUtils
 {
 public:
-	static std::string ws2s(const std::wstring& ws);
+	static std::string ws2s(const std::wstring& wstring);
 	static std::wstring s2ws(const std::string& s);
 	//purpose:char to WCHAR 、wchar_t、LPWSTR etc
 	/*

@@ -12,6 +12,8 @@
 
 #include "HW_StringUtils.h"
 
+#include <locale>
+
 class FileOperation
 {
 public:

@@ -1,6 +1,6 @@
 ﻿#include "AppDelegate.h"
 #include "HelloWorldScene.h"
-
+#pragma execution_character_set("utf-8") 
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {

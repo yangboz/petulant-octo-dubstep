@@ -1,18 +1,14 @@
 #include "HW_StringUtils.h"
 
-std::string HW_StringUtils::ws2s(const std::wstring& ws)
+std::string HW_StringUtils::ws2s(const std::wstring& widestring)
 {
-	std::string curLocale = setlocale(LC_ALL, NULL);        // curLocale = "C";
-	setlocale(LC_ALL, "chs");
-	const wchar_t* _Source = ws.c_str();
-	size_t _Dsize = 2 * ws.size() + 1;
-	char *_Dest = new char[_Dsize];
-	memset(_Dest, 0, _Dsize);
-	wcstombs(_Dest, _Source, _Dsize);
-	std::string result = _Dest;
-	delete[]_Dest;
-	setlocale(LC_ALL, curLocale.c_str());
-	return result;
+	unsigned len = widestring.size() * 4;
+	setlocale(LC_CTYPE, "");
+	char *p = new char[len];
+	wcstombs(p, widestring.c_str(), len);
+	std::string str1(p);
+	delete[] p;
+	return str1;
 }
 
 std::wstring HW_StringUtils::s2ws(const std::string& s)
