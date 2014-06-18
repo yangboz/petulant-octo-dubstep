@@ -35,7 +35,7 @@ using namespace ui;
 
 //OpenCV Debug level
 #define HW_OPENCV_DEBUG false
-///OpenCV Grabcut interactive level
+///OpenCV Grab-cut interactive level
 #define HW_OPENCV_GRABCUT_INTERACTIVE false
 
 //Design color constants

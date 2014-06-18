@@ -620,26 +620,27 @@ bool OpenCvOperation::foregroundGrabcut(std::string filePath, int width, int hei
 			{
 				//ESC按键退出  
 			case '\x1b':
-				cout << "Exiting ..." << endl;
+				CCLOG("Interactive Grabcut Exiting ...");
 				//goto exit_main;
 				//r按键重置图像  
 			case 'r':
-				cout << endl;
 				gcapp.reset();
 				gcapp.showImage();
 				break;
 				//n按键进行一次处理  
 			case 'n':
 				int iterCount = gcapp.getIterCount();
-				cout << "<" << iterCount << "... ";
+				CCLOG("< %d ... ",iterCount);
 				int newIterCount = gcapp.nextIter();
 				if (newIterCount > iterCount)
 				{
 					gcapp.showImage();
-					cout << iterCount << ">" << endl;
+					CCLOG("iterCount:%d >",iterCount);
 				}
 				else
-					cout << "rect must be determined>" << endl;
+				{
+					CCLOG("rect must be determined>");
+				}
 				break;
 			}
 		}

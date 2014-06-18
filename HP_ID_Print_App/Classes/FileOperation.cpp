@@ -190,8 +190,11 @@ std::string FileOperation::openFileDialog()
 		}
 	}
 	//
-	filePath = HW_StringUtils::ws2s(filePaths);
-	CCLOG("Selected image file path: %s", filePath.c_str());
+	if (filePaths.size())
+	{
+		filePath = HW_StringUtils::ws2s(filePaths);
+		CCLOG("Selected image file path: %s", filePath.c_str());
+	}
 	return filePath;
 }
 

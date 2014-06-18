@@ -514,7 +514,7 @@ void HelloWorld::onRotateSliderValueChanged(Object *pSender, ui::SliderEventType
 {
 	ui::Slider *slider = static_cast<ui::Slider*>(pSender);
 	//const cocos2d::Size size = this->imageView_cert_origin->getSize();
-	float rotateStepper = 5.0f;
+	float rotateStepper = 10.0f;
 	const cocos2d::Point orignalImagePoint = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	//
 	switch (type)
@@ -567,7 +567,7 @@ void HelloWorld::onWindowMinButtonTouch(Object *pSender, ui::TouchEventType type
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onWindowMinButtonTouch,TOUCH_EVENT_ENDED!");
-		//TODO:Windows minize function here:
+		//TODO:Windows minimize function here:
 
 		break;
 	default:
@@ -1084,7 +1084,7 @@ void HelloWorld::applyEditorSettingChanges()
 	//this->imageView_editor->setSize(definedSize);
 	this->cur_defined_size = HW_DataModel::HW_DataModel::ARRAY_OF_EDITOR_FRAME_DISPLAY[HW_UserDataModel::Instance()->cur_listView_selected_index];
 	this->scrollView_editor->setInnerContainerSize(this->cur_defined_size);
-
+	//this->scrollView_editor->setSize(this->cur_defined_size);
 }
 ///Utility functions
 cocos2d::Size HelloWorld::getUserDefinedSize()
