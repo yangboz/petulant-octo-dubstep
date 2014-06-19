@@ -88,6 +88,8 @@ public:
 	void onUploadListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onEditorListViewItemSelected(Object *pSender, ui::ListViewEventType type);
 	void onTypesetListViewItemSelected(Object *pSender, ui::ListViewEventType type);
+	///ScrollView related
+	void onScrollViewEdtiorTouch(Object *pSender, ui::ScrollviewEventType type);
 	///Panel touch related to dismiss the popup layers
 	void onPanelsTouch(Object *pSender, ui::TouchEventType type);
 	void onPageViewTurning(Object *pSender, ui::PageViewEventType type);
@@ -101,6 +103,9 @@ public:
 	void removePopupLayer(float interval);
 	//Set up list views with size values
 	void setupListViews();
+	//Save function
+	bool onSaveSolidColorBgImage(bool dialog);//With open file folder dialog select option
+	bool onSaveTilingResultImage();
 	//Verify functions
 	bool onVerify_Background();
 	bool onVerify_Clothing();
@@ -186,9 +191,10 @@ private:
 	std::string cur_output_tiled_file_path;
 	std::string cur_foreground_file_path;
 	std::string cur_background_file_path;
-	//
+	//User data
 	cocos2d::CCSize cur_defined_size;
 	cocos2d::CCPoint ori_image_verified_pos;
+	std::string userDefinedFolderFilePath;
 
 	//Popup related
 	PopupLayer* createPopupLayer(const char *bgFilePath);

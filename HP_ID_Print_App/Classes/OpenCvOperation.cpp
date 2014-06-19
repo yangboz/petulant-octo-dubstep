@@ -642,6 +642,8 @@ bool OpenCvOperation::foregroundGrabcut(std::string filePath, int width, int hei
 					CCLOG("rect must be determined>");
 				}
 				break;
+			//case 's':
+				//break;
 			}
 		}
 	}
@@ -660,6 +662,17 @@ bool OpenCvOperation::foregroundGrabcut(std::string filePath, int width, int hei
 	//Resize the Mat
 	Mat resized;
 	cv::resize(dst, resized, cvSize(width, height));
+	//Crop the size
+	/*
+	// Setup a rectangle to define your region of interest
+	cv::Rect myROI(10, 10, width, height);
+	// Crop the full image to that image contained by the rectangle myROI
+	// Note that this doesn't copy the data
+	cv::Mat croppedRef(dst, myROI);
+	cv::Mat cropped;
+	// Copy the data into new matrix
+	croppedRef.copyTo(cropped);
+	*/
 	//Save the result(image file)
 	return OpenCvOperation::saveMatImageFile(resized, HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME);
 }
@@ -849,6 +862,7 @@ bool OpenCvOperation::saveTransformedImageFile(double angle, double scale, doubl
 
 	// Do a transformation
 	cvWarpAffine(srcImage, imageTransformed, rot_mat);
+
 	//
 	saved = OpenCvOperation::saveIplImageFile(imageTransformed, dst);
 	//free mem

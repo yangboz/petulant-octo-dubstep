@@ -174,12 +174,15 @@ bool HelloWorld::init()
 	this->popup_upload_photo_invalid_face = NULL;
 	//ListView set up.
 	this->setupListViews();
+	//ScrollView event handler.
+	this->scrollView_editor->addEventListenerScrollView(this, (ui::SEL_ScrollViewEvent)&HelloWorld::onScrollViewEdtiorTouch);
 	//Default variables initialization
 	this->cur_roated_value = 0.0f;
 	this->cur_scaled_value = 1.0f;
 	this->cur_moved_value_x = 0.0f;
 	this->cur_moved_value_y = 0.0f;
 	this->cur_colored_value = BG_COLOR_WHITE;
+	this->userDefinedFolderFilePath = "";
     return true;
 }
 
@@ -349,34 +352,21 @@ void HelloWorld::onWhiteColouredButtonTouch(Object *pSender, ui::TouchEventType 
 }
 void HelloWorld::onSaveButtonTouch(Object *pSender, ui::TouchEventType type)
 {
-	cocos2d::Size definedSize = HelloWorld::getUserDefinedSize();
-	std::string definedFolderFilePath;
+
 	switch (type)
 	{
 	case TOUCH_EVENT_BEGAN:
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onSaveButtonTouch,TOUCH_EVENT_ENDED!");
-		//Get user defined save photo path:
-		definedFolderFilePath = FileOperation::saveFileDialog();
-		this->cur_output_file_path = definedFolderFilePath + HW_DataModel::HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME;
-		this->cur_output_tiled_file_path = definedFolderFilePath + HW_DataModel::HW_DataModel::OUT_PUT_FIN_RESULT_FILE_NAME;
-		CCLOG("cur_output_file_folder: %s", this->cur_output_file_path.c_str());
-		//OpenCV save colored background image file:
-		if (!OpenCvOperation::saveColoredImageFile(this->cur_colored_value, (int)definedSize.width, (int)definedSize.height, HW_DataModel::HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME.c_str()))
+		if (!HelloWorld::onSaveSolidColorBgImage(true))
 		{
 			MessageBox("Save background image file failure!", "ERROR");
 		}
-		else
+		if (HelloWorld::onSaveTilingResultImage())
 		{
-			//OpenCV add images(foreground,background):
-			this->cur_foreground_file_path = HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME.c_str();
-			this->cur_background_file_path = HW_DataModel::HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME.c_str();
-			if (OpenCvOperation::addingTwoImages(this->cur_foreground_file_path, this->cur_background_file_path, this->cur_output_file_path,HW_OPENCV_DEBUG))
-			{
-				//Popup notification.
-				this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS);
-			}
+			//Popup notification.
+			this->centerPopupLayer(HW_DataModel::HW_DataModel::BG_FILE_OF_SAVE_PHOTO_SUCCESS);
 		}
 		break;
 	default:
@@ -723,7 +713,7 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_MOG_1(this->cur_photo_file_path);
 		//OpenCvOperation::backgroundSubstraction_(this->cur_photo_file_path);
-		if (OpenCvOperation::foregroundGrabcut(this->cur_photo_file_path, (int)definedSize.width, (int)definedSize.height, HW_OPENCV_DEBUG,HW_OPENCV_GRABCUT_INTERACTIVE))
+		if (OpenCvOperation::foregroundGrabcut(this->cur_photo_file_path, (int)definedSize.width, (int)definedSize.height, true, true))
 		{
 			
 			this->progressBar_verifing->setPercent(100);
@@ -737,6 +727,7 @@ void HelloWorld::onVerifingNaviButtonTouch(Object *pSender, ui::TouchEventType t
 }
 void HelloWorld::onVerifiedNaviButtonTouch(Object *pSender, ui::TouchEventType type)
 {
+	std::string definedFolderFilePath;
 	//
 	switch (type)
 	{
@@ -744,12 +735,16 @@ void HelloWorld::onVerifiedNaviButtonTouch(Object *pSender, ui::TouchEventType t
 		break;
 	case TOUCH_EVENT_ENDED:
 		CCLOG("onVerifiedNaviButtonTouch,TOUCH_EVENT_ENDED!");
-		//
-		this->pageView_main->scrollToPage(PAGE_VIEW_VERIFIED);
-		//
-		this->scrollView_verified->setBackGroundColor(cocos2d::ccColor3B::WHITE);
-		//Keep state
-		this->ori_image_verified_pos = this->imageView_verified->getPosition();
+		//Default save image file function
+		if (this->onSaveSolidColorBgImage(false) && this->onSaveTilingResultImage())
+		{
+			//
+			this->pageView_main->scrollToPage(PAGE_VIEW_VERIFIED);
+			//
+			this->scrollView_verified->setBackGroundColor(cocos2d::ccColor3B::WHITE);
+			//Keep state
+			this->ori_image_verified_pos = this->imageView_verified->getPosition();
+		}
 		break;
 	default:
 		break;
@@ -768,6 +763,24 @@ void HelloWorld::onTypesetNaviButtonTouch(Object *pSender, ui::TouchEventType ty
 		this->pageView_main->scrollToPage(PAGE_VIEW_TYPESET);
 		//
 		this->imageView_verified->loadTexture(HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME);
+		break;
+	default:
+		break;
+	}
+}
+void HelloWorld::onScrollViewEdtiorTouch(Object *pSender, ui::ScrollviewEventType type)
+{
+	CCLOG("onScrollViewEdtiorTouch! %d", this->panel_editor->isTouchEnabled());
+	//this->pageView_main->setTouchEnabled(false);
+	//
+	switch (type)
+	{
+	case SCROLLVIEW_EVENT_SCROLL_TO_LEFT:
+		this->panel_editor->setTouchEnabled(false);
+		break;
+	case SCROLLVIEW_EVENT_SCROLL_TO_RIGHT:
+		CCLOG("onScrollViewEdtiorTouch,TOUCH_EVENT_ENDED!");
+		//
 		break;
 	default:
 		break;
@@ -1130,4 +1143,36 @@ bool HelloWorld::onVerify_Resolutiony()
 	bool result = true;
 	//
 	return result;
+}
+//Save functions
+bool HelloWorld::onSaveSolidColorBgImage(bool dialog)
+{
+	bool saved = false;
+	cocos2d::Size definedSize = HelloWorld::getUserDefinedSize();
+	//Get user defined save photo path:
+	if (dialog)
+	{
+		this->userDefinedFolderFilePath = FileOperation::saveFileDialog();
+		this->cur_output_file_path = this->userDefinedFolderFilePath + HW_DataModel::HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME;
+		this->cur_output_tiled_file_path = this->userDefinedFolderFilePath + HW_DataModel::HW_DataModel::OUT_PUT_FIN_RESULT_FILE_NAME;
+	}
+	else
+	{
+		this->cur_output_file_path = HW_DataModel::HW_DataModel::OUT_PUT_PRE_RESULT_FILE_NAME;
+		this->cur_output_tiled_file_path =  HW_DataModel::HW_DataModel::OUT_PUT_FIN_RESULT_FILE_NAME;
+	}
+	CCLOG("cur_output_file_folder: %s", this->cur_output_file_path.c_str());
+	//OpenCV save colored background image file:
+	saved = OpenCvOperation::saveColoredImageFile(this->cur_colored_value, (int)definedSize.width, (int)definedSize.height, HW_DataModel::HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME.c_str());
+
+	return saved;
+}
+bool HelloWorld::onSaveTilingResultImage()
+{
+	bool saved = false;
+	//OpenCV add images(foreground,background):
+	this->cur_foreground_file_path = HW_DataModel::HW_DataModel::OUT_PUT_FOREGROUND_FILE_NAME.c_str();
+	this->cur_background_file_path = HW_DataModel::HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME.c_str();
+	saved = OpenCvOperation::addingTwoImages(this->cur_foreground_file_path, this->cur_background_file_path, this->cur_output_file_path, HW_OPENCV_DEBUG);
+	return saved;
 }
