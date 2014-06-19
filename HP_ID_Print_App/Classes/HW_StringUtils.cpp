@@ -1,4 +1,4 @@
-#include "HW_StringUtils.h"
+﻿#include "HW_StringUtils.h"
 
 std::string HW_StringUtils::ws2s(const std::wstring& widestring)
 {
@@ -73,4 +73,34 @@ std::string HW_StringUtils::WStrToUTF8(const std::wstring &str)
 	std::string result;
 	WStrToUTF8Convert(result, str);
 	return result;
+}
+
+int HW_StringUtils::gBKToUTF8(std::string & gbkStr)
+{
+	const char* fromCode = GB2312;
+	const char* toCode = UTF8;
+	//
+	iconv_t iconvH;
+	iconvH = iconv_open(fromCode, toCode);
+	if (iconvH == 0)
+	{
+		return -1;
+	}
+
+	const char* strChar = gbkStr.c_str();
+	const char** pin = &strChar;
+	size_t strLength = gbkStr.length();
+	char* outbuf = (char*)malloc(strLength * 4);
+	char* pBuff = outbuf;
+
+	memset(outbuf, 0, strLength * 4);
+	size_t outLength = strLength * 4;
+	if (-1 == iconv(iconvH, pin, &strLength, &outbuf, &outLength))
+	{
+		iconv_close(iconvH);
+		return -1;
+	}
+	gbkStr = pBuff;
+	iconv_close(iconvH);
+	return 0;
 }

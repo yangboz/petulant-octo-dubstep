@@ -183,6 +183,7 @@ std::string FileOperation::openFileDialog()
 				pRet->GetDisplayName(SIGDN_DESKTOPABSOLUTEPARSING, &nameBuffer);
 				//filePaths.push_back(std::wstring(nameBuffer));
 				filePaths = std::wstring(nameBuffer);
+				//filePath = static_cast<std::string>(nameBuffer);
 				pRet->Release();
 				CoTaskMemFree(nameBuffer);
 			}
@@ -193,6 +194,9 @@ std::string FileOperation::openFileDialog()
 	if (filePaths.size())
 	{
 		filePath = HW_StringUtils::ws2s(filePaths);
+		FileOperation::copyFileToWorkspace(filePath, HW_DataModel::HW_DataModel::OUT_PUT_RAW_FILE_NAME);
+		//HW_StringUtils::gBKToUTF8(filePath);
+		filePath = HW_DataModel::HW_DataModel::OUT_PUT_RAW_FILE_NAME;
 		CCLOG("Selected image file path: %s", filePath.c_str());
 	}
 	return filePath;
@@ -258,4 +262,15 @@ std::vector<std::wstring> openFilesDialog()
 	}
 	CCLOG("Selected image files path: c \\n", filePaths);
 	return filePaths;
+}
+bool FileOperation::copyFileToWorkspace(std::string src, std::string dst)
+{
+	//@see https://answers.yahoo.com/question/index?qid=20081125140921AA3VB5V
+	//std::string  command = "copy C:\\lena.png  C:\\Joey.jpg ";
+	std::string command = "copy" + src + " " + dst;
+	//printf("HW_StringUtils::copyFileToWorkspace cmd:%s", command.c_str());
+	int result = system(command.c_str());
+	system("PAUSE");
+	//printf("HW_StringUtils::copyFileToWorkspace result:%i", result);
+	return (bool)result;
 }

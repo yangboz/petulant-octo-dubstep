@@ -46,4 +46,5 @@ namespace HW_DataModel
 	const std::string HW_DataModel::OUT_PUT_FOREGROUND_MOVED_FILE_NAME = "HP_ID_Print_output_foreground_moved_.png";
 	const std::string HW_DataModel::OUT_PUT_FOREGROUND_TRANSFORMED_FILE_NAME = "HP_ID_Print_output_foreground_transformed_.png";
 	const std::string HW_DataModel::OUT_PUT_BACKGROUND_FILE_NAME = "HP_ID_Print_output_background_.png";
+	const std::string HW_DataModel::OUT_PUT_RAW_FILE_NAME = "C:\\HP_ID_Print.jpg";
 }

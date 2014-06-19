@@ -378,11 +378,23 @@ void HelloWorld::onIntroListViewItemSelected(Object *pSender, ui::ListViewEventT
 {
 	ui::ListView *listView = static_cast<ListView*>(pSender);
 	//std::string localPrinterName;
+	Mat img;
+	//std::string filePath = "C:\\Users\\yangboz\\Desktop\\乔伊.jpg";
 	//
 	switch (type)
 	{
 	case LISTVIEW_ONSELECTEDITEM_END:
 		//Testing code here:
+		/*
+		HW_StringUtils::gBKToUTF8(filePath);
+		img = imread(filePath, CV_LOAD_IMAGE_UNCHANGED);
+		if (img.empty())
+		{
+			CCLOG("OpenCV ImageLoad Failure！");
+		}
+		namedWindow("OpenCVLoadImageWindow", CV_WINDOW_AUTOSIZE);
+		imshow("OpenCVLoadImageWindow", img);
+		*/
 		//localPrinterName = PrintOperation::printDialog();
 		//OpenCvOperation::addingTwoImages("C:\\HP_ID_Print_output_foreground_.jpg", "C:\\HP_ID_Print_output_background_.png", "C:\\HP_ID_Print_output_result_fin_.png",HW_OPENCV_DEBUG);
 		//OpenCvOperation::tilingImages(2, 2, "C:\\lena.png", "C:\\lena_.png", HW_OPENCV_DEBUG);

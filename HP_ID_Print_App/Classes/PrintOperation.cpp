@@ -10,6 +10,7 @@ std::string PrintOperation::printDialog()
 	HDC                printerDC = NULL;
 	PRINTDLG        printDlgInfo = { 0 };
 	LPWSTR            localPrinterName = NULL;
+	//BYTE*            localPrinterName;
 	PDEVMODE        returnedDevmode = NULL;
 	PDEVMODE        localDevmode = NULL;
 	int                localNumberOfCopies = 0;
@@ -78,6 +79,7 @@ std::string PrintOperation::printDialog()
 	//
 	std::wstring wstr(localPrinterName);
 	std::string str(wstr.begin(), wstr.end());
+	//std::string str((char *)localPrinterName);//Multiply char set
 	return str;
 }
 /*
