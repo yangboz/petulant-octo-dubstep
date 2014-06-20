@@ -11,16 +11,43 @@
 			
 			import spark.events.IndexChangeEvent;
 			
+			override protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				///Upldate UI images.
+				this.updateImageViews();
+			}
+			
 			override protected function id_list_changeHandler(event:IndexChangeEvent):void
 			{
 				super.id_list_changeHandler(event);
 				//
-				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;
+//				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;
+				///Upldate UI images.
+				this.updateImageViews();
 			}
 			
 			override public function get viewBackgroundImage():Bitmap
 			{
 				return new AppData.BG_IMG_01() as Bitmap;
+			}
+			
+			private function updateImageViews():void
+			{
+				//
+				this.id_image_instruction.source = AppData.ARRAY_INS_CERT_TEXTS[AppData.selectedCertSizeIndex];
+				//
+				this.id_image_frame.source = AppData.ARRAY_EDITOR_PHOTO_FRAMES[AppData.selectedCertSizeIndex];
+				this.id_image_guide.source = AppData.ARRAY_EDITOR_PHOTO_GUIDES[AppData.selectedCertSizeIndex];
+			}
+			
+			protected function reupload_button_clickHandler(event:MouseEvent):void
+			{
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_UPLOAD;			
+			}
+			
+			protected function editnext_button_clickHandler(event:MouseEvent):void
+			{
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;			
 			}
 		]]>
 	</fx:Script>
@@ -31,6 +58,19 @@
 					   backgroundImage="{viewBackgroundImage}"
 					   >
 		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)"/>
+		
+		<s:Image id="id_image_instruction" x="200" y="60"/>
+		
+		<s:Image id="id_image_frame" x="410" y="190" />
+		<s:Image id="id_image_guide" x="410" y="190" />
+		
+		<s:Button x="383" y="500" label="RE_UPLOAD" skinClass="skins.HW_Back2UploadButton_Skin" click="reupload_button_clickHandler(event)"/>
+		<s:Button x="505" y="500" label="EDIT_NEXT" skinClass="skins.HW_EditorNextButton_Skin" click="editnext_button_clickHandler(event)"/>
+		<s:HSlider x="393" y="438" skinClass="skins.HW_EditorRotateSlider_Skin"/>
+		<s:Button x="349" y="425" label="ROTATE" skinClass="skins.HW_RotateButton_Skin"/>
+		<s:Button x="625" y="198" label="ZOOM_IN" skinClass="skins.HW_ZoomInButton_Skin"/>
+		<s:Button x="625" y="373" label="ZOOM_OUT" skinClass="skins.HW_ZoomOutButton_Skin"/>
+		<s:VSlider x="638" y="230" skinClass="skins.HW_EditorScaleSlider_Skin"/>
 		
 	</s:BorderContainer>
 </views:ViewBase>

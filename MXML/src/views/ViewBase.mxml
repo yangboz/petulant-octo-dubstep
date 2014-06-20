@@ -28,8 +28,6 @@
 			protected function id_list_changeHandler(event:IndexChangeEvent):void
 			{
 				AppData.selectedCertSizeIndex = event.newIndex;
-				//
-				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_UPLOAD;
 			}
 			
 			

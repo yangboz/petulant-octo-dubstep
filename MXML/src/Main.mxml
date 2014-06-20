@@ -6,10 +6,11 @@
 					   height="600" xmlns:views="views.*"
 					   creationComplete="creationCompleteHandler(event)"
 					   showStatusBar="false"
-					   mouseDown="this.nativeWindow.startMove();"
+					   
 					   >
 	<fx:Script>
 		<![CDATA[
+//			mouseDown="this.nativeWindow.startMove();"
 			import model.AppData;
 			
 			import mx.events.FlexEvent;

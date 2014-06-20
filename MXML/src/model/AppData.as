@@ -133,6 +133,17 @@ package model
 			"assets/images/Photo_22x32/pattern_upload_photo_notice_22x32.png","assets/images/Photo_25x35/pattern_upload_photo_notice_25x35.png","assets/images/Photo_33x48/pattern_upload_photo_notice_33x48.png",
 			"assets/images/Photo_35x45/pattern_upload_photo_notice_35x45.png","assets/images/Photo_35x50/pattern_upload_photo_notice_35x50.png","assets/images/Photo_50x50/pattern_upload_photo_notice_50x50.png"
 		];
+		///EditorView_photos
+		//
+		public static var ARRAY_EDITOR_PHOTO_FRAMES:Array = [
+			"assets/images/Photo_22x32/pattern_edit_photo_frame_22x32.png","assets/images/Photo_25x35/pattern_edit_photo_frame_25x35.png","assets/images/Photo_33x48/pattern_edit_photo_frame_33x48.png",
+			"assets/images/Photo_35x45/pattern_edit_photo_frame_35x45.png","assets/images/Photo_35x50/pattern_edit_photo_frame_35x50.png","assets/images/Photo_50x50/pattern_edit_photo_frame_50x50.png"
+		];
+		//
+		public static var ARRAY_EDITOR_PHOTO_GUIDES:Array = [
+			"assets/images/Photo_22x32/pattern_edit_photo_guide_22x32.png","assets/images/Photo_25x35/pattern_edit_photo_guide_25x35.png","assets/images/Photo_33x48/pattern_edit_photo_guide_33x48.png",
+			"assets/images/Photo_35x45/pattern_edit_photo_guide_35x45.png","assets/images/Photo_35x50/pattern_edit_photo_guide_35x50.png","assets/images/Photo_50x50/pattern_edit_photo_guide_50x50.png"
+		];
 		//
 		[Embed(source="assets/images/background/text/pattern_detecting.png")]
 		public static var INS_VERIFING_TEXT:Class;
