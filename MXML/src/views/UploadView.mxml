@@ -63,6 +63,8 @@
 			private function fileRef_select(event:Event):void 
 			{
 //				trace(event);
+				AppData.uploadedImageFile = event.target as File;
+//				AppData.uploadedImageFile = event.target
 				this.imageAttributeCheck();
 			}
 			
@@ -91,8 +93,8 @@
 			private function onNativeDragDrop(event:NativeDragEvent):void
 			{
 				var fileList:Array = event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
-				var imageFile:File = fileList[0] as File;
-				trace(imageFile);//TODO:navtive file upload function.
+				AppData.uploadedImageFile = fileList[0] as File;
+				trace(AppData.uploadedImageFile);//TODO:navtive file upload function.
 				//
 				this.imageAttributeCheck();
 			}

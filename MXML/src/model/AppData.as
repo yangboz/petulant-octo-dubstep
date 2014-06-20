@@ -1,7 +1,9 @@
 
 package model
 {
+	import flash.filesystem.File;
 	import flash.geom.Point;
+	import flash.net.dns.AAAARecord;
 
 	//--------------------------------------------------------------------------
 	//
@@ -29,7 +31,7 @@ package model
 		//
 		public static var selectedCertSizeIndex:int = -1;
 		public static var selectedTypesetSizeIndex:int = -1;
-		
+		public static var uploadedImageFile:File;
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
