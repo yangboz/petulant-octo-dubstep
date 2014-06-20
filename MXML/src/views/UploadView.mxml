@@ -2,29 +2,106 @@
 <views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				xmlns:views="views.*" width="800" height="600">
+				width="800" height="600" 
+				xmlns:views="views.*"
+				xmlns:components="views.components.*"
+				>
 	<fx:Script>
 		<![CDATA[
 			import model.AppData;
 			
+			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
+			import mx.managers.DragManager;
 			
 			import spark.events.IndexChangeEvent;
+			import spark.primitives.supportClasses.FilledElement;
+			
+			private var fileRef:File;
+//			private var fileRef:FileReference;
+			private var imagesFilter:FileFilter = new FileFilter("Images", "*.jpg;*.gif;*.png");
 			
 			override protected function id_list_changeHandler(event:IndexChangeEvent):void
 			{
 				super.id_list_changeHandler(event);
 				//
-				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;
+//				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;
+			}
+			
+			override protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				//register for the drag enter event
+				addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER, onNativeDragEnter);
+				
+				//register for the drag drop event
+				addEventListener(NativeDragEvent.NATIVE_DRAG_DROP, onNativeDragDrop);
 			}
 			
 			override public function get viewBackgroundImage():Bitmap
 			{
 				return new AppData.BG_IMG_01() as Bitmap;
 			}
+			
+			protected function upload_button_clickHandler(event:MouseEvent):void
+			{
+				this.fileRef = new File();
+				this.fileRef.browseForOpen("Open",[imagesFilter]);
+//				fileRef = new FileReference();
+//				fileRef.addEventListener(Event.SELECT, fileRef_select);
+//				fileRef.addEventListener(ProgressEvent.PROGRESS, fileRef_progress);
+//				fileRef.addEventListener(Event.COMPLETE, fileRef_complete);
+//				fileRef.browse([imagesFilter]);
+				fileRef.addEventListener(Event.SELECT, fileRef_select);
+				fileRef.addEventListener(ProgressEvent.PROGRESS, fileRef_progress);
+				fileRef.addEventListener(Event.COMPLETE, fileRef_complete);
+			}
+			///
+			private function fileRef_select(event:Event):void 
+			{
+				trace(event);
+			}
+			
+			private function fileRef_progress(event:ProgressEvent):void 
+			{
+				trace(event);
+			}
+			
+			private function fileRef_complete(event:Event):void 
+			{
+				trace(event);
+			}
+			
+			//called when the user drags an item into the component area
+			private function onNativeDragEnter(event:NativeDragEvent):void
+			{
+				//check and see if files are being drug in
+				if(event.clipboard.hasFormat(ClipboardFormats.FILE_LIST_FORMAT))
+				{
+					//accept the drag action
+					DragManager.acceptDragDrop(UIComponent(event.currentTarget));
+				}
+			}
+			
+			//called when the user drops an item over the component
+			private function onNativeDragDrop(event:NativeDragEvent):void
+			{
+				var fileList:Array = event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
+				var imageFile:File = fileList[0] as File;
+				trace(imageFile);//TODO:navtive file upload function.
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	<s:BorderContainer width="100%" height="100%" contentBackgroundAlpha="0"
+					   backgroundImage="{viewBackgroundImage}"
+					   >
+		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)"/>
+		
+		<s:Image x="200" y="80" source="{getIntructionImage()}"/>
+		
+		<s:Button x="433" y="500" width="120" height="30" label="Upload" skinClass="skins.HW_UploadButton_Skin" click="upload_button_clickHandler(event)"/>
+	</s:BorderContainer>
+	
 </views:ViewBase>
