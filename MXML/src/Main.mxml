@@ -4,7 +4,21 @@
 					   xmlns:mx="library://ns.adobe.com/flex/mx"
 					   width="800"
 					   height="600" xmlns:views="views.*"
+					   creationComplete="creationCompleteHandler(event)"
 					   >
+	<fx:Script>
+		<![CDATA[
+			import model.AppData;
+			
+			import mx.events.FlexEvent;
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				AppData.mainApp = this;
+			}
+			
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!--skinClass="skins.HW_ApplicationSkin"-->
 		<!-- Place non-visual elements (e.g., services, value objects) here -->

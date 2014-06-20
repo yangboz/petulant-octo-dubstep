@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true">
+	
+	<s:states>
+		<s:State name="normal"/>
+		<!--<s:State name="hovered"/>-->
+		<s:State name="selected"/>
+	</s:states>   
+	
+	<s:Image id="id_image_bg" 
+			 source.normal="{data.normal}"
+			 source.selected="{data.down}"
+			 />
+	<!--<s:Image id="id_image_info" source.hovered="@Embed('assets/images/photosize_menu/button_photosize_info.png')"/>-->
+</s:ItemRenderer>
