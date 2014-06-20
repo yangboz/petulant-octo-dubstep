@@ -2,18 +2,32 @@
 <views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				xmlns:views="views.*" width="800" height="600" creationComplete="creationCompleteHandler(event)">
+				xmlns:views="views.*" width="800" height="600" 
+				>
 	<fx:Script>
 		<![CDATA[
 			import model.AppData;
 			
 			import mx.events.FlexEvent;
 			
-			protected function creationCompleteHandler(event:FlexEvent):void
+			import spark.events.IndexChangeEvent;
+			
+			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				this.id_list.enabled = false;
 			}
 			
+			override protected function id_list_changeHandler(event:IndexChangeEvent):void
+			{
+				super.id_list_changeHandler(event);
+				//
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_TYPESET;
+			}
+			
+			override public function get viewBackgroundImage():Bitmap
+			{
+				return new AppData.BG_IMG_01() as Bitmap;
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>

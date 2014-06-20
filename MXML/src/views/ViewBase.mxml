@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="800" height="600">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="800" height="600"
+		 creationComplete="creationCompleteHandler(event)"
+		 >
 	<s:layout>
 		<s:VerticalLayout/>
 	</s:layout>
 	<fx:Script>
 		<![CDATA[
 			import model.AppData;
+			
+			import mx.events.FlexEvent;
 			
 			import spark.events.IndexChangeEvent;
 			
@@ -16,14 +20,26 @@
 				AppData.selectedCertSizeIndex = event.newIndex;
 			}
 			
+			public function get viewBackgroundImage():Bitmap
+			{
+				return new AppData.BG_IMG_00() as Bitmap;
+			}
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				
+			}
+			
 		]]>
 	</fx:Script>
 	<s:BorderContainer width="100%" height="100%"
-					   backgroundImage="@Embed('assets/images/background/pattern_window_background_01.png')"
+					   backgroundImage="{viewBackgroundImage}"
 					   >
 		<s:List id="id_list" height="220" borderVisible="false" horizontalCenter="-313"
 				itemRenderer="skins.HW_ListSkin_CertSize" useVirtualLayout="false"
-				verticalCenter="-78" change="id_list_changeHandler(event)">
+				verticalCenter="-78" change="id_list_changeHandler(event)"
+			    selectedIndex="{AppData.selectedCertSizeIndex}"
+				>
 			<s:dataProvider>
 				<s:ArrayList>
 					<fx:Object name="25_35" normal="@Embed('assets/images/photosize_menu/button_photosize_25_35.png')" down="@Embed('assets/images/photosize_menu/button_photosize_25_35_pd.png')" />

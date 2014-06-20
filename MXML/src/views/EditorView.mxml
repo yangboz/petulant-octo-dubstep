@@ -15,9 +15,13 @@
 			{
 				super.id_list_changeHandler(event);
 				//
-				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_UPLOAD;
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;
 			}
 			
+			override public function get viewBackgroundImage():Bitmap
+			{
+				return new AppData.BG_IMG_01() as Bitmap;
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>

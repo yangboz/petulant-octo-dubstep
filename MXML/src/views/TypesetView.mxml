@@ -18,6 +18,10 @@
 				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_UPLOAD;
 			}
 			
+			override public function get viewBackgroundImage():Bitmap
+			{
+				return new AppData.BG_IMG_02() as Bitmap;
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
