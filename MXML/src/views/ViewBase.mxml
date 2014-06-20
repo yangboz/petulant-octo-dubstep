@@ -15,6 +15,8 @@
 			
 			import spark.events.IndexChangeEvent;
 			
+			private var isFullScreen:Boolean = false;
+			
 			protected function id_list_changeHandler(event:IndexChangeEvent):void
 			{
 				AppData.selectedCertSizeIndex = event.newIndex;
@@ -30,14 +32,28 @@
 				
 			}
 			
-			private function closeWindowButtonClickHandler(event):void
+			private function closeWindowButtonClickHandler(event:MouseEvent):void
 			{
 				AppData.mainApp.nativeWindow.close();
 			}
 			
-			private function minWindowButtonClickHandler(event):void
+			private function minWindowButtonClickHandler(event:MouseEvent):void
 			{
 				AppData.mainApp.nativeWindow.minimize();
+			}
+			
+			private function maxWindowButtonClickHandler(event:MouseEvent):void
+			{
+				if(isFullScreen)
+				{
+					AppData.mainApp.nativeWindow.restore();
+					isFullScreen = false;
+				}
+				else
+				{
+					AppData.mainApp.nativeWindow.maximize();
+					isFullScreen = true;
+				}
 			}
 		]]>
 	</fx:Script>
@@ -60,8 +76,9 @@
 				</s:ArrayList>
 			</s:dataProvider>
 		</s:List>
-		<s:Button x="724" y="14" label="Button" skinClass="skins.HW_MinButton_Skin" click="closeWindowButtonClickHandler(event)"/>
-		<s:Button x="754" y="14" label="Button" skinClass="skins.HW_CloseButton_Skin" click="minWindowButtonClickHandler(event)"/>
+		<s:Button x="694" y="14" label="Button" skinClass="skins.HW_CloseButton_Skin" click="maxWindowButtonClickHandler(event)"/>
+		<s:Button x="724" y="14" label="Button" skinClass="skins.HW_MinButton_Skin" click="minWindowButtonClickHandler(event)"/>
+		<s:Button x="754" y="14" label="Button" skinClass="skins.HW_CloseButton_Skin" click="closeWindowButtonClickHandler(event)"/>
 	</s:BorderContainer>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->

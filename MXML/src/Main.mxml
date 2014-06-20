@@ -6,6 +6,7 @@
 					   height="600" xmlns:views="views.*"
 					   creationComplete="creationCompleteHandler(event)"
 					   showStatusBar="false"
+					   mouseDown="this.nativeWindow.startMove();"
 					   >
 	<fx:Script>
 		<![CDATA[
