@@ -26,6 +26,8 @@
 				super.id_list_changeHandler(event);
 				//
 //				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;
+				//
+				id_image_instruction.source = AppData.ARRAY_INS_CERT_TEXTS[AppData.selectedCertSizeIndex];
 			}
 			
 			override protected function creationCompleteHandler(event:FlexEvent):void
@@ -35,6 +37,9 @@
 				
 				//register for the drag drop event
 				addEventListener(NativeDragEvent.NATIVE_DRAG_DROP, onNativeDragDrop);
+				
+				//
+				id_image_instruction.source = AppData.ARRAY_INS_CERT_TEXTS[AppData.selectedCertSizeIndex];
 			}
 			
 			override public function get viewBackgroundImage():Bitmap
@@ -99,9 +104,9 @@
 					   >
 		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)"/>
 		
-		<s:Image x="200" y="80" source="{getIntructionImage()}"/>
-		
 		<s:Button x="433" y="500" width="120" height="30" label="Upload" skinClass="skins.HW_UploadButton_Skin" click="upload_button_clickHandler(event)"/>
+		
+		<s:Image id="id_image_instruction" x="200" y="80"/>
 	</s:BorderContainer>
 	
 </views:ViewBase>
