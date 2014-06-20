@@ -26,8 +26,8 @@
 				super.id_list_changeHandler(event);
 				//
 //				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;
-				//
-				id_image_instruction.source = AppData.ARRAY_INS_CERT_TEXTS[AppData.selectedCertSizeIndex];
+				///Upldate UI images.
+				this.updateImageViews();
 			}
 			
 			override protected function creationCompleteHandler(event:FlexEvent):void
@@ -37,9 +37,8 @@
 				
 				//register for the drag drop event
 				addEventListener(NativeDragEvent.NATIVE_DRAG_DROP, onNativeDragDrop);
-				
-				//
-				id_image_instruction.source = AppData.ARRAY_INS_CERT_TEXTS[AppData.selectedCertSizeIndex];
+				///Upldate UI images.
+				this.updateImageViews();
 			}
 			
 			override public function get viewBackgroundImage():Bitmap
@@ -63,17 +62,18 @@
 			///
 			private function fileRef_select(event:Event):void 
 			{
-				trace(event);
+//				trace(event);
+				this.imageAttributeCheck();
 			}
 			
 			private function fileRef_progress(event:ProgressEvent):void 
 			{
-				trace(event);
+//				trace(event);
 			}
 			
 			private function fileRef_complete(event:Event):void 
 			{
-				trace(event);
+//				trace(event);
 			}
 			
 			//called when the user drags an item into the component area
@@ -93,6 +93,25 @@
 				var fileList:Array = event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
 				var imageFile:File = fileList[0] as File;
 				trace(imageFile);//TODO:navtive file upload function.
+				//
+				this.imageAttributeCheck();
+			}
+			
+			private function updateImageViews():void
+			{
+				//
+				this.id_image_instruction.source = AppData.ARRAY_INS_CERT_TEXTS[AppData.selectedCertSizeIndex];
+				//
+				this.id_image_frame.source = AppData.ARRAY_UPLOAD_PHOTO_FRAMES[AppData.selectedCertSizeIndex];
+				this.id_image_guide.source = AppData.ARRAY_UPLOAD_PHOTO_GUIDES[AppData.selectedCertSizeIndex];
+				this.id_image_notice.source = AppData.ARRAY_UPLOAD_PHOTO_NOTICES[AppData.selectedCertSizeIndex];
+			}
+			
+			private function imageAttributeCheck():void
+			{
+				//TODO:imageAttributeCheck
+				//
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;
 			}
 		]]>
 	</fx:Script>
@@ -104,9 +123,13 @@
 					   >
 		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)"/>
 		
-		<s:Button x="433" y="500" width="120" height="30" label="Upload" skinClass="skins.HW_UploadButton_Skin" click="upload_button_clickHandler(event)"/>
-		
 		<s:Image id="id_image_instruction" x="200" y="80"/>
+		
+		<s:Image id="id_image_frame" x="410" y="220" />
+		<s:Image id="id_image_guide" x="410" y="220" />
+		<s:Image id="id_image_notice" x="410" y="220" />
+		
+		<s:Button x="433" y="500" width="120" height="30" label="Upload" skinClass="skins.HW_UploadButton_Skin" click="upload_button_clickHandler(event)"/>
 	</s:BorderContainer>
 	
 </views:ViewBase>

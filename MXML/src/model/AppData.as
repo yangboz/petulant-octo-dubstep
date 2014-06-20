@@ -59,10 +59,79 @@ package model
 		private static var INS_CERT_TEXT_04:Class;
 		[Embed(source="assets/images/background/text/infomation_editphoto_06.png")]
 		private static var INS_CERT_TEXT_05:Class;
+		///Upload_photo_frames
+//		[Embed(source="assets/images/Photo_22x32/pattern_upload_photo_frame_22x32.png")]
+//		private static var UPLOAD_PHOTO_FRAME_00:Class;
+//		[Embed(source="assets/images/Photo_25x35/pattern_upload_photo_frame_25x35.png")]
+//		private static var UPLOAD_PHOTO_FRAME_01:Class;
+//		[Embed(source="assets/images/Photo_33x48/pattern_upload_photo_frame_33x48.png")]
+//		private static var UPLOAD_PHOTO_FRAME_02:Class;
+//		[Embed(source="assets/images/Photo_35x45/pattern_upload_photo_frame_35x45.png")]
+//		private static var UPLOAD_PHOTO_FRAME_03:Class;
+//		[Embed(source="assets/images/Photo_35x50/pattern_upload_photo_frame_35x50.png")]
+//		private static var UPLOAD_PHOTO_FRAME_04:Class;
+//		[Embed(source="assets/images/Photo_50x50/pattern_upload_photo_frame_50x50.png")]
+//		private static var UPLOAD_PHOTO_FRAME_05:Class;
+		///Upload_photo_guides
+//		[Embed(source="assets/images/Photo_22x32/pattern_upload_photo_guide_22x32.png")]
+//		private static var UPLOAD_PHOTO_GUIDE_00:Class;
+//		[Embed(source="assets/images/Photo_25x35/pattern_upload_photo_guide_25x35.png")]
+//		private static var UPLOAD_PHOTO_GUIDE_01:Class;
+//		[Embed(source="assets/images/Photo_33x48/pattern_upload_photo_guide_33x48.png")]
+//		private static var UPLOAD_PHOTO_GUIDE_02:Class;
+//		[Embed(source="assets/images/Photo_35x45/pattern_upload_photo_guide_35x45.png")]
+//		private static var UPLOAD_PHOTO_GUIDE_03:Class;
+//		[Embed(source="assets/images/Photo_35x50/pattern_upload_photo_guide_35x50.png")]
+//		private static var UPLOAD_PHOTO_GUIDE_04:Class;
+//		[Embed(source="assets/images/Photo_50x50/pattern_upload_photo_guide_50x50.png")]
+//		private static var UPLOAD_PHOTO_GUIDE_05:Class;
+		///Upload_photo_notices
+//		[Embed(source="assets/images/Photo_22x32/pattern_upload_photo_notice_22x32.png")]
+//		private static var UPLOAD_PHOTO_NOTICE_00:Class;
+//		[Embed(source="assets/images/Photo_25x35/pattern_upload_photo_notice_25x35.png")]
+//		private static var UPLOAD_PHOTO_NOTICE_01:Class;
+//		[Embed(source="assets/images/Photo_33x48/pattern_upload_photo_notice_33x48.png")]
+//		private static var UPLOAD_PHOTO_NOTICE_02:Class;
+//		[Embed(source="assets/images/Photo_35x45/pattern_upload_photo_notice_35x45.png")]
+//		private static var UPLOAD_PHOTO_NOTICE_03:Class;
+//		[Embed(source="assets/images/Photo_35x50/pattern_upload_photo_notice_35x50.png")]
+//		private static var UPLOAD_PHOTO_NOTICE_04:Class;
+//		[Embed(source="assets/images/Photo_50x50/pattern_upload_photo_notice_50x50.png")]
+//		private static var UPLOAD_PHOTO_NOTICE_05:Class;
 		//
 		public static var ARRAY_INS_CERT_TEXTS:Array = [
 			new INS_CERT_TEXT_00(),new INS_CERT_TEXT_01(),new INS_CERT_TEXT_02(),
 			new INS_CERT_TEXT_03(),new INS_CERT_TEXT_04(),new INS_CERT_TEXT_05()
+		];
+		//
+//		public static var ARRAY_UPLOAD_PHOTO_FRAMES:Array = [
+//			new UPLOAD_PHOTO_FRAME_00(),new UPLOAD_PHOTO_FRAME_01(),new UPLOAD_PHOTO_FRAME_02(),
+//			new UPLOAD_PHOTO_FRAME_03(),new UPLOAD_PHOTO_FRAME_04(),new UPLOAD_PHOTO_FRAME_05()
+//		];
+		//
+		public static var ARRAY_UPLOAD_PHOTO_FRAMES:Array = [
+			"assets/images/Photo_22x32/pattern_upload_photo_frame_22x32.png","assets/images/Photo_25x35/pattern_upload_photo_frame_25x35.png","assets/images/Photo_33x48/pattern_upload_photo_frame_33x48.png",
+			"assets/images/Photo_35x45/pattern_upload_photo_frame_35x45.png","assets/images/Photo_35x50/pattern_upload_photo_frame_35x50.png","assets/images/Photo_50x50/pattern_upload_photo_frame_50x50.png"
+		];
+		//
+//		public static var ARRAY_UPLOAD_PHOTO_GUIDES:Array = [
+//			new UPLOAD_PHOTO_GUIDE_00(),new UPLOAD_PHOTO_GUIDE_01(),new UPLOAD_PHOTO_GUIDE_02(),
+//			new UPLOAD_PHOTO_GUIDE_03(),new UPLOAD_PHOTO_GUIDE_04(),new UPLOAD_PHOTO_GUIDE_05()
+//		];
+		//
+		public static var ARRAY_UPLOAD_PHOTO_GUIDES:Array = [
+			"assets/images/Photo_22x32/pattern_upload_photo_guide_22x32.png","assets/images/Photo_25x35/pattern_upload_photo_guide_25x35.png","assets/images/Photo_33x48/pattern_upload_photo_guide_33x48.png",
+			"assets/images/Photo_35x45/pattern_upload_photo_guide_35x45.png","assets/images/Photo_35x50/pattern_upload_photo_guide_35x50.png","assets/images/Photo_50x50/pattern_upload_photo_guide_50x50.png"
+		];
+		//
+//		public static var ARRAY_UPLOAD_PHOTO_NOTICES:Array = [
+//			new UPLOAD_PHOTO_NOTICE_00(),new UPLOAD_PHOTO_NOTICE_01(),new UPLOAD_PHOTO_NOTICE_02(),
+//			new UPLOAD_PHOTO_NOTICE_03(),new UPLOAD_PHOTO_NOTICE_04(),new UPLOAD_PHOTO_NOTICE_05()
+//		];
+		//
+		public static var ARRAY_UPLOAD_PHOTO_NOTICES:Array = [
+			"assets/images/Photo_22x32/pattern_upload_photo_notice_22x32.png","assets/images/Photo_25x35/pattern_upload_photo_notice_25x35.png","assets/images/Photo_33x48/pattern_upload_photo_notice_33x48.png",
+			"assets/images/Photo_35x45/pattern_upload_photo_notice_35x45.png","assets/images/Photo_35x50/pattern_upload_photo_notice_35x50.png","assets/images/Photo_50x50/pattern_upload_photo_notice_50x50.png"
 		];
 		//
 		[Embed(source="assets/images/background/text/pattern_detecting.png")]

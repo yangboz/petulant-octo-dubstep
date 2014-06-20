@@ -12,7 +12,7 @@
 			
 			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
-//				this.id_list.enabled = false;
+				this.id_list.enabled = false;
 			}
 			
 			override public function get viewBackgroundImage():Bitmap
