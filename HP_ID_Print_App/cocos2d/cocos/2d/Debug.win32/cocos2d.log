@@ -1,4 +1,4 @@
-﻿Build started 2014/6/19 16:50:25.
+﻿Build started 2014/6/21 18:13:42.
      1>Project "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\cocos2d\cocos\2d\cocos2d.vcxproj" on node 2 (Build target(s)).
      1>PreLinkEvent:
          if not exist "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\" mkdir "C:\Users\yangboz\git\petulant-octo-dubstep\HP_ID_Print_App\proj.win32\Debug.win32\"
@@ -30,4 +30,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.95
+Time Elapsed 00:00:02.02

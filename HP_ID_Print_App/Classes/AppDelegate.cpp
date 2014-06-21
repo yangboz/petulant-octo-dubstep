@@ -1,6 +1,12 @@
-﻿#include "AppDelegate.h"
+﻿#define GLFW_EXPOSE_NATIVE_WIN32
+#define GLFW_EXPOSE_NATIVE_WGL
+
+#include "AppDelegate.h"
 #include "HelloWorldScene.h"
-#pragma execution_character_set("utf-8") 
+
+#include <glfw3\include\win32\glfw3native.h>
+
+
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
@@ -24,6 +30,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		glview->setDesignResolutionSize(800, 600, ResolutionPolicy::EXACT_FIT);
 		//
 	}
+	//Remove windows border.
+	GLFWwindow* glWindow = glview->getWindow();
+	HWND hWnd = glfwGetWin32Window(glWindow);
+	SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) & ~WS_CAPTION);
 
     // turn on display FPS
     director->setDisplayStats(false);
