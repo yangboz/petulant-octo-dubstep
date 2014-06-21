@@ -30,7 +30,7 @@ package model
 		public static var mainApp:Main;
 		//
 		public static var selectedCertSizeIndex:int = -1;
-		public static var selectedTypesetSizeIndex:int = -1;
+		public static var selectedTypesetSizeIndex:int = 0;
 		public static var uploadedImageFile:File;
 		//----------------------------------
 		// CONSTANTS
@@ -151,6 +151,11 @@ package model
 		public static var INS_VERIFING_TEXT:Class;
 		[Embed(source="assets/images/background/text/pattern_detected.png")]
 		public static var INS_VERIFIED_TEXT:Class;
+		///Verified_view_frame
+		public static var ARRAY_VERIFIED_PHOTO_FRAMES:Array = [
+			"assets/images/Photo_22x32/pattern_detected_photo_22x32.png","assets/images/Photo_25x35/pattern_detected_photo_25x35_bg.png","assets/images/Photo_33x48/pattern_detected_photo_33x48_bg.png",
+			"assets/images/Photo_35x45/pattern_detected_photo_35x45.png","assets/images/Photo_35x50/pattern_detected_photo_35x50.png","assets/images/Photo_50x50/pattern_detected_photo_50x50_bg.png"
+		];
 		///CertSizes
 		public static const ARRAY_SIZE_CERTS:Array = [
 			new Point(140, 196), new Point(132, 192), new Point(156, 227), 
@@ -160,7 +165,9 @@ package model
 		public static const ARRAY_SIZE_TYPESET:Array = [
 			new Point(220, 320), new Point(480, 330), new Point(480, 330)
 		];
-		
+		public static var ARRAY_TYPESET_FRAMES:Array = [
+			"assets/images/photo_on_paper/pattern_photo_on_paper_4x6.png","assets/images/photo_on_paper/pattern_photo_on_paper_5x7.png","assets/images/photo_on_paper/pattern_photo_on_paper_a4.png"
+		];
 		//--------------------------------------------------------------------------
 		//
 		// Public properties

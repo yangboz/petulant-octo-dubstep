@@ -5,17 +5,22 @@
 		height="200"
 		borderVisible="false"
 		itemRenderer="skins.HW_ListSkin_CertSize" useVirtualLayout="false"
-		selectedIndex="{AppData.selectedCertSizeIndex}"
+		selectedIndex="{AppData.selectedTypesetSizeIndex}"
 		left="10" top="110"
 		>
+	<fx:Script>
+		<![CDATA[
+			import model.AppData;
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<s:dataProvider>
 		<s:ArrayList>
-			<fx:Object name="25_35" normal="@Embed('assets/images/photosize_menu/button_photosize_25_35.png')" down="@Embed('assets/images/photosize_menu/button_photosize_25_35_pd.png')" />
-			<fx:Object name="22_32" normal="@Embed('assets/images/photosize_menu/button_photosize_22_32.png')" down="@Embed('assets/images/photosize_menu/button_photosize_22_32_pd.png')"/>
-			<fx:Object name="33_48" normal="@Embed('assets/images/photosize_menu/button_photosize_33_48.png')" down="@Embed('assets/images/photosize_menu/button_photosize_33_48_pd.png')"/>
+			<fx:Object name="25_35" normal="@Embed('assets/images/papersize_menu/button_papersize_4x6.png')" down="@Embed('assets/images/papersize_menu/button_papersize_4x6_pd.png')" />
+			<fx:Object name="22_32" normal="@Embed('assets/images/papersize_menu/button_papersize_5x7.png')" down="@Embed('assets/images/papersize_menu/button_papersize_5x7_pd.png')"/>
+			<fx:Object name="33_48" normal="@Embed('assets/images/papersize_menu/button_papersize_a4.png')" down="@Embed('assets/images/papersize_menu/button_papersize_a4_pd.png')"/>
 		</s:ArrayList>
 	</s:dataProvider>
 </s:List>

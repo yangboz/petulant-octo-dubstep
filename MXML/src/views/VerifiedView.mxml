@@ -15,11 +15,29 @@
 			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				this.id_list.enabled = false;
+				///Upldate UI images.
+				this.updateImageViews();
 			}
 			
 			override public function get viewBackgroundImage():Bitmap
 			{
 				return new AppData.BG_IMG_01() as Bitmap;
+			}
+			
+			protected function cancelVerify_button_clickHandler(event:MouseEvent):void
+			{
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_UPLOAD;			
+			}
+			
+			protected function verifyNext_button_clickHandler(event:MouseEvent):void
+			{
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_TYPESET;			
+			}
+			
+			private function updateImageViews():void
+			{
+				//
+				this.id_image_frame.source = AppData.ARRAY_VERIFIED_PHOTO_FRAMES[AppData.selectedCertSizeIndex];
 			}
 		]]>
 	</fx:Script>
@@ -32,6 +50,13 @@
 					   >
 		
 		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)"/>
+		
+		<s:Image id="id_image_instruction" x="200" y="60" source="{AppData.INS_VERIFIED_TEXT}"/>
+		
+		<s:Image id="id_image_frame" x="410" y="190" />
+		
+		<s:Button x="383" y="500" label="CANCEL_VERIFY" skinClass="skins.HW_Back2EditorButton_Skin" click="cancelVerify_button_clickHandler(event)"/>
+		<s:Button x="505" y="500" label="GOTO_TYPESET" skinClass="skins.HW_VerifyNextButton_Skin" click="verifyNext_button_clickHandler(event)"/>
 		
 	</s:BorderContainer>
 </views:ViewBase>

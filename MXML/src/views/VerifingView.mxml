@@ -19,6 +19,16 @@
 			{
 				return new AppData.BG_IMG_01() as Bitmap;
 			}
+			
+			protected function cancelVerify_button_clickHandler(event:MouseEvent):void
+			{
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_UPLOAD;			
+			}
+			
+			protected function verifyNext_button_clickHandler(event:MouseEvent):void
+			{
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFIED;			
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -30,5 +40,11 @@
 		
 		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)"/>
 		
+		<s:Image id="id_image_instruction" x="200" y="60" source="{AppData.INS_VERIFING_TEXT}"/>
+		
+		<mx:ProgressBar x="457" y="264" indeterminate="true"/>
+		
+		<s:Button x="383" y="500" label="CANCEL_VERIFY" skinClass="skins.HW_Back2UploadButton_Skin" click="cancelVerify_button_clickHandler(event)"/>
+		<s:Button x="505" y="500" label="VERIFY_NEXT" skinClass="skins.HW_EditorNextButton_Skin" click="verifyNext_button_clickHandler(event)"/>
 	</s:BorderContainer>
 </views:ViewBase>

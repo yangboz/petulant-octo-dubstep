@@ -2,7 +2,7 @@
 <views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				xmlns:views="views.*" width="800" height="600">
+				xmlns:views="views.*" width="800" height="600" xmlns:components="views.components.*">
 	<fx:Script>
 		<![CDATA[
 			import model.AppData;
@@ -11,11 +11,34 @@
 			
 			import spark.events.IndexChangeEvent;
 			
-			override protected function id_list_changeHandler(event:IndexChangeEvent):void
+			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
-				super.id_list_changeHandler(event);
 				//
-				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_UPLOAD;
+				id_image_frame.source = AppData.ARRAY_TYPESET_FRAMES[AppData.selectedTypesetSizeIndex];
+			}
+			
+			protected function id_list_typeset_changeHandler(event:IndexChangeEvent):void
+			{
+				//
+				AppData.selectedTypesetSizeIndex = event.newIndex;
+				//
+				id_image_frame.source = AppData.ARRAY_TYPESET_FRAMES[event.newIndex];
+			}
+			
+			protected function cancelTypeset_button_clickHandler(event:MouseEvent):void
+			{
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFIED;			
+			}
+			
+			protected function printOut_button_clickHandler(event:MouseEvent):void
+			{
+				//@see http://www.fising.cn/docs/AS3_Reference/flash/printing/PrintJob.html#includeExamplesSummary
+				var printOut:PrintJob = new PrintJob();
+				if(printOut.start())
+				{
+//					printOut.addPage();
+//					printOut.send();
+				}
 			}
 			
 			override public function get viewBackgroundImage():Bitmap
@@ -27,4 +50,15 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	<s:BorderContainer width="100%" height="100%" contentBackgroundAlpha="0"
+					   backgroundImage="{viewBackgroundImage}"
+					   >
+		<components:HW_List_Typeset id="id_list_typeset" height="105"
+									change="id_list_typeset_changeHandler(event)"/>
+		
+		<s:Image id="id_image_frame" left="200" top="40"/>
+		
+		<s:Button x="383" y="500" label="Back2Verify" skinClass="skins.HW_Back2VerifyButton_Skin" click="cancelTypeset_button_clickHandler(event)"/>
+		<s:Button x="505" y="500" label="PRINT_OUT" skinClass="skins.HW_PrintButton_Skin" click="printOut_button_clickHandler(event)"/>
+	</s:BorderContainer>
 </views:ViewBase>
