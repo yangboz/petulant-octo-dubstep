@@ -3,13 +3,17 @@
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
 				xmlns:views="views.*" width="800" height="600" 
-				xmlns:components="views.components.*" xmlns:view="com.vstyran.transform.view.*" xmlns:model="com.vstyran.transform.model.*">
+				xmlns:components="views.components.*"
+				xmlns:view="com.vstyran.transform.view.*" 
+				xmlns:model="com.vstyran.transform.model.*" xmlns:spark="de.patrickheinzelmann.components.spark.*">
 	<fx:Script>
 		<![CDATA[
+			import com.vstyran.transform.consts.GuidelineType;
 			import com.vstyran.transform.skins.TransformToolSkin;
 			
 			import model.AppData;
 			
+			import mx.controls.sliderClasses.Slider;
 			import mx.events.FlexEvent;
 			
 			import spark.events.IndexChangeEvent;
@@ -31,13 +35,12 @@
 				///Display image_editor
 				this.id_image_edit.source = AppData.uploadedImageFile.nativePath;
 				this.id_image_edit.addEventListener(Event.COMPLETE,function(event:Event):void{
-					id_uitransform_tool.target = id_image_edit;
-					id_uitransform_tool.width = id_image_edit.bitmapData.width;
-					id_uitransform_tool.height = id_image_edit.bitmapData.height;
+					selectUITransformTool(new MouseEvent(MouseEvent.CLICK));
 				});
 				///Upldate UI images.
 				this.updateImageViews();
-				
+				///
+//				this.addEventListener(MouseEvent.CLICK,deselectUITransformTool);
 			}
 			
 			override protected function id_list_changeHandler(event:IndexChangeEvent):void
@@ -70,7 +73,40 @@
 			
 			protected function editnext_button_clickHandler(event:MouseEvent):void
 			{
-				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;			
+				//Save transformed image here:
+				trace(id_uitransform_tool);
+				//
+//				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;	
+			}
+			//
+			private function deselectUITransformTool(event:MouseEvent):void
+			{
+				id_uitransform_tool.targets = null;
+				id_uitransform_tool.visible = false;
+				id_uitransform_tool.includeInLayout = false;
+			}
+			
+			private function selectUITransformTool(event:MouseEvent):void
+			{
+				id_uitransform_tool.targets = [id_image_edit];
+				id_uitransform_tool.visible = true;
+				id_uitransform_tool.includeInLayout = true;
+				//
+				id_uitransform_tool.width = id_image_edit.bitmapData.width;
+				id_uitransform_tool.height = id_image_edit.bitmapData.height;
+			}
+			
+			private function onEditorScaleSliderChange(event:Event):void
+			{
+				this.id_uitransform_tool.scaleX =  this.id_vslider_scale.value;
+				this.id_uitransform_tool.scaleY =  this.id_vslider_scale.value;
+				this.id_image_edit.scaleX =  this.id_vslider_scale.value;
+				this.id_image_edit.scaleY =  this.id_vslider_scale.value;
+			}
+			private function onEditorRotateSliderChange(event:Event):void
+			{
+				this.id_uitransform_tool.rotation = this.id_hslider_rotate.value;
+				this.id_image_edit.rotation = this.id_hslider_rotate.value;
 			}
 		]]>
 	</fx:Script>
@@ -85,22 +121,34 @@
 		<s:Image id="id_image_instruction" x="200" y="60"/>
 		
 		<s:Image id="id_image_frame" x="410" y="190"/>
-		<s:Image id="id_image_edit" x="410" y="190"/>
+		<s:Image id="id_image_edit" x="410" y="190" />
 		<s:Image id="id_image_guide" x="410" y="190" enabled="false"/>
 		
-		<view:UITransformTool id="id_uitransform_tool" target="{id_image_edit}" width="{img_editor_width}" height="{img_editor_height}">
+		<view:UITransformTool id="id_uitransform_tool">
 			<view:bounds>
 				<model:Bounds x="{id_image_frame.x}" y="{id_image_frame.y}" width="{img_editor_width}" height="{img_editor_height}"/>
 			</view:bounds>
+			<view:guidelines>
+				<model:Guideline type="{GuidelineType.HORIZONTAL_EDGE}" value="{id_image_frame.width}" fraction="1"/>
+				<model:Guideline type="{GuidelineType.VERTICAL_EDGE}" value="{id_image_frame.height}" fraction="1"/>
+			</view:guidelines>
 		</view:UITransformTool>
 		
 		<s:Button x="383" y="500" label="RE_UPLOAD" skinClass="skins.HW_Back2UploadButton_Skin" click="reupload_button_clickHandler(event)"/>
 		<s:Button x="505" y="500" label="EDIT_NEXT" skinClass="skins.HW_EditorNextButton_Skin" click="editnext_button_clickHandler(event)"/>
-		<s:HSlider x="393" y="438" skinClass="skins.HW_EditorRotateSlider_Skin"/>
+		<spark:HSlider id="id_hslider_rotate" x="393" y="438" 
+					   showTrackHighlight="true"
+				   change="onEditorRotateSliderChange(event)" stepSize="5" minimum="-360" maximum="360" value="0"
+				   width="200"
+				   />
 		<s:Button x="349" y="425" label="ROTATE" skinClass="skins.HW_RotateButton_Skin"/>
 		<s:Button x="625" y="198" label="ZOOM_IN" skinClass="skins.HW_ZoomInButton_Skin"/>
 		<s:Button x="625" y="373" label="ZOOM_OUT" skinClass="skins.HW_ZoomOutButton_Skin"/>
-		<s:VSlider x="638" y="230" skinClass="skins.HW_EditorScaleSlider_Skin"/>
+		<spark:VSlider id="id_vslider_scale" x="638" y="230" 
+					   showTrackHighlight="true"
+				   change="onEditorScaleSliderChange(event)" stepSize="0.1" minimum="0.1" maximum="2" value="1"
+				   height="140"
+				   />
 		
 	</s:BorderContainer>
 </views:ViewBase>
