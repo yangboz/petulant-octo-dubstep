@@ -8,6 +8,10 @@
 				>
 	<fx:Script>
 		<![CDATA[
+			import jp.maaash.ObjectDetection.ObjectDetector;
+			import jp.maaash.ObjectDetection.ObjectDetectorEvent;
+			import jp.maaash.ObjectDetection.ObjectDetectorOptions;
+			
 			import model.AppData;
 			
 			import mx.core.UIComponent;
@@ -20,6 +24,7 @@
 			private var fileRef:File;
 //			private var fileRef:FileReference;
 			private var imagesFilter:FileFilter = new FileFilter("Images", "*.jpg;*.gif;*.png");
+			//
 			
 			override protected function id_list_changeHandler(event:IndexChangeEvent):void
 			{
@@ -111,9 +116,64 @@
 			
 			private function imageAttributeCheck():void
 			{
-				//TODO:imageAttributeCheck
+				//ImageAttributeCheck
+				///File size
+				var requiredFileSizeMin:Number = (AppData.ARRAY_UPLOAD_FILE_SIZES[AppData.selectedCertSizeIndex] as Point).x;
+				var requiredFileSizeMax:Number = (AppData.ARRAY_UPLOAD_FILE_SIZES[AppData.selectedCertSizeIndex] as Point).y;
+				var uploadImageFileSize:Number = AppData.uploadedImageFile.size;
+				trace("uploadImageFileSize:",uploadImageFileSize);
+				if(uploadImageFileSize<requiredFileSizeMin)
+				{
+					return AppData.popup_image_verify_result(AppData.NOTIFY_IMG_VERIFY_RESULT_0);
+				}
+				//
+				this.id_image_upload.source = AppData.uploadedImageFile.nativePath;
+				this.id_image_upload.addEventListener(Event.COMPLETE,uploadImageCompleteHandler);
+			}
+			///Facial number check
+			private function uploadImageCompleteHandler(event:Event):void
+			{
+//				if(!faceDetection(this.id_image_upload,true))
+//				{
+//					return AppData.popup_image_verify_result(AppData.NOTIFY_IMG_VERIFY_RESULT_1);
+//				}
 				//
 				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;
+			}
+			
+			private function faceDetection(target:Image,display:Boolean):int
+			{
+				var faceNumbers:int = 0;
+				////Init face detector
+				var detector:ObjectDetector = new ObjectDetector();
+				var options:ObjectDetectorOptions = new ObjectDetectorOptions();
+				options.min_size  = 30;
+				detector.options = options;
+				detector.addEventListener(ObjectDetectorEvent.DETECTION_COMPLETE,function( e :ObjectDetectorEvent ):void{
+					trace("[ObjectDetectorEvent.COMPLETE]");
+					//					tf.appendText( "\ntime: "+(new Date)+" "+e.type );
+					detector.removeEventListener( ObjectDetectorEvent.DETECTION_COMPLETE, arguments.callee );
+					
+					if( e.rects ){
+						var g :Graphics = id_faceRectContainer.graphics;
+						g.clear();
+						g.lineStyle( 2 );	// black 2pix
+						e.rects.forEach( function( r :Rectangle, idx :int, arr :Array ) :void {
+							g.drawRect( r.x, r.y, r.width, r.height );
+						});
+					}
+					//
+					faceNumbers = e.rects.length;
+				});
+				
+				detector.addEventListener( ObjectDetectorEvent.DETECTION_START, function(e :ObjectDetectorEvent) :void {
+					trace( "\ntime: "+(new Date)+" "+e.type );
+				});
+				var bmpTarget:Bitmap = new Bitmap( new BitmapData( target.sourceWidth, target.sourceHeight, false ) )
+				bmpTarget.bitmapData.draw( id_image_upload );
+				detector.detect( bmpTarget.bitmapData );
+				//
+				return faceNumbers;
 			}
 		]]>
 	</fx:Script>
@@ -130,6 +190,8 @@
 		<s:Image id="id_image_frame" x="410" y="190" />
 		<s:Image id="id_image_guide" x="410" y="190" />
 		<s:Image id="id_image_notice" x="410" y="190" />
+		<s:SpriteVisualElement id="id_faceRectContainer"/>
+		<s:Image id="id_image_upload" x="410" y="190"/>
 		
 		<s:Button x="433" y="500" width="120" height="30" label="Upload" skinClass="skins.HW_UploadButton_Skin" click="upload_button_clickHandler(event)"/>
 	</s:BorderContainer>

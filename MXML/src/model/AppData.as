@@ -1,9 +1,16 @@
 
 package model
 {
+	import flash.display.Bitmap;
+	import flash.display.DisplayObjectContainer;
 	import flash.filesystem.File;
 	import flash.geom.Point;
 	import flash.net.dns.AAAARecord;
+	
+	import mx.core.FlexGlobals;
+	import mx.managers.PopUpManager;
+	
+	import views.popups.Popup_ImageVerify_Result;
 
 	//--------------------------------------------------------------------------
 	//
@@ -135,6 +142,11 @@ package model
 			"assets/images/Photo_22x32/pattern_upload_photo_notice_22x32.png","assets/images/Photo_25x35/pattern_upload_photo_notice_25x35.png","assets/images/Photo_33x48/pattern_upload_photo_notice_33x48.png",
 			"assets/images/Photo_35x45/pattern_upload_photo_notice_35x45.png","assets/images/Photo_35x50/pattern_upload_photo_notice_35x50.png","assets/images/Photo_50x50/pattern_upload_photo_notice_50x50.png"
 		];
+		//default file sizes of certificates
+		public static var ARRAY_UPLOAD_FILE_SIZES:Array = [
+			new Point(14336, 30720), new Point(40960, 51200), new Point(40960, 51200), 
+			new Point(40960, 51200), new Point(40960, 51200), new Point(40960, 51200) 
+		];
 		///EditorView_photos
 		//
 		public static var ARRAY_EDITOR_PHOTO_FRAMES:Array = [
@@ -168,6 +180,13 @@ package model
 		public static var ARRAY_TYPESET_FRAMES:Array = [
 			"assets/images/photo_on_paper/pattern_photo_on_paper_4x6.png","assets/images/photo_on_paper/pattern_photo_on_paper_5x7.png","assets/images/photo_on_paper/pattern_photo_on_paper_a4.png"
 		];
+		///ImageVerify notifications
+		[Embed(source="assets/images/notification/pattern_notification_01.png")]
+		public static var NOTIFY_IMG_VERIFY_RESULT_0:Class;
+		[Embed(source="assets/images/notification/pattern_notification_03.png")]
+		public static var NOTIFY_IMG_VERIFY_RESULT_1:Class;
+		[Embed(source="assets/images/notification/pattern_notification_02.png")]
+		public static var NOTIFY_IMG_SAVE_RESULT:Class;
 		//--------------------------------------------------------------------------
 		//
 		// Public properties
@@ -194,7 +213,15 @@ package model
 		// Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		public static function popup_image_verify_result(bgClass:Class):void
+		{
+			var popup:Popup_ImageVerify_Result = new Popup_ImageVerify_Result();
+//			popup.setStyle("backgroundImage",new bgClass() as Bitmap);
+//			popup.image_source = new bgClass() as Bitmap;
+			//				menuPopup.open(this, true);
+			popup.open(FlexGlobals.topLevelApplication as DisplayObjectContainer, true);
+			PopUpManager.centerPopUp(popup);
+		}
 		//--------------------------------------------------------------------------
 		//
 		// Protected methods

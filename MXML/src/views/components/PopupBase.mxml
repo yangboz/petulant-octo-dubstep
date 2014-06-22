@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnablePopUpContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						   xmlns:s="library://ns.adobe.com/flex/spark"
+						   backgroundAlpha="0"
+						   creationComplete="withPopUpView_creationCompleteHandler(event)"
+						   >
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.events.FlexMouseEvent;
+			
+			//@see:http://dlgsoftware.com/AIRAndroidBackKey.php
+			protected function withPopUpView_creationCompleteHandler(event:FlexEvent):void
+			{
+				systemManager.stage.addEventListener(KeyboardEvent.KEY_DOWN, stageKeyDownHandler, false, 500, true);
+				//
+				this.addEventListener(FlexMouseEvent.MOUSE_DOWN_OUTSIDE,mouseDownOutSideHandler);
+			}
+			// Prevent app close when there is no view to pop to and Back key pressed in popup
+			protected function stageKeyDownHandler(event:KeyboardEvent):void
+			{
+				var key:uint = event.keyCode;
+				if (key == Keyboard.BACK && !systemManager.numModalWindows==0)
+				{
+					event.preventDefault();
+					//
+					this.close();
+				}
+			}
+			//
+			protected function mouseDownOutSideHandler(event:FlexMouseEvent):void
+			{
+				this.close();
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+</s:SkinnablePopUpContainer>
