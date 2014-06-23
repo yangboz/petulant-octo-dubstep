@@ -11,6 +11,8 @@
 	<fx:Script>
 		<![CDATA[
 			import com.vstyran.transform.consts.GuidelineType;
+			import com.vstyran.transform.consts.TransformationType;
+			import com.vstyran.transform.events.GuidelineEvent;
 			import com.vstyran.transform.events.TransformEvent;
 			import com.vstyran.transform.model.Guideline;
 			import com.vstyran.transform.skins.TransformToolSkin;
@@ -21,6 +23,8 @@
 			import mx.controls.sliderClasses.Slider;
 			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
+			import mx.graphics.codec.JPEGEncoder;
+			import mx.graphics.codec.PNGEncoder;
 			
 			import spark.effects.Rotate;
 			import spark.events.IndexChangeEvent;
@@ -77,7 +81,7 @@
 				this.id_image_guide.source = AppData.ARRAY_EDITOR_PHOTO_GUIDES[AppData.selectedCertSizeIndex];
 				this.id_image_mask.source = AppData.ARRAY_EDITOR_PHOTO_GUIDES[AppData.selectedCertSizeIndex];
 				//Mask
-				id_image_edit.mask = id_image_mask;
+//				id_image_edit.mask = id_image_mask;
 			}
 			
 			protected function reupload_button_clickHandler(event:MouseEvent):void
@@ -92,7 +96,35 @@
 				//
 //				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;	
 				//Draw bitmap data, then save to file
-				
+				var bitMapData:BitmapData = new BitmapData(this.id_image_edit.width,this.id_image_edit.height,true); 
+				bitMapData.draw(this.id_image_edit); 
+//				var pngEncoder:PNGEncoder = new PNGEncoder(); 
+				var jpgEncoder:JPEGEncoder = new JPEGEncoder(80);
+				var imageByteArray:ByteArray = jpgEncoder.encode(bitMapData); 
+				var docsDir:File = File.documentsDirectory;
+				docsDir.save(imageByteArray,"HP_ID_Print_result_pre.jpg");
+//				try
+//				{
+//					docsDir.browseForSave("Save As");
+//					docsDir.addEventListener(Event.SELECT, saveData);
+//				}
+//				catch (error:Error)
+//				{
+//					trace("Failed:", error.message);
+//				}
+//				
+//				function saveData(event:Event):void 
+//				{
+//					var newFile:File = event.target as File;
+//					if (!newFile.exists) // remove this 'if' if overwrite is OK.
+//					{
+//						var stream:FileStream = new FileStream();
+//						stream.open(newFile, FileMode.WRITE);
+//						stream.writeBytes(imageByteArray);
+//						stream.close();
+//					} 
+//					else trace('Selected path already exists.');
+//				}
 			}
 			//
 			private function deselectUITransformTool(event:MouseEvent):void
@@ -167,7 +199,7 @@
 				this.updateUITransformTools();
 			}
 			
-			protected function id_uitransform_tool_transformationCompleteHandler(event:TransformEvent):void
+			protected function tool_transformationCompleteHandler(event:TransformEvent):void
 			{
 				trace(event);
 //				switch(event.transformationType)
@@ -210,12 +242,99 @@
 				}
 				id_uitransform_tool.guidelines = guidelines;
 			}
-			
+			protected function tool_guidelinesUpdateHandler(event:GuidelineEvent):void
+			{
+				if(event.cross && event.cross.vGuideline)
+					vGuide.x = event.cross.vGuideline.value;
+				vGuide.visible = (event.cross && event.cross.vGuideline);
+				
+				if(event.cross && event.cross.hGuideline)
+					hGuide.y = event.cross.hGuideline.value;
+				hGuide.visible = (event.cross && event.cross.hGuideline);
+				
+				passiveGuideGroup.removeAllElements();
+				if(event.cross)
+				{
+					if(true)
+					{
+						for each (var vguide:Guideline in event.cross.getVGuidelines()) 
+						{
+							var vGuideLine:VGuideLine = new VGuideLine();
+							vGuideLine.x = vguide.value;
+							passiveGuideGroup.addElement(vGuideLine);
+						}
+						for each (var hguide:Guideline in event.cross.getHGuidelines()) 
+						{
+							var hGuideLine:HGuideLine = new HGuideLine();
+							hGuideLine.y = hguide.value;
+							passiveGuideGroup.addElement(hGuideLine);
+						}
+					}
+					
+					if(event.transformationType == TransformationType.ROTATE)
+					{
+						if(event.cross.rGuideline)
+						{
+							var rTargetGuideLine:RGuideLine = new RGuideLine();
+							rTargetGuideLine.update(id_uitransform_tool.target, passiveGuideGroup);
+							passiveGuideGroup.addElement(rTargetGuideLine);
+						}
+						
+						for each (var rguide:Guideline in event.cross.getRGuidelines()) 
+						{
+							var rGuideLine:RGuideLine = new RGuideLine();
+							rGuideLine.update(rguide.userData as Image, passiveGuideGroup);
+							passiveGuideGroup.addElement(rGuideLine);
+						}
+					}
+				}
+			}	
 		]]>
 	</fx:Script>
-	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
-	</fx:Declarations>
+	<fx:Declarations>                                                                                                     
+		<fx:Component className="VGuideLine">
+			<s:Line alpha="0.1" y="45" height="230">
+				<s:stroke>
+					<s:SolidColorStroke/>
+				</s:stroke>
+			</s:Line>
+		</fx:Component>                                       
+		<fx:Component className="HGuideLine">
+			<s:Line alpha="0.1" x="30" width="400">
+				<s:stroke>
+					<s:SolidColorStroke/>
+				</s:stroke>
+			</s:Line>
+		</fx:Component>                                       
+		<fx:Component className="RGuideLine">
+			<s:Line>
+				<fx:Script>
+					<![CDATA[
+						import com.vstyran.transform.utils.TransformUtil;
+						
+						import mx.core.UIComponent;
+						import spark.components.Group;
+						
+						public function update(target:UIComponent, passiveGuideGroup:Group):void
+						{
+							var m:Matrix = TransformUtil.getMatrix(target, passiveGuideGroup);
+							
+							var stPoimt:Point =  m.transformPoint(new Point(target.width/2, target.height/2));
+							var endPoimt:Point =  m.transformPoint(new Point(target.width, target.height/2));
+							this.xFrom = stPoimt.x;
+							this.yFrom = stPoimt.y;
+							this.xTo = endPoimt.x;
+							this.yTo = endPoimt.y;
+						}
+					]]>
+				</fx:Script>
+				<s:stroke>
+					<s:SolidColorStroke color="#AA0000"/>
+				</s:stroke>
+			</s:Line>
+		</fx:Component>                                       
+	</fx:Declarations>               
+	
 	<s:BorderContainer id="id_border_container" width="100%" height="100%" contentBackgroundAlpha="0"
 					   backgroundImage="{viewBackgroundImage}"
 					   >
@@ -225,10 +344,13 @@
 		
 		<s:Image id="id_image_frame" x="410" y="190"/>
 		<s:Image id="id_image_edit" x="410" y="190" />
-		<s:Image id="id_image_mask" x="410" y="190"/>
+		<s:Image id="id_image_mask" x="410" y="190" enabled="false"/>
 		<s:Image id="id_image_guide" x="410" y="190" enabled="false"/>
 		
-		<view:UITransformTool id="id_uitransform_tool" skinClass="skins.uiTransformTool.TransformToolSkin3" transformationComplete="id_uitransform_tool_transformationCompleteHandler(event)">
+		<view:UITransformTool id="id_uitransform_tool" skinClass="skins.uiTransformTool.TransformToolSkin3" 
+							  transformationComplete="tool_transformationCompleteHandler(event)"
+							  guidelinesUpdate="tool_guidelinesUpdateHandler(event)"
+							  >
 			<!--<view:bounds>
 				<model:Bounds x="{id_image_frame.x}" y="{id_image_frame.y}" width="{img_editor_width}" height="{img_editor_height}"/>
 			</view:bounds>-->
@@ -255,5 +377,17 @@
 				   height="140" 
 				   />
 		
+		
+		<s:Group id="passiveGuideGroup" top="0" bottom="0" left="0" right="0"/>
+		<s:Line id="vGuide" yFrom="45" yTo="275" depth="3" visible="false">
+			<s:stroke>
+				<s:SolidColorStroke color="#AA0000"/>
+			</s:stroke>
+		</s:Line>
+		<s:Line id="hGuide" xFrom="30" xTo="430" depth="3" visible="false">
+			<s:stroke>
+				<s:SolidColorStroke color="#AA0000"/>
+			</s:stroke>
+		</s:Line>
 	</s:BorderContainer>
 </views:ViewBase>
