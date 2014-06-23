@@ -30,7 +30,15 @@
 				AppData.selectedCertSizeIndex = event.newIndex;
 			}
 			
+			protected function getRequiredCertPhotoWidth():Number
+			{
+				return (AppData.ARRAY_SIZE_CERTS[AppData.selectedCertSizeIndex] as Point).x;
+			}
 			
+			protected function getRequiredCertPhotoHeight():Number
+			{
+				return (AppData.ARRAY_SIZE_CERTS[AppData.selectedCertSizeIndex] as Point).y;
+			}
 			
 		]]>
 	</fx:Script>

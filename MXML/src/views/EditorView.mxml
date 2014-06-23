@@ -23,6 +23,7 @@
 			import mx.controls.sliderClasses.Slider;
 			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
+			import mx.graphics.ImageSnapshot;
 			import mx.graphics.codec.JPEGEncoder;
 			import mx.graphics.codec.PNGEncoder;
 			
@@ -91,13 +92,20 @@
 			
 			protected function editnext_button_clickHandler(event:MouseEvent):void
 			{
+				
 				//Save transformed image here:
 				trace(id_uitransform_tool);
 				//
 //				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;	
+				//Transformed maxtrix calculate
+				var transformMat:Matrix=new Matrix();
+				transformMat.scale(0.7,0.7);
+//				transformMat.translate(30,40);
+				transformMat.rotate(10);
 				//Draw bitmap data, then save to file
-				var bitMapData:BitmapData = new BitmapData(this.id_image_edit.width,this.id_image_edit.height,true); 
+				var bitMapData:BitmapData = new BitmapData(this.getRequiredCertPhotoWidth(),this.getRequiredCertPhotoHeight(),true); 
 				bitMapData.draw(this.id_image_edit); 
+//				var bitMapData:BitmapData = ImageSnapshot.captureBitmapData(this.id_image_edit,new Matrix(1,1,1,1,50,50));
 //				var pngEncoder:PNGEncoder = new PNGEncoder(); 
 				var jpgEncoder:JPEGEncoder = new JPEGEncoder(80);
 				var imageByteArray:ByteArray = jpgEncoder.encode(bitMapData); 
