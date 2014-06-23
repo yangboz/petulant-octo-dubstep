@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- http://blog.flexexamples.com/2010/04/15/creating-a-custom-thumb-skin-on-a-spark-hslider-control-in-flex-4/ -->
+<s:SparkSkin name=""
+			 xmlns:fx="http://ns.adobe.com/mxml/2009"
+			 xmlns:s="library://ns.adobe.com/flex/spark"
+			 xmlns:fb="http://ns.adobe.com/flashbuilder/2009">
+	<!-- states -->
+	<s:states>
+		<s:State name="up" />
+		<s:State name="over" />
+		<s:State name="down" />
+		<s:State name="disabled" />
+	</s:states>
+	
+	<fx:Metadata>
+		[HostComponent("views.components.ImageButton")]
+	</fx:Metadata> 
+	
+	<fx:Script fb:purpose="styling">
+		<![CDATA[
+			override protected function initializationComplete():void {
+				useChromeColor = true;
+				super.initializationComplete();
+			}
+		]]>
+	</fx:Script>
+	
+	<s:BitmapImage source="@Embed('../../assets/images/editphoto/pattern_slidingbar_button.png')" includeIn="up,over,down,disabled"/>
+	
+</s:SparkSkin>

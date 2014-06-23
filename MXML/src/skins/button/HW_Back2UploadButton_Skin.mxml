@@ -28,9 +28,9 @@
 	</s:fill>
 	</s:Rect>-->
 	
-	<s:BitmapImage source="@Embed('../assets/images/below_button/button_cancel.png')" includeIn="up, disabled"/>
-	<s:BitmapImage source="@Embed('../assets/images/below_button/button_cancel_pd.png')" includeIn="over"/>
-	<s:BitmapImage source="@Embed('../assets/images/below_button/button_cancel_pd.png')" includeIn="down"/>
+	<s:BitmapImage source="@Embed('../../assets/images/below_button/button_re_uploadphoto.png')" includeIn="up, disabled"/>
+	<s:BitmapImage source="@Embed('../../assets/images/below_button/button_re_uploadphoto_pd.png')" includeIn="over"/>
+	<s:BitmapImage source="@Embed('../../assets/images/below_button/button_re_uploadphoto_pd.png')" includeIn="down"/>
 	
 	
 </s:SparkSkin>

@@ -44,7 +44,7 @@
 		
 		<mx:ProgressBar x="457" y="264" indeterminate="true" label=""/>
 		
-		<s:Button x="383" y="500" label="CANCEL_VERIFY" skinClass="skins.HW_Back2UploadButton_Skin" click="cancelVerify_button_clickHandler(event)"/>
-		<s:Button x="505" y="500" label="VERIFY_NEXT" skinClass="skins.HW_EditorNextButton_Skin" click="verifyNext_button_clickHandler(event)"/>
+		<s:Button x="383" y="500" label="CANCEL_VERIFY" skinClass="skins.button.HW_Back2UploadButton_Skin" click="cancelVerify_button_clickHandler(event)"/>
+		<s:Button x="505" y="500" label="VERIFY_NEXT" skinClass="skins.button.HW_EditorNextButton_Skin" click="verifyNext_button_clickHandler(event)"/>
 	</s:BorderContainer>
 </views:ViewBase>

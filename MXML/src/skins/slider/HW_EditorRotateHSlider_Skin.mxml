@@ -103,17 +103,17 @@ HsliderTrackHighLightSkin, HSliderThumbSkin and HSliderTrackSkin,  classes, resp
 	@copy spark.components.supportClasses.TrackBase#trackHighlight
 	@see spark.skins.spark.HSliderTrackSkin -->
 	<s:Button id="track" left="0" right="0" top="0" bottom="0" minWidth="33" width="100"
-			  skinClass="skins.HW_VSliderTrackSkin" />
+			  skinClass="skins.slider.HW_HSliderTrackSkin" />
 	
 	<!--- The default skin class is HSliderTrackSkin. 
 	@copy spark.components.supportClasses.TrackBase#track
 	@see de.patrickheinzelmann.components.spark.skins.HsliderTrackHighLightSkin -->
 	<s:Button id="trackHighLight" left="0" right="0" top="0" bottom="0" minWidth="33" width="100"
-			  skinClass="de.patrickheinzelmann.components.spark.skins.HSliderTrackHighLightSkin" />
+			  skinClass="skins.slider.HW_HSliderTrackHighLightSkin" />
 	
 	<!--- The default skin class is HSliderThumbSkin.
 	@copy spark.components.supportClasses.TrackBase#thumb 
 	@see spark.skins.spark.HSliderThumbSkin -->
 	<s:Button id="thumb" top="0" bottom="0" width="11" height="11" 
-			  skinClass="skins.HW_VSliderThumbSkin" accentColor="0xFF00FF" />
+			  skinClass="spark.skins.spark.HSliderThumbSkin" accentColor="0xFF00FF" />
 </s:SparkSkin>
