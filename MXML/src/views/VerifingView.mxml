@@ -10,6 +10,11 @@
 			
 			import mx.events.FlexEvent;
 			
+			override protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFIED;
+			}
+			
 			override public function get viewBackgroundImage():Bitmap
 			{
 				return new AppData.BG_IMG_01() as Bitmap;
@@ -40,6 +45,6 @@
 		<s:Image x="457" y="264" source="{AppData.INS_VERIFING_IMAGE}"/>
 		
 		<s:Button x="383" y="500" label="CANCEL_VERIFY" skinClass="skins.button.HW_CancelVerifyButton_Skin" click="cancelVerify_button_clickHandler(event)"/>
-		<s:Button x="505" y="500" label="VERIFY_NEXT" skinClass="skins.button.HW_EditorNextButton_Skin" click="verifyNext_button_clickHandler(event)"/>
+		<!--<s:Button x="505" y="500" label="VERIFY_NEXT" skinClass="skins.button.HW_EditorNextButton_Skin" click="verifyNext_button_clickHandler(event)"/>-->
 	</s:BorderContainer>
 </views:ViewBase>

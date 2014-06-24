@@ -40,6 +40,15 @@
 				return (AppData.ARRAY_SIZE_CERTS[AppData.selectedCertSizeIndex] as Point).y;
 			}
 			
+			protected function getRequiredTillingImageX():Number
+			{
+				return (AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex] as Point).x;
+			}
+			
+			protected function getRequiredTillingImageY():Number
+			{
+				return (AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex] as Point).y;
+			}
 		]]>
 	</fx:Script>
 	<s:BorderContainer width="100%" height="100%" contentBackgroundAlpha="0"

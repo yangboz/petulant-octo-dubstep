@@ -192,6 +192,10 @@ package model
 			new Point(2,5),new Point(2,5),new Point(2,4),
 			new Point(2,4),new Point(2,4),new Point(1,2)
 		];
+		private static var ARRAY_TYPESET_TILE_POINT_4x6:Array = [
+			new Point(310,172),new Point(2,5),new Point(2,4),
+			new Point(2,4),new Point(2,4),new Point(1,2)
+		];
 		private static var ARRAY_TYPESET_TILE_IMAGE_5x7:Array = [
 			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_25x35on5x7.png",
 			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_22x32on5x7.png",
@@ -202,6 +206,10 @@ package model
 		];
 		private static var ARRAY_TYPESET_TILE_SIZE_5x7:Array = [
 			new Point(3,4),new Point(3,4),new Point(2,4),
+			new Point(2,4),new Point(2,4),new Point(2,3)
+		];
+		private static var ARRAY_TYPESET_TILE_POINT_5x7:Array = [
+			new Point(310,172),new Point(3,4),new Point(2,4),
 			new Point(2,4),new Point(2,4),new Point(2,3)
 		];
 		private static var ARRAY_TYPESET_TILE_IMAGE_A7:Array = [
@@ -216,6 +224,10 @@ package model
 			new Point(8,2),new Point(5,2),new Point(7,2),
 			new Point(5,2),new Point(5,2),new Point(3,2)
 		];
+		private static var ARRAY_TYPESET_TILE_POINT_A7:Array = [
+			new Point(310,172),new Point(5,2),new Point(7,2),
+			new Point(5,2),new Point(5,2),new Point(3,2)
+		];
 		//
 		public static var ARRAY_TYPESET_TILE_IMGS:Array = [
 			ARRAY_TYPESET_TILE_IMAGE_4x6,
@@ -226,6 +238,11 @@ package model
 			ARRAY_TYPESET_TILE_SIZE_4x6,
 			ARRAY_TYPESET_TILE_SIZE_5x7,
 			ARRAY_TYPESET_TILE_SIZE_A7
+		];
+		public static var ARRAY_TYPESET_TILE_POINT:Array = [
+			ARRAY_TYPESET_TILE_POINT_4x6,
+			ARRAY_TYPESET_TILE_POINT_5x7,
+			ARRAY_TYPESET_TILE_POINT_A7
 		];
 		///ImageVerify notifications
 		[Embed(source="assets/images/notification/pattern_notification_01.png")]
