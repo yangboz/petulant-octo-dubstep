@@ -154,20 +154,20 @@ package model
 			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_50X50on4x6.png"
 		];
 		private static var ARRAY_TYPESET_TILES_5x7:Array = [
-			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_22x32on4x6.png",
-			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_25x35on4x6.png",
-			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_33x48on4x6.png",
-			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_35x45on4x6.png",
-			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_35x50on4x6.png",
-			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_50X50on4x6.png"
+			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_22x32on5x7.png",
+			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_25x35on5x7.png",
+			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_33x48on5x7.png",
+			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_35x45on5x7.png",
+			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_35x50on5x7.png",
+			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_50X50on5x7.png"
 		];
 		private static var ARRAY_TYPESET_TILES_A7:Array = [
-			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_22x32on4x6.png",
-			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_25x35on4x6.png",
-			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_33x48on4x6.png",
-			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_35x45on4x6.png",
-			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_35x50on4x6.png",
-			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_50X50on4x6.png"
+			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_22x32ona4.png",
+			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_25x35ona4.png",
+			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_33x48ona4.png",
+			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_35x45ona4.png",
+			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_35x50ona4.png",
+			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_50X50ona4.png"
 		];
 		public static var ARRAY_TYPESET_TILES:Array = [
 			ARRAY_TYPESET_TILES_4x6,ARRAY_TYPESET_TILES_5x7,ARRAY_TYPESET_TILES_A7

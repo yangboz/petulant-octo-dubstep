@@ -53,6 +53,7 @@
 				id_image_frame.source = AppData.ARRAY_TYPESET_FRAMES[AppData.selectedTypesetSizeIndex];
 				trace("AppData.selectedCertSizeIndex:",AppData.selectedCertSizeIndex);
 				id_image_tile.source = AppData.ARRAY_TYPESET_TILES[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex];
+				trace("id_image_tile.source:",id_image_tile.source);
 			}
 		]]>
 	</fx:Script>
