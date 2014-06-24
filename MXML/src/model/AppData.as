@@ -52,6 +52,8 @@ package model
 		public static var uploadedImageFile:File;
 		public static var savedImageFie:File;
 		public static var savedImageBitmapData:BitmapData;
+		//
+		public static var ppi2dpi:Number = 0.3;
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
