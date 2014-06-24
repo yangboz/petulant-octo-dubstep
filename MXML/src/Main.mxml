@@ -22,6 +22,11 @@
 			private function closeWindowButtonClickHandler(event:MouseEvent):void
 			{
 				AppData.mainApp.nativeWindow.close();
+				//
+//				if(AppData.saveImageFile(AppData.savedImageBitmapData,true))
+//				{
+//					AppData.mainApp.nativeWindow.close();
+//				}
 			}
 			
 			private function minWindowButtonClickHandler(event:MouseEvent):void

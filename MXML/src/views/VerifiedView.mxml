@@ -14,7 +14,6 @@
 			
 			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
-				this.id_list.enabled = false;
 				///Upldate UI images.
 				this.updateImageViews();
 			}
@@ -51,12 +50,27 @@
 					   backgroundImage="{viewBackgroundImage}"
 					   >
 		
-		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)"/>
+		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)" enabled="false"/>
 		
 		<s:Image id="id_image_instruction" x="200" y="60" source="{AppData.INS_VERIFIED_TEXT}"/>
 		
 		<s:Image id="id_image_frame" x="410" y="190" />
 		<s:Image id="id_image_saved" x="410" y="190" />
+		
+		<s:VGroup x="600" y="200" >
+			<s:HGroup>
+				<s:Image id="id_image_verified_result_00" source="{AppData.INS_VERIFIED_RESULT_PASS}"/>
+				<s:Image id="id_image_verified_lable_00" source="{AppData.INS_VERIFIED_LABLE_00}"/>
+			</s:HGroup>
+			<s:HGroup>
+				<s:Image id="id_image_verified_result_01" source="{AppData.INS_VERIFIED_RESULT_PASS}"/>
+				<s:Image id="id_image_verified_lable_01" source="{AppData.INS_VERIFIED_LABLE_01}"/>
+			</s:HGroup>
+			<s:HGroup>
+				<s:Image id="id_image_verified_result_02" source="{AppData.INS_VERIFIED_RESULT_PASS}"/>
+				<s:Image id="id_image_verified_lable_02" source="{AppData.INS_VERIFIED_LABLE_02}"/>
+			</s:HGroup>
+		</s:VGroup>
 		
 		<s:Button x="383" y="500" label="CANCEL_VERIFY" skinClass="skins.button.HW_Back2EditorButton_Skin" click="cancelVerify_button_clickHandler(event)"/>
 		<s:Button x="505" y="500" label="GOTO_TYPESET" skinClass="skins.button.HW_VerifyNextButton_Skin" click="verifyNext_button_clickHandler(event)"/>
