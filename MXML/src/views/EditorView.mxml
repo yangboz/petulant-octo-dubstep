@@ -105,34 +105,8 @@
 				//Draw bitmap data, then save to file
 				var bitMapData:BitmapData = new BitmapData(this.getRequiredCertPhotoWidth(),this.getRequiredCertPhotoHeight(),true); 
 				bitMapData.draw(this.id_image_edit); 
-//				var bitMapData:BitmapData = ImageSnapshot.captureBitmapData(this.id_image_edit,new Matrix(1,1,1,1,50,50));
-//				var pngEncoder:PNGEncoder = new PNGEncoder(); 
-				var jpgEncoder:JPEGEncoder = new JPEGEncoder(80);
-				var imageByteArray:ByteArray = jpgEncoder.encode(bitMapData); 
-				var docsDir:File = File.documentsDirectory;
-				docsDir.save(imageByteArray,"HP_ID_Print_result_pre.jpg");
-//				try
-//				{
-//					docsDir.browseForSave("Save As");
-//					docsDir.addEventListener(Event.SELECT, saveData);
-//				}
-//				catch (error:Error)
-//				{
-//					trace("Failed:", error.message);
-//				}
-//				
-//				function saveData(event:Event):void 
-//				{
-//					var newFile:File = event.target as File;
-//					if (!newFile.exists) // remove this 'if' if overwrite is OK.
-//					{
-//						var stream:FileStream = new FileStream();
-//						stream.open(newFile, FileMode.WRITE);
-//						stream.writeBytes(imageByteArray);
-//						stream.close();
-//					} 
-//					else trace('Selected path already exists.');
-//				}
+				//
+				AppData.saveImageFile(bitMapData);
 				//
 				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;	
 			}

@@ -2,12 +2,20 @@
 package model
 {
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.DisplayObjectContainer;
+	import flash.events.Event;
 	import flash.filesystem.File;
+	import flash.filesystem.FileMode;
+	import flash.filesystem.FileStream;
+	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.net.dns.AAAARecord;
+	import flash.utils.ByteArray;
 	
 	import mx.core.FlexGlobals;
+	import mx.graphics.codec.JPEGEncoder;
+	import mx.graphics.codec.PNGEncoder;
 	import mx.managers.PopUpManager;
 	
 	import views.popups.Popup_ImageVerify_Result;
@@ -38,7 +46,11 @@ package model
 		//
 		public static var selectedCertSizeIndex:int = -1;
 		public static var selectedTypesetSizeIndex:int = 0;
+		//
+		public static var selectedFileName:String = "HP_ID_Print_result_pre";
+		//
 		public static var uploadedImageFile:File;
+		public static var savedImageFie:File;
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
@@ -213,6 +225,49 @@ package model
 			//				menuPopup.open(this, true);
 			popup.open(FlexGlobals.topLevelApplication as DisplayObjectContainer, true);
 			PopUpManager.centerPopUp(popup);
+		}
+		//
+		public static function saveImageFile(bitmapData:BitmapData,dialog:Boolean=false,extension:String=".jpg"):Boolean
+		{
+			var saved:Boolean = false;
+			//
+			var pngEncoder:PNGEncoder = new PNGEncoder(); 
+			var jpgEncoder:JPEGEncoder = new JPEGEncoder(80);
+			var imageByteArray:ByteArray;
+			//
+			if(extension==".jpg")
+			{
+				imageByteArray = jpgEncoder.encode(bitmapData); 
+			}else//*.png
+			{
+				imageByteArray = pngEncoder.encode(bitmapData); 
+			}
+			//
+			AppData.selectedFileName = AppData.selectedFileName.concat(extension);
+			//
+			AppData.savedImageFie = File.documentsDirectory;
+//			AppData.savedImageFie = File.applicationDirectory;
+			//
+			if(dialog)
+			{
+				AppData.savedImageFie.save(imageByteArray,AppData.selectedFileName.concat(extension));
+			}else
+			{
+				AppData.savedImageFie=AppData.savedImageFie.resolvePath(AppData.selectedFileName.concat(extension));  
+				var fileStream:FileStream = new FileStream();  
+				fileStream.open(AppData.savedImageFie, FileMode.WRITE);  
+				fileStream.writeBytes(imageByteArray);
+//				fileStream.writeUTFBytes("Hi this file was saved from AIR application without dialog");  
+				fileStream.addEventListener(Event.CLOSE, fileClosed);  
+				fileStream.close();  
+				//
+				function fileClosed(event:Event):void {  
+					trace("fileStream closed event fired!");  
+					saved = true;
+				}  	
+			}
+			//
+			return saved;
 		}
 		//--------------------------------------------------------------------------
 		//
