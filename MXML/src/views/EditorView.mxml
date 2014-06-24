@@ -83,6 +83,9 @@
 				this.id_image_mask.source = AppData.ARRAY_EDITOR_PHOTO_GUIDES[AppData.selectedCertSizeIndex];
 				//Mask
 //				id_image_edit.mask = id_image_mask;
+				//Image group
+				this.id_group.width = this.getRequiredCertPhotoWidth();
+				this.id_group.height = this.getRequiredCertPhotoHeight();
 			}
 			
 			protected function reupload_button_clickHandler(event:MouseEvent):void
@@ -92,11 +95,8 @@
 			
 			protected function editnext_button_clickHandler(event:MouseEvent):void
 			{
-				
 				//Save transformed image here:
-				trace(id_uitransform_tool);
-				//
-//				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;	
+				trace(id_uit_tool);
 				//Transformed maxtrix calculate
 				var transformMat:Matrix=new Matrix();
 				transformMat.scale(0.7,0.7);
@@ -133,23 +133,25 @@
 //					} 
 //					else trace('Selected path already exists.');
 //				}
+				//
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;	
 			}
 			//
 			private function deselectUITransformTool(event:MouseEvent):void
 			{
-				id_uitransform_tool.targets = null;
-				id_uitransform_tool.visible = false;
-				id_uitransform_tool.includeInLayout = false;
+				id_uit_tool.targets = null;
+				id_uit_tool.visible = false;
+				id_uit_tool.includeInLayout = false;
 			}
 			
 			private function selectUITransformTool(event:MouseEvent):void
 			{
-				id_uitransform_tool.targets = [id_image_edit];
-				id_uitransform_tool.visible = true;
-				id_uitransform_tool.includeInLayout = true;
+				id_uit_tool.targets = [id_image_edit];
+				id_uit_tool.visible = true;
+				id_uit_tool.includeInLayout = true;
 				//UITransformTool
-				id_uitransform_tool.width = id_image_edit.bitmapData.width;
-				id_uitransform_tool.height = id_image_edit.bitmapData.height;
+				id_uit_tool.width = id_image_edit.bitmapData.width;
+				id_uit_tool.height = id_image_edit.bitmapData.height;
 			}
 			
 			private function onEditorScaleSliderChange(event:Event):void
@@ -220,7 +222,7 @@
 			private function updateUITransformTools():void
 			{
 				//Update tool
-				this.id_uitransform_tool.updateTool(true);
+				this.id_uit_tool.updateTool(true);
 				//Update tool guide lines
 				var guidelines:Vector.<Guideline> = new Vector.<Guideline>();
 				
@@ -228,7 +230,7 @@
 				{
 					var element:IVisualElement = id_border_container.getElementAt(i);
 					
-					if(element is Image && id_uitransform_tool.target != element)
+					if(element is Image && id_uit_tool.target != element)
 					{
 						var box:Rectangle = DataUtil.createData(element as Image).getBoundingBox();
 						
@@ -248,7 +250,7 @@
 						}
 					}
 				}
-				id_uitransform_tool.guidelines = guidelines;
+				id_uit_tool.guidelines = guidelines;
 			}
 			protected function tool_guidelinesUpdateHandler(event:GuidelineEvent):void
 			{
@@ -284,7 +286,7 @@
 						if(event.cross.rGuideline)
 						{
 							var rTargetGuideLine:RGuideLine = new RGuideLine();
-							rTargetGuideLine.update(id_uitransform_tool.target, passiveGuideGroup);
+							rTargetGuideLine.update(id_uit_tool.target, passiveGuideGroup);
 							passiveGuideGroup.addElement(rTargetGuideLine);
 						}
 						
@@ -351,11 +353,13 @@
 		<s:Image id="id_image_instruction" x="200" y="60"/>
 		
 		<s:Image id="id_image_frame" x="410" y="190"/>
-		<s:Image id="id_image_edit" x="410" y="190" />
+		<s:BorderContainer id="id_group" x="410" y="190" borderColor="red">
+			<s:Image id="id_image_edit"/>
+		</s:BorderContainer>
 		<s:Image id="id_image_mask" x="410" y="190" enabled="false"/>
 		<s:Image id="id_image_guide" x="410" y="190" enabled="false"/>
 		
-		<view:UITransformTool id="id_uitransform_tool" skinClass="skins.uiTransformTool.TransformToolSkin3" 
+		<view:UITransformTool id="id_uit_tool" skinClass="skins.uiTransformTool.TransformToolSkin3" 
 							  transformationComplete="tool_transformationCompleteHandler(event)"
 							  guidelinesUpdate="tool_guidelinesUpdateHandler(event)"
 							  >

@@ -69,45 +69,6 @@ package model
 		[Embed(source="assets/images/background/text/infomation_editphoto_06.png")]
 		private static var INS_CERT_TEXT_05:Class;
 		///Upload_photo_frames
-//		[Embed(source="assets/images/Photo_22x32/pattern_upload_photo_frame_22x32.png")]
-//		private static var UPLOAD_PHOTO_FRAME_00:Class;
-//		[Embed(source="assets/images/Photo_25x35/pattern_upload_photo_frame_25x35.png")]
-//		private static var UPLOAD_PHOTO_FRAME_01:Class;
-//		[Embed(source="assets/images/Photo_33x48/pattern_upload_photo_frame_33x48.png")]
-//		private static var UPLOAD_PHOTO_FRAME_02:Class;
-//		[Embed(source="assets/images/Photo_35x45/pattern_upload_photo_frame_35x45.png")]
-//		private static var UPLOAD_PHOTO_FRAME_03:Class;
-//		[Embed(source="assets/images/Photo_35x50/pattern_upload_photo_frame_35x50.png")]
-//		private static var UPLOAD_PHOTO_FRAME_04:Class;
-//		[Embed(source="assets/images/Photo_50x50/pattern_upload_photo_frame_50x50.png")]
-//		private static var UPLOAD_PHOTO_FRAME_05:Class;
-		///Upload_photo_guides
-//		[Embed(source="assets/images/Photo_22x32/pattern_upload_photo_guide_22x32.png")]
-//		private static var UPLOAD_PHOTO_GUIDE_00:Class;
-//		[Embed(source="assets/images/Photo_25x35/pattern_upload_photo_guide_25x35.png")]
-//		private static var UPLOAD_PHOTO_GUIDE_01:Class;
-//		[Embed(source="assets/images/Photo_33x48/pattern_upload_photo_guide_33x48.png")]
-//		private static var UPLOAD_PHOTO_GUIDE_02:Class;
-//		[Embed(source="assets/images/Photo_35x45/pattern_upload_photo_guide_35x45.png")]
-//		private static var UPLOAD_PHOTO_GUIDE_03:Class;
-//		[Embed(source="assets/images/Photo_35x50/pattern_upload_photo_guide_35x50.png")]
-//		private static var UPLOAD_PHOTO_GUIDE_04:Class;
-//		[Embed(source="assets/images/Photo_50x50/pattern_upload_photo_guide_50x50.png")]
-//		private static var UPLOAD_PHOTO_GUIDE_05:Class;
-		///Upload_photo_notices
-//		[Embed(source="assets/images/Photo_22x32/pattern_upload_photo_notice_22x32.png")]
-//		private static var UPLOAD_PHOTO_NOTICE_00:Class;
-//		[Embed(source="assets/images/Photo_25x35/pattern_upload_photo_notice_25x35.png")]
-//		private static var UPLOAD_PHOTO_NOTICE_01:Class;
-//		[Embed(source="assets/images/Photo_33x48/pattern_upload_photo_notice_33x48.png")]
-//		private static var UPLOAD_PHOTO_NOTICE_02:Class;
-//		[Embed(source="assets/images/Photo_35x45/pattern_upload_photo_notice_35x45.png")]
-//		private static var UPLOAD_PHOTO_NOTICE_03:Class;
-//		[Embed(source="assets/images/Photo_35x50/pattern_upload_photo_notice_35x50.png")]
-//		private static var UPLOAD_PHOTO_NOTICE_04:Class;
-//		[Embed(source="assets/images/Photo_50x50/pattern_upload_photo_notice_50x50.png")]
-//		private static var UPLOAD_PHOTO_NOTICE_05:Class;
-		//
 		public static var ARRAY_INS_CERT_TEXTS:Array = [
 			new INS_CERT_TEXT_00(),new INS_CERT_TEXT_01(),new INS_CERT_TEXT_02(),
 			new INS_CERT_TEXT_03(),new INS_CERT_TEXT_04(),new INS_CERT_TEXT_05()
@@ -161,6 +122,8 @@ package model
 		//
 		[Embed(source="assets/images/background/text/pattern_detecting.png")]
 		public static var INS_VERIFING_TEXT:Class;
+		[Embed(source="assets/images/editphoto/pattern_loading_circle_01.png")]
+		public static var INS_VERIFING_IMAGE:Class;
 		[Embed(source="assets/images/background/text/pattern_detected.png")]
 		public static var INS_VERIFIED_TEXT:Class;
 		///Verified_view_frame
@@ -178,7 +141,36 @@ package model
 			new Point(220, 320), new Point(480, 330), new Point(480, 330)
 		];
 		public static var ARRAY_TYPESET_FRAMES:Array = [
-			"assets/images/photo_on_paper/pattern_photo_on_paper_4x6.png","assets/images/photo_on_paper/pattern_photo_on_paper_5x7.png","assets/images/photo_on_paper/pattern_photo_on_paper_a4.png"
+			"assets/images/photo_on_paper/pattern_photo_on_paper_4x6.png",
+			"assets/images/photo_on_paper/pattern_photo_on_paper_5x7.png",
+			"assets/images/photo_on_paper/pattern_photo_on_paper_a4.png"
+		];
+		private static var ARRAY_TYPESET_TILES_4x6:Array = [
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_22x32on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_25x35on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_33x48on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_35x45on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_35x50on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_50X50on4x6.png"
+		];
+		private static var ARRAY_TYPESET_TILES_5x7:Array = [
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_22x32on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_25x35on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_33x48on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_35x45on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_35x50on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_50X50on4x6.png"
+		];
+		private static var ARRAY_TYPESET_TILES_A7:Array = [
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_22x32on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_25x35on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_33x48on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_35x45on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_35x50on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_50X50on4x6.png"
+		];
+		public static var ARRAY_TYPESET_TILES:Array = [
+			ARRAY_TYPESET_TILES_4x6,ARRAY_TYPESET_TILES_5x7,ARRAY_TYPESET_TILES_A7
 		];
 		///ImageVerify notifications
 		[Embed(source="assets/images/notification/pattern_notification_01.png")]
