@@ -19,7 +19,7 @@
 			{
 				return new AppData.BG_IMG_00() as Bitmap;
 			}
-			
+			////FIXME: @see http://www.misho.ca/flex-4-viewstack-page-navigation-part-one/
 			protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				
@@ -42,12 +42,12 @@
 			
 			protected function getRequiredTillingImageX():Number
 			{
-				return (AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex] as Point).x;
+				return AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].x;
 			}
 			
 			protected function getRequiredTillingImageY():Number
 			{
-				return (AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex] as Point).y;
+				return AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].y;
 			}
 		]]>
 	</fx:Script>

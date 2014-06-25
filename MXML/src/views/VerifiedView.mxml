@@ -26,6 +26,11 @@
 			{
 				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_TYPESET;			
 			}
+			//
+			[Bindable]
+			private var id_image_frame_source:String = AppData.ARRAY_VERIFIED_PHOTO_FRAMES[AppData.selectedCertSizeIndex];
+			[Bindable]
+			private var id_image_saved_source:String = AppData.savedImageFie.nativePath;
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -40,8 +45,8 @@
 		
 		<s:Image id="id_image_instruction" x="200" y="60" source="{AppData.INS_VERIFIED_TEXT}"/>
 		
-		<s:Image id="id_image_frame" x="410" y="190" source="{AppData.ARRAY_VERIFIED_PHOTO_FRAMES[AppData.selectedCertSizeIndex]}"/>
-		<s:Image id="id_image_saved" x="410" y="190" source="{AppData.savedImageFie.nativePath}"/>
+		<s:Image id="id_image_frame" x="410" y="190" source="{id_image_frame_source}"/>
+		<s:Image id="id_image_saved" x="410" y="190" source="{id_image_saved_source}"/>
 		
 		<s:VGroup x="650" y="200" >
 			<s:HGroup>

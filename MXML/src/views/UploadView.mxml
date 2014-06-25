@@ -122,10 +122,10 @@
 				var requiredFileSizeMax:Number = (AppData.ARRAY_UPLOAD_FILE_SIZES[AppData.selectedCertSizeIndex] as Point).y;
 				var uploadImageFileSize:Number = AppData.uploadedImageFile.size;
 				trace("uploadImageFileSize:",uploadImageFileSize);
-				if(uploadImageFileSize<requiredFileSizeMin)
-				{
-					return AppData.popup_image_verify_result(AppData.NOTIFY_IMG_VERIFY_RESULT_0);
-				}
+//				if(uploadImageFileSize<requiredFileSizeMin)
+//				{
+//					return AppData.popup_image_verify_result(AppData.NOTIFY_IMG_VERIFY_RESULT_0);
+//				}
 				//
 				this.id_image_upload.source = AppData.uploadedImageFile.nativePath;
 				///TODO:Facial number check

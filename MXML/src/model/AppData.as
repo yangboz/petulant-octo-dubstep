@@ -204,8 +204,8 @@ package model
 			new Point(2,4),new Point(2,4),new Point(1,2)
 		];
 		private static var ARRAY_TYPESET_TILE_POINT_4x6:Array = [
-			new Point(310,172),new Point(2,5),new Point(2,4),
-			new Point(2,4),new Point(2,4),new Point(1,2)
+			{x:101,y:128,w:76.7,h:105,r:0},{x:126,y:135,w:66,h:96,r:0},{x:96,y:92,w:99,h:144,r:0},
+			{x:77,y:105,w:105,h:135,r:0},{x:82,y:91,w:105,h:150,r:0},{x:143,y:158,w:150,h:150,r:0},
 		];
 		private static var ARRAY_TYPESET_TILE_IMAGE_5x7:Array = [
 			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_25x35on5x7.png",
@@ -220,10 +220,10 @@ package model
 			new Point(2,4),new Point(2,4),new Point(2,3)
 		];
 		private static var ARRAY_TYPESET_TILE_POINT_5x7:Array = [
-			new Point(310,172),new Point(3,4),new Point(2,4),
-			new Point(2,4),new Point(2,4),new Point(2,3)
+			{x:100,y:96,w:65,h:91,r:0},{x:100,y:107,w:57,h:83,r:0},{x:120,y:105,w:86,h:125,r:0},
+			{x:106,y:103,w:91,h:117,r:0},{x:110,y:111,w:91,h:130,r:0},{x:97,y:103,w:130,h:130,r:0},
 		];
-		private static var ARRAY_TYPESET_TILE_IMAGE_A7:Array = [
+		private static var ARRAY_TYPESET_TILE_IMAGE_A4:Array = [
 			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_25x35ona4.png",
 			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_22x32ona4.png",
 			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_33x48ona4.png",
@@ -231,29 +231,29 @@ package model
 			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_35x45ona4.png",
 			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_50X50ona4.png"
 		];
-		private static var ARRAY_TYPESET_TILE_SIZE_A7:Array = [
-			new Point(8,2),new Point(5,2),new Point(7,2),
+		private static var ARRAY_TYPESET_TILE_SIZE_A4:Array = [
+			new Point(7,2),new Point(8,2),new Point(5,2),
 			new Point(5,2),new Point(5,2),new Point(3,2)
 		];
-		private static var ARRAY_TYPESET_TILE_POINT_A7:Array = [
-			new Point(310,172),new Point(5,2),new Point(7,2),
-			new Point(5,2),new Point(5,2),new Point(3,2)
+		private static var ARRAY_TYPESET_TILE_POINT_A4:Array = [
+			{x:70,y:83,w:42,h:58,r:270},{x:71,y:83,w:36,h:53,r:270},{x:69,y:94,w:55,h:80,r:270},
+			{x:70,y:83,w:58,h:75,r:270},{x:67,y:86,w:58,h:83,r:270},{x:70,y:108,w:83,h:83,r:270},
 		];
 		//
 		public static var ARRAY_TYPESET_TILE_IMGS:Array = [
 			ARRAY_TYPESET_TILE_IMAGE_4x6,
 			ARRAY_TYPESET_TILE_IMAGE_5x7,
-			ARRAY_TYPESET_TILE_IMAGE_A7
+			ARRAY_TYPESET_TILE_IMAGE_A4
 		];
 		public static var ARRAY_TYPESET_TILE_SIZE:Array = [
 			ARRAY_TYPESET_TILE_SIZE_4x6,
 			ARRAY_TYPESET_TILE_SIZE_5x7,
-			ARRAY_TYPESET_TILE_SIZE_A7
+			ARRAY_TYPESET_TILE_SIZE_A4
 		];
 		public static var ARRAY_TYPESET_TILE_POINT:Array = [
 			ARRAY_TYPESET_TILE_POINT_4x6,
 			ARRAY_TYPESET_TILE_POINT_5x7,
-			ARRAY_TYPESET_TILE_POINT_A7
+			ARRAY_TYPESET_TILE_POINT_A4
 		];
 		///ImageVerify notifications
 		[Embed(source="assets/images/notification/pattern_notification_01.png")]

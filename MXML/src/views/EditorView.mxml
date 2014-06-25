@@ -30,7 +30,6 @@
 			import spark.effects.Rotate;
 			import spark.events.IndexChangeEvent;
 			//UITransformTools: @see http://vstyran-flex.ho.ua/
-			
 			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				///Display image_editor
