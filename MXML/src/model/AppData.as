@@ -17,6 +17,7 @@ package model
 	import mx.graphics.codec.JPEGEncoder;
 	import mx.graphics.codec.PNGEncoder;
 	import mx.managers.PopUpManager;
+	import mx.utils.UIDUtil;
 	
 	import views.popups.Popup_ImageVerify_Result;
 
@@ -47,16 +48,24 @@ package model
 		public static var selectedCertSizeIndex:int = -1;
 		public static var selectedTypesetSizeIndex:int = 0;
 		//
-		public static var selectedFileName:String = "HP_ID_Print_result_pre";
+		private static const FILE_NAME_DEFAULT:String = "HP_ID_Print_result_pre";
+		private static const FILE_ANME_EXT_DEFAULT:String = ".jpg";
+		public static var selectedFileName:String;
+		public static var selectedFileExt:String;
 		//
 		public static var uploadedImageFile:File;
 		public static var savedImageFie:File;
 		public static var savedImageBitmapData:BitmapData;
+		public static var savedImageMatrix:Matrix;
 		//
 		public static var ppi2dpi:Number = 0.3;
+		//
+		private static var fileStream:FileStream;
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
+		
+		//
 		public static const VIEW_INTRO:int = 0;
 		public static const VIEW_UPLOAD:int = 1;
 		public static const VIEW_EIDTOR:int = 2;
@@ -294,7 +303,7 @@ package model
 			var saved:Boolean = false;
 			//
 			var pngEncoder:PNGEncoder = new PNGEncoder(); 
-			var jpgEncoder:JPEGEncoder = new JPEGEncoder(80);
+			var jpgEncoder:JPEGEncoder = new JPEGEncoder(100);
 			var imageByteArray:ByteArray;
 			//
 			if(extension==".jpg")
@@ -307,29 +316,35 @@ package model
 			//
 			AppData.savedImageBitmapData = bitmapData;
 			//
-			AppData.selectedFileName = AppData.selectedFileName.concat(extension);
-			//
+			AppData.selectedFileExt = extension;
+			AppData.selectedFileName = AppData.FILE_NAME_DEFAULT.concat(extension);
+//			AppData.selectedFileName = getRandomFileName().concat(extension);//
+			//Remove existed file to avoid file cache issue.
+			//			AppData.savedImageFie = File.createTempFile();
+			if(AppData.savedImageFie)
+			{
+				AppData.savedImageFie.deleteFile();
+			}
+			//Kind of file save options here:
 			AppData.savedImageFie = File.documentsDirectory;
 //			AppData.savedImageFie = File.applicationDirectory;
+//			AppData.savedImageFie = File.applicationStorageDirectory;
 			//
 			if(dialog)
 			{
-				AppData.savedImageFie.save(imageByteArray,AppData.selectedFileName.concat(extension));
+				AppData.savedImageFie.save(imageByteArray,AppData.selectedFileName);
 			}else
 			{
-				AppData.savedImageFie=AppData.savedImageFie.resolvePath(AppData.selectedFileName.concat(extension));  
-				var fileStream:FileStream = new FileStream();  
+				AppData.savedImageFie=AppData.savedImageFie.resolvePath(AppData.selectedFileName);  
+				//
+				fileStream = new FileStream();  
 				fileStream.open(AppData.savedImageFie, FileMode.WRITE);  
 				fileStream.writeBytes(imageByteArray);
 //				fileStream.writeUTFBytes("Hi this file was saved from AIR application without dialog");  
-				fileStream.addEventListener(Event.CLOSE, fileClosed);  
+				fileStream.addEventListener(Event.CLOSE, fileStreamCloseHandler);  
 				fileStream.close();  
-				//
-				function fileClosed(event:Event):void {  
-					trace("fileStream closed event fired!");  
-					saved = true;
-				}  	
 			}
+			trace("AppData.savedImageFie:",AppData.savedImageFie.nativePath);
 			//
 			return saved;
 		}
@@ -344,6 +359,16 @@ package model
 		// Private methods
 		//
 		//--------------------------------------------------------------------------
+		private static function fileStreamCloseHandler(event:Event):void 
+		{  
+			trace("fileStreamCloseHandler fired!");  
+			fileStream.removeEventListener(Event.CLOSE, fileStreamCloseHandler);
+		}  	
+		//
+		private static function getRandomFileName():String
+		{
+			return UIDUtil.createUID();
+		}
 	}
 	
 }

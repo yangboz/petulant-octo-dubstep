@@ -12,12 +12,6 @@
 			
 			import spark.events.IndexChangeEvent;
 			
-			override protected function creationCompleteHandler(event:FlexEvent):void
-			{
-				///Upldate UI images.
-				this.updateImageViews();
-			}
-			
 			override public function get viewBackgroundImage():Bitmap
 			{
 				return new AppData.BG_IMG_01() as Bitmap;
@@ -25,20 +19,12 @@
 			
 			protected function cancelVerify_button_clickHandler(event:MouseEvent):void
 			{
-				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_UPLOAD;			
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;			
 			}
 			
 			protected function verifyNext_button_clickHandler(event:MouseEvent):void
 			{
 				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_TYPESET;			
-			}
-			
-			private function updateImageViews():void
-			{
-				//
-				this.id_image_frame.source = AppData.ARRAY_VERIFIED_PHOTO_FRAMES[AppData.selectedCertSizeIndex];
-				//
-				this.id_image_saved.source = AppData.savedImageFie.nativePath;
 			}
 		]]>
 	</fx:Script>
@@ -50,14 +36,14 @@
 					   backgroundImage="{viewBackgroundImage}"
 					   >
 		
-		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)" enabled="false"/>
+		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)" enabled="false" selectedIndex="{AppData.selectedCertSizeIndex}"/>
 		
 		<s:Image id="id_image_instruction" x="200" y="60" source="{AppData.INS_VERIFIED_TEXT}"/>
 		
-		<s:Image id="id_image_frame" x="410" y="190" />
-		<s:Image id="id_image_saved" x="410" y="190" />
+		<s:Image id="id_image_frame" x="410" y="190" source="{AppData.ARRAY_VERIFIED_PHOTO_FRAMES[AppData.selectedCertSizeIndex]}"/>
+		<s:Image id="id_image_saved" x="410" y="190" source="{AppData.savedImageFie.nativePath}"/>
 		
-		<s:VGroup x="600" y="200" >
+		<s:VGroup x="650" y="200" >
 			<s:HGroup>
 				<s:Image id="id_image_verified_result_00" source="{AppData.INS_VERIFIED_RESULT_PASS}"/>
 				<s:Image id="id_image_verified_lable_00" source="{AppData.INS_VERIFIED_LABLE_00}"/>

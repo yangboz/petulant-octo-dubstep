@@ -2,18 +2,21 @@
 <views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				xmlns:views="views.*" width="800" height="600" xmlns:components="views.components.*" 
+				xmlns:views="views.*" width="800" height="600" 
+				xmlns:components="views.components.*" 
+			    show="viewbase1_showHandler(event)"
 				>
 	<fx:Script>
 		<![CDATA[
 			import model.AppData;
 			
 			import mx.events.FlexEvent;
-			
-			override protected function creationCompleteHandler(event:FlexEvent):void
-			{
-				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFIED;
-			}
+			//FIXME: @see http://www.misho.ca/flex-4-viewstack-page-navigation-part-one/
+//			override protected function creationCompleteHandler(event:FlexEvent):void
+//			{
+//				//
+//				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFIED;
+//			}
 			
 			override public function get viewBackgroundImage():Bitmap
 			{
@@ -29,6 +32,12 @@
 			{
 				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFIED;			
 			}
+			
+			protected function viewbase1_showHandler(event:FlexEvent):void
+			{
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFIED;
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -38,11 +47,15 @@
 					   backgroundImage="{viewBackgroundImage}"
 					   >
 		
-		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)" enabled="false"/>
+		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)" enabled="false" selectedIndex="{AppData.selectedCertSizeIndex}"/>
 		
 		<s:Image id="id_image_instruction" x="200" y="60" source="{AppData.INS_VERIFING_TEXT}"/>
 		
-		<s:Image x="457" y="264" source="{AppData.INS_VERIFING_IMAGE}"/>
+		<s:Image id="id_image_rotator" x="457" y="264" source="{AppData.INS_VERIFING_IMAGE}"/>
+		
+		<!--<s:Parallel id="transformer" target="{id_image_rotator}">
+			<s:Rotate angleFrom="0" angleTo="360" autoCenterTransform="true" />
+		</s:Parallel>-->
 		
 		<s:Button x="383" y="500" label="CANCEL_VERIFY" skinClass="skins.button.HW_CancelVerifyButton_Skin" click="cancelVerify_button_clickHandler(event)"/>
 		<!--<s:Button x="505" y="500" label="VERIFY_NEXT" skinClass="skins.button.HW_EditorNextButton_Skin" click="verifyNext_button_clickHandler(event)"/>-->

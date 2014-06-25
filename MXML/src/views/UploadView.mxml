@@ -128,15 +128,7 @@
 				}
 				//
 				this.id_image_upload.source = AppData.uploadedImageFile.nativePath;
-				this.id_image_upload.addEventListener(Event.COMPLETE,uploadImageCompleteHandler);
-			}
-			///Facial number check
-			private function uploadImageCompleteHandler(event:Event):void
-			{
-//				if(!faceDetection(this.id_image_upload,true))
-//				{
-//					return AppData.popup_image_verify_result(AppData.NOTIFY_IMG_VERIFY_RESULT_1);
-//				}
+				///TODO:Facial number check
 				//
 				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;
 			}
