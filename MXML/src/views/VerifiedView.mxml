@@ -32,6 +32,15 @@
 				if(id_image_frame)
 				{
 					id_image_frame.source = AppData.ARRAY_VERIFIED_PHOTO_FRAMES[AppData.selectedCertSizeIndex];
+					var id_image_frame_point:Point = AppData.ARRAY_EDITOR_POINT_FRAMES[AppData.selectedCertSizeIndex] as Point;
+					id_image_frame.x = id_image_frame_point.x;
+					id_image_frame.y = id_image_frame_point.y;
+				}
+				if(id_image_saved)
+				{
+					var id_image_saved_point:Point = AppData.ARRAY_EDITOR_POINT_PHOTOS[AppData.selectedCertSizeIndex] as Point;
+					id_image_saved.x = id_image_saved_point.x;
+					id_image_saved.y = id_image_saved_point.y;
 				}
 			}
 		]]>
@@ -48,8 +57,8 @@
 		
 		<s:Image id="id_image_instruction" x="200" y="60" source="{AppData.INS_VERIFIED_TEXT}"/>
 		
-		<s:Image id="id_image_frame" x="410" y="190" />
-		<s:Image id="id_image_saved" x="410" y="190" source="{AppData.savedImageFie.nativePath}"/>
+		<s:Image id="id_image_frame" />
+		<s:Image id="id_image_saved" source="{AppData.savedImageFie.nativePath}"/>
 		
 		<s:VGroup x="650" y="200" >
 			<s:HGroup>

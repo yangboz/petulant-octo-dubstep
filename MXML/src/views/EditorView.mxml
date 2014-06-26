@@ -61,19 +61,30 @@
 				return new AppData.BG_IMG_01() as Bitmap;
 			}
 			
-			private function updateImageViews():void
+			public function updateImageViews():void
 			{
 				//
 				this.id_image_instruction.source = AppData.ARRAY_INS_CERT_TEXTS[AppData.selectedCertSizeIndex];
 				//
 				this.id_image_frame.source = AppData.ARRAY_EDITOR_PHOTO_FRAMES[AppData.selectedCertSizeIndex];
+				//
+				var id_image_frame_point:Point = AppData.ARRAY_EDITOR_POINT_FRAMES[AppData.selectedCertSizeIndex] as Point;
+				this.id_image_frame.x = id_image_frame_point.x;
+				this.id_image_frame.y = id_image_frame_point.y;
+				//
 				this.id_image_guide.source = AppData.ARRAY_EDITOR_PHOTO_GUIDES[AppData.selectedCertSizeIndex];
-				this.id_image_mask.source = AppData.ARRAY_EDITOR_PHOTO_GUIDES[AppData.selectedCertSizeIndex];
+				var id_image_guide_point:Point = AppData.ARRAY_EDITOR_POINT_GUIDES[AppData.selectedCertSizeIndex] as Point;
+				this.id_image_guide.x = id_image_guide_point.x;
+				this.id_image_guide.y = id_image_guide_point.y;
+//				this.id_image_mask.source = AppData.ARRAY_EDITOR_PHOTO_GUIDES[AppData.selectedCertSizeIndex];
 				//Mask
 //				id_image_edit.mask = id_image_mask;
 				//Image group
-				this.id_group.width = this.getRequiredCertPhotoWidth();
-				this.id_group.height = this.getRequiredCertPhotoHeight();
+//				this.id_group.width = this.getRequiredCertPhotoWidth();
+//				this.id_group.height = this.getRequiredCertPhotoHeight();
+				var id_group_point:Point = AppData.ARRAY_EDITOR_POINT_PHOTOS[AppData.selectedCertSizeIndex] as Point;
+				this.id_group.x = id_group_point.x;
+				this.id_group.y = id_group_point.y;
 			}
 			
 			protected function reupload_button_clickHandler(event:MouseEvent):void
@@ -86,9 +97,11 @@
 				//Save transformed image here:
 				trace("AppData.savedImageMatrix(before saving):",AppData.savedImageMatrix);
 				//Draw bitmap data, then save to file
-				var bitMapData:BitmapData = new BitmapData(this.getRequiredCertPhotoWidth(),this.getRequiredCertPhotoHeight(),true); 
+				var requiredPhotoWidth:Number = this.getRequiredCertPhotoWidth();
+				var requiredPhotoHeight:Number = this.getRequiredCertPhotoHeight();
+				var bitMapData:BitmapData = new BitmapData(requiredPhotoWidth,requiredPhotoHeight,true); 
 //				bitMapData.draw(this.id_group,AppData.savedImageMatrix); 
-				bitMapData.draw(this.id_group); 
+				bitMapData.draw(this.id_group,null,null,null,new Rectangle(1,1,requiredPhotoWidth,requiredPhotoHeight)); 
 				//
 				AppData.saveImageFile(bitMapData);
 				//
@@ -161,8 +174,16 @@
 			}
 			private function applyZoom(target:DisplayObject,ratio:Number):void
 			{
+//				target.scaleX = ratio;
+//				target.scaleY = ratio;
+				//
+				var posX:Number = target.x;
+				var posY:Number = target.y;
+				target.x =target.y = 0;
 				target.scaleX = ratio;
 				target.scaleY = ratio;
+				target.x = posX;
+				target.y = posY;
 				//Update tool
 				this.updateUITransformTools();
 			}
@@ -331,12 +352,12 @@
 		
 		<s:Image id="id_image_instruction" x="200" y="60"/>
 		
-		<s:Image id="id_image_frame" x="410" y="190"/>
-		<s:Group id="id_group" x="410" y="190" clipAndEnableScrolling="true">
-			<s:Image id="id_image_edit"/>
+		<s:Group id="id_group" clipAndEnableScrolling="true">
+			<s:Image id="id_image_edit" maxWidth="400" maxHeight="400" minWidth="100" minHeight="100"/>
 		</s:Group>
-		<s:Image id="id_image_mask" x="410" y="190" enabled="false"/>
-		<s:Image id="id_image_guide" x="410" y="190" enabled="false"/>
+		<s:Image id="id_image_frame" enabled="false"/>
+		<s:Image id="id_image_guide" enabled="false"/>
+		<!--<s:Image id="id_image_mask" x="410" y="190" enabled="false"/>-->
 		
 		<view:UITransformTool id="id_uit_tool" skinClass="skins.uiTransformTool.TransformToolSkin3" 
 							  transformationComplete="tool_transformationCompleteHandler(event)"
@@ -357,7 +378,7 @@
 		<s:Button x="505" y="500" label="EDIT_NEXT" skinClass="skins.button.HW_EditorNextButton_Skin" click="editnext_button_clickHandler(event)"/>
 		<spark:HSlider id="id_hslider_rotate" x="393" y="438" 
 					   showTrackHighlight="true" skinClass="skins.slider.HW_EditorRotateHSlider_Skin"
-				   change="onEditorRotateSliderChange(event)" stepSize="5" minimum="-360" maximum="360" value="0"
+				   change="onEditorRotateSliderChange(event)" stepSize="5" minimum="-180" maximum="180" value="0"
 				   width="200" 
 				   />
 		<s:Button x="349" y="425" label="ROTATE" skinClass="skins.button.HW_RotateButton_Skin" click="rotate90ButtonClickHandler(event)"/>
@@ -365,7 +386,7 @@
 		<s:Button x="625" y="373" label="ZOOM_OUT" skinClass="skins.button.HW_ZoomOutButton_Skin" click="zoomOutButtonClickHandler(event)"/>
 		<spark:VSlider id="id_vslider_scale" x="638" y="230"
 					   showTrackHighlight="true" skinClass="skins.slider.HW_EditorScaleVSlider_Skin"
-				   change="onEditorScaleSliderChange(event)" stepSize="0.1" minimum="0.1" maximum="2" value="1"
+				   change="onEditorScaleSliderChange(event)" stepSize="0.1" minimum="0.5" maximum="2" value="1"
 				   height="140" 
 				   />
 		

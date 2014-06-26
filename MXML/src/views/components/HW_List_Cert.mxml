@@ -6,7 +6,7 @@
 		borderVisible="false"
 		itemRenderer="skins.HW_ListSkin_CertSize" useVirtualLayout="false"
 		selectedIndex="{AppData.selectedCertSizeIndex}"
-		left="10" top="110"
+		left="3" top="102"
 		>
 	<fx:Script>
 		<![CDATA[

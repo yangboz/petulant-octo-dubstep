@@ -143,6 +143,18 @@ package model
 			"assets/images/Photo_35x45/pattern_edit_photo_frame_35x45.png",
 			"assets/images/Photo_50x50/pattern_edit_photo_frame_50x50.png"
 		];
+		public static const ARRAY_EDITOR_POINT_PHOTOS:Array = [
+			new Point(423, 187), new Point(427, 187), new Point(415, 187), 
+			new Point(416, 187), new Point(416, 187), new Point(393, 187)
+		];
+		public static const ARRAY_EDITOR_POINT_FRAMES:Array = [
+			new Point(421, 185), new Point(425, 185), new Point(413, 185), 
+			new Point(414, 185), new Point(414, 185), new Point(391, 185)
+		];
+		public static const ARRAY_EDITOR_POINT_GUIDES:Array = [
+			new Point(421, 185), new Point(425, 185), new Point(413, 185), 
+			new Point(414, 185), new Point(414, 185), new Point(391, 185)
+		];
 		//
 		public static var ARRAY_EDITOR_PHOTO_GUIDES:Array = [
 			"assets/images/Photo_25x35/pattern_edit_photo_guide_25x35.png",
@@ -179,6 +191,15 @@ package model
 		public static var INS_VERIFIED_RESULT_ERROR:Class;
 		[Embed(source="assets/images/editphoto/icon_checklist_pass.png")]
 		public static var INS_VERIFIED_RESULT_PASS:Class;
+		///
+		public static const ARRAY_VERIFIED_POINT_PHOTO:Array = [
+			new Point(346, 187), new Point(350, 187), new Point(338, 187), 
+			new Point(339, 187), new Point(339, 187), new Point(316, 187)
+		];
+		public static const ARRAY_VERIFIED_POINT_FRAMES:Array = [
+			new Point(342, 183), new Point(346, 183), new Point(334, 183), 
+			new Point(335, 183), new Point(335, 183), new Point(312, 183)
+		];
 		///CertSizes
 		public static const ARRAY_SIZE_CERTS:Array = [
 			new Point(140, 196), new Point(132, 192), new Point(156, 227), 

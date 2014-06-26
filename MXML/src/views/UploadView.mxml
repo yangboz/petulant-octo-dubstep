@@ -179,13 +179,20 @@
 		
 		<s:Image id="id_image_instruction" x="200" y="60"/>
 		
-		<s:Image id="id_image_frame" x="410" y="190" />
-		<s:Image id="id_image_guide" x="410" y="190" />
-		<s:Image id="id_image_notice" x="410" y="190" />
+		<s:VGroup x="410" y="190" horizontalAlign="center">
+			<s:Group>
+				<s:Image id="id_image_frame" />
+				<s:Image id="id_image_guide" />
+				<s:Image id="id_image_notice" />
+			</s:Group>
+		</s:VGroup>
+		
+		<s:Button bottom="100" width="120" height="30" label="Upload"
+				  click="upload_button_clickHandler(event)" horizontalCenter="100"
+				  skinClass="skins.button.HW_UploadButton_Skin"/>
 		<s:SpriteVisualElement id="id_faceRectContainer"/>
 		<s:Image id="id_image_upload" x="410" y="190"/>
 		
-		<s:Button x="433" y="500" width="120" height="30" label="Upload" skinClass="skins.button.HW_UploadButton_Skin" click="upload_button_clickHandler(event)"/>
 	</s:BorderContainer>
 	
 </views:ViewBase>
