@@ -61,6 +61,8 @@ package model
 		public static var ppi2dpi:Number = 0.3;
 		//
 		private static var fileStream:FileStream;
+		//
+		private static var autoCloseWindow:Boolean;
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
@@ -298,8 +300,11 @@ package model
 			PopUpManager.centerPopUp(popup);
 		}
 		//
-		public static function saveImageFile(bitmapData:BitmapData,dialog:Boolean=false,extension:String=".jpg"):Boolean
+		public static function saveImageFile(bitmapData:BitmapData,dialog:Boolean=false,extension:String=".jpg",autoCloseWindow:Boolean=false):Boolean
 		{
+			//
+			AppData.autoCloseWindow = autoCloseWindow;
+			//
 			var saved:Boolean = false;
 			//
 			var pngEncoder:PNGEncoder = new PNGEncoder(); 
@@ -319,12 +324,6 @@ package model
 			AppData.selectedFileExt = extension;
 			AppData.selectedFileName = AppData.FILE_NAME_DEFAULT.concat(extension);
 //			AppData.selectedFileName = getRandomFileName().concat(extension);//
-			//Remove existed file to avoid file cache issue.
-			//			AppData.savedImageFie = File.createTempFile();
-			if(AppData.savedImageFie)
-			{
-				AppData.savedImageFie.deleteFile();
-			}
 			//Kind of file save options here:
 			AppData.savedImageFie = File.documentsDirectory;
 //			AppData.savedImageFie = File.applicationDirectory;
@@ -333,6 +332,15 @@ package model
 			if(dialog)
 			{
 				AppData.savedImageFie.save(imageByteArray,AppData.selectedFileName);
+//				trace("AppData.savedImageFie(with dialog):",AppData.savedImageFie.nativePath);
+				AppData.savedImageFie.addEventListener(Event.COMPLETE,complateHandler);
+				function complateHandler(event:Event):void
+				{
+					if(AppData.autoCloseWindow)
+					{
+						AppData.mainApp.nativeWindow.close();
+					}
+				}
 			}else
 			{
 				AppData.savedImageFie=AppData.savedImageFie.resolvePath(AppData.selectedFileName);  
@@ -343,8 +351,9 @@ package model
 //				fileStream.writeUTFBytes("Hi this file was saved from AIR application without dialog");  
 				fileStream.addEventListener(Event.CLOSE, fileStreamCloseHandler);  
 				fileStream.close();  
+				trace("AppData.savedImageFie(without dialog):",AppData.savedImageFie.nativePath);
 			}
-			trace("AppData.savedImageFie:",AppData.savedImageFie.nativePath);
+//			
 			//
 			return saved;
 		}

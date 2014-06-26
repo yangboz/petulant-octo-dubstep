@@ -21,12 +21,14 @@
 			
 			private function closeWindowButtonClickHandler(event:MouseEvent):void
 			{
-				AppData.mainApp.nativeWindow.close();
 				//
-//				if(AppData.saveImageFile(AppData.savedImageBitmapData,true))
-//				{
-//					AppData.mainApp.nativeWindow.close();
-//				}
+				if(AppData.savedImageBitmapData)//Delegate to save image file with dialog function
+				{
+					AppData.saveImageFile(AppData.savedImageBitmapData,true,".jpg",true);
+				}else
+				{
+					AppData.mainApp.nativeWindow.close();
+				}
 			}
 			
 			private function minWindowButtonClickHandler(event:MouseEvent):void
@@ -60,7 +62,10 @@
 					clearTimeout(timeoutID);
 				}
 			}
-			
+			protected function navigatorcontent_verified_showHandler(event:FlexEvent):void
+			{
+				id_verified_view.updateImageViews();
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -80,8 +85,8 @@
 		<s:NavigatorContent width="100%" height="100%" show="navigatorcontent_verifing_showHandler(event)">
 			<views:VerifingView/>
 		</s:NavigatorContent>
-		<s:NavigatorContent width="100%" height="100%">
-			<views:VerifiedView/>
+		<s:NavigatorContent width="100%" height="100%" show="navigatorcontent_verified_showHandler(event)">
+			<views:VerifiedView id="id_verified_view"/>
 		</s:NavigatorContent>
 		<s:NavigatorContent width="100%" height="100%">
 			<views:TypesetView/>
