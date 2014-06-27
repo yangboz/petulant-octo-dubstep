@@ -9,9 +9,10 @@
 					   >
 	<fx:Script>
 		<![CDATA[
-//			mouseDown="this.nativeWindow.startMove();"
 			import model.AppData;
 			
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
 			import mx.events.FlexEvent;
 			
 			protected function creationCompleteHandler(event:FlexEvent):void
@@ -19,12 +20,24 @@
 				AppData.mainApp = this;
 			}
 			
+			private function alertCloseHandler(event:CloseEvent):void
+			{
+				if(event.detail==Alert.OK)
+				{
+					AppData.saveImageFile(AppData.savedImageBitmapData,true,".jpg",true);
+					AppData.mainApp.nativeWindow.close();
+				}else
+				{
+					AppData.mainApp.nativeWindow.close();
+				}
+			}
+			
 			private function closeWindowButtonClickHandler(event:MouseEvent):void
 			{
 				//
 				if(AppData.savedImageBitmapData)//Delegate to save image file with dialog function
 				{
-					AppData.saveImageFile(AppData.savedImageBitmapData,true,".jpg",true);
+					Alert.show("Save File?","Close",Alert.OK|Alert.CANCEL,this,alertCloseHandler,null,Alert.OK);
 				}else
 				{
 					AppData.mainApp.nativeWindow.close();
