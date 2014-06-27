@@ -40,8 +40,8 @@
 			{
 				//Save image at first
 				//Draw bitmap data, then save to file
-				var bitMapData:BitmapData = new BitmapData(this.getRequiredCertPhotoWidth(),this.getRequiredCertPhotoHeight(),true); 
-				bitMapData.draw(this.id_list_tile); 
+//				var bitMapData:BitmapData = new BitmapData(this.getRequiredCertPhotoWidth(),this.getRequiredCertPhotoHeight(),true); 
+//				bitMapData.draw(this.id_list_tile); 
 //				if(AppData.saveImageFile(bitMapData))
 //				{
 					//@see http://www.fising.cn/docs/AS3_Reference/flash/printing/PrintJob.html#includeExamplesSummary
@@ -52,7 +52,8 @@
 					if(printOut.start())
 					{
 						//					printOut.addPage();
-						printOut.addPage(this.id_border_container,new Rectangle(id_image_tile.x,id_image_tile.y,id_image_tile.width,id_image_tile.height),option);
+						printOut.addPage(this.id_border_container,new Rectangle(id_list_tile.x-1,id_list_tile.y-1,id_list_tile.width+2,id_list_tile.height+2),option);
+//						printOut.addPage(this.id_list_tile,new Rectangle(id_image_tile.x-1,id_image_tile.y-1,id_image_tile.width+2,id_image_tile.height+2),option);
 						printOut.send();
 					}
 //				}

@@ -10,7 +10,7 @@
 		<s:State name="hovered" />
 	</s:states>
 	
-	<s:postLayoutTransformOffsets>
+	<!--<s:postLayoutTransformOffsets>
 		<mx:TransformOffsets id="offsets" x.hovered="-25" y.hovered="-50" scaleX.hovered="2" scaleY.hovered="2" />
 	</s:postLayoutTransformOffsets>    
 	
@@ -31,7 +31,7 @@
 				<s:SimpleMotionPath property="y" />
 			</s:Animate>
 		</mx:Transition>
-	</s:transitions>    
+	</s:transitions>    -->
 	
 	<s:Image id="image" source="{data.source}" width="{data.width}" height="{data.height}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0"/>
 	

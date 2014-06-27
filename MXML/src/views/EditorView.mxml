@@ -364,6 +364,7 @@
 							  guidelinesUpdate="tool_guidelinesUpdateHandler(event)"
 							  transformation="tool_transformationHandler(event)"
 							  maxWidth="400" maxHeight="400" minWidth="100" minHeight="100"
+							  buttonMode="true"
 							  >
 			<!--<view:bounds>
 				<model:Bounds x="{id_image_frame.x}" y="{id_image_frame.y}" width="{img_editor_width}" height="{img_editor_height}"/>
