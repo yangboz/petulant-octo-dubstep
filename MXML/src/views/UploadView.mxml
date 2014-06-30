@@ -127,7 +127,7 @@
 //					return AppData.popup_image_verify_result(AppData.NOTIFY_IMG_VERIFY_RESULT_0);
 //				}
 				//
-				this.id_image_upload.source = AppData.uploadedImageFile.nativePath;
+//				this.id_image_upload.source = AppData.uploadedImageFile.nativePath;
 				///TODO:Facial number check
 				//
 				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;
@@ -188,7 +188,7 @@
 		</s:VGroup>
 		
 		<s:Button bottom="100" width="120" height="30" label="Upload"
-				  click="upload_button_clickHandler(event)" horizontalCenter="100"
+				  click="upload_button_clickHandler(event)" horizontalCenter="80"
 				  skinClass="skins.button.HW_UploadButton_Skin"/>
 		<s:SpriteVisualElement id="id_faceRectContainer"/>
 		<s:Image id="id_image_upload" x="410" y="190"/>

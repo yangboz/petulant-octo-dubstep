@@ -8,7 +8,7 @@
 		xmlns:layouts="com.vstyran.transform.layouts.*"
 		xmlns:vector="com.vstyran.transform.managers.vector.*"
 		xmlns:cursors="com.vstyran.transform.managers.vector.cursors.*"
-		width="200" height="180" xmlns:model="com.vstyran.transform.model.*" >
+		width="200" height="180" xmlns:model="com.vstyran.transform.model.*">
 	<!-- host component -->
 	<fx:Metadata>
 		[HostComponent("com.vstyran.transform.view.TransformTool")]

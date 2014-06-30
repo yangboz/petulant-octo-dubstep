@@ -29,18 +29,23 @@
 			
 			import spark.effects.Rotate;
 			import spark.events.IndexChangeEvent;
+			
+			import utils.AlignUtil;
 			//UITransformTools: @see http://vstyran-flex.ho.ua/
 			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				///Display image_editor
 				this.id_image_edit.source = AppData.uploadedImageFile.nativePath;
 				this.id_image_edit.addEventListener(Event.COMPLETE,function(event:Event):void{
+					///Align Image Views.
+					alignImageView();
+					///
 					selectUITransformTool(new MouseEvent(MouseEvent.CLICK));
 				});
 				///Upldate UI images.
-				this.updateImageViews();
+				updateImageViews();
 				//Update tool
-				this.updateUITransformTools();
+				updateUITransformTools();
 				///
 //				this.addEventListener(MouseEvent.CLICK,deselectUITransformTool);
 			}
@@ -52,6 +57,8 @@
 //				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;
 				///Upldate UI images.
 				this.updateImageViews();
+				///Align Image Views.
+				alignImageView();
 				//Update tool
 				this.updateUITransformTools();
 			}
@@ -63,6 +70,9 @@
 			
 			public function updateImageViews():void
 			{
+				//
+				this.id_image_edit.minHeight = this.getRequiredCertPhotoHeight();
+				this.id_image_edit.minWidth = this.getRequiredCertPhotoWidth();
 				//
 				this.id_image_instruction.source = AppData.ARRAY_INS_CERT_TEXTS[AppData.selectedCertSizeIndex];
 				//
@@ -76,20 +86,29 @@
 				var id_image_guide_point:Point = AppData.ARRAY_EDITOR_POINT_GUIDES[AppData.selectedCertSizeIndex] as Point;
 				this.id_image_guide.x = id_image_guide_point.x;
 				this.id_image_guide.y = id_image_guide_point.y;
-//				this.id_image_mask.source = AppData.ARRAY_EDITOR_PHOTO_GUIDES[AppData.selectedCertSizeIndex];
-				//Mask
-//				id_image_edit.mask = id_image_mask;
 				//Image group
 //				this.id_group.width = this.getRequiredCertPhotoWidth();
 //				this.id_group.height = this.getRequiredCertPhotoHeight();
 				var id_group_point:Point = AppData.ARRAY_EDITOR_POINT_PHOTOS[AppData.selectedCertSizeIndex] as Point;
 				this.id_group.x = id_group_point.x;
 				this.id_group.y = id_group_point.y;
+				this.id_group.maxWidth = this.getRequiredCertPhotoWidth();
+				this.id_group.maxHeight = this.getRequiredCertPhotoHeight();
+				//Mask
+//				this.id_image_mask.source = AppData.ARRAY_EDITOR_PHOTO_FRAMES[AppData.selectedCertSizeIndex];
+//				this.id_image_edit.mask = this.id_image_mask;
+				//Alignment
+			}
+			
+			protected function alignImageView():void
+			{
+//				this.id_group.x -= (this.id_image_edit.bitmapData.width-this.getRequiredCertPhotoWidth())/2;
+//				this.id_group.y -= (this.id_image_edit.bitmapData.height-this.getRequiredCertPhotoHeight())/2;
 			}
 			
 			protected function reupload_button_clickHandler(event:MouseEvent):void
 			{
-				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_UPLOAD;			
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_UPLOAD;
 			}
 			
 			protected function editnext_button_clickHandler(event:MouseEvent):void
@@ -101,7 +120,7 @@
 				var requiredPhotoHeight:Number = this.getRequiredCertPhotoHeight();
 				var bitMapData:BitmapData = new BitmapData(requiredPhotoWidth,requiredPhotoHeight,true); 
 //				bitMapData.draw(this.id_group,AppData.savedImageMatrix); 
-				bitMapData.draw(this.id_group,null,null,null,new Rectangle(1,1,requiredPhotoWidth,requiredPhotoHeight)); 
+				bitMapData.draw(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight)); 
 				//
 				AppData.saveImageFile(bitMapData);
 				//
@@ -353,21 +372,19 @@
 		<s:Image id="id_image_instruction" x="200" y="60"/>
 		
 		<s:Group id="id_group" clipAndEnableScrolling="true">
-			<s:Image id="id_image_edit" maxWidth="400" maxHeight="400" minWidth="100" minHeight="100"/>
+			<s:Image id="id_image_edit" />
 		</s:Group>
 		<s:Image id="id_image_frame" enabled="false"/>
 		<s:Image id="id_image_guide" enabled="false"/>
-		<!--<s:Image id="id_image_mask" x="410" y="190" enabled="false"/>-->
+		<!--<s:Image id="id_image_mask" x="{id_image_frame.x}" y="{id_image_frame.y}" enabled="false"/>-->
 		
 		<view:UITransformTool id="id_uit_tool" skinClass="skins.uiTransformTool.TransformToolSkin3" 
 							  transformationComplete="tool_transformationCompleteHandler(event)"
 							  guidelinesUpdate="tool_guidelinesUpdateHandler(event)"
 							  transformation="tool_transformationHandler(event)"
-							  maxWidth="400" maxHeight="400" minWidth="100" minHeight="100"
-							  buttonMode="true"
 							  >
 			<!--<view:bounds>
-				<model:Bounds x="{id_image_frame.x}" y="{id_image_frame.y}" width="{img_editor_width}" height="{img_editor_height}"/>
+				<model:Bounds x="{id_image_frame.x-50}" y="{id_image_frame.y-50}" width="300" height="300"/>
 			</view:bounds>-->
 			<!--<view:guidelines>
 				<model:Guideline type="{GuidelineType.HORIZONTAL_CENTER}" value="400" fraction="3"/>

@@ -39,8 +39,8 @@
 				if(id_image_saved)
 				{
 					var id_image_saved_point:Point = AppData.ARRAY_EDITOR_POINT_PHOTOS[AppData.selectedCertSizeIndex] as Point;
-					id_image_saved.x = id_image_saved_point.x;
-					id_image_saved.y = id_image_saved_point.y;
+					id_image_saved.x = id_image_saved_point.x+1;
+					id_image_saved.y = id_image_saved_point.y+1;
 				}
 			}
 		]]>
@@ -60,7 +60,7 @@
 		<s:Image id="id_image_frame" />
 		<s:Image id="id_image_saved" source="{AppData.savedImageFie.nativePath}"/>
 		
-		<s:VGroup x="650" y="200" >
+		<s:VGroup x="650" y="200" visible="false">
 			<s:HGroup>
 				<s:Image id="id_image_verified_result_00" source="{AppData.INS_VERIFIED_RESULT_PASS}"/>
 				<s:Image id="id_image_verified_lable_00" source="{AppData.INS_VERIFIED_LABLE_00}"/>
