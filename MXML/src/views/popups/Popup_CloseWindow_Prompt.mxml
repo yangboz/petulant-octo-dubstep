@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<components:PopupBase xmlns:components="views.components.*"
+					  xmlns:fx="http://ns.adobe.com/mxml/2009"
+					  xmlns:s="library://ns.adobe.com/flex/spark"
+					  backgroundAlpha="0" >
+	<fx:Script>
+		<![CDATA[
+			import model.AppData;
+			
+			import skins.button.HW_AlertCloseCancelButton_Skin;
+			import skins.button.HW_AlertCloseSaveButton_Skin;
+			import skins.button.HW_AlertCloseUnSaveButton_Skin;
+			
+			protected function button_cancel_clickHandler(event:MouseEvent):void
+			{
+				this.close();
+			}
+			
+			protected function button_unsave_clickHandler(event:MouseEvent):void
+			{
+				this.close();
+				//
+				AppData.mainApp.nativeWindow.close();
+			}
+			
+			protected function button_save_clickHandler(event:MouseEvent):void
+			{
+				AppData.saveImageFile(AppData.savedImageBitmapData,true,".jpg",true);
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:BorderContainer id="id_borderContainer" width="400" height="140"
+					   borderAlpha="0" backgroundImage="{AppData.ALERT_CLOSE_WINDOW_BG}">
+		
+		<s:Button x="30" y="80" label="Button" skinClass="skins.button.HW_AlertCloseCancelButton_Skin" click="button_cancel_clickHandler(event)" useHandCursor="true" buttonMode="true"/>
+		<s:Button x="150" y="80" label="Button" skinClass="skins.button.HW_AlertCloseUnSaveButton_Skin" click="button_unsave_clickHandler(event)" useHandCursor="true" buttonMode="true"/>
+		<s:Button x="270" y="80" label="Button" skinClass="skins.button.HW_AlertCloseSaveButton_Skin" click="button_save_clickHandler(event)" useHandCursor="true" buttonMode="true"/>
+		
+	</s:BorderContainer>
+	
+</components:PopupBase >

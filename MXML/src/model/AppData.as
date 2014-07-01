@@ -285,6 +285,9 @@ package model
 		public static var NOTIFY_IMG_VERIFY_RESULT_1:Class;
 		[Embed(source="assets/images/notification/pattern_notification_02.png")]
 		public static var NOTIFY_IMG_SAVE_RESULT:Class;
+		///Close Window
+		[Embed(source="assets/images/close_window/pattern_window_close_bg.png")]
+		public static var ALERT_CLOSE_WINDOW_BG:Class;
 		//--------------------------------------------------------------------------
 		//
 		// Public properties

@@ -14,29 +14,28 @@
 			import mx.controls.Alert;
 			import mx.events.CloseEvent;
 			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			import views.popups.Popup_CloseWindow_Prompt;
 			
 			protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				AppData.mainApp = this;
 			}
 			
-			private function alertCloseHandler(event:CloseEvent):void
-			{
-				if(event.detail==Alert.YES)
-				{
-					AppData.saveImageFile(AppData.savedImageBitmapData,true,".jpg",true);
-				}else
-				{
-					AppData.mainApp.nativeWindow.close();
-				}
-			}
+			private var popup_close_window_prompt:Popup_CloseWindow_Prompt;
 			
 			private function closeWindowButtonClickHandler(event:MouseEvent):void
 			{
-				//
-				if(AppData.savedImageBitmapData)//Delegate to save image file with dialog function
+				this.popup_close_window_prompt = new Popup_CloseWindow_Prompt();
+				popup_close_window_prompt.open(this, true);
+				PopUpManager.centerPopUp(this.popup_close_window_prompt);
+				return;
+				if(AppData.savedImageBitmapData)
 				{
-					Alert.show("Do you want save?","",Alert.YES|Alert.NO,this,alertCloseHandler,null,Alert.OK);
+					this.popup_close_window_prompt = new Popup_CloseWindow_Prompt();
+					popup_close_window_prompt.open(this, true);
+					PopUpManager.centerPopUp(this.popup_close_window_prompt);
 				}else
 				{
 					AppData.mainApp.nativeWindow.close();
@@ -84,6 +83,17 @@
 		<!--skinClass="skins.HW_ApplicationSkin"-->
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace mx "library://ns.adobe.com/flex/mx";
+		@namespace views "views.*";
+		s|SkinnablePopUpContainer {  
+			modalTransparencyBlur: 5;
+			modalTransparency: 0.5;
+			modalTransparencyColor: #FFFFFF;
+			modalTransparencyDuration: 100;
+		} 
+	</fx:Style>
 	<mx:ViewStack id="id_viewStack" width="100%" height="100%">
 		<s:NavigatorContent width="100%" height="100%">
 			<views:IntroView/>
