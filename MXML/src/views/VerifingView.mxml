@@ -42,6 +42,9 @@
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Parallel id="showEff">
+			<s:Rotate angleFrom="0" angleTo="360" duration="1000" autoCenterTransform="true" target="{id_image_rotator}"/>
+		</s:Parallel>
 	</fx:Declarations>
 	<s:BorderContainer width="100%" height="100%" contentBackgroundAlpha="0"
 					   backgroundImage="{viewBackgroundImage}"
@@ -51,7 +54,7 @@
 		
 		<s:Image id="id_image_instruction" x="200" y="60" source="{AppData.INS_VERIFING_TEXT}"/>
 		
-		<s:Image id="id_image_rotator" x="457" y="264" source="{AppData.INS_VERIFING_IMAGE}"/>
+		<s:Image id="id_image_rotator" x="457" y="264" source="{AppData.INS_VERIFING_IMAGE}" />
 		
 		<!--<s:Parallel id="transformer" target="{id_image_rotator}">
 			<s:Rotate angleFrom="0" angleTo="360" autoCenterTransform="true" />

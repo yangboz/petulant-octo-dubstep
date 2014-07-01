@@ -8,9 +8,14 @@
 			import model.AppData;
 			
 			import mx.collections.ArrayList;
+			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
+			import mx.printing.FlexPrintJob;
+			import mx.printing.FlexPrintJobScaleType;
 			
 			import spark.events.IndexChangeEvent;
+			
+			import views.renderers.ImageRenderer;
 			
 			
 			override protected function creationCompleteHandler(event:FlexEvent):void
@@ -35,28 +40,39 @@
 			{
 				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;			
 			}
-			
+			//@see http://flextutorial.org/2009/06/23/understanding-flex-print-job-from-a-to-z/
 			protected function printOut_button_clickHandler(event:MouseEvent):void
 			{
-				//Save image at first
-				//Draw bitmap data, then save to file
-//				var bitMapData:BitmapData = new BitmapData(this.getRequiredCertPhotoWidth(),this.getRequiredCertPhotoHeight(),true); 
-//				bitMapData.draw(this.id_list_tile); 
-//				if(AppData.saveImageFile(bitMapData))
+				var option:PrintJobOptions = new PrintJobOptions(true);
+//				option.pixelsPerInch = 72;
+				//
+//				var flexPrintJob:FlexPrintJob = new FlexPrintJob();
+//				this.id_border_container.scaleX = this.id_border_container.scaleY = 1.667;
+//				//
+//				if(flexPrintJob.start())
 //				{
-					//@see http://www.fising.cn/docs/AS3_Reference/flash/printing/PrintJob.html#includeExamplesSummary
-					var printOut:PrintJob = new PrintJob();
-					var option:PrintJobOptions = new PrintJobOptions();
-//					option.pixelsPerInch = 72;
-					//
-					if(printOut.start())
-					{
-						//					printOut.addPage();
-						printOut.addPage(this.id_border_container,new Rectangle(id_list_tile.x-1,id_list_tile.y-1,id_list_tile.width+2,id_list_tile.height+2),option);
-//						printOut.addPage(this.id_list_tile,new Rectangle(id_image_tile.x-1,id_image_tile.y-1,id_image_tile.width+2,id_image_tile.height+2),option);
-						printOut.send();
-					}
+//					flexPrintJob.addObject(this.id_border_container,FlexPrintJobScaleType.NONE);
+////					flexPrintJob.addPage(this.id_border_container,new Rectangle(id_list_tile.x-1,id_list_tile.y-1,id_list_tile.width+2,id_list_tile.height+2),option);
 //				}
+//				flexPrintJob.send();
+				//@see http://www.fising.cn/docs/AS3_Reference/flash/printing/PrintJob.html#includeExamplesSummary
+				var printOut:PrintJob = new PrintJob();
+//					option.pixelsPerInch = 72;
+				//
+//				this.id_border_container.scaleX = this.id_border_container.scaleY = 1.667;
+				var requiredImageWidth:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w;
+				var requiredImageHeight:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h;
+				this.id_list_tile.width = requestedColumnCount*requiredImageWidth;
+				this.id_list_tile.height = requestedRowCount*requiredImageHeight;
+				//
+				if(printOut.start())
+				{
+					//					printOut.addPage();
+					printOut.addPage(this.id_border_container,new Rectangle(id_list_tile.x,id_list_tile.y,id_list_tile.width,id_list_tile.height),option);
+//					printOut.addPage(this.id_border_container,new Rectangle(id_list_tile.x-1,id_list_tile.y-1,id_list_tile.width+2,id_list_tile.height+2),option);
+//						printOut.addPage(this.id_list_tile,new Rectangle(id_image_tile.x-1,id_image_tile.y-1,id_image_tile.width+2,id_image_tile.height+2),option);
+					printOut.send();
+				}
 			}
 			
 			override public function get viewBackgroundImage():Bitmap
@@ -70,8 +86,8 @@
 				trace("AppData.selectedTypesetSizeIndex:",AppData.selectedTypesetSizeIndex);
 //				id_image_frame.source = AppData.ARRAY_TYPESET_FRAMES[AppData.selectedTypesetSizeIndex];
 				trace("AppData.selectedCertSizeIndex:",AppData.selectedCertSizeIndex);
-				id_image_tile.source = AppData.ARRAY_TYPESET_TILE_IMGS[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex];
-				trace("id_image_tile.source:",id_image_tile.source);
+//				id_image_tile.source = AppData.ARRAY_TYPESET_TILE_IMGS[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex];
+//				trace("id_image_tile.source:",id_image_tile.source);
 			}
 			
 			private function updateTileList():void
@@ -89,13 +105,14 @@
 				{
 					for(var j:int=0;j<requestedColumnCount;j++)
 					{
-						imageArray.push(
-						{
+						var data:Object = {
 							source:AppData.savedImageFie.nativePath,
-							width:requiredImageWidth,
-							height:requiredImageHeight,
-							rotation:requiredImageRotation
-						});
+								width:requiredImageWidth,
+								height:requiredImageHeight,
+								rotation:requiredImageRotation
+						}
+						imageArray.push(data);
+//						this.id_list_tile.updateRenderer(ImageRenderer as IVisualElement,i*requestedColumnCount+j,data);
 					}
 				}
 				this.imageArrayList = new ArrayList(imageArray);
@@ -132,7 +149,7 @@
 		
 		<!--<s:Image id="id_image_frame" left="200" top="40" />-->
 		<s:BorderContainer id="id_border_container" left="200" top="40" backgroundAlpha="0" borderVisible="false">
-			<s:Image id="id_image_tile" />
+			<!--<s:Image id="id_image_tile" />-->
 			<s:DataGroup  id="id_list_tile"
 						  dataProvider="{this.imageArrayList}" 
 						  itemRenderer="views.renderers.ImageRenderer"
@@ -148,7 +165,7 @@
 		<s:Button x="383" y="500" label="Back2Verify" skinClass="skins.button.HW_Back2VerifyButton_Skin" click="cancelTypeset_button_clickHandler(event)"/>
 		<s:Button x="505" y="500" label="PRINT_OUT" skinClass="skins.button.HW_PrintButton_Skin" click="printOut_button_clickHandler(event)"/>
 		
-		<!--<view:UITransformTool id="id_uit_tool" target="{id_list_tile}" />-->
+		<view:UITransformTool id="id_uit_tool" target="{id_list_tile}" />
 		
 	</s:BorderContainer>
 </views:ViewBase>

@@ -2,7 +2,7 @@
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009"
 				xmlns:s="library://ns.adobe.com/flex/spark"
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				autoDrawBackground="false" 
+				autoDrawBackground="false"
 				depth="0" depth.hovered="1">
 	
 	<s:states>
@@ -32,7 +32,6 @@
 			</s:Animate>
 		</mx:Transition>
 	</s:transitions>    -->
-	
-	<s:Image id="image" source="{data.source}" width="{data.width}" height="{data.height}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0"/>
+		<s:Image id="image" source="{data.source}" width="{data.width}" height="{data.height}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0"/>
 	
 </s:ItemRenderer>

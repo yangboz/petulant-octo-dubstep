@@ -81,32 +81,23 @@ package model
 		public static var BG_IMG_01:Class;
 		[Embed(source="assets/images/background/pattern_window_background_03.png")]
 		public static var BG_IMG_02:Class;
-		////Instruction text
-		[Embed(source="assets/images/background/text/infomation_editphoto_01.png")]
-		private static var INS_CERT_TEXT_00:Class;
-		[Embed(source="assets/images/background/text/infomation_editphoto_02.png")]
-		private static var INS_CERT_TEXT_01:Class;
-		[Embed(source="assets/images/background/text/infomation_editphoto_03.png")]
-		private static var INS_CERT_TEXT_02:Class;
-		[Embed(source="assets/images/background/text/infomation_editphoto_04.png")]
-		private static var INS_CERT_TEXT_03:Class;
-		[Embed(source="assets/images/background/text/infomation_editphoto_05.png")]
-		private static var INS_CERT_TEXT_04:Class;
-		[Embed(source="assets/images/background/text/infomation_editphoto_06.png")]
-		private static var INS_CERT_TEXT_05:Class;
 		///Upload_photo_frames
+		////Instruction text
 		public static var ARRAY_INS_CERT_TEXTS:Array = [
-			new INS_CERT_TEXT_00(),new INS_CERT_TEXT_01(),new INS_CERT_TEXT_02(),
-			new INS_CERT_TEXT_03(),new INS_CERT_TEXT_04(),new INS_CERT_TEXT_05()
+			"assets/images/background/text/infomation_editphoto_01.png",
+			"assets/images/background/text/infomation_editphoto_02.png",
+			"assets/images/background/text/infomation_editphoto_03.png",
+			"assets/images/background/text/infomation_editphoto_05.png",
+			"assets/images/background/text/infomation_editphoto_04.png",
+			"assets/images/background/text/infomation_editphoto_06.png"
 		];
-		//
 		//
 		public static var ARRAY_UPLOAD_PHOTO_FRAMES:Array = [
 			"assets/images/Photo_25x35/pattern_upload_photo_frame_25x35.png",
 			"assets/images/Photo_22x32/pattern_upload_photo_frame_22x32.png",
 			"assets/images/Photo_33x48/pattern_upload_photo_frame_33x48.png",
-			"assets/images/Photo_35x50/pattern_upload_photo_frame_35x50.png",
 			"assets/images/Photo_35x45/pattern_upload_photo_frame_35x45.png",
+			"assets/images/Photo_35x50/pattern_upload_photo_frame_35x50.png",
 			"assets/images/Photo_50x50/pattern_upload_photo_frame_50x50.png"
 		];
 		//
@@ -114,8 +105,8 @@ package model
 			"assets/images/Photo_25x35/pattern_upload_photo_guide_25x35.png",
 			"assets/images/Photo_22x32/pattern_upload_photo_guide_22x32.png",
 			"assets/images/Photo_33x48/pattern_upload_photo_guide_33x48.png",
-			"assets/images/Photo_35x50/pattern_upload_photo_guide_35x50.png",
 			"assets/images/Photo_35x45/pattern_upload_photo_guide_35x45.png",
+			"assets/images/Photo_35x50/pattern_upload_photo_guide_35x50.png",
 			"assets/images/Photo_50x50/pattern_upload_photo_guide_50x50.png"
 		];
 		//
@@ -124,8 +115,8 @@ package model
 			"assets/images/Photo_25x35/pattern_upload_photo_notice_25x35.png",
 			"assets/images/Photo_22x32/pattern_upload_photo_notice_22x32.png",
 			"assets/images/Photo_33x48/pattern_upload_photo_notice_33x48.png",
-			"assets/images/Photo_35x50/pattern_upload_photo_notice_35x50.png",
 			"assets/images/Photo_35x45/pattern_upload_photo_notice_35x45.png",
+			"assets/images/Photo_35x50/pattern_upload_photo_notice_35x50.png",
 			"assets/images/Photo_50x50/pattern_upload_photo_notice_50x50.png"
 		];
 		//default file sizes of certificates
@@ -139,8 +130,8 @@ package model
 			"assets/images/Photo_25x35/pattern_edit_photo_frame_25x35.png",
 			"assets/images/Photo_22x32/pattern_edit_photo_frame_22x32.png",
 			"assets/images/Photo_33x48/pattern_edit_photo_frame_33x48.png",
-			"assets/images/Photo_35x50/pattern_edit_photo_frame_35x50.png",
 			"assets/images/Photo_35x45/pattern_edit_photo_frame_35x45.png",
+			"assets/images/Photo_35x50/pattern_edit_photo_frame_35x50.png",
 			"assets/images/Photo_50x50/pattern_edit_photo_frame_50x50.png"
 		];
 		public static const ARRAY_EDITOR_POINT_PHOTOS:Array = [
@@ -160,8 +151,8 @@ package model
 			"assets/images/Photo_25x35/pattern_edit_photo_guide_25x35.png",
 			"assets/images/Photo_22x32/pattern_edit_photo_guide_22x32.png",
 			"assets/images/Photo_33x48/pattern_edit_photo_guide_33x48.png",
-			"assets/images/Photo_35x50/pattern_edit_photo_guide_35x50.png",
 			"assets/images/Photo_35x45/pattern_edit_photo_guide_35x45.png",
+			"assets/images/Photo_35x50/pattern_edit_photo_guide_35x50.png",
 			"assets/images/Photo_50x50/pattern_edit_photo_guide_50x50.png"
 		];
 		//
@@ -176,8 +167,8 @@ package model
 			"assets/images/Photo_25x35/pattern_detected_photo_25x35_bg.png",
 			"assets/images/Photo_22x32/pattern_detected_photo_22x32.png",
 			"assets/images/Photo_33x48/pattern_detected_photo_33x48_bg.png",
-			"assets/images/Photo_35x50/pattern_detected_photo_35x50.png",
 			"assets/images/Photo_35x45/pattern_detected_photo_35x45.png",
+			"assets/images/Photo_35x50/pattern_detected_photo_35x50.png",
 			"assets/images/Photo_50x50/pattern_detected_photo_50x50_bg.png"
 		];
 		///Verified_result_related
@@ -200,10 +191,10 @@ package model
 			new Point(342, 183), new Point(346, 183), new Point(334, 183), 
 			new Point(335, 183), new Point(335, 183), new Point(312, 183)
 		];
-		///CertSizes
+		///CertSizes(标准一寸,小一寸,大一寸,标准二寸,小二寸,赴美签证)
 		public static const ARRAY_SIZE_CERTS:Array = [
 			new Point(140, 196), new Point(132, 192), new Point(156, 227), 
-			new Point(154, 220), new Point(154, 198), new Point(200, 200) 
+			new Point(154, 198), new Point(154, 220), new Point(200, 200) 
 		];
 		///TypesetSizes
 		public static const ARRAY_SIZE_TYPESET:Array = [
@@ -227,7 +218,7 @@ package model
 			new Point(2,4),new Point(2,4),new Point(1,2)
 		];
 		private static var ARRAY_TYPESET_TILE_POINT_4x6:Array = [
-			{x:101,y:128,w:76.7,h:105,r:0},{x:126,y:135,w:66,h:96,r:0},{x:96,y:92,w:99,h:144,r:0},
+			{x:101,y:128,w:76,h:105,r:0},{x:126,y:135,w:66,h:96,r:0},{x:96,y:92,w:99,h:144,r:0},
 			{x:77,y:105,w:105,h:135,r:0},{x:82,y:91,w:105,h:150,r:0},{x:143,y:158,w:150,h:150,r:0},
 		];
 		private static var ARRAY_TYPESET_TILE_IMAGE_5x7:Array = [

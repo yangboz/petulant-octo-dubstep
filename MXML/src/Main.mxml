@@ -27,10 +27,6 @@
 			
 			private function closeWindowButtonClickHandler(event:MouseEvent):void
 			{
-				this.popup_close_window_prompt = new Popup_CloseWindow_Prompt();
-				popup_close_window_prompt.open(this, true);
-				PopUpManager.centerPopUp(this.popup_close_window_prompt);
-				return;
 				if(AppData.savedImageBitmapData)
 				{
 					this.popup_close_window_prompt = new Popup_CloseWindow_Prompt();
@@ -72,6 +68,8 @@
 					AppData.mainApp.id_viewStack.selectedIndex =  AppData.VIEW_VERIFIED;
 					clearTimeout(timeoutID);
 				}
+				//
+				id_verifing_view.showEff.play();
 			}
 			protected function navigatorcontent_verified_showHandler(event:FlexEvent):void
 			{
@@ -105,7 +103,7 @@
 			<views:EditorView/>
 		</s:NavigatorContent>
 		<s:NavigatorContent width="100%" height="100%" show="navigatorcontent_verifing_showHandler(event)">
-			<views:VerifingView/>
+			<views:VerifingView id="id_verifing_view"/>
 		</s:NavigatorContent>
 		<s:NavigatorContent width="100%" height="100%" show="navigatorcontent_verified_showHandler(event)">
 			<views:VerifiedView id="id_verified_view"/>
