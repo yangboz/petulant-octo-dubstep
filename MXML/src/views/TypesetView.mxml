@@ -17,7 +17,6 @@
 			
 			import views.renderers.ImageRenderer;
 			
-			
 			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				//
@@ -68,9 +67,12 @@
 				if(printOut.start())
 				{
 					//					printOut.addPage();
-					printOut.addPage(this.id_border_container,new Rectangle(id_list_tile.x,id_list_tile.y,id_list_tile.width,id_list_tile.height),option);
-//					printOut.addPage(this.id_border_container,new Rectangle(id_list_tile.x-1,id_list_tile.y-1,id_list_tile.width+2,id_list_tile.height+2),option);
-//						printOut.addPage(this.id_list_tile,new Rectangle(id_image_tile.x-1,id_image_tile.y-1,id_image_tile.width+2,id_image_tile.height+2),option);
+					printOut.addPage(this.id_border_container,new Rectangle(
+						id_list_tile.x-2,
+						id_list_tile.y-2,
+						id_list_tile.width+(requestedColumnCount+1)*2,
+						id_list_tile.height+(requestedRowCount+1)*2
+					),option);
 					printOut.send();
 				}
 			}
@@ -156,7 +158,7 @@
 						  >
 				<s:layout>
 					<s:TileLayout requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
-								  verticalGap="1" horizontalGap="1" 
+								  verticalGap="2" horizontalGap="2" 
 								  />
 				</s:layout>
 			</s:DataGroup>
@@ -165,7 +167,7 @@
 		<s:Button x="383" y="500" label="Back2Verify" skinClass="skins.button.HW_Back2VerifyButton_Skin" click="cancelTypeset_button_clickHandler(event)"/>
 		<s:Button x="505" y="500" label="PRINT_OUT" skinClass="skins.button.HW_PrintButton_Skin" click="printOut_button_clickHandler(event)"/>
 		
-		<view:UITransformTool id="id_uit_tool" target="{id_list_tile}" />
+		<!--<view:UITransformTool id="id_uit_tool" target="{id_list_tile}" />-->
 		
 	</s:BorderContainer>
 </views:ViewBase>
