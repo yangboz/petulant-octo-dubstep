@@ -48,7 +48,7 @@ package model
 		public static var selectedCertSizeIndex:int = -1;
 		public static var selectedTypesetSizeIndex:int = 0;
 		//
-		private static const FILE_NAME_DEFAULT:String = "HP_ID_Print_result_pre";
+		private static const FILE_NAME_DEFAULT:String = "HP_ID_Print_";
 		private static const FILE_ANME_EXT_DEFAULT:String = ".jpg";
 		public static var selectedFileName:String;
 		public static var selectedFileExt:String;
@@ -343,8 +343,8 @@ package model
 			AppData.savedImageBitmapData = bitmapData;
 			//
 			AppData.selectedFileExt = extension;
-			AppData.selectedFileName = AppData.FILE_NAME_DEFAULT.concat(extension);
-//			AppData.selectedFileName = getRandomFileName().concat(extension);//
+//			AppData.selectedFileName = AppData.FILE_NAME_DEFAULT.concat(extension);
+			AppData.selectedFileName = getClassifiedFileName().concat(extension);
 			//Kind of file save options here:
 			AppData.savedImageFie = File.documentsDirectory;
 //			AppData.savedImageFie = File.applicationDirectory;
@@ -400,9 +400,61 @@ package model
 			fileStream.removeEventListener(Event.CLOSE, fileStreamCloseHandler);
 		}  	
 		//
-		private static function getRandomFileName():String
+		private static function getClassifiedFileName():String
 		{
-			return UIDUtil.createUID();
+			var fileName:String = FILE_NAME_DEFAULT;
+			fileName = fileName.concat(getCertPlainText(selectedCertSizeIndex),"_",getPrintPlainText(selectedTypesetSizeIndex),"_");
+			return fileName;
+//			return UIDUtil.createUID();
+		}
+		//
+		private static function getCertPlainText(index:int):String
+		{
+			var certText:String = "???????";
+			switch(index)
+			{
+				case 0:
+					certText = "25x35mm";
+					break;
+				case 1:
+					certText = "22x32mm";
+					break;
+				case 2:
+					certText = "33x48mm";
+					break;
+				case 3:
+					certText = "35x45mm";
+					break;
+				case 4:
+					certText = "35x50mm";
+					break;
+				case 5:
+					certText = "50x50mm";
+					break;
+				default:
+					break;
+			}
+			return certText;
+		}
+		//
+		private static function getPrintPlainText(index:int):String
+		{
+			var printText:String = "???";
+			switch(index)
+			{
+				case 0:
+					printText = "4x6";
+					break;
+				case 1:
+					printText = "5x7";
+					break;
+				case 2:
+					printText = "A4";
+					break;
+				default:
+					break;
+			}
+			return printText;
 		}
 	}
 	

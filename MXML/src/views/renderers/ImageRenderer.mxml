@@ -3,12 +3,13 @@
 				xmlns:s="library://ns.adobe.com/flex/spark"
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
 				autoDrawBackground="false"
-				depth="0" depth.hovered="1">
+			    cacheAsBitmap="false" cachePolicy="off"
+				>
 	
-	<s:states>
+	<!--<s:states>
 		<s:State name="normal" />
 		<s:State name="hovered" />
-	</s:states>
+	</s:states>-->
 	
 	<!--<s:postLayoutTransformOffsets>
 		<mx:TransformOffsets id="offsets" x.hovered="-25" y.hovered="-50" scaleX.hovered="2" scaleY.hovered="2" />
@@ -32,6 +33,7 @@
 			</s:Animate>
 		</mx:Transition>
 	</s:transitions>    -->
-		<s:Image id="image" source="{data.source}" width="{data.width}" height="{data.height}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0"/>
-	
+	<!--<s:Image id="image" horizontalCenter="0" verticalCenter="0"/>-->
+	<s:Image id="image" source="{data.source}" width="{data.width}" height="{data.height}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0"/>
+		 
 </s:ItemRenderer>
