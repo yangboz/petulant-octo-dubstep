@@ -3,7 +3,6 @@
 				xmlns:s="library://ns.adobe.com/flex/spark"
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
 				autoDrawBackground="false"
-			    cacheAsBitmap="false" cachePolicy="off"
 				>
 	
 	<!--<s:states>
@@ -34,6 +33,6 @@
 		</mx:Transition>
 	</s:transitions>    -->
 	<!--<s:Image id="image" horizontalCenter="0" verticalCenter="0"/>-->
-	<s:Image id="image" source="{data.source}" width="{data.width}" height="{data.height}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0"/>
+	<s:Image id="image" source="{data.source}" width="{data.width}" height="{data.height}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0" />
 		 
 </s:ItemRenderer>
