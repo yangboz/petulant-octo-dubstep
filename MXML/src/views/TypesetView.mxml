@@ -48,6 +48,13 @@
 //				flexPrintJob.send();
 				//@see http://www.fising.cn/docs/AS3_Reference/flash/printing/PrintJob.html#includeExamplesSummary
 				var printOut:PrintJob = new PrintJob();
+				printOut.orientation = PrintJobOrientation.LANDSCAPE;
+				//Auto select papersize(Optional)
+//				if (PrintJob.supportsPageSetupDialog)
+//				{
+//					printOut.showPageSetupDialog();
+//				}
+				printOut.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
 //					option.pixelsPerInch = 72;
 				//
 //				this.id_border_container.scaleX = this.id_border_container.scaleY = 1.667;
@@ -59,12 +66,13 @@
 				if(printOut.start())
 				{
 					//					printOut.addPage();
-					printOut.addPage(this.id_border_container,new Rectangle(
+					 /* printOut.addPage(this.id_border_container,new Rectangle(
 						id_list_tile.x-2,
 						id_list_tile.y-2,
 						id_list_tile.width+(requestedColumnCount+1)*2,
 						id_list_tile.height+(requestedRowCount+1)*2
-					),option);
+					),option);  */
+					 printOut.addPage(this.id_list_tile,null,option); 
 					printOut.send();
 				}
 			}
@@ -118,6 +126,10 @@
 				//
 				this.id_list_tile.x = this.getRequiredTillingImageX();
 				this.id_list_tile.y = this.getRequiredTillingImageY();
+//				this.id_border_container.x = this.id_list_tile.x-2;
+//				this.id_border_container.y = this.id_list_tile.y-2;
+//				this.id_border_container.width = this.id_list_tile.width+(requestedColumnCount+1)*2;
+//				this.id_border_container.height = this.id_list_tile.height+(requestedRowCount+1)*2;
 			}
 			//[Bindable] values here
 			[Bindable]
@@ -140,7 +152,8 @@
 									change="id_list_typeset_changeHandler(event)"/>
 		
 		<s:Image id="id_image_frame" left="200" top="40" />
-		<s:BorderContainer id="id_border_container" left="200" top="40" backgroundAlpha="0" borderVisible="false">
+		<!--<s:BorderContainer id="id_border_container" backgroundAlpha="1" borderVisible="false" backgroundColor="0xCCCCCC" 
+						   >-->
 			<!--<s:Image id="id_image_tile" />-->
 			<!--<s:DataGroup  id="id_list_tile"
 						  itemRenderer="views.renderers.ImageRenderer"
@@ -151,16 +164,18 @@
 								  />
 				</s:layout>
 			</s:DataGroup>-->
-			<s:List  id="id_list_tile" borderVisible="false" 
+			<s:List  id="id_list_tile"
 					useVirtualLayout="false"  itemRenderer="views.renderers.ImageRenderer"
 				    verticalScrollPolicy="off" horizontalScrollPolicy="off"
+				    borderVisible="true" borderColor="0xCCCCCC" 
+					contentBackgroundColor="0xCCCCCC" contentBackgroundAlpha="1"
 					>
 				<s:layout>
 					<s:TileLayout requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
 								  verticalGap="2" horizontalGap="2" useVirtualLayout="false"/>
 				</s:layout>
 			</s:List>
-		</s:BorderContainer>
+		<!--</s:BorderContainer>-->
 		
 		<s:Button x="383" y="500" label="Back2Verify" skinClass="skins.button.HW_Back2VerifyButton_Skin" click="cancelTypeset_button_clickHandler(event)"/>
 		<s:Button x="505" y="500" label="PRINT_OUT" skinClass="skins.button.HW_PrintButton_Skin" click="printOut_button_clickHandler(event)"/>

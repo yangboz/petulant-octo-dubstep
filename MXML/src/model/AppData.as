@@ -11,6 +11,7 @@ package model
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.net.dns.AAAARecord;
+	import flash.printing.PaperSize;
 	import flash.utils.ByteArray;
 	
 	import mx.core.FlexGlobals;
@@ -438,19 +439,19 @@ package model
 			return certText;
 		}
 		//
-		private static function getPrintPlainText(index:int):String
+		public static function getPrintPlainText(index:int):String
 		{
-			var printText:String = "???";
+			var printText:String = PaperSize.A4;
 			switch(index)
 			{
 				case 0:
-					printText = "4x6";
+					printText = PaperSize.CHOUKEI4GOU;
 					break;
 				case 1:
-					printText = "5x7";
+					printText = PaperSize.ENV_MONARCH;
 					break;
 				case 2:
-					printText = "A4";
+					printText = PaperSize.A4;
 					break;
 				default:
 					break;
