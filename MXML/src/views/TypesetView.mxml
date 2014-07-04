@@ -10,10 +10,11 @@
 			import mx.collections.ArrayList;
 			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
-			import mx.printing.FlexPrintJob;
 			import mx.printing.FlexPrintJobScaleType;
 			
 			import spark.events.IndexChangeEvent;
+			
+			import utils.FlexPrintJob;
 			
 			import views.renderers.ImageRenderer;
 			//
@@ -34,24 +35,27 @@
 			//@see http://flextutorial.org/2009/06/23/understanding-flex-print-job-from-a-to-z/
 			protected function printOut_button_clickHandler(event:MouseEvent):void
 			{
+				this.id_list_tile.scaleX = 2;
+				this.id_list_tile.scaleY = 2;
 				//
 				var flexPrintJob:FlexPrintJob = new FlexPrintJob();
 				//
 				var option:PrintJobOptions = new PrintJobOptions();
-//				option.pixelsPerInch = 72;
-				/*
+//				flexPrintJob.printJob.pixelsPerInch = 72;
+				flexPrintJob.printJob.orientation = PrintJobOrientation.LANDSCAPE;
+				//PageSize setting manually
+				flexPrintJob.printJob.selectPaperSize(PaperSize.STATEMENT);//4x6
 				 //Auto select papersize(Optional)
 				if (PrintJob.supportsPageSetupDialog)
 				{
-				////					var uiOption:PrintUIOptions = new PrintUIOptions();
+//					////					var uiOption:PrintUIOptions = new PrintUIOptions();
 					flexPrintJob.printJob.showPageSetupDialog();
-				//
-				trace(flexPrintJob.printJob);
+//					//
+					trace(flexPrintJob.printJob);
 				}else
 				{
 					flexPrintJob.printJob.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
 				} 
-				*/
 //				//
 				if(flexPrintJob.start())
 				{
@@ -155,6 +159,8 @@
 //				this.id_list_tile.y = this.getRequiredTillingImageY();
 				this.id_list_tile.x = 200;
 				this.id_list_tile.y = 10;
+				this.id_list_tile.scaleX = 0.5;
+				this.id_list_tile.scaleY = 0.5;
 			}
 			//[Bindable] values here
 			[Bindable]
