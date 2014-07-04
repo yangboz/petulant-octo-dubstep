@@ -50,11 +50,16 @@
 				var printOut:PrintJob = new PrintJob();
 				printOut.orientation = PrintJobOrientation.LANDSCAPE;
 				//Auto select papersize(Optional)
-//				if (PrintJob.supportsPageSetupDialog)
-//				{
-//					printOut.showPageSetupDialog();
-//				}
-				printOut.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
+				if (PrintJob.supportsPageSetupDialog)
+				{
+//					var uiOption:PrintUIOptions = new PrintUIOptions();
+					printOut.showPageSetupDialog();
+					//
+					trace(printOut);
+				}else
+				{
+					printOut.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
+				}
 //					option.pixelsPerInch = 72;
 				//
 //				this.id_border_container.scaleX = this.id_border_container.scaleY = 1.667;
@@ -72,7 +77,7 @@
 						id_list_tile.width+(requestedColumnCount+1)*2,
 						id_list_tile.height+(requestedRowCount+1)*2
 					),option);  */
-					 printOut.addPage(this.id_list_tile,null,option); 
+					printOut.addPage(this.id_list_tile,null,option); 
 					printOut.send();
 				}
 			}
@@ -124,12 +129,10 @@
 //				(this.id_list_tile.layout as TileLayout).requestedColumnCount = requestedColumnCount;
 //				(this.id_list_tile.layout as TileLayout).requestedRowCount = requestedRowCount;
 				//
-				this.id_list_tile.x = this.getRequiredTillingImageX();
-				this.id_list_tile.y = this.getRequiredTillingImageY();
-//				this.id_border_container.x = this.id_list_tile.x-2;
-//				this.id_border_container.y = this.id_list_tile.y-2;
-//				this.id_border_container.width = this.id_list_tile.width+(requestedColumnCount+1)*2;
-//				this.id_border_container.height = this.id_list_tile.height+(requestedRowCount+1)*2;
+//				this.id_list_tile.x = this.getRequiredTillingImageX();
+//				this.id_list_tile.y = this.getRequiredTillingImageY();
+				this.id_list_tile.x = 200;
+				this.id_list_tile.y = 10;
 			}
 			//[Bindable] values here
 			[Bindable]

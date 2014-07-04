@@ -218,9 +218,10 @@ package model
 			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_35x45on4x6.png",
 			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_50X50on4x6.png"
 		];
+		//标准一寸（25x35），小一寸（22x32），大一寸（33x48），小二寸（35x45），标准二寸（35x50），赴美签证（50x50）
 		private static var ARRAY_TYPESET_TILE_SIZE_4x6:Array = [
-			new Point(2,5),new Point(2,5),new Point(2,4),
-			new Point(2,4),new Point(2,4),new Point(1,2)
+			new Point(2,5),new Point(2,5),new Point(1,4),//row,column
+			new Point(2,4),new Point(1,4),new Point(1,2)
 		];
 		//mm*0.3937008*DPI
 		//2.8368
@@ -236,8 +237,9 @@ package model
 			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_35x45on5x7.png",
 			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_50X50on5x7.png"
 		];
+		//标准一寸（25x35），小一寸（22x32），大一寸（33x48），小二寸（35x45），标准二寸（35x50），赴美签证（50x50）
 		private static var ARRAY_TYPESET_TILE_SIZE_5x7:Array = [
-			new Point(3,4),new Point(3,4),new Point(2,4),
+			new Point(3,4),new Point(3,4),new Point(2,4),//row,column
 			new Point(2,4),new Point(2,4),new Point(2,3)
 		];
 		private static var ARRAY_TYPESET_TILE_POINT_5x7:Array = [
@@ -252,9 +254,10 @@ package model
 			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_35x45ona4.png",
 			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_50X50ona4.png"
 		];
+		//标准一寸（25x35），小一寸（22x32），大一寸（33x48），小二寸（35x45），标准二寸（35x50），赴美签证（50x50）
 		private static var ARRAY_TYPESET_TILE_SIZE_A4:Array = [
-			new Point(4,3),new Point(5,2),new Point(3,3),
-			new Point(3,3),new Point(3,3),new Point(2,3)
+			new Point(7,2),new Point(8,2),new Point(5,2),//row,column
+			new Point(5,2),new Point(5,2),new Point(3,2)
 		];
 		private static var ARRAY_TYPESET_TILE_POINT_A4:Array = [
 			{x:95,y:100,w:25*2.8368,h:35*2.8368,r:270},{x:71,y:78,w:22*2.8368,h:32*2.8362,r:270},{x:79,y:94,w:33*2.8368,h:48*2.8368,r:270},

@@ -34,18 +34,8 @@
 			//UITransformTools: @see http://vstyran-flex.ho.ua/
 			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
-				///Display image_editor
-				this.id_image_edit.source = AppData.uploadedImageFile.nativePath;
-				this.id_image_edit.addEventListener(Event.COMPLETE,function(event:Event):void{
-					///Align Image Views.
-					alignImageView();
-					///
-					selectUITransformTool(new MouseEvent(MouseEvent.CLICK));
-				});
 				///Upldate UI images.
 				updateImageViews();
-				//Update tool
-				updateUITransformTools();
 				///
 //				this.addEventListener(MouseEvent.CLICK,deselectUITransformTool);
 			}
@@ -70,6 +60,14 @@
 			
 			public function updateImageViews():void
 			{
+				///Display image_editor
+				this.id_image_edit.source = AppData.uploadedImageFile.nativePath;
+				this.id_image_edit.addEventListener(Event.COMPLETE,function(event:Event):void{
+					///Align Image Views.
+					alignImageView();
+					///
+					selectUITransformTool(new MouseEvent(MouseEvent.CLICK));
+				});
 				//
 				this.id_image_edit.minHeight = this.getRequiredCertPhotoHeight();
 				this.id_image_edit.minWidth = this.getRequiredCertPhotoWidth();
@@ -98,6 +96,8 @@
 //				this.id_image_mask.source = AppData.ARRAY_EDITOR_PHOTO_FRAMES[AppData.selectedCertSizeIndex];
 //				this.id_image_edit.mask = this.id_image_mask;
 				//Alignment
+				//Update tool
+				updateUITransformTools();
 			}
 			
 			protected function alignImageView():void
