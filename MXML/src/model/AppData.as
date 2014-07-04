@@ -448,10 +448,10 @@ package model
 			switch(index)
 			{
 				case 0:
-					printText = PaperSize.CHOUKEI4GOU;
+					printText = PaperSize.ENV_PERSONAL;
 					break;
 				case 1:
-					printText = PaperSize.ENV_MONARCH;
+					printText = PaperSize.ENV_10;
 					break;
 				case 2:
 					printText = PaperSize.A4;

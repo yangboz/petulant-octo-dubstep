@@ -5,6 +5,7 @@
 				xmlns:views="views.*" width="800" height="600" xmlns:components="views.components.*" xmlns:view="com.vstyran.transform.view.*">
 	<fx:Script>
 		<![CDATA[
+			
 			import model.AppData;
 			
 			import mx.collections.ArrayList;
@@ -35,8 +36,6 @@
 			//@see http://flextutorial.org/2009/06/23/understanding-flex-print-job-from-a-to-z/
 			protected function printOut_button_clickHandler(event:MouseEvent):void
 			{
-				this.id_list_tile.scaleX = 2;
-				this.id_list_tile.scaleY = 2;
 				//
 				var flexPrintJob:FlexPrintJob = new FlexPrintJob();
 				//
@@ -44,7 +43,8 @@
 //				flexPrintJob.printJob.pixelsPerInch = 72;
 				flexPrintJob.printJob.orientation = PrintJobOrientation.LANDSCAPE;
 				//PageSize setting manually
-				flexPrintJob.printJob.selectPaperSize(PaperSize.STATEMENT);//4x6
+				flexPrintJob.printJob.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
+				/*
 				 //Auto select papersize(Optional)
 				if (PrintJob.supportsPageSetupDialog)
 				{
@@ -56,11 +56,13 @@
 				{
 					flexPrintJob.printJob.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
 				} 
+				*/
 //				//
 				if(flexPrintJob.start())
 				{
-					flexPrintJob.addObject(this.id_list_tile,FlexPrintJobScaleType.NONE);
-//					flexPrintJob.addPage(this.id_border_container,new Rectangle(id_list_tile.x-1,id_list_tile.y-1,id_list_tile.width+2,id_list_tile.height+2),option);
+//					flexPrintJob.addObject(this.id_list_tile,FlexPrintJobScaleType.NONE);
+					//@see http://stackoverflow.com/questions/1642008/how-to-dynamically-set-print-page-margins-in-flash-cs3
+					flexPrintJob.printJob.addPage(this.id_list_tile,new Rectangle(this.id_list_tile.x,id_list_tile.y-10,this.id_list_tile.width,this.id_list_tile.height),option);
 					flexPrintJob.send();
 				}
 				//@see http://www.fising.cn/docs/AS3_Reference/flash/printing/PrintJob.html#includeExamplesSummary
@@ -155,12 +157,6 @@
 //				(this.id_list_tile.layout as TileLayout).requestedColumnCount = requestedColumnCount;
 //				(this.id_list_tile.layout as TileLayout).requestedRowCount = requestedRowCount;
 				//
-//				this.id_list_tile.x = this.getRequiredTillingImageX();
-//				this.id_list_tile.y = this.getRequiredTillingImageY();
-				this.id_list_tile.x = 200;
-				this.id_list_tile.y = 10;
-				this.id_list_tile.scaleX = 0.5;
-				this.id_list_tile.scaleY = 0.5;
 			}
 			//[Bindable] values here
 			[Bindable]
@@ -191,13 +187,10 @@
 								  />
 				</s:layout>
 			</s:DataGroup>-->
-		<s:List  id="id_list_tile" 
-				useVirtualLayout="false"  itemRenderer="views.renderers.ImageRenderer"
-			    verticalScrollPolicy="off" horizontalScrollPolicy="off"
-			    borderVisible="true" borderColor="0xCCCCCC" 
-				contentBackgroundColor="0xCCCCCC" contentBackgroundAlpha="1"
-			    autoLayout="true"
-				>
+		<s:List id="id_list_tile" left="280" top="130" autoLayout="true" borderColor="0xCCCCCC"
+				borderVisible="true" contentBackgroundAlpha="1" contentBackgroundColor="0xCCCCCC"
+				horizontalScrollPolicy="off" itemRenderer="views.renderers.ImageRenderer"
+				useVirtualLayout="false" verticalScrollPolicy="off">
 			<s:layout>
 				<s:TileLayout requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
 							  verticalGap="2" horizontalGap="2" useVirtualLayout="false" 
