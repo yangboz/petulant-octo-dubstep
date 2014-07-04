@@ -34,35 +34,49 @@
 			//@see http://flextutorial.org/2009/06/23/understanding-flex-print-job-from-a-to-z/
 			protected function printOut_button_clickHandler(event:MouseEvent):void
 			{
-				var option:PrintJobOptions = new PrintJobOptions(true);
-//				option.pixelsPerInch = 72;
 				//
-//				var flexPrintJob:FlexPrintJob = new FlexPrintJob();
-//				this.id_border_container.scaleX = this.id_border_container.scaleY = 1.667;
-//				//
-//				if(flexPrintJob.start())
-//				{
-//					flexPrintJob.addObject(this.id_border_container,FlexPrintJobScaleType.NONE);
-////					flexPrintJob.addPage(this.id_border_container,new Rectangle(id_list_tile.x-1,id_list_tile.y-1,id_list_tile.width+2,id_list_tile.height+2),option);
-//				}
-//				flexPrintJob.send();
-				//@see http://www.fising.cn/docs/AS3_Reference/flash/printing/PrintJob.html#includeExamplesSummary
-				var printOut:PrintJob = new PrintJob();
-				printOut.orientation = PrintJobOrientation.LANDSCAPE;
-				//Auto select papersize(Optional)
+				var flexPrintJob:FlexPrintJob = new FlexPrintJob();
+				//
+				var option:PrintJobOptions = new PrintJobOptions();
+//				option.pixelsPerInch = 72;
+				/*
+				 //Auto select papersize(Optional)
 				if (PrintJob.supportsPageSetupDialog)
 				{
-//					var uiOption:PrintUIOptions = new PrintUIOptions();
-					printOut.showPageSetupDialog();
-					//
-					trace(printOut);
+				////					var uiOption:PrintUIOptions = new PrintUIOptions();
+					flexPrintJob.printJob.showPageSetupDialog();
+				//
+				trace(flexPrintJob.printJob);
 				}else
 				{
-					printOut.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
+					flexPrintJob.printJob.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
+				} 
+				*/
+//				//
+				if(flexPrintJob.start())
+				{
+					flexPrintJob.addObject(this.id_list_tile,FlexPrintJobScaleType.NONE);
+//					flexPrintJob.addPage(this.id_border_container,new Rectangle(id_list_tile.x-1,id_list_tile.y-1,id_list_tile.width+2,id_list_tile.height+2),option);
+					flexPrintJob.send();
 				}
+				//@see http://www.fising.cn/docs/AS3_Reference/flash/printing/PrintJob.html#includeExamplesSummary
+//				var printOut:PrintJob = new PrintJob();
+//				printOut.orientation = PrintJobOrientation.LANDSCAPE;
+				//Auto select papersize(Optional)
+//				if (PrintJob.supportsPageSetupDialog)
+//				{
+////					var uiOption:PrintUIOptions = new PrintUIOptions();
+//					printOut.showPageSetupDialog();
+//					//
+//					trace(printOut);
+//				}else
+//				{
+//					printOut.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
+//				}
 //					option.pixelsPerInch = 72;
 				//
 //				this.id_border_container.scaleX = this.id_border_container.scaleY = 1.667;
+				/*
 				var requiredImageWidth:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w;
 				var requiredImageHeight:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h;
 				this.id_list_tile.width = requestedColumnCount*requiredImageWidth;
@@ -71,15 +85,16 @@
 				if(printOut.start())
 				{
 					//					printOut.addPage();
-					 /* printOut.addPage(this.id_border_container,new Rectangle(
+					printOut.addPage(this.id_border_container,new Rectangle(
 						id_list_tile.x-2,
 						id_list_tile.y-2,
 						id_list_tile.width+(requestedColumnCount+1)*2,
 						id_list_tile.height+(requestedRowCount+1)*2
-					),option);  */
+					),option);
 					printOut.addPage(this.id_list_tile,null,option); 
 					printOut.send();
 				}
+				*/
 			}
 			
 			override public function get viewBackgroundImage():Bitmap
@@ -99,13 +114,18 @@
 			
 			public function updateTileList():void
 			{
+				trace("AppData.selectedTypesetSizeIndex:",AppData.selectedTypesetSizeIndex);
+				trace("AppData.selectedCertSizeIndex:",AppData.selectedCertSizeIndex);
 				//
 				requestedRowCount = AppData.ARRAY_TYPESET_TILE_SIZE[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].x;
 				requestedColumnCount = AppData.ARRAY_TYPESET_TILE_SIZE[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].y;
 				//
-				requiredImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w;
-				requiredImageHeight = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h;
-				requiredImageRotation = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].r;
+				var definedImageWidth:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w;
+				var definedImageHeight:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h;
+				var definedImageRotation:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].r;
+				//
+				var definedImageScaleX:Number = definedImageWidth/this.getRequiredCertPhotoWidth();
+				var definedImageScaleY:Number = definedImageHeight/this.getRequiredCertPhotoHeight();
 				//DataProvider
 				var imageArray:Array = [];
 //				this.id_list_tile.dataProvider = new ArrayList(imageArray);
@@ -116,9 +136,11 @@
 					{
 						var data:Object = {
 								source:AppData.savedImageFie.nativePath,
-								width:requiredImageWidth,
-								height:requiredImageHeight,
-								rotation:requiredImageRotation
+//								width:requiredImageWidth,
+//								height:requiredImageHeight,
+								scaleX:definedImageScaleX,
+								scaleY:definedImageScaleY,
+								rotation:definedImageRotation
 						}
 						imageArray.push(data);
 					}
@@ -139,10 +161,6 @@
 			private var requestedRowCount:int;
 			[Bindable]
 			private var requestedColumnCount:int;
-//			x="{id_image_tile.x}" y="{id_image_tile.y}"
-			private var requiredImageWidth:int;
-			private var requiredImageHeight:int;
-			private var requiredImageRotation:int;
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -167,18 +185,21 @@
 								  />
 				</s:layout>
 			</s:DataGroup>-->
-			<s:List  id="id_list_tile"
-					useVirtualLayout="false"  itemRenderer="views.renderers.ImageRenderer"
-				    verticalScrollPolicy="off" horizontalScrollPolicy="off"
-				    borderVisible="true" borderColor="0xCCCCCC" 
-					contentBackgroundColor="0xCCCCCC" contentBackgroundAlpha="1"
-					>
-				<s:layout>
-					<s:TileLayout requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
-								  verticalGap="2" horizontalGap="2" useVirtualLayout="false"/>
-				</s:layout>
-			</s:List>
-		<!--</s:BorderContainer>-->
+		<s:List  id="id_list_tile" 
+				useVirtualLayout="false"  itemRenderer="views.renderers.ImageRenderer"
+			    verticalScrollPolicy="off" horizontalScrollPolicy="off"
+			    borderVisible="true" borderColor="0xCCCCCC" 
+				contentBackgroundColor="0xCCCCCC" contentBackgroundAlpha="1"
+			    autoLayout="true"
+				>
+			<s:layout>
+				<s:TileLayout requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
+							  verticalGap="2" horizontalGap="2" useVirtualLayout="false" 
+							  paddingLeft="2" paddingBottom="2" paddingRight="2" paddingTop="2"
+							  orientation="columns"
+							  />
+			</s:layout>
+		</s:List>
 		
 		<s:Button x="383" y="500" label="Back2Verify" skinClass="skins.button.HW_Back2VerifyButton_Skin" click="cancelTypeset_button_clickHandler(event)"/>
 		<s:Button x="505" y="500" label="PRINT_OUT" skinClass="skins.button.HW_PrintButton_Skin" click="printOut_button_clickHandler(event)"/>

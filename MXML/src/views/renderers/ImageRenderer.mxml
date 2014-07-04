@@ -33,6 +33,6 @@
 		</mx:Transition>
 	</s:transitions>    -->
 	<!--<s:Image id="image" horizontalCenter="0" verticalCenter="0"/>-->
-	<s:Image id="image" source="{data.source}" width="{data.width}" height="{data.height}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0" />
+	<s:Image id="image" source="{data.source}" scaleX="{data.scaleX}" scaleY="{data.scaleY}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0" />
 		 
 </s:ItemRenderer>

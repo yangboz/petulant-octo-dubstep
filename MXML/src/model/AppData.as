@@ -227,7 +227,7 @@ package model
 		//2.8368
 		private static var ARRAY_TYPESET_TILE_POINT_4x6:Array = [
 			{x:101,y:128,w:25*2.8368,h:35*2.8368,r:0},{x:126,y:125,w:22*2.8368,h:32*2.8362,r:0},{x:96,y:96,w:33*2.8368,h:48*2.8368,r:0},
-			{x:97,y:108,w:30*2.8368,h:45*2.8368,r:0},{x:82,y:91,w:35*2.8368,h:50*2.8368,r:0},{x:143,y:158,w:50*2.8368,h:50*2.8368,r:0},
+			{x:97,y:108,w:35*2.8368,h:45*2.8368,r:0},{x:82,y:91,w:35*2.8368,h:50*2.8368,r:0},{x:143,y:158,w:50*2.8368,h:50*2.8368,r:0},
 		];
 		private static var ARRAY_TYPESET_TILE_IMAGE_5x7:Array = [
 			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_25x35on5x7.png",
@@ -244,7 +244,7 @@ package model
 		];
 		private static var ARRAY_TYPESET_TILE_POINT_5x7:Array = [
 			{x:110,y:86,w:25*2.8368,h:35*2.8368,r:0},{x:100,y:107,w:22*2.8368,h:32*2.8362,r:0},{x:100,y:95,w:33*2.8368,h:48*2.8368,r:0},
-			{x:120,y:108,w:30*2.8368,h:45*2.8368,r:0},{x:90,y:91,w:35*2.8368,h:50*2.8368,r:0},{x:80,y:93,w:50*2.8368,h:50*2.8368,r:0},
+			{x:120,y:108,w:35*2.8368,h:45*2.8368,r:0},{x:90,y:91,w:35*2.8368,h:50*2.8368,r:0},{x:80,y:93,w:50*2.8368,h:50*2.8368,r:0},
 		];
 		private static var ARRAY_TYPESET_TILE_IMAGE_A4:Array = [
 			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_25x35ona4.png",
@@ -261,7 +261,7 @@ package model
 		];
 		private static var ARRAY_TYPESET_TILE_POINT_A4:Array = [
 			{x:95,y:100,w:25*2.8368,h:35*2.8368,r:270},{x:71,y:78,w:22*2.8368,h:32*2.8362,r:270},{x:79,y:94,w:33*2.8368,h:48*2.8368,r:270},
-			{x:95,y:100,w:30*2.8368,h:45*2.8368,r:270},{x:81,y:83,w:35*2.8368,h:50*2.8368,r:270},{x:80,y:93,w:50*2.8368,h:50*2.8368,r:270},
+			{x:95,y:100,w:35*2.8368,h:45*2.8368,r:270},{x:81,y:83,w:35*2.8368,h:50*2.8368,r:270},{x:80,y:93,w:50*2.8368,h:50*2.8368,r:270},
 		];
 		//
 		public static var ARRAY_TYPESET_TILE_IMGS:Array = [
