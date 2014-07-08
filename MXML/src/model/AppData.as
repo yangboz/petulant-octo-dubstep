@@ -72,6 +72,7 @@ package model
 		//mm*0.3937008*DPI
 		//Inch to pixel
 		private static const INCH_2_PIXEL:Number = 7.2;
+		public static const PIXEL_2_PRINT:Number = 2.8368;
 		//
 		public static const VIEW_INTRO:int = 0;
 		public static const VIEW_UPLOAD:int = 1;
@@ -205,6 +206,7 @@ package model
 		public static const ARRAY_SIZE_TYPESET:Array = [
 			new Point(220, 320), new Point(480, 330), new Point(480, 330)
 		];
+		//
 		public static var ARRAY_TYPESET_FRAMES:Array = [
 			"assets/images/photo_on_paper/pattern_photo_on_paper_4x6.png",
 			"assets/images/photo_on_paper/pattern_photo_on_paper_5x7.png",
@@ -214,27 +216,29 @@ package model
 			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_25x35on4x6.png",
 			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_22x32on4x6.png",
 			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_33x48on4x6.png",
-			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_35x50on4x6.png",
 			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_35x45on4x6.png",
+			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_35x50on4x6.png",
 			"assets/images/photo_on_paper/4x6/pattern_photo_on_paper_50X50on4x6.png"
 		];
 		//标准一寸（25x35），小一寸（22x32），大一寸（33x48），小二寸（35x45），标准二寸（35x50），赴美签证（50x50）
 		private static var ARRAY_TYPESET_TILE_SIZE_4x6:Array = [
 			new Point(2,5),new Point(2,5),new Point(1,4),//row,column
-			new Point(2,4),new Point(1,4),new Point(1,2)
+			new Point(2,4),new Point(2,4),new Point(1,2)
 		];
 		//mm*0.3937008*DPI
 		//2.8368
 		private static var ARRAY_TYPESET_TILE_POINT_4x6:Array = [
-			{x:101,y:128,w:25*2.8368,h:35*2.8368,r:0},{x:126,y:125,w:22*2.8368,h:32*2.8362,r:0},{x:96,y:96,w:33*2.8368,h:48*2.8368,r:0},
-			{x:97,y:108,w:35*2.8368,h:45*2.8368,r:0},{x:82,y:91,w:35*2.8368,h:50*2.8368,r:0},{x:143,y:158,w:50*2.8368,h:50*2.8368,r:0},
+			{x:300,y:166,w:75,h:105,w_:25,h_:35,r:0},{x:325,y:176,w:66,h:96,w_:22,h_:32,r:0},{x:292,y:144,w:99,h:150,w_:33,h_:48,r:0},
+			{x:281,y:138,w:105,h:135,w_:35,h_:45,r:0},{x:282,y:142,w:96,h:135,w_:35,h_:50,r:0},{x:340,y:197,w:150,h:150,w_:50,h_:50,r:0},
+//			{x:101,y:128,w:25*2.8368,h:35*2.8368,r:0},{x:126,y:125,w:22*2.8368,h:32*2.8362,r:0},{x:96,y:96,w:33*2.8368,h:48*2.8368,r:0},
+//			{x:97,y:108,w:35*2.8368,h:45*2.8368,r:0},{x:82,y:91,w:35*2.8368,h:50*2.8368,r:0},{x:143,y:158,w:50*2.8368,h:50*2.8368,r:0},
 		];
 		private static var ARRAY_TYPESET_TILE_IMAGE_5x7:Array = [
 			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_25x35on5x7.png",
 			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_22x32on5x7.png",
 			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_33x48on5x7.png",
-			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_35x50on5x7.png",
 			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_35x45on5x7.png",
+			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_35x50on5x7.png",
 			"assets/images/photo_on_paper/5x7/pattern_photo_on_paper_50X50on5x7.png"
 		];
 		//标准一寸（25x35），小一寸（22x32），大一寸（33x48），小二寸（35x45），标准二寸（35x50），赴美签证（50x50）
@@ -243,15 +247,17 @@ package model
 			new Point(2,4),new Point(2,4),new Point(2,3)
 		];
 		private static var ARRAY_TYPESET_TILE_POINT_5x7:Array = [
-			{x:110,y:86,w:25*2.8368,h:35*2.8368,r:0},{x:100,y:107,w:22*2.8368,h:32*2.8362,r:0},{x:100,y:95,w:33*2.8368,h:48*2.8368,r:0},
-			{x:120,y:108,w:35*2.8368,h:45*2.8368,r:0},{x:90,y:91,w:35*2.8368,h:50*2.8368,r:0},{x:80,y:93,w:50*2.8368,h:50*2.8368,r:0},
+			{x:297,y:133,w:65,h:91,w_:25,h_:35,r:0},{x:299,y:147,w:57,h:83,w_:22,h_:32,r:0},{x:318,y:146,w:86,h:125,w_:33,h_:48,r:0},
+			{x:308,y:154,w:91,h:117,w_:35,h_:45,r:0},{x:308,y:142,w:91,h:130,w_:35,h_:50,r:0},{x:296,y:141,w:130,h:130,w_:50,h_:50,r:0},
+//			{x:110,y:86,w:25*2.8368,h:35*2.8368,r:0},{x:100,y:107,w:22*2.8368,h:32*2.8362,r:0},{x:100,y:95,w:33*2.8368,h:48*2.8368,r:0},
+//			{x:120,y:108,w:35*2.8368,h:45*2.8368,r:0},{x:90,y:91,w:35*2.8368,h:50*2.8368,r:0},{x:80,y:93,w:50*2.8368,h:50*2.8368,r:0},
 		];
 		private static var ARRAY_TYPESET_TILE_IMAGE_A4:Array = [
 			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_25x35ona4.png",
 			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_22x32ona4.png",
 			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_33x48ona4.png",
-			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_35x50ona4.png",
 			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_35x45ona4.png",
+			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_35x50ona4.png",
 			"assets/images/photo_on_paper/A4/pattern_photo_on_paper_50X50ona4.png"
 		];
 		//标准一寸（25x35），小一寸（22x32），大一寸（33x48），小二寸（35x45），标准二寸（35x50），赴美签证（50x50）
@@ -260,8 +266,10 @@ package model
 			new Point(5,2),new Point(5,2),new Point(3,2)
 		];
 		private static var ARRAY_TYPESET_TILE_POINT_A4:Array = [
-			{x:95,y:100,w:25*2.8368,h:35*2.8368,r:270},{x:71,y:78,w:22*2.8368,h:32*2.8362,r:270},{x:79,y:94,w:33*2.8368,h:48*2.8368,r:270},
-			{x:95,y:100,w:35*2.8368,h:45*2.8368,r:270},{x:81,y:83,w:35*2.8368,h:50*2.8368,r:270},{x:80,y:93,w:50*2.8368,h:50*2.8368,r:270},
+			{x:267,y:120,w:42,h:58,w_:25,h_:35,r:270},{x:266,y:125,w:36,h:53,w_:22,h_:32,r:270},{x:268,y:130,w:55,h:80,w_:33,h_:48,r:270},
+			{x:267,y:123,w:58,h:75,w_:35,h_:45,r:270},{x:269,y:126,w:58,h:83,w_:35,h_:50,r:270},{x:269,y:146,w:83,h:83,w_:50,h_:50,r:270},
+//			{x:95,y:100,w:25*2.8368,h:35*2.8368,r:270},{x:71,y:78,w:22*2.8368,h:32*2.8362,r:270},{x:79,y:94,w:33*2.8368,h:48*2.8368,r:270},
+//			{x:95,y:100,w:35*2.8368,h:45*2.8368,r:270},{x:81,y:83,w:35*2.8368,h:50*2.8368,r:270},{x:80,y:93,w:50*2.8368,h:50*2.8368,r:270},
 		];
 		//
 		public static var ARRAY_TYPESET_TILE_IMGS:Array = [

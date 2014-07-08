@@ -2,9 +2,10 @@
 <views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				xmlns:views="views.*" width="800" height="600" xmlns:components="views.components.*" xmlns:view="com.vstyran.transform.view.*">
+				xmlns:views="views.*" width="800" height="600" xmlns:components="views.components.*" xmlns:view="com.vstyran.transform.view.*" xmlns:utils="utils.*">
 	<fx:Script>
 		<![CDATA[
+			import flash.utils.setTimeout;
 			
 			import model.AppData;
 			
@@ -36,71 +37,12 @@
 			//@see http://flextutorial.org/2009/06/23/understanding-flex-print-job-from-a-to-z/
 			protected function printOut_button_clickHandler(event:MouseEvent):void
 			{
-				//
-				var flexPrintJob:FlexPrintJob = new FlexPrintJob();
-				//
-				var option:PrintJobOptions = new PrintJobOptions();
-//				flexPrintJob.printJob.pixelsPerInch = 72;
-				flexPrintJob.printJob.orientation = PrintJobOrientation.LANDSCAPE;
-				//PageSize setting manually
-				flexPrintJob.printJob.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
-				/*
-				 //Auto select papersize(Optional)
-				if (PrintJob.supportsPageSetupDialog)
-				{
-//					////					var uiOption:PrintUIOptions = new PrintUIOptions();
-					flexPrintJob.printJob.showPageSetupDialog();
-//					//
-					trace(flexPrintJob.printJob);
-				}else
-				{
-					flexPrintJob.printJob.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
-				} 
-				*/
-//				//
-				if(flexPrintJob.start())
-				{
-//					flexPrintJob.addObject(this.id_list_tile,FlexPrintJobScaleType.NONE);
-					//@see http://stackoverflow.com/questions/1642008/how-to-dynamically-set-print-page-margins-in-flash-cs3
-					flexPrintJob.printJob.addPage(this.id_list_tile,new Rectangle(this.id_list_tile.x,id_list_tile.y-10,this.id_list_tile.width,this.id_list_tile.height),option);
-					flexPrintJob.send();
-				}
-				//@see http://www.fising.cn/docs/AS3_Reference/flash/printing/PrintJob.html#includeExamplesSummary
-//				var printOut:PrintJob = new PrintJob();
-//				printOut.orientation = PrintJobOrientation.LANDSCAPE;
-				//Auto select papersize(Optional)
-//				if (PrintJob.supportsPageSetupDialog)
-//				{
-////					var uiOption:PrintUIOptions = new PrintUIOptions();
-//					printOut.showPageSetupDialog();
-//					//
-//					trace(printOut);
-//				}else
-//				{
-//					printOut.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
-//				}
-//					option.pixelsPerInch = 72;
-				//
-//				this.id_border_container.scaleX = this.id_border_container.scaleY = 1.667;
-				/*
-				var requiredImageWidth:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w;
-				var requiredImageHeight:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h;
-				this.id_list_tile.width = requestedColumnCount*requiredImageWidth;
-				this.id_list_tile.height = requestedRowCount*requiredImageHeight;
-				//
-				if(printOut.start())
-				{
-					//					printOut.addPage();
-					printOut.addPage(this.id_border_container,new Rectangle(
-						id_list_tile.x-2,
-						id_list_tile.y-2,
-						id_list_tile.width+(requestedColumnCount+1)*2,
-						id_list_tile.height+(requestedRowCount+1)*2
-					),option);
-					printOut.addPage(this.id_list_tile,null,option); 
-					printOut.send();
-				}
-				*/
+//				this.id_resize_normal.play();
+				this.updateTileList(false);//Expand to print.
+				//Set timeout
+				flash.utils.setTimeout(printOut,1000);
+//				this.id_list_tile_real.scaleX = 0.5;
+//				this.id_list_tile_real.scaleY = 0.5;
 			}
 			
 			override public function get viewBackgroundImage():Bitmap
@@ -112,13 +54,14 @@
 			{
 				//
 				trace("AppData.selectedTypesetSizeIndex:",AppData.selectedTypesetSizeIndex);
-				id_image_frame.source = AppData.ARRAY_TYPESET_FRAMES[AppData.selectedTypesetSizeIndex];
+				this.id_image_frame.source = AppData.ARRAY_TYPESET_FRAMES[AppData.selectedTypesetSizeIndex];
+//				this.id_border_container.setStyle("backgroundImage",AppData.ARRAY_TYPESET_FRAMES[AppData.selectedTypesetSizeIndex]);
 				trace("AppData.selectedCertSizeIndex:",AppData.selectedCertSizeIndex);
-//				id_image_tile.source = AppData.ARRAY_TYPESET_TILE_IMGS[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex];
-//				trace("id_image_tile.source:",id_image_tile.source);
+				this.id_image_tile.source = AppData.ARRAY_TYPESET_TILE_IMGS[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex];
+//				trace("this.id_image_tile.source:",id_image_tile.source);
 			}
 			
-			public function updateTileList():void
+			public function updateTileList(resizeForDisplay:Boolean=true):void
 			{
 				trace("AppData.selectedTypesetSizeIndex:",AppData.selectedTypesetSizeIndex);
 				trace("AppData.selectedCertSizeIndex:",AppData.selectedCertSizeIndex);
@@ -126,8 +69,17 @@
 				requestedRowCount = AppData.ARRAY_TYPESET_TILE_SIZE[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].x;
 				requestedColumnCount = AppData.ARRAY_TYPESET_TILE_SIZE[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].y;
 				//
-				var definedImageWidth:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w;
-				var definedImageHeight:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h;
+				var definedImageWidth:Number;
+				var definedImageHeight:Number;
+				if(resizeForDisplay)
+				{
+					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w;
+					definedImageHeight = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h;
+				}else
+				{
+					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w_ *AppData.PIXEL_2_PRINT;
+					definedImageHeight = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h_*AppData.PIXEL_2_PRINT;
+				}
 				var definedImageRotation:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].r;
 				//
 				var definedImageScaleX:Number = definedImageWidth/this.getRequiredCertPhotoWidth();
@@ -142,8 +94,8 @@
 					{
 						var data:Object = {
 								source:AppData.savedImageFie.nativePath,
-//								width:requiredImageWidth,
-//								height:requiredImageHeight,
+//								width:definedImageWidth,
+//								height:definedImageHeight,
 								scaleX:definedImageScaleX,
 								scaleY:definedImageScaleY,
 								rotation:definedImageRotation
@@ -152,21 +104,68 @@
 					}
 				}
 				this.id_list_tile.dataProvider = new ArrayList(imageArray);
-				//
-//				//Coloumn,Row 
-//				(this.id_list_tile.layout as TileLayout).requestedColumnCount = requestedColumnCount;
-//				(this.id_list_tile.layout as TileLayout).requestedRowCount = requestedRowCount;
-				//
+				this.id_list_tile.x = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].x;
+				this.id_list_tile.y = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].y;
+//				this.id_list_tile.callLater(function():void{
+//					id_list_tile.x = id_image_tile.x;
+//					id_list_tile.y = id_image_tile.y;
+//				});
 			}
 			//[Bindable] values here
 			[Bindable]
 			private var requestedRowCount:int;
 			[Bindable]
 			private var requestedColumnCount:int;
+			//
+			private function printOut():void
+			{
+				//
+				var flexPrintJob:FlexPrintJob = new FlexPrintJob();
+				//
+				var option:PrintJobOptions = new PrintJobOptions();
+				//				option.pixelsPerInch = 72;
+				flexPrintJob.printJob.orientation = PrintJobOrientation.LANDSCAPE;
+				//PageSize setting manually
+				flexPrintJob.printJob.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
+				/*
+				//Auto select papersize(Optional)
+				if (PrintJob.supportsPageSetupDialog)
+				{
+				//					////					var uiOption:PrintUIOptions = new PrintUIOptions();
+					flexPrintJob.printJob.showPageSetupDialog();
+				//					//
+					trace(flexPrintJob.printJob);
+				}else
+				{
+					flexPrintJob.printJob.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
+				} 
+				*/
+				//
+				var printRect:Rectangle = new Rectangle(0,0,this.id_list_tile.width,this.id_list_tile.height);
+				//				//
+				if(flexPrintJob.start())
+				{
+					//					flexPrintJob.addObject(this.id_list_tile,FlexPrintJobScaleType.NONE);
+					//@see http://stackoverflow.com/questions/1642008/how-to-dynamically-set-print-page-margins-in-flash-cs3
+					flexPrintJob.printJob.addPage(this.id_list_tile,printRect,option);
+					//					flexPrintJob.addObject(this.id_list_tile_real,FlexPrintJobScaleType.NONE);
+					flexPrintJob.send();
+				}
+				//Rollback to display
+				this.updateTileList();
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Parallel id="id_resize_small">
+			<s:Scale scaleYTo="0.5" scaleXTo="0.5" target="{this.id_list_tile}" autoCenterTransform="true"/>
+			<!--<s:Resize widthTo="200" heightTo="200" target="{this.id_list_tile_real}"/>-->
+		</s:Parallel>
+		<s:Parallel id="id_resize_normal">
+			<!--<s:Resize widthTo="400" heightTo="400" target="{this.id_list_tile_real}"/>-->
+			<s:Scale scaleYTo="1" scaleXTo="1" target="{this.id_list_tile}" autoCenterTransform="true" />
+		</s:Parallel>
 	</fx:Declarations>
 	<s:BorderContainer width="100%" height="100%" contentBackgroundAlpha="0"
 					   backgroundImage="{viewBackgroundImage}"
@@ -175,8 +174,7 @@
 									change="id_list_typeset_changeHandler(event)"/>
 		
 		<s:Image id="id_image_frame" left="200" top="40" />
-		<!--<s:BorderContainer id="id_border_container" backgroundAlpha="1" borderVisible="false" backgroundColor="0xCCCCCC" 
-						   >-->
+		<!--<s:BorderContainer id="id_border_container">-->
 			<!--<s:Image id="id_image_tile" />-->
 			<!--<s:DataGroup  id="id_list_tile"
 						  itemRenderer="views.renderers.ImageRenderer"
@@ -187,18 +185,24 @@
 								  />
 				</s:layout>
 			</s:DataGroup>-->
-		<s:List id="id_list_tile" left="280" top="130" autoLayout="true" borderColor="0xCCCCCC"
-				borderVisible="true" contentBackgroundAlpha="1" contentBackgroundColor="0xCCCCCC"
+		<s:Image id="id_image_tile" left="200" top="40"/>
+		<s:List id="id_list_tile" autoLayout="true" borderColor="#CCCCCC" borderAlpha="1"
+				contentBackgroundAlpha="1" contentBackgroundColor="#CCCCCC"
 				horizontalScrollPolicy="off" itemRenderer="views.renderers.ImageRenderer"
-				useVirtualLayout="false" verticalScrollPolicy="off">
+				useVirtualLayout="false" verticalScrollPolicy="off"
+		>
 			<s:layout>
-				<s:TileLayout requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
+				<!--<s:TileLayout-->
+				<utils:HW_TileLayout
+				 requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
 							  verticalGap="2" horizontalGap="2" useVirtualLayout="false" 
 							  paddingLeft="2" paddingBottom="2" paddingRight="2" paddingTop="2"
 							  orientation="columns"
 							  />
 			</s:layout>
 		</s:List>
+		
+		<!--</s:BorderContainer>-->
 		
 		<s:Button x="383" y="500" label="Back2Verify" skinClass="skins.button.HW_Back2VerifyButton_Skin" click="cancelTypeset_button_clickHandler(event)"/>
 		<s:Button x="505" y="500" label="PRINT_OUT" skinClass="skins.button.HW_PrintButton_Skin" click="printOut_button_clickHandler(event)"/>

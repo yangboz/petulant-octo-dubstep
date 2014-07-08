@@ -4,7 +4,7 @@
 		xmlns:mx="library://ns.adobe.com/flex/mx" 
 		height="210"
 		borderVisible="false"
-		itemRenderer="skins.HW_ListSkin_CertSize" useVirtualLayout="false"
+		itemRenderer="skins.HW_ListItemRendererSkin_CertSize" useVirtualLayout="false"
 		selectedIndex="{AppData.selectedCertSizeIndex}"
 		left="3" top="102"
 		>
