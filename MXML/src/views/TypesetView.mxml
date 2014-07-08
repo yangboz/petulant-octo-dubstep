@@ -66,8 +66,12 @@
 				trace("AppData.selectedTypesetSizeIndex:",AppData.selectedTypesetSizeIndex);
 				trace("AppData.selectedCertSizeIndex:",AppData.selectedCertSizeIndex);
 				//
-				requestedRowCount = AppData.ARRAY_TYPESET_TILE_SIZE[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].x;
-				requestedColumnCount = AppData.ARRAY_TYPESET_TILE_SIZE[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].y;
+				requestedRowCount = AppData.ARRAY_TYPESET_TILE_SIZE[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].row;
+				requestedColumnCount = AppData.ARRAY_TYPESET_TILE_SIZE[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].col;
+				requestedShiftIndex = AppData.ARRAY_TYPESET_TILE_SIZE[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].shiftIndex;
+				trace("requestedShiftIndex:",requestedShiftIndex);
+				requestedOffsetX = AppData.ARRAY_TYPESET_TILE_SIZE[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].offsetX;
+				requestedOffsetY = AppData.ARRAY_TYPESET_TILE_SIZE[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].offsetY;
 				//
 				var definedImageWidth:Number;
 				var definedImageHeight:Number;
@@ -92,6 +96,11 @@
 				{
 					for(var j:int=0;j<requestedColumnCount;j++)
 					{
+						var index:int = i*requestedRowCount+j;
+						//TODO:rotate those special items
+//						if( requestedShiftIndex.indexOf(index)!=-1){
+//							definedImageRotation = 270;
+//						}
 						var data:Object = {
 								source:AppData.savedImageFie.nativePath,
 //								width:definedImageWidth,
@@ -116,6 +125,10 @@
 			private var requestedRowCount:int;
 			[Bindable]
 			private var requestedColumnCount:int;
+			//Display excption identify value here.
+			private var requestedShiftIndex:Array;//For shift index of image item rotation.
+			private var requestedOffsetX:Number;//For print position offsetX
+			private var requestedOffsetY:Number;//For print position offsetY
 			//
 			private function printOut():void
 			{
@@ -141,7 +154,7 @@
 				} 
 				*/
 				//
-				var printRect:Rectangle = new Rectangle(0,0,this.id_list_tile.width,this.id_list_tile.height);
+				var printRect:Rectangle = new Rectangle(requestedOffsetX,requestedOffsetY,this.id_list_tile.width,this.id_list_tile.height);
 				//				//
 				if(flexPrintJob.start())
 				{

@@ -222,8 +222,14 @@ package model
 		];
 		//标准一寸（25x35），小一寸（22x32），大一寸（33x48），小二寸（35x45），标准二寸（35x50），赴美签证（50x50）
 		private static var ARRAY_TYPESET_TILE_SIZE_4x6:Array = [
-			new Point(2,5),new Point(2,5),new Point(1,4),//row,column
-			new Point(2,4),new Point(2,4),new Point(1,2)
+			{row:2,col:5,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:2,col:5,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:1,col:3,offsetX:0,offsetY:0,shiftIndex:[4,5]},//Modified
+			{row:2,col:3,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:1,col:3,offsetX:0,offsetY:0,shiftIndex:[4,5]},//Modified
+			{row:1,col:2,offsetX:0,offsetY:0,shiftIndex:[]}
+//			new Point(2,5),new Point(2,5),new Point(1,4),//row,column
+//			new Point(2,4),new Point(2,4),new Point(1,2)
 		];
 		//mm*0.3937008*DPI
 		//2.8368
@@ -243,8 +249,14 @@ package model
 		];
 		//标准一寸（25x35），小一寸（22x32），大一寸（33x48），小二寸（35x45），标准二寸（35x50），赴美签证（50x50）
 		private static var ARRAY_TYPESET_TILE_SIZE_5x7:Array = [
-			new Point(3,4),new Point(3,4),new Point(2,4),//row,column
-			new Point(2,4),new Point(2,4),new Point(2,3)
+			{row:2,col:5,offsetX:0,offsetY:0,shiftIndex:[]},//Modified
+			{row:3,col:4,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:2,col:4,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:2,col:4,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:1,col:4,offsetX:0,offsetY:0,shiftIndex:[]},//Modified
+			{row:1,col:3,offsetX:0,offsetY:0,shiftIndex:[]}//Modified
+//			new Point(3,4),new Point(3,4),new Point(2,4),//row,column
+//			new Point(2,4),new Point(2,4),new Point(2,3)
 		];
 		private static var ARRAY_TYPESET_TILE_POINT_5x7:Array = [
 			{x:297,y:133,w:65,h:91,w_:25,h_:35,r:0},{x:299,y:147,w:57,h:83,w_:22,h_:32,r:0},{x:318,y:146,w:86,h:125,w_:33,h_:48,r:0},
@@ -262,8 +274,14 @@ package model
 		];
 		//标准一寸（25x35），小一寸（22x32），大一寸（33x48），小二寸（35x45），标准二寸（35x50），赴美签证（50x50）
 		private static var ARRAY_TYPESET_TILE_SIZE_A4:Array = [
-			new Point(7,2),new Point(8,2),new Point(5,2),//row,column
-			new Point(5,2),new Point(5,2),new Point(3,2)
+			{row:7,col:2,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:8,col:2,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:5,col:2,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:5,col:2,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:5,col:2,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:3,col:2,offsetX:0,offsetY:0,shiftIndex:[]}
+//			new Point(7,2),new Point(8,2),new Point(5,2),//row,column
+//			new Point(5,2),new Point(5,2),new Point(3,2)
 		];
 		private static var ARRAY_TYPESET_TILE_POINT_A4:Array = [
 			{x:267,y:120,w:42,h:58,w_:25,h_:35,r:270},{x:266,y:125,w:36,h:53,w_:22,h_:32,r:270},{x:268,y:130,w:55,h:80,w_:33,h_:48,r:270},
@@ -456,10 +474,10 @@ package model
 			switch(index)
 			{
 				case 0:
-					printText = PaperSize.ENV_PERSONAL;
+					printText = PaperSize.ENV_MONARCH;//PaperSize.ENV_PERSONAL
 					break;
 				case 1:
-					printText = PaperSize.ENV_10;
+					printText = PaperSize.ENV_10;//PaperSize.ENV_10
 					break;
 				case 2:
 					printText = PaperSize.A4;
