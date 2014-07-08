@@ -56,7 +56,7 @@
 
 		<!-- Whether the window is transparent. Only applicable when systemChrome is none. Optional. Default false. -->
 		<transparent>true</transparent>
-
+		
 		<!-- Whether the window is initially visible. Optional. Default false. -->
 		<!-- <visible>false</visible> -->
 

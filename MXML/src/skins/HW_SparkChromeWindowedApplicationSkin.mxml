@@ -170,17 +170,17 @@
     
     <!-- background of border for when it is alpha=0.5 -->
     <!--- Defines the background color of the border. -->
-    <s:Group id="borderBgFill" left="0" right="0" top="0" bottom="0" visible="false" includeInLayout="false">
+    <s:Group id="borderBgFill" left="0" right="0" top="0" bottom="0">
         <s:Rect left="0" right="0" top="0" bottom="0">
             <s:stroke>
-                <s:SolidColorStroke weight="1" color="0xFFFFFF" />
+                <s:SolidColorStroke weight=".5" color="0xCCCCCC"/>
             </s:stroke>
         </s:Rect>
     </s:Group>
     <!-- the border -->
-    <s:Rect left="0" right="0" top="0" bottom="0" >
+    <s:Rect left="0" right="0" top="0" bottom="0">
         <s:stroke>
-            <s:SolidColorStroke alpha.inactiveGroup="0.5" weight="10" color="0xA6A6A6" />
+			<s:SolidColorStroke alpha=".5" weight="0.5" color="0xCCCCCC" />
         </s:stroke>
     </s:Rect>
     
