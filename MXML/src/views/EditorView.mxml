@@ -372,7 +372,7 @@
 		<s:Image id="id_image_instruction" x="200" y="60"/>
 		
 		<s:Group id="id_group" clipAndEnableScrolling="true">
-			<s:Image id="id_image_edit" />
+			<s:Image id="id_image_edit"/>
 		</s:Group>
 		<s:Image id="id_image_frame" enabled="false"/>
 		<s:Image id="id_image_guide" enabled="false"/>
@@ -382,6 +382,7 @@
 							  transformationComplete="tool_transformationCompleteHandler(event)"
 							  guidelinesUpdate="tool_guidelinesUpdateHandler(event)"
 							  transformation="tool_transformationHandler(event)"
+							  maintainProjectionCenter="true" maintainMoveShortcuts="true"
 							  >
 			<!--<view:bounds>
 				<model:Bounds x="{id_image_frame.x-50}" y="{id_image_frame.y-50}" width="300" height="300"/>
