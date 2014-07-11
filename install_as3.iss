@@ -3,7 +3,7 @@
 
 [Setup]
 AppName = "HP_ID_Print_App"
-AppVersion = 0.0.5
+AppVersion = 0.0.6
 DefaultDirName = "C:\HP_ID_Print_App\"
 AppCopyright = Copyright 2013 HP, Corp.
 AppPublisher = HP, Corp.

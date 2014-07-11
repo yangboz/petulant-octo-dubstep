@@ -40,7 +40,8 @@
 //				this.id_resize_normal.play();
 				this.updateTileList(false);//Expand to print.
 				//Set timeout
-				flash.utils.setTimeout(printOut,1000);
+				this.id_list_tile.callLater(printOut);
+//				flash.utils.setTimeout(printOut,1000);
 //				this.id_list_tile_real.scaleX = 0.5;
 //				this.id_list_tile_real.scaleY = 0.5;
 			}
@@ -199,18 +200,17 @@
 				</s:layout>
 			</s:DataGroup>-->
 		<!--<s:Image id="id_image_tile" left="200" top="40"/>-->
-		<s:List id="id_list_tile" autoLayout="true" borderColor="#CCCCCC" borderAlpha="1"
-				contentBackgroundAlpha="1" contentBackgroundColor="#CCCCCC"
+		<s:List id="id_list_tile" autoLayout="true" borderColor="#5e6468" borderAlpha="1"
+				contentBackgroundAlpha="1" contentBackgroundColor="#5e6468"
 				horizontalScrollPolicy="off" itemRenderer="views.renderers.ImageRenderer"
 				useVirtualLayout="false" verticalScrollPolicy="off"
 		>
 			<s:layout>
-				<!--<s:TileLayout-->
-				<utils:HW_TileLayout
+				<!--<utils:HW_TileLayout-->
+				<s:TileLayout
 				 requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
 							  verticalGap="2" horizontalGap="2" useVirtualLayout="false" 
 							  paddingLeft="2" paddingBottom="2" paddingRight="2" paddingTop="2"
-							  orientation="columns"
 							  />
 			</s:layout>
 		</s:List>
