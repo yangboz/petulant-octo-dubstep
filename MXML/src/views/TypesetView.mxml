@@ -210,7 +210,7 @@
 				<s:TileLayout
 				 requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
 							  verticalGap="2" horizontalGap="2" useVirtualLayout="false" 
-							  paddingLeft="2" paddingBottom="2" paddingRight="2" paddingTop="2"
+							  paddingLeft="1" paddingBottom="1" paddingRight="1" paddingTop="1"
 							  />
 			</s:layout>
 		</s:List>

@@ -250,7 +250,7 @@ package model
 		//标准一寸（25x35），小一寸（22x32），大一寸（33x48），小二寸（35x45），标准二寸（35x50），赴美签证（50x50）
 		private static var ARRAY_TYPESET_TILE_SIZE_5x7:Array = [
 			{row:2,col:5,offsetX:0,offsetY:0,shiftIndex:[]},//Modified
-			{row:3,col:4,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:2,col:6,offsetX:0,offsetY:0,shiftIndex:[]},//Modified
 			{row:2,col:4,offsetX:0,offsetY:0,shiftIndex:[]},
 			{row:2,col:4,offsetX:0,offsetY:0,shiftIndex:[]},
 			{row:1,col:4,offsetX:0,offsetY:0,shiftIndex:[]},//Modified
