@@ -65,6 +65,8 @@
 				this.id_image_edit.addEventListener(Event.COMPLETE,function(event:Event):void{
 					///Align Image Views.
 					alignImageView();
+					///Image autosize
+					autoResizeImageView();
 					///
 					selectUITransformTool(new MouseEvent(MouseEvent.CLICK));
 				});
@@ -92,18 +94,22 @@
 				this.id_group.y = id_group_point.y;
 				this.id_group.maxWidth = this.getRequiredCertPhotoWidth();
 				this.id_group.maxHeight = this.getRequiredCertPhotoHeight();
-				//Mask
-//				this.id_image_mask.source = AppData.ARRAY_EDITOR_PHOTO_FRAMES[AppData.selectedCertSizeIndex];
-//				this.id_image_edit.mask = this.id_image_mask;
 				//Alignment
-				//Update tool
-				updateUITransformTools();
+
 			}
 			
 			protected function alignImageView():void
 			{
 //				this.id_group.x -= (this.id_image_edit.bitmapData.width-this.getRequiredCertPhotoWidth())/2;
 //				this.id_group.y -= (this.id_image_edit.bitmapData.height-this.getRequiredCertPhotoHeight())/2;
+			}
+			
+			protected function autoResizeImageView():void
+			{
+				this.id_image_edit.width = getRequiredCertPhotoWidth();
+				this.id_image_edit.height = getRequiredCertPhotoHeight();
+				//Update tool
+				updateUITransformTools();
 			}
 			
 			protected function reupload_button_clickHandler(event:MouseEvent):void
@@ -140,8 +146,8 @@
 				id_uit_tool.visible = true;
 				id_uit_tool.includeInLayout = true;
 				//UITransformTool
-				id_uit_tool.width = id_image_edit.bitmapData.width;
-				id_uit_tool.height = id_image_edit.bitmapData.height;
+//				id_uit_tool.width = id_image_edit.bitmapData.width;
+//				id_uit_tool.height = id_image_edit.bitmapData.height;
 			}
 			
 			private function onEditorScaleSliderChange(event:Event):void

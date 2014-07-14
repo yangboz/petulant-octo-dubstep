@@ -4,17 +4,19 @@ package model
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObjectContainer;
+	import flash.errors.IOError;
 	import flash.events.Event;
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
-	import flash.net.dns.AAAARecord;
 	import flash.printing.PaperSize;
 	import flash.utils.ByteArray;
+	import flash.utils.setTimeout;
 	
 	import mx.core.FlexGlobals;
+	import mx.formatters.DateFormatter;
 	import mx.graphics.codec.JPEGEncoder;
 	import mx.graphics.codec.PNGEncoder;
 	import mx.managers.PopUpManager;
@@ -49,6 +51,7 @@ package model
 		public static var selectedCertSizeIndex:int = -1;
 		public static var selectedTypesetSizeIndex:int = 0;
 		//
+		private static const FILE_FOLDER_NAME:String = "HP_ID_PRINT";
 		private static const FILE_NAME_DEFAULT:String = "HP_ID_Print_";
 		private static const FILE_ANME_EXT_DEFAULT:String = ".jpg";
 		public static var selectedFileName:String;
@@ -376,9 +379,21 @@ package model
 //			AppData.selectedFileName = AppData.FILE_NAME_DEFAULT.concat(extension);
 			AppData.selectedFileName = getClassifiedFileName().concat(extension);
 			//Kind of file save options here:
-			AppData.savedImageFie = File.documentsDirectory;
+//			AppData.savedImageFie = File.documentsDirectory;
 //			AppData.savedImageFie = File.applicationDirectory;
 //			AppData.savedImageFie = File.applicationStorageDirectory;
+			//create a directory
+			if(AppData.savedImageFie)//Whatever reset the workspace folder to avoid cache issue.
+			{
+				trace("Try Clear Workspace:",AppData.savedImageFie.nativePath);
+				AppData.savedImageFie.deleteDirectory(true); 
+				//TODO:DELETE empty directory.
+			}
+			var randomFolderName:String = getRandomWorkspaceDirName();
+			trace("getRandomWorkspaceDirName:",randomFolderName);
+			AppData.savedImageFie = File.documentsDirectory.resolvePath(randomFolderName);
+			AppData.savedImageFie.createDirectory();
+			//create the file
 			//
 			if(dialog)
 			{
@@ -412,6 +427,26 @@ package model
 		public static function centerMeterToPixel(value:Number):Number
 		{
 			return value*CENTER_METER_2_INCH*INCH_2_PIXEL;
+		}
+		//
+		public static function getPrintPlainText(index:int):String
+		{
+			var printText:String = PaperSize.A4;
+			switch(index)
+			{
+				case 0:
+					printText = PaperSize.ENV_MONARCH;//PaperSize.ENV_PERSONAL
+					break;
+				case 1:
+					printText = PaperSize.ENV_10;//PaperSize.ENV_10
+					break;
+				case 2:
+					printText = PaperSize.A4;
+					break;
+				default:
+					break;
+			}
+			return printText;
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -468,24 +503,13 @@ package model
 			return certText;
 		}
 		//
-		public static function getPrintPlainText(index:int):String
+		private static function getRandomWorkspaceDirName():String
 		{
-			var printText:String = PaperSize.A4;
-			switch(index)
-			{
-				case 0:
-					printText = PaperSize.ENV_MONARCH;//PaperSize.ENV_PERSONAL
-					break;
-				case 1:
-					printText = PaperSize.ENV_10;//PaperSize.ENV_10
-					break;
-				case 2:
-					printText = PaperSize.A4;
-					break;
-				default:
-					break;
-			}
-			return printText;
+			var CurrentDateTime:Date = new Date();
+			var CurrentDF:DateFormatter = new DateFormatter();
+			CurrentDF.formatString = "_MM_DD_YY_LL_NN_SS_A";
+			var DateTimeString:String = CurrentDF.format(CurrentDateTime);
+			return FILE_FOLDER_NAME.concat(DateTimeString);
 		}
 	}
 	

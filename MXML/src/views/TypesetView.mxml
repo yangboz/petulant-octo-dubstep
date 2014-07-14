@@ -55,6 +55,7 @@
 			{
 				//
 				trace("AppData.selectedTypesetSizeIndex:",AppData.selectedTypesetSizeIndex);
+				this.id_image_frame.source = "";
 				this.id_image_frame.source = AppData.ARRAY_TYPESET_FRAMES[AppData.selectedTypesetSizeIndex];
 //				this.id_border_container.setStyle("backgroundImage",AppData.ARRAY_TYPESET_FRAMES[AppData.selectedTypesetSizeIndex]);
 				trace("AppData.selectedCertSizeIndex:",AppData.selectedCertSizeIndex);
