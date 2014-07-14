@@ -120,7 +120,7 @@
 				var requiredPhotoHeight:Number = this.getRequiredCertPhotoHeight();
 				var bitMapData:BitmapData = new BitmapData(requiredPhotoWidth,requiredPhotoHeight,true); 
 //				bitMapData.draw(this.id_group,AppData.savedImageMatrix); 
-				bitMapData.draw(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight)); 
+				bitMapData.draw(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true); 
 				//
 				AppData.saveImageFile(bitMapData);
 				//
@@ -146,7 +146,7 @@
 			
 			private function onEditorScaleSliderChange(event:Event):void
 			{
-				this.applyZoom(this.id_image_edit,this.id_vslider_scale.value);
+//				this.applyZoom(this.id_image_edit,this.id_vslider_scale.value);
 				//Update tool
 				this.updateUITransformTools();
 			}
@@ -165,14 +165,14 @@
 			
 			protected function zoomInButtonClickHandler(event:MouseEvent):void
 			{
-				this.id_vslider_scale.value += 0.1; 
-				this.applyZoom(this.id_image_edit,this.id_vslider_scale.value);
+//				this.id_vslider_scale.value += 0.1; 
+//				this.applyZoom(this.id_image_edit,this.id_vslider_scale.value);
 			}
 			
 			protected function zoomOutButtonClickHandler(event:MouseEvent):void
 			{
-				this.id_vslider_scale.value -= 0.1; 
-				this.applyZoom(this.id_image_edit,this.id_vslider_scale.value);
+//				this.id_vslider_scale.value -= 0.1; 
+//				this.applyZoom(this.id_image_edit,this.id_vslider_scale.value);
 			}
 			
 			private function applyRotate(target:DisplayObject,angle:Number):void
@@ -402,13 +402,13 @@
 				   width="200" 
 				   />
 		<s:Button x="349" y="425" label="ROTATE" skinClass="skins.button.HW_RotateButton_Skin" click="rotate90ButtonClickHandler(event)"/>
-		<s:Button x="625" y="198" label="ZOOM_IN" skinClass="skins.button.HW_ZoomInButton_Skin" click="zoomInButtonClickHandler(event)"/>
+<!--		<s:Button x="625" y="198" label="ZOOM_IN" skinClass="skins.button.HW_ZoomInButton_Skin" click="zoomInButtonClickHandler(event)"/>
 		<s:Button x="625" y="373" label="ZOOM_OUT" skinClass="skins.button.HW_ZoomOutButton_Skin" click="zoomOutButtonClickHandler(event)"/>
 		<spark:VSlider id="id_vslider_scale" x="638" y="230"
 					   showTrackHighlight="true" skinClass="skins.slider.HW_EditorScaleVSlider_Skin"
 				   change="onEditorScaleSliderChange(event)" stepSize="0.1" minimum="0.5" maximum="2" value="1"
 				   height="140" 
-				   />
+				   />-->
 		
 		
 		<s:Group id="passiveGuideGroup" top="0" bottom="0" left="0" right="0"/>
