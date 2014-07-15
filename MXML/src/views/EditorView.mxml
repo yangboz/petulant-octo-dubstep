@@ -107,15 +107,16 @@
 				var requiredW:Number = getRequiredCertPhotoWidth();
 				var requiredH:Number = getRequiredCertPhotoHeight();
 				var requiredWHratio:Number = requiredW/requiredH;
+
 				//Ratio check
-				if(contentWHration>=requiredWHratio)
-				{
-					this.id_image_edit.width = requiredW*requiredWHratio;
-					this.id_image_edit.height = requiredH;
-				}else
+				if(contentWHration<=requiredWHratio)
 				{
 					this.id_image_edit.width = requiredW;
-					this.id_image_edit.height = requiredH*requiredWHratio;
+					this.id_image_edit.height = requiredH*contentWHration;
+				}else
+				{
+					this.id_image_edit.width = requiredW*contentWHration;
+					this.id_image_edit.height = requiredH;
 				}
 				//Update tool
 				updateUITransformTools();

@@ -2,7 +2,7 @@
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009"
 				xmlns:s="library://ns.adobe.com/flex/spark"
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				autoDrawBackground="false"
+				autoDrawBackground="false" xmlns:components="views.components.*"
 				>
 	
 	<!--<s:states>
@@ -33,7 +33,11 @@
 		</mx:Transition>
 	</s:transitions>    -->
 	<!--<s:Image id="image" horizontalCenter="0" verticalCenter="0"/>-->
-	<s:Image id="image" source="{data.source}" scaleX="{data.scaleX}" scaleY="{data.scaleY}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0" />
+	<components:ImageWithBorder id="image" source="{data.source}" scaleX="{data.scaleX}" scaleY="{data.scaleY}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0" 
+								borderAlpha="1"
+								borderWidth="0.25"
+								borderColor="white"
+								/>
 	<!--<s:Image id="image" source="{data.source}" width="{data.width}" height="{data.height}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0" />-->
 		 
 </s:ItemRenderer>
