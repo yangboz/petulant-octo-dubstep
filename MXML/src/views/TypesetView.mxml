@@ -40,7 +40,7 @@
 //				this.id_resize_normal.play();
 				this.updateTileList(false);//Expand to print.
 				//Set timeout
-				this.id_list_tile.callLater(printOut);
+				this.id_list_tile_print.callLater(printOut);
 //				flash.utils.setTimeout(printOut,1000);
 //				this.id_list_tile_real.scaleX = 0.5;
 //				this.id_list_tile_real.scaleY = 0.5;
@@ -85,7 +85,6 @@
 				{
 					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w_ *AppData.PIXEL_2_PRINT;
 					definedImageHeight = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h_*AppData.PIXEL_2_PRINT;
-					this.id_list_tile.visible = false;
 				}
 				var definedImageRotation:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].r;
 				//
@@ -115,6 +114,8 @@
 						imageArray.push(data);
 					}
 				}
+				if(resizeForDisplay)
+				{
 				this.id_list_tile.dataProvider = new ArrayList(imageArray);
 				this.id_list_tile.x = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].x;
 				this.id_list_tile.y = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].y;
@@ -122,6 +123,11 @@
 //					id_list_tile.x = id_image_tile.x;
 //					id_list_tile.y = id_image_tile.y;
 //				});
+				}else{
+				this.id_list_tile_print.dataProvider = new ArrayList(imageArray);
+				this.id_list_tile_print.x = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].x;
+				this.id_list_tile_print.y = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].y;
+				}
 			}
 			//[Bindable] values here
 			[Bindable]
@@ -158,19 +164,18 @@
 				} 
 				*/
 				//
-				var printRect:Rectangle = new Rectangle(requestedOffsetX,requestedOffsetY,this.id_list_tile.width,this.id_list_tile.height);
+				var printRect:Rectangle = new Rectangle(requestedOffsetX,requestedOffsetY,this.id_list_tile_print.width,this.id_list_tile_print.height);
 				//				//
 				if(flexPrintJob.start())
 				{
 					//					flexPrintJob.addObject(this.id_list_tile,FlexPrintJobScaleType.NONE);
 					//@see http://stackoverflow.com/questions/1642008/how-to-dynamically-set-print-page-margins-in-flash-cs3
-					flexPrintJob.printJob.addPage(this.id_list_tile,printRect,option);
+					flexPrintJob.printJob.addPage(this.id_list_tile_print,printRect,option);
 					//					flexPrintJob.addObject(this.id_list_tile_real,FlexPrintJobScaleType.NONE);
 					flexPrintJob.send();
 				}
 				//Rollback to display
 				this.updateTileList();
-				this.id_list_tile.visible = true;
 			}
 		]]>
 	</fx:Script>
@@ -184,6 +189,7 @@
 			<!--<s:Resize widthTo="400" heightTo="400" target="{this.id_list_tile_real}"/>-->
 			<s:Scale scaleYTo="1" scaleXTo="1" target="{this.id_list_tile}" autoCenterTransform="true" />
 		</s:Parallel>
+		
 	</fx:Declarations>
 	<s:BorderContainer width="100%" height="100%" contentBackgroundAlpha="0"
 					   backgroundImage="{viewBackgroundImage}"
@@ -192,19 +198,8 @@
 									change="id_list_typeset_changeHandler(event)"/>
 		
 		<s:Image id="id_image_frame" left="200" top="40" />
-		<!--<s:BorderContainer id="id_border_container">-->
-			<!--<s:Image id="id_image_tile" />-->
-			<!--<s:DataGroup  id="id_list_tile"
-						  itemRenderer="views.renderers.ImageRenderer"
-						  >
-				<s:layout>
-					<s:TileLayout requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
-								  verticalGap="2" horizontalGap="2" useVirtualLayout="false"
-								  />
-				</s:layout>
-			</s:DataGroup>-->
-		<!--<s:Image id="id_image_tile" left="200" top="40"/>-->
-		<s:List id="id_list_tile" autoLayout="true" borderColor="#5e6468" borderAlpha="0"
+		
+		<s:List id="id_list_tile" autoLayout="true" borderColor="#5e6468" borderAlpha="1"
 				contentBackgroundAlpha="0" contentBackgroundColor="#5e6468"
 				horizontalScrollPolicy="off" itemRenderer="views.renderers.ImageRenderer"
 				useVirtualLayout="false" verticalScrollPolicy="off"
@@ -213,12 +208,26 @@
 				<!--<utils:HW_TileLayout-->
 				<s:TileLayout
 				 requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
-							  verticalGap="2" horizontalGap="2" useVirtualLayout="false" 
+							  verticalGap="0.1" horizontalGap="0.1" useVirtualLayout="false" 
 							  paddingLeft="1" paddingBottom="1" paddingRight="1" paddingTop="1"
 							  />
 			</s:layout>
 		</s:List>
 		
+		<s:List id="id_list_tile_print" autoLayout="true" borderColor="#5e6468" borderAlpha="0"
+				contentBackgroundAlpha="0" contentBackgroundColor="#5e6468"
+				horizontalScrollPolicy="off" itemRenderer="views.renderers.ImageRenderer"
+				useVirtualLayout="false" verticalScrollPolicy="off" 
+				>
+			<s:layout>
+				<!--<utils:HW_TileLayout-->
+				<s:TileLayout
+					requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
+					verticalGap="0.1" horizontalGap="0.1" useVirtualLayout="false" 
+					paddingLeft="1" paddingBottom="1" paddingRight="1" paddingTop="1"
+					/>
+			</s:layout>
+		</s:List>
 		<!--</s:BorderContainer>-->
 		
 		<s:Button x="383" y="500" label="Back2Verify" skinClass="skins.button.HW_Back2VerifyButton_Skin" click="cancelTypeset_button_clickHandler(event)"/>
