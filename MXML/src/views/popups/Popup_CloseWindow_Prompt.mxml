@@ -21,6 +21,8 @@
 				this.close();
 				//
 				AppData.mainApp.nativeWindow.close();
+				//
+				AppData.clearWorkspace();
 			}
 			
 			protected function button_save_clickHandler(event:MouseEvent):void

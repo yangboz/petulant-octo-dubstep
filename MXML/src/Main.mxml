@@ -37,8 +37,6 @@
 				{
 					AppData.mainApp.nativeWindow.close();
 				}
-				//
-				AppData.clearWorkspace();
 			}
 			
 			private function minWindowButtonClickHandler(event:MouseEvent):void

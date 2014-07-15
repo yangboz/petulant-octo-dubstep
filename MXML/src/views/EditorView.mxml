@@ -19,10 +19,10 @@
 			
 			import model.AppData;
 			
+			import mx.controls.Image;
 			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
 			
-			import mx.controls.Image;
 			import spark.events.IndexChangeEvent;
 			//UITransformTools: @see http://vstyran-flex.ho.ua/
 			override protected function creationCompleteHandler(event:FlexEvent):void
@@ -99,8 +99,24 @@
 			
 			protected function autoResizeImageView():void
 			{
-				this.id_image_edit.width = getRequiredCertPhotoWidth();
-				this.id_image_edit.height = getRequiredCertPhotoHeight();
+				//
+				var contentW:Number = this.id_image_edit.contentWidth;
+				var contentH:Number = this.id_image_edit.contentHeight;
+				var contentWHration:Number = contentW/contentH;
+				//
+				var requiredW:Number = getRequiredCertPhotoWidth();
+				var requiredH:Number = getRequiredCertPhotoHeight();
+				var requiredWHratio:Number = requiredW/requiredH;
+				//Ratio check
+				if(contentWHration>=requiredWHratio)
+				{
+					this.id_image_edit.width = requiredW*requiredWHratio;
+					this.id_image_edit.height = requiredH;
+				}else
+				{
+					this.id_image_edit.width = requiredW;
+					this.id_image_edit.height = requiredH*requiredWHratio;
+				}
 				//Update tool
 				updateUITransformTools();
 			}

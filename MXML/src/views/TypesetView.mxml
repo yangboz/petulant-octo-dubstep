@@ -85,6 +85,7 @@
 				{
 					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w_ *AppData.PIXEL_2_PRINT;
 					definedImageHeight = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h_*AppData.PIXEL_2_PRINT;
+					this.id_list_tile.visible = false;
 				}
 				var definedImageRotation:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].r;
 				//
@@ -142,6 +143,7 @@
 				flexPrintJob.printJob.orientation = PrintJobOrientation.LANDSCAPE;
 				//PageSize setting manually
 				flexPrintJob.printJob.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
+//				flexPrintJob.printJob.printer = "";//TODO:use the stored printer name;
 				/*
 				//Auto select papersize(Optional)
 				if (PrintJob.supportsPageSetupDialog)
@@ -168,6 +170,7 @@
 				}
 				//Rollback to display
 				this.updateTileList();
+				this.id_list_tile.visible = true;
 			}
 		]]>
 	</fx:Script>

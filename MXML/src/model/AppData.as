@@ -278,12 +278,12 @@ package model
 		];
 		//标准一寸（25x35），小一寸（22x32），大一寸（33x48），小二寸（35x45），标准二寸（35x50），赴美签证（50x50）
 		private static var ARRAY_TYPESET_TILE_SIZE_A4:Array = [
-			{row:7,col:2,offsetX:0,offsetY:0,shiftIndex:[]},
-			{row:8,col:2,offsetX:0,offsetY:0,shiftIndex:[]},
-			{row:5,col:2,offsetX:0,offsetY:0,shiftIndex:[]},
-			{row:5,col:2,offsetX:0,offsetY:0,shiftIndex:[]},
-			{row:5,col:2,offsetX:0,offsetY:0,shiftIndex:[]},
-			{row:3,col:2,offsetX:0,offsetY:0,shiftIndex:[]}
+			{row:7,col:4,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:8,col:4,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:5,col:4,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:5,col:4,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:5,col:4,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:3,col:4,offsetX:0,offsetY:0,shiftIndex:[]}
 //			new Point(7,2),new Point(8,2),new Point(5,2),//row,column
 //			new Point(5,2),new Point(5,2),new Point(3,2)
 		];
@@ -391,7 +391,8 @@ package model
 			}
 			var randomFolderName:String = getRandomWorkspaceDirName();
 			trace("getRandomWorkspaceDirName:",randomFolderName);
-			AppData.savedImageFie = File.documentsDirectory.resolvePath(randomFolderName);
+			AppData.savedImageFie = File.createTempDirectory().resolvePath(randomFolderName);
+//			AppData.savedImageFie = File.documentsDirectory.resolvePath(randomFolderName);
 			AppData.savedImageFie.createDirectory();
 			AppData.savedWorkspaceFolders.push(AppData.savedImageFie);
 			//create the file
