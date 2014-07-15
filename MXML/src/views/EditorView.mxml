@@ -15,22 +15,15 @@
 			import com.vstyran.transform.events.GuidelineEvent;
 			import com.vstyran.transform.events.TransformEvent;
 			import com.vstyran.transform.model.Guideline;
-			import com.vstyran.transform.skins.TransformToolSkin;
 			import com.vstyran.transform.utils.DataUtil;
 			
 			import model.AppData;
 			
-			import mx.controls.sliderClasses.Slider;
 			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
-			import mx.graphics.ImageSnapshot;
-			import mx.graphics.codec.JPEGEncoder;
-			import mx.graphics.codec.PNGEncoder;
 			
-			import spark.effects.Rotate;
+			import mx.controls.Image;
 			import spark.events.IndexChangeEvent;
-			
-			import utils.AlignUtil;
 			//UITransformTools: @see http://vstyran-flex.ho.ua/
 			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
@@ -255,9 +248,9 @@
 				{
 					var element:IVisualElement = id_border_container.getElementAt(i);
 					
-					if(element is Image && id_uit_tool.target != element)
+					if(element is mx.controls.Image && id_uit_tool.target != element)
 					{
-						var box:Rectangle = DataUtil.createData(element as Image).getBoundingBox();
+						var box:Rectangle = DataUtil.createData(element as mx.controls.Image).getBoundingBox();
 						
 						guidelines.push(new Guideline(GuidelineType.VERTICAL_EDGE, box.x, 3));
 						guidelines.push(new Guideline(GuidelineType.VERTICAL_CENTER, box.x+box.width/2, 3));
@@ -267,9 +260,9 @@
 						guidelines.push(new Guideline(GuidelineType.HORIZONTAL_CENTER, box.y+box.height/2, 3));
 						guidelines.push(new Guideline(GuidelineType.HORIZONTAL_EDGE, box.y+box.height, 3));
 						
-						if((element as Image).rotation%90 != 0)
+						if((element as mx.controls.Image).rotation%90 != 0)
 						{
-							var guideLine:Guideline = new Guideline(GuidelineType.ROTATION, (element as Image).rotation, 3);
+							var guideLine:Guideline = new Guideline(GuidelineType.ROTATION, (element as mx.controls.Image).rotation, 3);
 							guideLine.userData = element;
 							guidelines.push(guideLine);
 						}
@@ -318,7 +311,7 @@
 						for each (var rguide:Guideline in event.cross.getRGuidelines()) 
 						{
 							var rGuideLine:RGuideLine = new RGuideLine();
-							rGuideLine.update(rguide.userData as Image, passiveGuideGroup);
+							rGuideLine.update(rguide.userData as mx.controls.Image, passiveGuideGroup);
 							passiveGuideGroup.addElement(rGuideLine);
 						}
 					}
@@ -378,7 +371,8 @@
 		<s:Image id="id_image_instruction" x="200" y="60"/>
 		
 		<s:Group id="id_group" clipAndEnableScrolling="true">
-			<s:Image id="id_image_edit"/>
+			<!--<s:Image id="id_image_edit"/>-->
+			<mx:Image id="id_image_edit" maintainAspectRatio="false"/>
 		</s:Group>
 		<s:Image id="id_image_frame" enabled="false"/>
 		<s:Image id="id_image_guide" enabled="false"/>
