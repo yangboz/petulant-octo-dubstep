@@ -51,6 +51,7 @@ package model
 		public static var selectedCertSizeIndex:int = -1;
 		public static var selectedTypesetSizeIndex:int = 0;
 		//
+		private static var savedWorkspaceFolders:Array = [];
 		private static const FILE_FOLDER_NAME:String = "HP_ID_PRINT";
 		private static const FILE_NAME_DEFAULT:String = "HP_ID_Print_";
 		private static const FILE_ANME_EXT_DEFAULT:String = ".jpg";
@@ -387,12 +388,12 @@ package model
 			{
 				trace("Try Clear Workspace:",AppData.savedImageFie.nativePath);
 				AppData.savedImageFie.deleteDirectory(true); 
-				//TODO:DELETE empty directory.
 			}
 			var randomFolderName:String = getRandomWorkspaceDirName();
 			trace("getRandomWorkspaceDirName:",randomFolderName);
 			AppData.savedImageFie = File.documentsDirectory.resolvePath(randomFolderName);
 			AppData.savedImageFie.createDirectory();
+			AppData.savedWorkspaceFolders.push(AppData.savedImageFie);
 			//create the file
 			//
 			if(dialog)
@@ -447,6 +448,27 @@ package model
 					break;
 			}
 			return printText;
+		}
+		//DELETE empty directory.
+		public static function clearWorkspace():void
+		{
+			for each(var folder:File in AppData.savedWorkspaceFolders)
+			{
+				//Delete folder's contents
+				try{
+					folder.deleteDirectory(true);
+				}catch(error:IOError)
+				{
+					trace(error.toString());
+				}
+				//Delete empty folder if neccessary
+				try{
+					folder.deleteDirectory(false);
+				}catch(error:IOError)
+				{
+					trace(error.toString());
+				}
+			}
 		}
 		//--------------------------------------------------------------------------
 		//
