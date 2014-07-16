@@ -71,6 +71,8 @@ package model
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
+		public static const MAX_UIT_WIDTH:Number = 300;
+		public static const MAX_UIT_HEIGHT:Number = 300;
 		//CenterMeter to Inch
 		private static const CENTER_METER_2_INCH:Number = 0.3937008;
 		//mm*0.3937008*DPI
