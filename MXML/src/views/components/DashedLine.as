@@ -22,12 +22,10 @@ package views.components
 	// Imports
 	//
 	//--------------------------------------------------------------------------
-	import flash.display.Sprite;
-	
+	import flash.display.CapsStyle;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.geom.Point;
-	import flash.display.CapsStyle;
 	/**
 	 * DashedLine.as class. 
 	 * @author yangboz
@@ -44,19 +42,19 @@ package views.components
 		// Variables
 		//
 		//--------------------------------------------------------------------------
-		var lengthsArray:Array = new Array();	// array of dash and gap lengths (dash,gap,dash,gap....)
-		var lineColor:uint;	// line color
-		var lineWeight:Number;	// line weight
-		var lineAlpha:Number = 1;	// line alpha
-		var curX:Number = 0;	// stores current x as it changes with lineTo and moveTo calls
-		var curY:Number = 0;	// same as above, but for y
-		var remainingDist:Number = 0;	// stores distance between the end of the last full dash or gap and the end coordinates specified in lineTo
-		var curIndex = null;	// current index in the length array, so we know which dash or gap to draw
-		var arraySum:Number = 0;	// total length of the dashes and gaps... not currently being used for anything, but maybe useful?
-		var startIndex:int = 0;	// array index (the particular dash or gap) to start with in a lineTo--based on the last dash or gap drawn in the previous lineTo (along with remainingDist, this is so our line can properly continue around corners!)
+		private var lengthsArray:Array = new Array();	// array of dash and gap lengths (dash,gap,dash,gap....)
+		private var lineColor:uint;	// line color
+		private var lineWeight:Number;	// line weight
+		private var lineAlpha:Number = 1;	// line alpha
+		private var curX:Number = 0;	// stores current x as it changes with lineTo and moveTo calls
+		private var curY:Number = 0;	// same as above, but for y
+		private var remainingDist:Number = 0;	// stores distance between the end of the last full dash or gap and the end coordinates specified in lineTo
+		private var curIndex:* = null;	// current index in the length array, so we know which dash or gap to draw
+		private var arraySum:Number = 0;	// total length of the dashes and gaps... not currently being used for anything, but maybe useful?
+		private var startIndex:int = 0;	// array index (the particular dash or gap) to start with in a lineTo--based on the last dash or gap drawn in the previous lineTo (along with remainingDist, this is so our line can properly continue around corners!)
 		
-		var fill:Shape = new Shape();	// shappe in the background to be used for fill (if any)
-		var stroke:Shape = new Shape();	// shape in the foreground to be used for the dashed line
+		private var fill:Shape = new Shape();	// shappe in the background to be used for fill (if any)
+		private var stroke:Shape = new Shape();	// shape in the foreground to be used for the dashed line
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------

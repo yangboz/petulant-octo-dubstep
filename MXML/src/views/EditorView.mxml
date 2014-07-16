@@ -127,10 +127,11 @@
 			{
 				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_UPLOAD;
 				//Clear UITransform tool's opration history
-				id_uit_tool.targets = null;
-//				this.id_uit_tool.rotation = 0;
-//				this.id_uit_tool.scaleX = 0;
-//				this.id_uit_tool.scaleY = 0;
+				this.id_image_edit.rotation = 0;
+				this.id_image_edit.width = NaN;
+				this.id_image_edit.height = NaN;
+				this.id_image_edit.x = 0;
+				this.id_image_edit.y = 0;
 			}
 			
 			protected function editnext_button_clickHandler(event:MouseEvent):void
@@ -409,9 +410,10 @@
 							  guidelinesUpdate="tool_guidelinesUpdateHandler(event)"
 							  transformation="tool_transformationHandler(event)"
 							  maintainProjectionCenter="true" maintainMoveShortcuts="true"
+							  maxWidth="200" maxHeight="200"
 							  >
 			<!--<view:bounds>
-				<model:Bounds x="{id_image_frame.x-50}" y="{id_image_frame.y-50}" width="300" height="300"/>
+				<model:Bounds x="{id_image_frame.x-100}" y="{id_image_frame.y-100}" width="100" height="100"/>
 			</view:bounds>-->
 			<!--<view:guidelines>
 				<model:Guideline type="{GuidelineType.HORIZONTAL_CENTER}" value="400" fraction="3"/>

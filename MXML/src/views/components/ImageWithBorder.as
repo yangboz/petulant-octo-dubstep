@@ -69,19 +69,20 @@ package views.components
 			//
 			if(width && height)
 			{
-				var x:Number=-(getStyle('borderWidth')/2);
-				var y:Number=-(getStyle('borderWidth')/2);
+				var x:Number=-(getStyle('borderWidth'));
+				var y:Number=-(getStyle('borderWidth'));
 				var width:Number=contentWidth+getStyle('borderWidth');
 				var height:Number=contentHeight+getStyle('borderWidth');
 //				graphics.clear();
 //				graphics.lineStyle(getStyle('borderWidth'),getStyle('borderColor'),getStyle('borderAlpha'),false);
 //				graphics.drawRect(x,y,width,height);
 				//
-				var dashy:DashedLine = new DashedLine(getStyle('borderWidth'),getStyle('borderColor'),new Array(8,4,2,4));
+				var dashy:DashedLine = new DashedLine(getStyle('borderWidth'),getStyle('borderColor'),new Array(4,4,4,4));
 				dashy.moveTo(x,y);
 				dashy.lineTo(width,y);
 				dashy.lineTo(width,height);
 				dashy.lineTo(x,height);
+				dashy.lineTo(x,y);
 				addChild(dashy);
 			}
 		}

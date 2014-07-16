@@ -13,6 +13,7 @@
 	<s:Image id="id_image_bg" 
 			 source.normal="{data.normal}"
 			 source.selected="{data.down}"
+			 buttonMode="true" useHandCursor="true"
 			 />
 	<!--<s:Image id="id_image_info" source.hovered="@Embed('assets/images/photosize_menu/button_photosize_info.png')"/>-->
 </s:ItemRenderer>

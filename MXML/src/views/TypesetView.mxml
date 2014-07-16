@@ -199,8 +199,10 @@
 		
 		<s:Image id="id_image_frame" left="200" top="40" />
 		
-		<s:List id="id_list_tile" autoLayout="true" borderColor="#5e6468" borderAlpha="1"
-				contentBackgroundAlpha="1" contentBackgroundColor="#5e6468"
+		<!--borderColor="#5e6468" borderAlpha="0.1"
+		contentBackgroundAlpha="0" contentBackgroundColor="#5e6468"-->
+		<s:List id="id_list_tile" autoLayout="true" 
+				
 				horizontalScrollPolicy="off" itemRenderer="views.renderers.ImageRenderer"
 				useVirtualLayout="false" verticalScrollPolicy="off"
 		>
@@ -208,7 +210,7 @@
 				<!--<utils:HW_TileLayout-->
 				<s:TileLayout
 				 requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
-							  verticalGap="2" horizontalGap="2" useVirtualLayout="false" 
+							  verticalGap="0.5" horizontalGap="0.5" useVirtualLayout="false" 
 							  paddingLeft="1" paddingBottom="1" paddingRight="1" paddingTop="1"
 							  />
 			</s:layout>

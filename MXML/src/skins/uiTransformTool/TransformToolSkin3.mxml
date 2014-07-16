@@ -111,14 +111,18 @@
 	<controls:Control id="topRightControl" top="-6" right="-6" anchor="{bottomLeftControl}" styleName="resizeControl">
 		<operations:ResizeOperation anchor="{new Point(0, 1)}"/>
 	</controls:Control>
-	<controls:Control id="middleRightControl" verticalCenter="0" right="-6" anchor="{middleLeftControl}" styleName="resizeControl" visible="false">
-		<operations:ResizeOperation verticalEnabled="false" anchor="{new Point(0, 0.5)}"/>
+	<controls:Control id="middleRightControl" verticalCenter="0" right="-6" anchor="{middleLeftControl}" styleName="resizeControl" >
+		<operations:ResizeOperation verticalEnabled="false" anchor="{new Point(0, 0.5)}">
+			<operations:bounds>
+				<model:Bounds width="200"/>
+			</operations:bounds>
+		</operations:ResizeOperation>
 	</controls:Control>
 	<controls:Control id="bottomRightControl" bottom="-6" right="-6" anchor="{topLeftControl}" styleName="resizeControl">
 		<operations:ResizeOperation anchor="{new Point(0, 0)}"/>
 	</controls:Control>
 	<controls:Control id="bottomMiddleControl" bottom="-6" horizontalCenter="0" anchor="{topMiddleControl}" styleName="resizeControl" visible="false">
-		<operations:ResizeOperation horizontalEnabled="false" anchor="{new Point(0.5, 0)}"/>
+		<operations:ResizeOperation horizontalEnabled="false" anchor="{new Point(0.5, 0)}" />
 	</controls:Control>
 	<controls:Control id="bottomLeftControl" bottom="-6" left="-6" anchor="{topRightControl}" styleName="resizeControl">
 		<operations:ResizeOperation anchor="{new Point(1, 0)}"/>
