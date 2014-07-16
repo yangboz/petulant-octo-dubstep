@@ -36,6 +36,8 @@
 			protected function viewbase1_showHandler(event:FlexEvent):void
 			{
 				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFIED;
+				//
+				this.id_list.selectedIndex = AppData.selectedCertSizeIndex;
 			}
 			
 		]]>
@@ -50,7 +52,7 @@
 					   backgroundImage="{viewBackgroundImage}"
 					   >
 		
-		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)" enabled="false" selectedIndex="{AppData.selectedCertSizeIndex}"/>
+		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)" enabled="false" />
 		
 		<s:Image id="id_image_instruction" x="200" y="60" source="{AppData.INS_VERIFING_TEXT}"/>
 		

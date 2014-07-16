@@ -55,7 +55,8 @@ package views.components
 		public function ImageButton()
 		{
 			super();
-			this.buttonMode=true;
+			//
+			this.buttonMode = true;
 		} 
 		//--------------------------------------------------------------------------
 		//

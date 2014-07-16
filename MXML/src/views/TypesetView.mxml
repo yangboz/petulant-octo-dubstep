@@ -40,10 +40,9 @@
 //				this.id_resize_normal.play();
 				this.updateTileList(false);//Expand to print.
 				//Set timeout
-				this.id_list_tile_print.callLater(printOut);
-//				flash.utils.setTimeout(printOut,1000);
-//				this.id_list_tile_real.scaleX = 0.5;
-//				this.id_list_tile_real.scaleY = 0.5;
+				this.id_list_tile.callLater(printOut);
+				//
+				this.id_list_tile.visible = false;
 			}
 			
 			override public function get viewBackgroundImage():Bitmap
@@ -114,8 +113,7 @@
 						imageArray.push(data);
 					}
 				}
-				if(resizeForDisplay)
-				{
+				//
 				this.id_list_tile.dataProvider = new ArrayList(imageArray);
 				this.id_list_tile.x = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].x;
 				this.id_list_tile.y = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].y;
@@ -123,11 +121,6 @@
 //					id_list_tile.x = id_image_tile.x;
 //					id_list_tile.y = id_image_tile.y;
 //				});
-				}else{
-				this.id_list_tile_print.dataProvider = new ArrayList(imageArray);
-				this.id_list_tile_print.x = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].x;
-				this.id_list_tile_print.y = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].y;
-				}
 			}
 			//[Bindable] values here
 			[Bindable]
@@ -164,18 +157,19 @@
 				} 
 				*/
 				//
-				var printRect:Rectangle = new Rectangle(requestedOffsetX,requestedOffsetY,this.id_list_tile_print.width,this.id_list_tile_print.height);
+				var printRect:Rectangle = new Rectangle(requestedOffsetX,requestedOffsetY,this.id_list_tile.width,this.id_list_tile.height);
 				//				//
 				if(flexPrintJob.start())
 				{
 					//					flexPrintJob.addObject(this.id_list_tile,FlexPrintJobScaleType.NONE);
 					//@see http://stackoverflow.com/questions/1642008/how-to-dynamically-set-print-page-margins-in-flash-cs3
-					flexPrintJob.printJob.addPage(this.id_list_tile_print,printRect,option);
+					flexPrintJob.printJob.addPage(this.id_list_tile,printRect,option);
 					//					flexPrintJob.addObject(this.id_list_tile_real,FlexPrintJobScaleType.NONE);
 					flexPrintJob.send();
 				}
 				//Rollback to display
 				this.updateTileList();
+				this.id_list_tile.visible = true;
 			}
 		]]>
 	</fx:Script>
@@ -200,7 +194,7 @@
 		<s:Image id="id_image_frame" left="200" top="40" />
 		
 		<s:List id="id_list_tile" autoLayout="true" borderColor="#5e6468" borderAlpha="1"
-				contentBackgroundAlpha="0" contentBackgroundColor="#5e6468"
+				contentBackgroundAlpha="1" contentBackgroundColor="#5e6468"
 				horizontalScrollPolicy="off" itemRenderer="views.renderers.ImageRenderer"
 				useVirtualLayout="false" verticalScrollPolicy="off"
 		>
@@ -208,30 +202,16 @@
 				<!--<utils:HW_TileLayout-->
 				<s:TileLayout
 				 requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
-							  verticalGap="0.1" horizontalGap="0.1" useVirtualLayout="false" 
+							  verticalGap="2" horizontalGap="2" useVirtualLayout="false" 
 							  paddingLeft="1" paddingBottom="1" paddingRight="1" paddingTop="1"
 							  />
 			</s:layout>
 		</s:List>
 		
-		<s:List id="id_list_tile_print" autoLayout="true" borderColor="#5e6468" borderAlpha="0"
-				contentBackgroundAlpha="0" contentBackgroundColor="#5e6468"
-				horizontalScrollPolicy="off" itemRenderer="views.renderers.ImageRenderer"
-				useVirtualLayout="false" verticalScrollPolicy="off" 
-				>
-			<s:layout>
-				<!--<utils:HW_TileLayout-->
-				<s:TileLayout
-					requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
-					verticalGap="0.1" horizontalGap="0.1" useVirtualLayout="false" 
-					paddingLeft="1" paddingBottom="1" paddingRight="1" paddingTop="1"
-					/>
-			</s:layout>
-		</s:List>
 		<!--</s:BorderContainer>-->
 		
-		<s:Button x="383" y="500" label="Back2Verify" skinClass="skins.button.HW_Back2VerifyButton_Skin" click="cancelTypeset_button_clickHandler(event)"/>
-		<s:Button x="505" y="500" label="PRINT_OUT" skinClass="skins.button.HW_PrintButton_Skin" click="printOut_button_clickHandler(event)"/>
+		<s:Button x="383" y="500" label="Back2Verify" skinClass="skins.button.HW_Back2VerifyButton_Skin" click="cancelTypeset_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
+		<s:Button x="505" y="500" label="PRINT_OUT" skinClass="skins.button.HW_PrintButton_Skin" click="printOut_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
 		
 		<!--<view:UITransformTool id="id_uit_tool" target="{id_list_tile}" />-->
 		

@@ -37,6 +37,6 @@
 								borderWidth="0.2"
 								borderColor="white"
 								/>-->
-	<s:Image id="id_image" source="{data.source}" width="{data.width}" height="{data.height}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0" />
+	<s:Image id="id_image" source="{data.source}" width="{data.width}" height="{data.height}" scaleX="{data.scaleX}" scaleY="{data.scaleY}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0" />
 		 
 </s:ItemRenderer>

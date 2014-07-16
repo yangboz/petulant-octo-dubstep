@@ -86,6 +86,10 @@
 				id_typeset_view.updateImageViews();
 				id_typeset_view.updateTileList();
 			}
+			protected function navigatorcontent_upload_showHandler(event:FlexEvent):void
+			{
+				id_upload_view.updateImageViews();
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -113,8 +117,8 @@
 		<s:NavigatorContent width="100%" height="100%">
 			<views:IntroView/>
 		</s:NavigatorContent>
-		<s:NavigatorContent width="100%" height="100%">
-			<views:UploadView/>
+		<s:NavigatorContent width="100%" height="100%" show="navigatorcontent_upload_showHandler(event)">
+			<views:UploadView id="id_upload_view"/>
 		</s:NavigatorContent>
 		<s:NavigatorContent width="100%" height="100%" show="navigatorcontent_editor_showHandler(event)">
 			<views:EditorView id="id_eitor_view"/>

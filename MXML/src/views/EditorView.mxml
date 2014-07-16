@@ -41,7 +41,7 @@
 				///Upldate UI images.
 				this.updateImageViews();
 				///Align Image Views.
-				alignImageView();
+				this.alignImageView();
 				//Update tool
 				this.updateUITransformTools();
 			}
@@ -88,7 +88,8 @@
 				this.id_group.maxWidth = this.getRequiredCertPhotoWidth();
 				this.id_group.maxHeight = this.getRequiredCertPhotoHeight();
 				//Alignment
-
+				//id_list selectedIndex
+				this.id_list.selectedIndex = AppData.selectedCertSizeIndex;
 			}
 			
 			protected function alignImageView():void
@@ -96,27 +97,27 @@
 //				this.id_group.x -= (this.id_image_edit.bitmapData.width-this.getRequiredCertPhotoWidth())/2;
 //				this.id_group.y -= (this.id_image_edit.bitmapData.height-this.getRequiredCertPhotoHeight())/2;
 			}
-			
+			//
 			protected function autoResizeImageView():void
 			{
 				//
 				var contentW:Number = this.id_image_edit.contentWidth;
 				var contentH:Number = this.id_image_edit.contentHeight;
-				var contentWHration:Number = contentW/contentH;
+				var contentWHratio:Number = contentW/contentH;
 				//
 				var requiredW:Number = getRequiredCertPhotoWidth();
 				var requiredH:Number = getRequiredCertPhotoHeight();
 				var requiredWHratio:Number = requiredW/requiredH;
 
 				//Ratio check
-				if(contentWHration<=requiredWHratio)
+				if(contentWHratio>=requiredWHratio)
 				{
-					this.id_image_edit.width = requiredW;
-					this.id_image_edit.height = requiredH*contentWHration;
+					this.id_image_edit.width = requiredW*contentWHratio;
+					this.id_image_edit.height = requiredH;
 				}else
 				{
-					this.id_image_edit.width = requiredW*contentWHration;
-					this.id_image_edit.height = requiredH;
+					this.id_image_edit.width = requiredW;
+					this.id_image_edit.height = requiredH*contentWHratio;
 				}
 				//Update tool
 				updateUITransformTools();
@@ -125,6 +126,11 @@
 			protected function reupload_button_clickHandler(event:MouseEvent):void
 			{
 				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_UPLOAD;
+				//Clear UITransform tool's opration history
+				id_uit_tool.targets = null;
+//				this.id_uit_tool.rotation = 0;
+//				this.id_uit_tool.scaleX = 0;
+//				this.id_uit_tool.scaleY = 0;
 			}
 			
 			protected function editnext_button_clickHandler(event:MouseEvent):void
@@ -383,7 +389,7 @@
 	<s:BorderContainer id="id_border_container" width="100%" height="100%" contentBackgroundAlpha="0"
 					   backgroundImage="{viewBackgroundImage}"
 					   >
-		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)"  selectedIndex="{AppData.selectedCertSizeIndex}"/>
+		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)" />
 		
 		<s:Image id="id_image_instruction" x="200" y="60"/>
 		
@@ -391,6 +397,7 @@
 			<!--<s:Image id="id_image_edit"/>-->
 			<mx:Image id="id_image_edit" maintainAspectRatio="false"/>
 		</s:Group>
+		
 		<s:Image id="id_image_frame" enabled="false"/>
 		<s:Image id="id_image_guide" enabled="false"/>
 		<!--<s:Image id="id_image_mask" x="{id_image_frame.x}" y="{id_image_frame.y}" enabled="false"/>-->
@@ -411,11 +418,11 @@
 			
 		</view:UITransformTool>
 		
-		<s:Button x="383" y="500" label="RE_UPLOAD" skinClass="skins.button.HW_Back2UploadButton_Skin" click="reupload_button_clickHandler(event)"/>
-		<s:Button x="505" y="500" label="EDIT_NEXT" skinClass="skins.button.HW_EditorNextButton_Skin" click="editnext_button_clickHandler(event)"/>
+		<s:Button x="383" y="500" label="RE_UPLOAD" skinClass="skins.button.HW_Back2UploadButton_Skin" click="reupload_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
+		<s:Button x="505" y="500" label="EDIT_NEXT" skinClass="skins.button.HW_EditorNextButton_Skin" click="editnext_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
 		<spark:HSlider id="id_hslider_rotate" x="393" y="438" 
 					   showTrackHighlight="true" skinClass="skins.slider.HW_EditorRotateHSlider_Skin"
-				   change="onEditorRotateSliderChange(event)" stepSize="5" minimum="-180" maximum="180" value="0"
+				   change="onEditorRotateSliderChange(event)" stepSize="1" minimum="-180" maximum="180" value="0"
 				   width="200" 
 				   />
 		<s:Button x="349" y="425" label="ROTATE" skinClass="skins.button.HW_RotateButton_Skin" click="rotate90ButtonClickHandler(event)"/>
@@ -426,7 +433,6 @@
 				   change="onEditorScaleSliderChange(event)" stepSize="0.1" minimum="0.5" maximum="2" value="1"
 				   height="140" 
 				   />-->
-		
 		
 		<s:Group id="passiveGuideGroup" top="0" bottom="0" left="0" right="0"/>
 		<s:Line id="vGuide" yFrom="{id_image_frame.y}" yTo="{id_image_frame.height}" depth="3" visible="false">
