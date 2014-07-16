@@ -283,7 +283,7 @@ package model
 			{row:5,col:4,offsetX:0,offsetY:0,shiftIndex:[]},
 			{row:5,col:4,offsetX:0,offsetY:0,shiftIndex:[]},
 			{row:5,col:4,offsetX:0,offsetY:0,shiftIndex:[]},
-			{row:3,col:4,offsetX:0,offsetY:0,shiftIndex:[]}
+			{row:3,col:5,offsetX:0,offsetY:0,shiftIndex:[]}
 //			new Point(7,2),new Point(8,2),new Point(5,2),//row,column
 //			new Point(5,2),new Point(5,2),new Point(3,2)
 		];

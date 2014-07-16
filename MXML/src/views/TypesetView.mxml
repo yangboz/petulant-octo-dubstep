@@ -12,6 +12,7 @@
 			import mx.collections.ArrayList;
 			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
+			import mx.graphics.ImageSnapshot;
 			import mx.printing.FlexPrintJobScaleType;
 			
 			import spark.events.IndexChangeEvent;
@@ -41,7 +42,10 @@
 				this.updateTileList(false);//Expand to print.
 				//Set timeout
 				this.id_list_tile.callLater(printOut);
-				//
+				//Adding snapshot file
+				var snapshot:BitmapData = ImageSnapshot.captureBitmapData(this.id_list_tile);
+				this.id_list_tile_snapshot.source = new Bitmap(snapshot);
+				//Hidden the expanded result
 				this.id_list_tile.visible = false;
 			}
 			
@@ -169,7 +173,9 @@
 				}
 				//Rollback to display
 				this.updateTileList();
+				//Display the resized for display
 				this.id_list_tile.visible = true;
+				this.id_list_tile_snapshot.source = "";
 			}
 		]]>
 	</fx:Script>
@@ -207,7 +213,7 @@
 							  />
 			</s:layout>
 		</s:List>
-		
+		<s:Image id="id_list_tile_snapshot" x="{id_list_tile.x}" y="{id_list_tile.y}" visible="{id_list_tile_snapshot.source!=''}"/>
 		<!--</s:BorderContainer>-->
 		
 		<s:Button x="383" y="500" label="Back2Verify" skinClass="skins.button.HW_Back2VerifyButton_Skin" click="cancelTypeset_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
