@@ -32,11 +32,11 @@
 			</s:Animate>
 		</mx:Transition>
 	</s:transitions>    -->
-	<components:ImageWithBorder id="id_image" source="{data.source}" scaleX="{data.scaleX}" scaleY="{data.scaleY}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0" 
+	<!--<components:ImageWithBorder id="id_image" source="{data.source}" scaleX="{data.scaleX}" scaleY="{data.scaleY}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0" 
 								borderAlpha="1"
 								borderWidth="0.1"
 								borderColor="black"
-								/>
-	<!--<s:Image id="id_image" source="{data.source}" width="{data.width}" height="{data.height}" scaleX="{data.scaleX}" scaleY="{data.scaleY}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0" />-->
+								/>-->
+	<s:Image id="id_image" source="{data.source}" width="{data.width}" height="{data.height}" scaleX="{data.scaleX}" scaleY="{data.scaleY}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0" />
 		 
 </s:ItemRenderer>
