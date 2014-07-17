@@ -112,12 +112,12 @@
 				//Ratio check
 				if(contentWHratio>=requiredWHratio)
 				{
-					this.id_image_edit.width = requiredW*contentWHratio;
-					this.id_image_edit.height = requiredH;
-				}else
-				{
 					this.id_image_edit.width = requiredW;
 					this.id_image_edit.height = requiredH*contentWHratio;
+				}else
+				{
+					this.id_image_edit.width = requiredW*contentWHratio;
+					this.id_image_edit.height = requiredH;
 				}
 				//Update tool
 				updateUITransformTools();

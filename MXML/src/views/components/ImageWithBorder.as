@@ -77,12 +77,14 @@ package views.components
 //				graphics.lineStyle(getStyle('borderWidth'),getStyle('borderColor'),getStyle('borderAlpha'),false);
 //				graphics.drawRect(x,y,width,height);
 				//
-				var dashy:DashedLine = new DashedLine(getStyle('borderWidth'),getStyle('borderColor'),new Array(4,4,4,4));
-				dashy.moveTo(x,y);
-				dashy.lineTo(width,y);
-				dashy.lineTo(width,height);
-				dashy.lineTo(x,height);
-				dashy.lineTo(x,y);
+				var dX:Number = x-1;
+				var dY:Number = y-1;
+				var dashy:DashedLine = new DashedLine(getStyle('borderWidth'),getStyle('borderColor'),new Array(2,2,2,2));
+				dashy.moveTo(dX,dY);
+				dashy.lineTo(width-dX,dY);
+				dashy.lineTo(width-dX,height-dY);
+				dashy.lineTo(dX,height-dY);
+				dashy.lineTo(dX,dY);
 				addChild(dashy);
 			}
 		}
