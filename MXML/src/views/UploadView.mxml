@@ -129,8 +129,14 @@
 				//
 //				this.id_image_upload.source = AppData.uploadedImageFile.nativePath;
 				///TODO:Facial number check
-				//
-				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;
+				this.id_image_upload.source = AppData.uploadedImageFile.nativePath;
+				this.id_image_upload.addEventListener(Event.COMPLETE,loadImageCompleteHandler);
+				function loadImageCompleteHandler(event:Event):void
+				{
+					AppData.originalFileBitmapData = id_image_upload.bitmapData;
+					//
+					AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;
+				}
 			}
 			
 			private function faceDetection(target:Image,display:Boolean):int

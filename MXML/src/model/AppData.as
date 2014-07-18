@@ -61,13 +61,15 @@ package model
 		public static var uploadedImageFile:File;
 		public static var savedImageFie:File;
 		public static var savedImageBitmapData:BitmapData;
-		public static var savedImageMatrix:Matrix;
+		public static var savedImageMatrix:Matrix = new Matrix();
 		//
 		public static var ppi2dpi:Number = 0.3;
 		//
 		private static var fileStream:FileStream;
 		//
 		private static var autoCloseWindow:Boolean;
+		//
+		public static var originalFileBitmapData:BitmapData;
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------

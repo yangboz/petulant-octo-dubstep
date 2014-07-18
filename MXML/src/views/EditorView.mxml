@@ -119,8 +119,6 @@
 					this.id_image_edit.width = requiredW*contentWHratio;
 					this.id_image_edit.height = requiredH;
 				}
-				//Update tool
-				updateUITransformTools();
 			}
 			
 			protected function reupload_button_clickHandler(event:MouseEvent):void
@@ -142,9 +140,19 @@
 				var requiredPhotoWidth:Number = this.getRequiredCertPhotoWidth();
 				var requiredPhotoHeight:Number = this.getRequiredCertPhotoHeight();
 				var bitMapData:BitmapData = new BitmapData(requiredPhotoWidth,requiredPhotoHeight,true); 
-//				bitMapData.draw(this.id_group,AppData.savedImageMatrix); 
+				AppData.savedImageMatrix = new Matrix();
+				AppData.savedImageMatrix.scale(requiredPhotoWidth/this.id_image_edit.contentWidth,requiredPhotoHeight/this.id_image_edit.contentHeight);
+				//
+				var rect:Rectangle = new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight);
+				var bufferBitmapData:BitmapData = new BitmapData(rect.width,rect.height);
+				bufferBitmapData.copyPixels(AppData.originalFileBitmapData,rect,new Point(0,0));
+				//
+//				bufferMatix.scale(requiredPhotoWidth/this.id_image_edit.contentWidth,requiredPhotoHeight/this.id_image_edit.contentHeight);
+				bitMapData.draw(bufferBitmapData,this.id_uit_tool.transform.matrix); 
 //				bitMapData.draw(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true); 
-				bitMapData.drawWithQuality(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true,StageQuality.BEST);
+//				bitMapData.drawWithQuality(AppData.originalFileBitmapData,AppData.savedImageMatrix,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true,StageQuality.BEST);
+				//
+				trace("this.id_uit_tool.transform:",this.id_uit_tool.transform);
 				//
 				AppData.saveImageFile(bitMapData);
 				//
@@ -236,7 +244,7 @@
 //				trace("(before transformationComplete)toolData.matrix:",event.toolData.matrix);
 				trace("(before transformationComplete)data.matrix:",event.data.matrix);
 				//
-				AppData.savedImageMatrix = event.data.matrix;
+//				AppData.savedImageMatrix = event.data.matrix;
 				switch(event.transformationType)
 				{
 					case TransformationType.RESIZE:
@@ -253,7 +261,6 @@
 				}
 //				trace("(after transformationComplete)toolData.matrix:",event.toolData.matrix);
 				trace("(after transformationComplete)data.matrix:",event.data.matrix);
-				
 			}
 			
 			protected function tool_transformationHandler(event:TransformEvent):void
@@ -398,7 +405,9 @@
 		<s:Group id="id_group" clipAndEnableScrolling="true">
 			<!--<s:Image id="id_image_edit"/>-->
 			<!--<mx:Image id="id_image_edit" maintainAspectRatio="true"/>-->
-			<components:ImageWithSmooth id="id_image_edit" maintainAspectRatio="true" 
+			<!--<components:ImageWithSmooth -->
+			<mx:Image 
+				id="id_image_edit" maintainAspectRatio="true" 
 										maxHeight="{AppData.MAX_UIT_HEIGHT}" maxWidth="{AppData.MAX_UIT_WIDTH}"/>
 		</s:Group>
 		
