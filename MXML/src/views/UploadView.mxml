@@ -136,6 +136,8 @@
 					AppData.originalFileBitmapData = id_image_upload.bitmapData;
 					//
 					AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;
+					//Avoid back cache issue.
+					id_image_upload.source = "";
 				}
 			}
 			
@@ -198,7 +200,7 @@
 				  skinClass="skins.button.HW_UploadButton_Skin" 
 				  buttonMode="true" useHandCursor="true"/>
 		<s:SpriteVisualElement id="id_faceRectContainer"/>
-		<s:Image id="id_image_upload" x="410" y="190"/>
+		<s:Image id="id_image_upload" x="410" y="190" visible="{id_image_upload.source}"/>
 		
 	</s:BorderContainer>
 	

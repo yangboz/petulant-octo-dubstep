@@ -31,7 +31,7 @@ package views.components
 		// Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		private var dashy:DashedLine;
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
@@ -71,20 +71,24 @@ package views.components
 			{
 				var x:Number=-(getStyle('borderWidth'));
 				var y:Number=-(getStyle('borderWidth'));
-				var width:Number=contentWidth+getStyle('borderWidth');
-				var height:Number=contentHeight+getStyle('borderWidth');
+				var width:Number=contentWidth-getStyle('borderWidth');
+				var height:Number=contentHeight-getStyle('borderWidth');
 //				graphics.clear();
-//				graphics.lineStyle(getStyle('borderWidth'),getStyle('borderColor'),getStyle('borderAlpha'),false);
+//				graphics.lineStyle(1,getStyle('borderColor'),getStyle('borderAlpha'),false);
 //				graphics.drawRect(x,y,width,height);
 				//
-				var dX:Number = x-1;
-				var dY:Number = y-1;
-				var dashy:DashedLine = new DashedLine(getStyle('borderWidth'),getStyle('borderColor'),new Array(2,2,2,2));
-				dashy.moveTo(dX,dY);
-				dashy.lineTo(width-dX,dY);
-				dashy.lineTo(width-dX,height-dY);
-				dashy.lineTo(dX,height-dY);
-				dashy.lineTo(dX,dY);
+				var dX:Number = getStyle('borderWidth');
+				var dY:Number = getStyle('borderWidth');
+				if(this.dashy)
+				{
+					this.removeChild(dashy);
+				}
+				this.dashy = new DashedLine(0.5,getStyle('borderColor'),new Array(2,2,2,2));
+				dashy.moveTo(-dX,-dY);
+				dashy.lineTo(width+2*dX,-dY);
+				dashy.lineTo(width+2*dX,height+2*dY);
+				dashy.lineTo(-dX,height+2*dY);
+				dashy.lineTo(-dX,-dY);
 				addChild(dashy);
 			}
 		}

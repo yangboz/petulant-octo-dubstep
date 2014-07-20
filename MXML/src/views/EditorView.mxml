@@ -110,13 +110,13 @@
 				var requiredWHratio:Number = requiredW/requiredH;
 
 				//Ratio check
-				if(contentWHratio>=requiredWHratio)
+				if(contentW<=contentH)
 				{
 					this.id_image_edit.width = requiredW;
-					this.id_image_edit.height = requiredH*contentWHratio;
+					this.id_image_edit.height = requiredH/contentWHratio;
 				}else
 				{
-					this.id_image_edit.width = requiredW*contentWHratio;
+					this.id_image_edit.width = requiredW/contentWHratio;
 					this.id_image_edit.height = requiredH;
 				}
 			}
@@ -140,6 +140,7 @@
 				var requiredPhotoWidth:Number = this.getRequiredCertPhotoWidth();
 				var requiredPhotoHeight:Number = this.getRequiredCertPhotoHeight();
 				var bitMapData:BitmapData = new BitmapData(requiredPhotoWidth,requiredPhotoHeight,true); 
+				/*
 				AppData.savedImageMatrix = new Matrix();
 				AppData.savedImageMatrix.scale(requiredPhotoWidth/this.id_image_edit.contentWidth,requiredPhotoHeight/this.id_image_edit.contentHeight);
 				//
@@ -149,8 +150,9 @@
 				//
 //				bufferMatix.scale(requiredPhotoWidth/this.id_image_edit.contentWidth,requiredPhotoHeight/this.id_image_edit.contentHeight);
 				bitMapData.draw(bufferBitmapData,this.id_uit_tool.transform.matrix); 
+				*/
 //				bitMapData.draw(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true); 
-//				bitMapData.drawWithQuality(AppData.originalFileBitmapData,AppData.savedImageMatrix,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true,StageQuality.BEST);
+				bitMapData.drawWithQuality(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true,StageQuality.BEST);
 				//
 				trace("this.id_uit_tool.transform:",this.id_uit_tool.transform);
 				//

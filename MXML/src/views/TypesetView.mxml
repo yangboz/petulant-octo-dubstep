@@ -210,7 +210,7 @@
 				<!--<utils:HW_TileLayout-->
 				<s:TileLayout
 				 requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
-							  verticalGap="2" horizontalGap="2" useVirtualLayout="false" 
+							  verticalGap="10" horizontalGap="10" useVirtualLayout="false" 
 							  paddingLeft="1" paddingBottom="1" paddingRight="1" paddingTop="1"
 							  />
 			</s:layout>
