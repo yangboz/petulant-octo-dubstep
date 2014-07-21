@@ -3,7 +3,7 @@
 
 [Setup]
 AppName = "HP_ID_Print_App"
-AppVersion = 0.0.81
+AppVersion = 0.0.82
 DefaultDirName = "C:\HP_ID_Print_App\"
 AppCopyright = Copyright 2013 HP, Corp.
 AppPublisher = HP, Corp.
@@ -12,7 +12,7 @@ AppPublisherURL = http://www.hp.com
 [Types]
 
 [Files]
-Source: "C:\Users\yangboz\git\petulant-octo-dubstep\MXML\HP_ID_Print_MXML\*.*"; DestDir: "{app}\"; Flags :ignoreversion recursesubdirs; CopyMode: alwaysoverwrite;
+Source: "C:\Users\yangboz\Documents\GitHub\petulant-octo-dubstep\MXML\Main\*.*"; DestDir: "{app}\"; Flags :ignoreversion recursesubdirs; CopyMode: alwaysoverwrite;
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files 
 
 [Tasks] 

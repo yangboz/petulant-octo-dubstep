@@ -5,6 +5,47 @@
 				autoDrawBackground="false" xmlns:components="views.components.*"
 				>
 	
+	<fx:Script>
+		<![CDATA[
+			
+			import model.AppData;
+			
+			import mx.events.FlexEvent;
+			
+			import views.components.ImageWithBorder;
+			
+//			private var id_image:ImageWithBorder;
+			
+			protected function id_image_completeHandler(event:Event):void
+			{
+				this.id_image.x = data.x;
+				this.id_image.y = data.y;
+				this.id_image.scaleX = data.sX;
+				this.id_image.scaleY = data.sY;
+				this.id_image.rotation = data.r;
+			}
+			/*
+			override public function set data( value:Object ) : void 
+			{
+				if(value)
+				{
+					if(this.id_image)
+					{
+						this.id_group.removeElement(id_image);
+					}
+					id_image = new ImageWithBorder();
+					this.id_group.addElement(id_image);
+					//
+					id_image.source = value.source;
+					id_image.addEventListener(Event.COMPLETE,id_image_completeHandler);
+				}
+				super.data  = value;
+			}
+			*/
+		]]>
+	</fx:Script>
+	
+	
 	<!--<s:states>
 		<s:State name="normal" />
 		<s:State name="hovered" />
@@ -32,11 +73,17 @@
 			</s:Animate>
 		</mx:Transition>
 	</s:transitions>    -->
-	<components:ImageWithBorder id="id_image" source="{data.source}" scaleX="{data.scaleX}" scaleY="{data.scaleY}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0" 
+	<!--<s:Group id="id_group" clipAndEnableScrolling="true" width="{data.w}" height="{data.h}">-->
+		<components:ImageWithBorder id="id_image" 
+								source="{data.source}" scaleX="{data.sX}" scaleY="{data.sY}" rotation="{data.r}"
 								borderAlpha="1"
 								borderWidth="5"
 								borderColor="black"
+								horizontalCenter="0" verticalCenter="0"
 								/>
-	<!--<s:Image id="id_image" source="{data.source}" width="{data.width}" height="{data.height}" scaleX="{data.scaleX}" scaleY="{data.scaleY}" rotation="{data.rotation}" horizontalCenter="0" verticalCenter="0" />-->
-		 
+		<!--<s:Image id="id_image" 
+				 source="{data.source}"  scaleX="{data.sX}" scaleY="{data.sY}" rotation="{data.r}"
+				 horizontalCenter="0" verticalCenter="0" 
+				 />-->
+	<!--</s:Group>-->
 </s:ItemRenderer>

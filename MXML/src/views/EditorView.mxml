@@ -28,7 +28,7 @@
 			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				///Upldate UI images.
-				updateImageViews();
+				this.updateImageViews();
 				///
 //				this.addEventListener(MouseEvent.CLICK,deselectUITransformTool);
 			}
@@ -42,6 +42,8 @@
 				this.updateImageViews();
 				///Align Image Views.
 				this.alignImageView();
+				///Image autosize
+				this.autoResizeImageView();
 				//Update tool
 				this.updateUITransformTools();
 			}
@@ -55,14 +57,7 @@
 			{
 				///Display image_editor
 				this.id_image_edit.source = AppData.uploadedImageFile.nativePath;
-				this.id_image_edit.addEventListener(Event.COMPLETE,function(event:Event):void{
-					///Align Image Views.
-					alignImageView();
-					///Image autosize
-					autoResizeImageView();
-					///
-					selectUITransformTool(new MouseEvent(MouseEvent.CLICK));
-				});
+				this.id_image_edit.addEventListener(Event.COMPLETE,id_image_edit_completeHandler);
 				//
 				this.id_image_edit.minHeight = this.getRequiredCertPhotoHeight();
 				this.id_image_edit.minWidth = this.getRequiredCertPhotoWidth();
@@ -108,17 +103,19 @@
 				var requiredW:Number = getRequiredCertPhotoWidth();
 				var requiredH:Number = getRequiredCertPhotoHeight();
 				var requiredWHratio:Number = requiredW/requiredH;
-
 				//Ratio check
 				if(contentW<=contentH)
 				{
 					this.id_image_edit.width = requiredW;
-					this.id_image_edit.height = requiredH/contentWHratio;
+					this.id_image_edit.height = requiredW* contentH/contentW;
 				}else
 				{
-					this.id_image_edit.width = requiredW/contentWHratio;
+					this.id_image_edit.width = requiredH*contentW/ contentH;
 					this.id_image_edit.height = requiredH;
 				}
+				//
+				AppData.savedImageOpts.sX = this.id_image_edit.width/contentW;
+				AppData.savedImageOpts.sY = this.id_image_edit.height/contentH;
 			}
 			
 			protected function reupload_button_clickHandler(event:MouseEvent):void
@@ -251,12 +248,17 @@
 				{
 					case TransformationType.RESIZE:
 						AppData.savedImageMatrix.scale(this.id_image_edit.scaleX,this.id_image_edit.scaleY);
+						AppData.savedImageOpts.sX = this.id_image_edit.scaleX;
+						AppData.savedImageOpts.sY = this.id_image_edit.scaleY;
 						break;
 					case TransformationType.ROTATE:
 						AppData.savedImageMatrix.rotate(this.id_image_edit.rotation);
+						AppData.savedImageOpts.r = this.id_image_edit.rotation;
 						break;
 					case TransformationType.MOVE:
 						AppData.savedImageMatrix.translate(event.data.matrix.tx,event.data.matrix.ty);
+						AppData.savedImageOpts.tX = event.data.matrix.tx;
+						AppData.savedImageOpts.tY = event.data.matrix.ty;
 						break;
 					default:
 						break;
@@ -351,6 +353,16 @@
 					}
 				}
 			}	
+			
+			private function id_image_edit_completeHandler(event:Event):void
+			{
+				///Align Image Views.
+				alignImageView();
+				///Image autosize
+				autoResizeImageView();
+				///
+				selectUITransformTool(new MouseEvent(MouseEvent.CLICK));
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>                                                                                                     

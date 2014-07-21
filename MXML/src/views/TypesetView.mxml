@@ -80,19 +80,28 @@
 				//
 				var definedImageWidth:Number;
 				var definedImageHeight:Number;
+				var definedImageSource:Object = AppData.savedImageFie.nativePath;
 				if(resizeForDisplay)
 				{
-					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w;
-					definedImageHeight = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h;
+					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w ;
+					definedImageHeight = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h ;
+//					definedImageSource =  AppData.uploadedImageFileCopy.nativePath;
 				}else
 				{
 					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w_ *AppData.PIXEL_2_PRINT;
 					definedImageHeight = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h_*AppData.PIXEL_2_PRINT;
+//					definedImageSource =  AppData.uploadedImageFile.nativePath;
 				}
 				var definedImageRotation:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].r;
+//				var definedImageRotation:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].r + AppData.savedImageOpts.r;
 				//
 				var definedImageScaleX:Number = definedImageWidth/this.getRequiredCertPhotoWidth();
 				var definedImageScaleY:Number = definedImageHeight/this.getRequiredCertPhotoHeight();
+//				var definedImageScaleX:Number = AppData.savedImageOpts.sX;
+//				var definedImageScaleY:Number = AppData.savedImageOpts.sY;
+				//
+				var definedImageTx:Number = AppData.savedImageOpts.tX;
+				var definedImageTy:Number = AppData.savedImageOpts.tY;
 				//DataProvider
 				var imageArray:Array = [];
 //				this.id_list_tile.dataProvider = new ArrayList(imageArray);
@@ -107,12 +116,14 @@
 //							definedImageRotation = 270;
 //						}
 						var data:Object = {
-								source:AppData.savedImageFie.nativePath,
-//								width:definedImageWidth,
-//								height:definedImageHeight,
-								scaleX:definedImageScaleX,
-								scaleY:definedImageScaleY,
-								rotation:definedImageRotation
+								source:definedImageSource,
+								w:definedImageWidth,
+								h:definedImageHeight,
+								sX:definedImageScaleX,
+								sY:definedImageScaleY,
+								r:definedImageRotation,
+								x:definedImageTx,
+								y:definedImageTy
 						}
 						imageArray.push(data);
 					}
@@ -181,15 +192,6 @@
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
-		<s:Parallel id="id_resize_small">
-			<s:Scale scaleYTo="0.5" scaleXTo="0.5" target="{this.id_list_tile}" autoCenterTransform="true"/>
-			<!--<s:Resize widthTo="200" heightTo="200" target="{this.id_list_tile_real}"/>-->
-		</s:Parallel>
-		<s:Parallel id="id_resize_normal">
-			<!--<s:Resize widthTo="400" heightTo="400" target="{this.id_list_tile_real}"/>-->
-			<s:Scale scaleYTo="1" scaleXTo="1" target="{this.id_list_tile}" autoCenterTransform="true" />
-		</s:Parallel>
-		
 	</fx:Declarations>
 	<s:BorderContainer width="100%" height="100%" contentBackgroundAlpha="0"
 					   backgroundImage="{viewBackgroundImage}"
@@ -203,15 +205,17 @@
 		contentBackgroundAlpha="0" contentBackgroundColor="#5e6468"-->
 		<s:List id="id_list_tile" autoLayout="true" 
 				
-				horizontalScrollPolicy="off" itemRenderer="views.renderers.ImageRenderer"
-				useVirtualLayout="false" verticalScrollPolicy="off"
+				horizontalScrollPolicy="off" verticalScrollPolicy="off"
+				itemRenderer="views.renderers.ImageRenderer"
+				useVirtualLayout="false" 
 		>
 			<s:layout>
 				<!--<utils:HW_TileLayout-->
 				<s:TileLayout
 				 requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
-							  verticalGap="10" horizontalGap="10" useVirtualLayout="false" 
-							  paddingLeft="1" paddingBottom="1" paddingRight="1" paddingTop="1"
+							  verticalGap="10" horizontalGap="10"
+							  paddingLeft="1" paddingBottom="1" paddingRight="1" paddingTop="1" 
+							  useVirtualLayout="false"
 							  />
 			</s:layout>
 		</s:List>

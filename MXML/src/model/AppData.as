@@ -63,6 +63,9 @@ package model
 		public static var savedImageBitmapData:BitmapData;
 		public static var savedImageMatrix:Matrix = new Matrix();
 		//
+		public static var uploadedImageFileCopy:File;
+		public static var savedImageOpts:Object = {sX:1,sY:1,tX:0,tY:0,r:0};//ScaleX/ScaleY,TraslateX,TranslateY,Rotation
+		//
 		public static var ppi2dpi:Number = 0.3;
 		//
 		private static var fileStream:FileStream;

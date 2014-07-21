@@ -97,7 +97,7 @@
 			{
 				var fileList:Array = event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
 				AppData.uploadedImageFile = fileList[0] as File;
-				trace(AppData.uploadedImageFile);//TODO:navtive file upload function.
+//				trace(AppData.uploadedImageFile);//TODO:navtive file upload function.
 				//
 				this.imageAttributeCheck();
 			}
@@ -129,6 +129,10 @@
 				//
 //				this.id_image_upload.source = AppData.uploadedImageFile.nativePath;
 				///TODO:Facial number check
+				//Copy file to workspace
+				AppData.uploadedImageFileCopy = File.createTempDirectory().resolvePath("copy_".concat(AppData.uploadedImageFile.name));
+				AppData.uploadedImageFile.copyTo(AppData.uploadedImageFileCopy as FileReference);
+				//
 				this.id_image_upload.source = AppData.uploadedImageFile.nativePath;
 				this.id_image_upload.addEventListener(Event.COMPLETE,loadImageCompleteHandler);
 				function loadImageCompleteHandler(event:Event):void
