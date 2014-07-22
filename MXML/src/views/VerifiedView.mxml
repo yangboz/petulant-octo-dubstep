@@ -40,9 +40,20 @@
 				{
 					id_image_saved.source = "";
 					id_image_saved.source = AppData.savedImageFie.nativePath;
+//					id_image_saved.source = AppData.uploadedImageFile.nativePath;
 					var id_image_saved_point:Point = AppData.ARRAY_EDITOR_POINT_PHOTOS[AppData.selectedCertSizeIndex] as Point;
 					id_image_saved.x = id_image_saved_point.x+1;
 					id_image_saved.y = id_image_saved_point.y+1;
+					/*
+					id_image_group.x = id_image_saved_point.x+1;
+					id_image_group.y = id_image_saved_point.y+1;
+					//Testing code for restore the UITransformTools operation
+					id_image_saved.scaleX = AppData.savedImageOpts.sX;
+					id_image_saved.scaleY = AppData.savedImageOpts.sX;
+					id_image_saved.x = AppData.savedImageOpts.tX;
+					id_image_saved.y = AppData.savedImageOpts.tY;
+					id_image_saved.rotation = AppData.savedImageOpts.r;
+					*/
 				}
 				//
 				this.id_list.selectedIndex = AppData.selectedCertSizeIndex;
@@ -61,8 +72,11 @@
 		
 		<s:Image id="id_image_instruction" x="200" y="60" source="{AppData.INS_VERIFIED_TEXT}"/>
 		
-		<s:Image id="id_image_frame" />
 		<s:Image id="id_image_saved" />
+		<!--<s:Group id="id_image_group" clipAndEnableScrolling="true" width="{id_image_frame.width}" height="{id_image_frame.height}">
+			<components:ImageAdjustRotate id="id_image_saved" />
+		</s:Group>-->
+		<s:Image id="id_image_frame" />
 		
 		<s:VGroup x="650" y="200" visible="false">
 			<s:HGroup>

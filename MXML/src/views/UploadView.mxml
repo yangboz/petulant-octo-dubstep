@@ -137,7 +137,7 @@
 				this.id_image_upload.addEventListener(Event.COMPLETE,loadImageCompleteHandler);
 				function loadImageCompleteHandler(event:Event):void
 				{
-					AppData.originalFileBitmapData = id_image_upload.bitmapData;
+					AppData.uploadFileBitmapData = id_image_upload.bitmapData;
 					//
 					AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;
 					//Avoid back cache issue.

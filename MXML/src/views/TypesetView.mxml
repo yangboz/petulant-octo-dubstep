@@ -81,6 +81,7 @@
 				var definedImageWidth:Number;
 				var definedImageHeight:Number;
 				var definedImageSource:Object = AppData.savedImageFie.nativePath;
+//				var definedImageSource:Object = AppData.uploadedImageFile.nativePath;
 				if(resizeForDisplay)
 				{
 					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w ;
@@ -95,13 +96,26 @@
 				var definedImageRotation:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].r;
 //				var definedImageRotation:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].r + AppData.savedImageOpts.r;
 				//
-				var definedImageScaleX:Number = definedImageWidth/this.getRequiredCertPhotoWidth();
-				var definedImageScaleY:Number = definedImageHeight/this.getRequiredCertPhotoHeight();
-//				var definedImageScaleX:Number = AppData.savedImageOpts.sX;
-//				var definedImageScaleY:Number = AppData.savedImageOpts.sY;
+				var definedContainerScaleX:Number = definedImageWidth/this.getRequiredCertPhotoWidth();
+				var definedContainerScaleY:Number = definedImageHeight/this.getRequiredCertPhotoHeight();
+				//
+//				var definedImageScaleX:Number = AppData.savedImageOpts.sX * definedContainerScaleX;
+//				var definedImageScaleY:Number = AppData.savedImageOpts.sY * definedContainerScaleY;
+				var definedImageScaleX:Number = definedContainerScaleX;
+				var definedImageScaleY:Number = definedContainerScaleY;
 				//
 				var definedImageTx:Number = AppData.savedImageOpts.tX;
 				var definedImageTy:Number = AppData.savedImageOpts.tY;
+				//Trace info:
+				trace("definedImageWidth:",definedImageWidth,
+					"definedImageHeight:",definedImageHeight,
+					"definedImageRotation:",definedImageRotation,
+					"definedImageScaleX:",definedImageScaleX,
+					"definedImageScaleY:",definedImageScaleY,
+					"definedImageTx:",definedImageTx,
+					"definedImageTy:",definedImageTy
+				);
+				
 				//DataProvider
 				var imageArray:Array = [];
 //				this.id_list_tile.dataProvider = new ArrayList(imageArray);

@@ -133,7 +133,7 @@
 			<views:TypesetView id="id_typeset_view"/>
 		</s:NavigatorContent>
 	</mx:ViewStack>
-	<s:Button x="0" y="0" width="100%" height="45" mouseDown="this.nativeWindow.startMove();" alpha="0"/>
+	<s:Button x="0" y="0" width="100%" height="45" mouseDown="this.nativeWindow.startMove();" alpha="0"  buttonMode="true" useHandCursor="true"/>
 	<s:Button x="694" y="14" label="Button" skinClass="skins.button.HW_CloseButton_Skin" click="maxWindowButtonClickHandler(event)" visible="false"/>
 	<s:Button x="724" y="14" label="Button" skinClass="skins.button.HW_MinButton_Skin" click="minWindowButtonClickHandler(event)" buttonMode="true" useHandCursor="true"/>
 	<s:Button x="754" y="14" label="Button" skinClass="skins.button.HW_CloseButton_Skin" click="closeWindowButtonClickHandler(event)" buttonMode="true" useHandCursor="true"/>

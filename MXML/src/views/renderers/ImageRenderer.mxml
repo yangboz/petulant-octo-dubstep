@@ -11,10 +11,10 @@
 			import model.AppData;
 			
 			import mx.events.FlexEvent;
-			
+			/*
 			import views.components.ImageWithBorder;
 			
-//			private var id_image:ImageWithBorder;
+			private var id_image:ImageWithBorder = null;
 			
 			protected function id_image_completeHandler(event:Event):void
 			{
@@ -22,9 +22,9 @@
 				this.id_image.y = data.y;
 				this.id_image.scaleX = data.sX;
 				this.id_image.scaleY = data.sY;
-				this.id_image.rotation = data.r;
+//				this.id_image.rotation = data.r;
 			}
-			/*
+			
 			override public function set data( value:Object ) : void 
 			{
 				if(value)
@@ -32,12 +32,15 @@
 					if(this.id_image)
 					{
 						this.id_group.removeElement(id_image);
+						this.id_image = null;
 					}
 					id_image = new ImageWithBorder();
 					this.id_group.addElement(id_image);
 					//
 					id_image.source = value.source;
 					id_image.addEventListener(Event.COMPLETE,id_image_completeHandler);
+					id_image.setStyle("horizontalAlign","left");
+					id_image.setStyle("verticalAlign","top");
 				}
 				super.data  = value;
 			}
@@ -73,17 +76,39 @@
 			</s:Animate>
 		</mx:Transition>
 	</s:transitions>    -->
-	<!--<s:Group id="id_group" clipAndEnableScrolling="true" width="{data.w}" height="{data.h}">-->
-		<components:ImageWithBorder id="id_image" 
+	<components:ImageWithBorder id="id_image" 
+		source="{data.source}" scaleX="{data.sX}" scaleY="{data.sY}" rotation="{data.r}"
+		borderAlpha="1"
+		borderWidth="5"
+		borderColor="black"
+		x="{data.x}" y="{data.y}"
+		horizontalCenter="0" verticalCenter="0" 
+	/>
+	<!--
+	<s:Group id="id_group" clipAndEnableScrolling="true" width="{data.w}" height="{data.h}">
+	<s:BorderContainer id="id_group" borderWeight="5" borderColor="black" borderVisible="true">
+		
+	<components:ImageWithBorder id="id_image" 
 								source="{data.source}" scaleX="{data.sX}" scaleY="{data.sY}" rotation="{data.r}"
 								borderAlpha="1"
 								borderWidth="5"
-								borderColor="black"
-								horizontalCenter="0" verticalCenter="0"
+								borderColor="0xffff00"
+								x="{data.x}" y="{data.y}"
+							    horizontalAlign="left" verticalAlign="top"
 								/>
-		<!--<s:Image id="id_image" 
-				 source="{data.source}"  scaleX="{data.sX}" scaleY="{data.sY}" rotation="{data.r}"
-				 horizontalCenter="0" verticalCenter="0" 
-				 />-->
-	<!--</s:Group>-->
+	<components:ImageAdjustRotate
+		id="id_image" 
+		source="{data.source}" scaleX="{data.sX}" scaleY="{data.sY}" rotation="{data.r}"
+		x="{data.x}" y="{data.y}"
+	    cachePolicy="off"
+				 />
+			<s:Image id="id_image" 
+					 source="{data.source}" scaleX="{data.sX}" scaleY="{data.sY}" rotation="{data.r}"
+					 x="{data.x}" y="{data.y}"
+					 horizontalCenter="0" verticalCenter="0" 
+					 />
+		</s:BorderContainer>
+		
+	</s:Group>
+	-->
 </s:ItemRenderer>

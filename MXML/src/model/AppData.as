@@ -29,7 +29,7 @@ package model
 	// Imports
 	//
 	//--------------------------------------------------------------------------
-	[Bindable]
+//	[Bindable]
 	/**
 	 * AppData.as class. 
 	 * @author yangboz
@@ -72,12 +72,12 @@ package model
 		//
 		private static var autoCloseWindow:Boolean;
 		//
-		public static var originalFileBitmapData:BitmapData;
+		public static var uploadFileBitmapData:BitmapData;
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
-		public static const MAX_UIT_WIDTH:Number = 300;
-		public static const MAX_UIT_HEIGHT:Number = 300;
+		public static const MAX_UIT_WIDTH_DEFAULT:Number = 400;
+		public static const MAX_UIT_HEIGHT_DEFAULT:Number = 400;
 		//CenterMeter to Inch
 		private static const CENTER_METER_2_INCH:Number = 0.3937008;
 		//mm*0.3937008*DPI

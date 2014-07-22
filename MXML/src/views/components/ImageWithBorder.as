@@ -41,7 +41,16 @@ package views.components
 		// Public properties
 		//
 		//--------------------------------------------------------------------------
-		
+//		override public function set rotation(value:Number):void
+//		{
+//			this.setStyle("horizontalAlign","center");
+//			this.setStyle("verticalAlign","middle");
+//			//
+//			super.rotation = value;
+//			//
+//			this.setStyle("horizontalAlign","left");
+//			this.setStyle("verticalAlign","top");
+//		}
 		
 		//--------------------------------------------------------------------------
 		//
@@ -92,6 +101,7 @@ package views.components
 				addChild(dashy);
 			}
 		}
+		
 		//--------------------------------------------------------------------------
 		//
 		// Protected methods
