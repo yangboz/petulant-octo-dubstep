@@ -142,6 +142,8 @@
 					AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;
 					//Avoid back cache issue.
 					id_image_upload.source = "";
+					//
+					id_image_upload.removeEventListener(Event.COMPLETE,loadImageCompleteHandler);
 				}
 			}
 			
