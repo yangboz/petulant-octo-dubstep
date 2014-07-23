@@ -80,24 +80,24 @@ package views.components
 			{
 				var x:Number=-(getStyle('borderWidth'));
 				var y:Number=-(getStyle('borderWidth'));
-				var width:Number=contentWidth-getStyle('borderWidth');
-				var height:Number=contentHeight-getStyle('borderWidth');
+				var width:Number=contentWidth-2*getStyle('borderWidth');
+				var height:Number=contentHeight-2*getStyle('borderWidth');
 //				graphics.clear();
 //				graphics.lineStyle(1,getStyle('borderColor'),getStyle('borderAlpha'),false);
 //				graphics.drawRect(x,y,width,height);
 				//
-				var dX:Number = getStyle('borderWidth');
-				var dY:Number = getStyle('borderWidth');
+				var dX:Number = -getStyle('borderWidth');
+				var dY:Number = -getStyle('borderWidth');
 				if(this.dashy)
 				{
 					this.removeChild(dashy);
 				}
-				this.dashy = new DashedLine(0.5,getStyle('borderColor'),new Array(2,2,2,2));
-				dashy.moveTo(-dX,-dY);
-				dashy.lineTo(width+2*dX,-dY);
-				dashy.lineTo(width+2*dX,height+2*dY);
-				dashy.lineTo(-dX,height+2*dY);
-				dashy.lineTo(-dX,-dY);
+				this.dashy = new DashedLine(0.3,getStyle('borderColor'),new Array(2,2,2,2));
+//				dashy.moveTo(dX,dY);
+//				dashy.lineTo(width-4*dX,dY);
+				dashy.moveTo(width-4*dX,height-4*dY);
+				dashy.lineTo(dX,height-4*dY);
+				dashy.lineTo(dX,dY);
 				addChild(dashy);
 			}
 		}

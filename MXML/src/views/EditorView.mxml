@@ -166,7 +166,7 @@
 				*/
 //				bitMapData.draw(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true); 
 //				bitMapData.drawWithQuality(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true,StageQuality.BEST);
-				bitMapData.drawWithQuality(this.id_image_edit,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true,StageQuality.BEST);
+				bitMapData.drawWithQuality(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true,StageQuality.BEST);
 				//
 //				trace("this.id_uit_tool.transform:",this.id_uit_tool.transform);
 				//
