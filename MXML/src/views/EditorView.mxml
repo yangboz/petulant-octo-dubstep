@@ -140,6 +140,8 @@
 				this.id_image_edit.y = 0;
 				//Clear UITransform tool's opration history
 				this.deselectUITransformTool(new MouseEvent(MouseEvent.CLICK));
+				//Avoid cache issue.
+				this.id_image_edit.source = "";
 			}
 			
 			protected function editnext_button_clickHandler(event:MouseEvent):void
@@ -376,6 +378,7 @@
 			
 			private function id_image_edit_completeHandler(event:Event):void
 			{
+				trace("id_image_edit_completeHandler!");
 				///Align Image Views.
 				this.alignImageView();
 				///Image autosize

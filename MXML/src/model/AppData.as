@@ -316,6 +316,7 @@ package model
 			ARRAY_TYPESET_TILE_POINT_5x7,
 			ARRAY_TYPESET_TILE_POINT_A4
 		];
+		[Bindable]
 		///ImageVerify notifications
 		[Embed(source="assets/images/notification/pattern_notification_01.png")]
 		public static var NOTIFY_IMG_VERIFY_RESULT_0:Class;
