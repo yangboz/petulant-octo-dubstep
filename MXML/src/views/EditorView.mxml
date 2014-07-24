@@ -21,6 +21,7 @@
 			
 			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
+			import mx.graphics.BitmapSmoothingQuality;
 			
 			import spark.events.IndexChangeEvent;
 			
@@ -125,6 +126,8 @@
 //					this.id_image_edit.maxWidth = AppData.MAX_UIT_WIDTH_DEFAULT;
 				}
 				//
+				AppData.savedImageMatrix.scale(this.id_image_edit.width/contentW,this.id_image_edit.height/contentH);
+				//
 				AppData.savedImageOpts.sX = this.id_image_edit.width/contentW;
 				AppData.savedImageOpts.sY = this.id_image_edit.height/contentH;
 			}
@@ -147,14 +150,14 @@
 			protected function editnext_button_clickHandler(event:MouseEvent):void
 			{
 				//Save transformed image here:
-				trace("AppData.savedImageMatrix(before saving):",AppData.savedImageMatrix);
+				trace("AppData.savedImageMatrix(in saving):",AppData.savedImageMatrix);
 				//Draw bitmap data, then save to file
 				var requiredPhotoWidth:Number = this.getRequiredCertPhotoWidth();
 				var requiredPhotoHeight:Number = this.getRequiredCertPhotoHeight();
 				var bitMapData:BitmapData = new BitmapData(requiredPhotoWidth,requiredPhotoHeight,true); 
 //				var bitMapData:BitmapData = ImageUtil.resample(AppData.uploadFileBitmapData,requiredPhotoWidth,requiredPhotoHeight,
 //					AppData.savedImageOpts.tX,AppData.savedImageOpts.tY,AppData.savedImageOpts.r,
-//					StageQuality.HIGH_8X8);
+//					StageQuality.BEST);
 				/*
 				AppData.savedImageMatrix = new Matrix();
 				AppData.savedImageMatrix.scale(requiredPhotoWidth/this.id_image_edit.contentWidth,requiredPhotoHeight/this.id_image_edit.contentHeight);
@@ -167,8 +170,8 @@
 				bitMapData.draw(bufferBitmapData,this.id_uit_tool.transform.matrix); 
 				*/
 //				bitMapData.draw(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true); 
-//				bitMapData.drawWithQuality(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true,StageQuality.BEST);
 				bitMapData.drawWithQuality(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true,StageQuality.BEST);
+//				bitMapData.drawWithQuality(AppData.uploadFileBitmapData,AppData.savedImageMatrix,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true,StageQuality.BEST);
 				//
 //				trace("this.id_uit_tool.transform:",this.id_uit_tool.transform);
 				//
@@ -274,7 +277,18 @@
 //						this.autoResizeImageView();
 						break;
 					case TransformationType.ROTATE:
-						AppData.savedImageMatrix.rotate(this.id_image_edit.rotation);
+//						AppData.savedImageMatrix.rotate(this.id_image_edit.rotation);
+						var angle:Number = this.id_image_edit.rotation;
+						// Calculate rotation and offsets
+						var radians:Number = angle * (Math.PI / 180.0);
+						var offsetWidth:Number = this.id_image_edit.width/2.0;
+						var offsetHeight:Number =  this.id_image_edit.height/2.0;
+						// Perform rotation
+						AppData.savedImageMatrix.translate(-offsetWidth, -offsetHeight);
+						AppData.savedImageMatrix.rotate(radians);
+						AppData.savedImageMatrix.translate(+offsetWidth, +offsetHeight);
+						AppData.savedImageMatrix.concat(this.id_image_edit.transform.matrix);
+						//
 						AppData.savedImageOpts.r = this.id_image_edit.rotation;
 						break;
 					case TransformationType.MOVE:
@@ -445,7 +459,7 @@
 			<!--<mx:Image id="id_image_edit" maintainAspectRatio="true"/>-->
 			<!--<components:ImageWithSmooth--> 
 			<s:Image
-				id="id_image_edit" maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smooth="true"/>
+				id="id_image_edit" maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smooth="true" smoothingQuality="{BitmapSmoothingQuality.HIGH}"/>
 		</s:Group>
 		
 		<s:Image id="id_image_frame" enabled="false"/>

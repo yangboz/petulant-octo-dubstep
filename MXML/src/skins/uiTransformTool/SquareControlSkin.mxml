@@ -2,7 +2,7 @@
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
 		xmlns:mx="library://ns.adobe.com/flex/mx" 
-		width="12" height="12">
+		width="28" height="28">
 	<!-- host component -->
 	<fx:Metadata>
 		[HostComponent("com.vstyran.transform.controls.Control")]
@@ -15,19 +15,20 @@
 		<s:State name="controlActive"/>
 	</s:states>
 	
-	<s:Rect top="1" bottom="1" left="1" right="1">
-		<s:stroke>
+	<s:Ellipse top="1" bottom="1" left="1" right="1">
+		<!--<s:stroke>
 			<s:SolidColorStroke/>
-		</s:stroke>
+		</s:stroke>-->
 		<s:fill>
-			<s:SolidColor color="#FFFFFF" color.controlActive="red" color.hovered="#7AFF8C"/>
+			<!--<s:SolidColor color="#FFFFFF" color.controlActive="red" color.hovered="#7AFF8C"/>-->
+			<s:BitmapFill source="@Embed('../../assets/images/editphoto/frame/frame_control_large.png')" fillMode="repeat" />
 		</s:fill>
-	</s:Rect>
-	<s:Rect top="0" bottom="0" left="0" right="0">
+	</s:Ellipse>
+	<!--<s:Ellipse top="0" bottom="0" left="0" right="0">
 		<s:stroke>
 			<s:SolidColorStroke color="white"/>
 		</s:stroke>
-	</s:Rect>
+	</s:Ellipse>-->
 	
 	<s:Rect width="4" height="4" verticalCenter="0" horizontalCenter="0" includeIn="anchorActive">
 		<s:fill>
