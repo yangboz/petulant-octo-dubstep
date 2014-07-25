@@ -24,11 +24,11 @@
 	<fx:Style>
 		.resizeControl
 		{
-			skinClass: ClassReference("skins.uiTransformTool.SquareControlSkin");
+			skinClass: ClassReference("skins.uiTransformTool.CircleControlSkin");
 		}
 		.resizeSmallControl
 		{
-			skinClass: ClassReference("skins.uiTransformTool.SquareSmallControlSkin");
+			skinClass: ClassReference("skins.uiTransformTool.CircleSmallControlSkin");
 		}
 		.rotateControl
 		{
@@ -101,37 +101,37 @@
 			 visible="{!topLeftRotateControl.controlActivated &amp;&amp; !topRightRotateControl.controlActivated &amp;&amp;
 					   !bottomLeftRotateControl.controlActivated &amp;&amp; !bottomRightRotateControl.controlActivated}"/>
 	
-	<controls:Control id="topLeftRotateControl" top="-10" left="-10" width="20" height="20" 
+	<controls:Control id="topLeftRotateControl" top="-11" left="-11" width="20" height="20" 
 					  styleName="rotateControl" operation="{rotateOperation}" anchor="{centerAnchorControl}"/>
-	<controls:Control id="topRightRotateControl" top="-10" right="-10" width="20" height="20" 
+	<controls:Control id="topRightRotateControl" top="-11" right="-11" width="20" height="20" 
 					  styleName="rotateControl" operation="{rotateOperation}" anchor="{centerAnchorControl}"/>
-	<controls:Control id="bottomLeftRotateControl" bottom="-10" left="-10" width="20" height="20" 
+	<controls:Control id="bottomLeftRotateControl" bottom="-11" left="-11" width="20" height="20" 
 					  styleName="rotateControl" operation="{rotateOperation}" anchor="{centerAnchorControl}"/>
-	<controls:Control id="bottomRightRotateControl" bottom="-10" right="-10" width="20" height="20" 
+	<controls:Control id="bottomRightRotateControl" bottom="-11" right="-11" width="20" height="20" 
 					  styleName="rotateControl" operation="{rotateOperation}" anchor="{centerAnchorControl}"/>
 	
-	<controls:Control id="topLeftControl" top="-14" left="-14" anchor="{bottomRightControl}" styleName="resizeControl" >
+	<controls:Control id="topLeftControl" top="-11" left="-11" anchor="{bottomRightControl}" styleName="resizeControl" >
 		<operations:ResizeOperation anchor="{new Point(1, 1)}"/>
 	</controls:Control>
-	<controls:Control id="topMiddleControl" top="-10" horizontalCenter="0" anchor="{bottomMiddleControl}" styleName="resizeSmallControl" >
+	<controls:Control id="topMiddleControl" top="-7" horizontalCenter="0" anchor="{bottomMiddleControl}" styleName="resizeSmallControl" >
 		<operations:ResizeOperation horizontalEnabled="false"  anchor="{new Point(0.5, 1)}"/>
 	</controls:Control>
-	<controls:Control id="topRightControl" top="-14" right="-14" anchor="{bottomLeftControl}" styleName="resizeControl">
+	<controls:Control id="topRightControl" top="-11" right="-11" anchor="{bottomLeftControl}" styleName="resizeControl">
 		<operations:ResizeOperation anchor="{new Point(0, 1)}"/>
 	</controls:Control>
-	<controls:Control id="middleRightControl" verticalCenter="0" right="-10" anchor="{middleLeftControl}" styleName="resizeSmallControl"  >
+	<controls:Control id="middleRightControl" verticalCenter="0" right="-7" anchor="{middleLeftControl}" styleName="resizeSmallControl"  >
 		<operations:ResizeOperation verticalEnabled="false" anchor="{new Point(0, 0.5)}"/>
 	</controls:Control>
-	<controls:Control id="bottomRightControl" bottom="-14" right="-14" anchor="{topLeftControl}" styleName="resizeControl">
+	<controls:Control id="bottomRightControl" bottom="-11" right="-11" anchor="{topLeftControl}" styleName="resizeControl">
 		<operations:ResizeOperation anchor="{new Point(0, 0)}"/>
 	</controls:Control>
-	<controls:Control id="bottomMiddleControl" bottom="-10" horizontalCenter="0" anchor="{topMiddleControl}" styleName="resizeSmallControl" >
+	<controls:Control id="bottomMiddleControl" bottom="-7" horizontalCenter="0" anchor="{topMiddleControl}" styleName="resizeSmallControl" >
 		<operations:ResizeOperation horizontalEnabled="false" anchor="{new Point(0.5, 0)}" />
 	</controls:Control>
-	<controls:Control id="bottomLeftControl" bottom="-14" left="-14" anchor="{topRightControl}" styleName="resizeControl">
+	<controls:Control id="bottomLeftControl" bottom="-11" left="-11" anchor="{topRightControl}" styleName="resizeControl">
 		<operations:ResizeOperation anchor="{new Point(1, 0)}"/>
 	</controls:Control>
-	<controls:Control id="middleLeftControl" verticalCenter="0" left="-10" anchor="{middleRightControl}" styleName="resizeSmallControl" >
+	<controls:Control id="middleLeftControl" verticalCenter="0" left="-7" anchor="{middleRightControl}" styleName="resizeSmallControl" >
 		<operations:ResizeOperation verticalEnabled="false" anchor="{new Point(1, 0.5)}"/>
 	</controls:Control>
 	

@@ -19,7 +19,7 @@
 			<s:SolidColorStroke/>
 		</s:stroke>
 		<s:fill>
-			<s:SolidColor color="#FFFFFF"/>
+			<s:SolidColor color="#0096D6"/>
 		</s:fill>
 	</s:Ellipse>
 	<s:Ellipse top="0" bottom="0" left="0" right="0">

@@ -83,6 +83,7 @@
 		borderColor="black"
 		x="{data.x}" y="{data.y}"
 		horizontalCenter="0" verticalCenter="0" 
+	    smoothBitmapContent="true"
 	/>
 	<!--
 	<s:Group id="id_group" clipAndEnableScrolling="true" width="{data.w}" height="{data.h}">

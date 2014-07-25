@@ -313,6 +313,7 @@
 			{
 				//Update tool
 				this.id_uit_tool.updateTool(true);
+	
 				//Update tool guide lines
 				var guidelines:Vector.<Guideline> = new Vector.<Guideline>();
 				
@@ -325,12 +326,12 @@
 						var box:Rectangle = DataUtil.createData(element as Image).getBoundingBox();
 						
 						guidelines.push(new Guideline(GuidelineType.VERTICAL_EDGE, box.x, 3));
-						guidelines.push(new Guideline(GuidelineType.VERTICAL_CENTER, box.x+box.width/2, 3));
-						guidelines.push(new Guideline(GuidelineType.VERTICAL_EDGE, box.x+box.width, 3));
+//						guidelines.push(new Guideline(GuidelineType.VERTICAL_CENTER, box.x+box.width/2, 3));
+//						guidelines.push(new Guideline(GuidelineType.VERTICAL_EDGE, box.x+box.width, 3));
 						
 						guidelines.push(new Guideline(GuidelineType.HORIZONTAL_EDGE, box.y, 3));
-						guidelines.push(new Guideline(GuidelineType.HORIZONTAL_CENTER, box.y+box.height/2, 3));
-						guidelines.push(new Guideline(GuidelineType.HORIZONTAL_EDGE, box.y+box.height, 3));
+//						guidelines.push(new Guideline(GuidelineType.HORIZONTAL_CENTER, box.y+box.height/2, 3));
+//						guidelines.push(new Guideline(GuidelineType.HORIZONTAL_EDGE, box.y+box.height, 3));
 						
 						if((element as Image).rotation%90 != 0)
 						{

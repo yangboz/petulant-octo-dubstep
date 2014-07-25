@@ -14,9 +14,9 @@
 		<s:State name="controlActive"/>
 	</s:states>
 	
-	<s:Rect top="0" right="0" bottom="0" left="0">
+	<s:Rect top="-2" right="-2" bottom="-2" left="-2">
 		<s:stroke>
-			<s:SolidColorStroke />
+			<s:SolidColorStroke color="#0096D6" weight="4"/>
 		</s:stroke>
 	<!--	<s:fill>
 			<s:SolidColor color="#FFFFFF" alpha="0"/>
