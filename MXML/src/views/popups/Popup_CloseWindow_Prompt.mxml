@@ -27,7 +27,7 @@
 			
 			protected function button_save_clickHandler(event:MouseEvent):void
 			{
-				AppData.saveImageFile(AppData.savedImageBitmapData,true,AppData.selectedFileExt,true);
+				AppData.saveImageFile(AppData.savedImageBitmapData,true,true,false);
 			}
 		]]>
 	</fx:Script>

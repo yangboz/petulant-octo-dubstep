@@ -96,10 +96,10 @@ package views.components
 //					(this as SkinnableContainer).removeElement(dashy);
 				}
 				this.dashy = new DashedLine(0.5,getStyle('borderColor'),new Array(4,4,4,4));
-//				dashy.moveTo(dX,dY);
-//				dashy.lineTo(width-4*dX,dY);
-				dashy.moveTo(width-2.5*dX,height-2.5*dY);
-				dashy.lineTo(dX,height-2.5*dY);
+				dashy.moveTo(dX,dY);
+				dashy.lineTo(width-3*dX,dY);
+				dashy.moveTo(width-3*dX,height-3*dY);
+				dashy.lineTo(dX,height-3*dY);
 				dashy.lineTo(dX,dY);
 				addChild(dashy);
 //				(this as SkinnableContainer).addElement(dashy);

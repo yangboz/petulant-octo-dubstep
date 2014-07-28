@@ -22,6 +22,11 @@ package model
 	import mx.managers.PopUpManager;
 	import mx.utils.UIDUtil;
 	
+	import nid.image.encoder.JPEGEncoder;
+	import nid.image.encoder.PNGEncoder;
+	
+	import spark.skins.spark.StackedFormHeadingSkin;
+	
 	import views.popups.Popup_ImageVerify_Result;
 
 	//--------------------------------------------------------------------------
@@ -72,6 +77,8 @@ package model
 		private static var autoCloseWindow:Boolean;
 		//
 		public static var uploadFileBitmapData:BitmapData;
+		//
+		public static var DPI_DEFAULT:Number = 300;
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
@@ -82,7 +89,9 @@ package model
 		//mm*0.3937008*DPI
 		//Inch to pixel
 		private static const INCH_2_PIXEL:Number = 7.2;
+//		private static const INCH_2_PIXEL:Number = 60;
 		public static const PIXEL_2_PRINT:Number = 2.8368;
+//		public static const PIXEL_2_PRINT:Number = 23.622;
 		//
 		public static const VIEW_INTRO:int = 0;
 		public static const VIEW_UPLOAD:int = 1;
@@ -362,30 +371,41 @@ package model
 			PopUpManager.centerPopUp(popup);
 		}
 		//
-		public static function saveImageFile(bitmapData:BitmapData,dialog:Boolean=false,extension:String=".png",autoCloseWindow:Boolean=false):Boolean
+		public static function saveImageFile(bitmapData:BitmapData,dialog:Boolean=false,autoCloseWindow:Boolean=false,standalone:Boolean=true):Boolean
 		{
 			//
 			AppData.autoCloseWindow = autoCloseWindow;
 			//
 			var saved:Boolean = false;
-			//
-			var pngEncoder:PNGEncoder = new PNGEncoder(); 
-			var jpgEncoder:JPEGEncoder = new JPEGEncoder(100);
+			//mx.core
+//			var pngEncoder:PNGEncoder = new PNGEncoder(); 
+//			var jpgEncoder:JPEGEncoder = new JPEGEncoder(100);
+			//Nid
+			var pngEncoder:nid.image.encoder.PNGEncoder = new nid.image.encoder.PNGEncoder();
+			var jpgEncoder:nid.image.encoder.JPEGEncoder = new nid.image.encoder.JPEGEncoder(100);
 			var imageByteArray:ByteArray;
 			//
-			if(extension==".jpg")
+			var extension:String = ".png";
+			if(extension==".jpg")//@deprecated
 			{
 				imageByteArray = jpgEncoder.encode(bitmapData); 
 			}else//*.png
 			{
-				imageByteArray = pngEncoder.encode(bitmapData); 
+//				imageByteArray = pngEncoder.encode(bitmapData); 
+				imageByteArray = nid.image.encoder.PNGEncoder.encode(bitmapData,DPI_DEFAULT);
 			}
 			//
 			AppData.savedImageBitmapData = bitmapData;
 			//
 			AppData.selectedFileExt = extension;
 //			AppData.selectedFileName = AppData.FILE_NAME_DEFAULT.concat(extension);
-			AppData.selectedFileName = getClassifiedFileName().concat(extension);
+			if(standalone)
+			{
+				AppData.selectedFileName = getClassifiedFileName().concat(extension);
+			}else
+			{
+				AppData.selectedFileName = getClassifiedFileName().concat("typeset_",extension);
+			}
 			//Kind of file save options here:
 //			AppData.savedImageFie = File.documentsDirectory;
 //			AppData.savedImageFie = File.applicationDirectory;
@@ -393,7 +413,7 @@ package model
 			//create a directory
 			if(AppData.savedImageFie)//Whatever reset the workspace folder to avoid cache issue.
 			{
-				trace("Try Clear Workspace:",AppData.savedImageFie.nativePath);
+				trace("try clear workspace:",AppData.savedImageFie.nativePath);
 				AppData.savedImageFie.deleteDirectory(true); 
 			}
 			var randomFolderName:String = getRandomWorkspaceDirName();
@@ -499,7 +519,7 @@ package model
 		{
 			var fileName:String = FILE_NAME_DEFAULT;
 //			fileName = fileName.concat(getCertPlainText(selectedCertSizeIndex),"_",getPrintPlainText(selectedTypesetSizeIndex),"_");
-			fileName = fileName.concat(getCertPlainText(selectedCertSizeIndex),"_");
+			fileName = fileName.concat(getCertPlainText(selectedCertSizeIndex),"_",getPrintPlainText(selectedTypesetSizeIndex),"_");
 			return fileName;
 //			return UIDUtil.createUID();
 		}

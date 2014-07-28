@@ -12,6 +12,7 @@
 			import mx.collections.ArrayList;
 			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
+			import mx.graphics.BitmapSmoothingQuality;
 			import mx.graphics.ImageSnapshot;
 			import mx.printing.FlexPrintJobScaleType;
 			
@@ -80,8 +81,8 @@
 				//
 				var definedImageWidth:Number;
 				var definedImageHeight:Number;
-//				var definedImageSource:Object = AppData.savedImageFie.nativePath;
-				var definedImageSource:Object = AppData.uploadedImageFile.nativePath;
+				var definedImageSource:Object = AppData.savedImageFie.nativePath;
+//				var definedImageSource:Object = AppData.uploadedImageFile.nativePath;
 				if(resizeForDisplay)
 				{
 					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w ;
@@ -89,8 +90,8 @@
 //					definedImageSource =  AppData.uploadedImageFileCopy.nativePath;
 				}else
 				{
-					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w_ *AppData.PIXEL_2_PRINT;
-					definedImageHeight = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h_*AppData.PIXEL_2_PRINT;
+					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w_ *AppData.PIXEL_2_PRINT ;
+					definedImageHeight = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h_*AppData.PIXEL_2_PRINT ;
 //					definedImageSource =  AppData.uploadedImageFile.nativePath;
 				}
 				var definedImageRotation:Number = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].r;
@@ -98,6 +99,8 @@
 				//
 				var definedContainerScaleX:Number = definedImageWidth/this.getRequiredCertPhotoWidth();
 				var definedContainerScaleY:Number = definedImageHeight/this.getRequiredCertPhotoHeight();
+				//
+				AppData.savedImageMatrix.scale(definedContainerScaleX,definedContainerScaleY);
 				//
 //				var definedImageScaleX:Number = AppData.savedImageOpts.sX * definedContainerScaleX;
 //				var definedImageScaleY:Number = AppData.savedImageOpts.sY * definedContainerScaleY;
@@ -163,11 +166,14 @@
 			//
 			private function printOut():void
 			{
+				//Adding snapshot file
+				var snapshot:BitmapData = ImageSnapshot.captureBitmapData(this.id_list_tile);
+				AppData.saveImageFile(snapshot,false,false,false);
 				//
 				var flexPrintJob:FlexPrintJob = new FlexPrintJob();
 				//
 				var option:PrintJobOptions = new PrintJobOptions();
-//				option.pixelsPerInch = 72;
+//				option.pixelsPerInch = 180;
 				//
 				flexPrintJob.printJob.orientation = PrintJobOrientation.LANDSCAPE;
 				//PageSize setting manually
@@ -222,7 +228,6 @@
 		<!--borderColor="#5e6468" borderAlpha="0.1"
 		contentBackgroundAlpha="0" contentBackgroundColor="#5e6468"-->
 		<s:List id="id_list_tile" autoLayout="true" 
-				
 				horizontalScrollPolicy="off" verticalScrollPolicy="off"
 				itemRenderer="views.renderers.ImageRenderer"
 				useVirtualLayout="false" 
@@ -231,13 +236,14 @@
 				<!--<utils:HW_TileLayout-->
 				<s:TileLayout
 				 requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
-							  verticalGap="10" horizontalGap="10"
-							  paddingLeft="2.5" paddingBottom="2.5" paddingRight="2.5" paddingTop="2.5" 
+							  verticalGap="14" horizontalGap="14"
+							  paddingLeft="7" paddingBottom="7" paddingRight="7" paddingTop="7" 
 							  useVirtualLayout="false"
 							  />
 			</s:layout>
 		</s:List>
 		<s:Image id="id_list_tile_snapshot" x="{id_list_tile.x}" y="{id_list_tile.y}" visible="{id_list_tile_snapshot.source!=''}"/>
+		<!--<s:Image id="id_list_tile_print" x="{id_list_tile.x}" y="{id_list_tile.y}" visible="{id_list_tile_print.source!=''}" smooth="true" smoothingQuality="{BitmapSmoothingQuality.HIGH}"/>-->
 		<!--</s:BorderContainer>-->
 		
 		<s:Button x="383" y="500" label="Back2Verify" skinClass="skins.button.HW_Back2VerifyButton_Skin" click="cancelTypeset_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>

@@ -88,8 +88,9 @@
 			
 			protected function alignImageView():void
 			{
-//				this.id_group.x -= (this.id_image_edit.bitmapData.width-this.getRequiredCertPhotoWidth())/2;
-//				this.id_group.y -= (this.id_image_edit.bitmapData.height-this.getRequiredCertPhotoHeight())/2;
+				this.id_image_edit.x = 0;
+				this.id_image_edit.y = 0;
+				this.id_image_edit.rotation = 0;
 			}
 			//
 			protected function autoResizeImageView():void
@@ -476,7 +477,7 @@
 		<spark:HSlider id="id_hslider_rotate" x="393" y="438" 
 					   showTrackHighlight="true" skinClass="skins.slider.HW_EditorRotateHSlider_Skin"
 				   change="onEditorRotateSliderChange(event)" stepSize="1" minimum="-180" maximum="180" value="0"
-				   width="200" 
+				   width="200" visible="false" includeInLayout="false"
 				   />
 		<s:Button x="349" y="425" label="ROTATE" skinClass="skins.button.HW_RotateButton_Skin" click="rotate90ButtonClickHandler(event)"/>
 <!--		<s:Button x="625" y="198" label="ZOOM_IN" skinClass="skins.button.HW_ZoomInButton_Skin" click="zoomInButtonClickHandler(event)"/>
