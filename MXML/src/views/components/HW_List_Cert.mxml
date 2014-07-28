@@ -4,13 +4,20 @@
 		xmlns:mx="library://ns.adobe.com/flex/mx" 
 		height="210"
 		borderVisible="false"
-		itemRenderer="skins.HW_ListItemRendererSkin_CertSize" useVirtualLayout="false"
-		selectedIndex="{AppData.selectedCertSizeIndex}"
+		itemRenderer="skins.HW_ListItemRendererSkin_CertSize" 
 		left="3" top="102"
+		selectedIndex="{AppData.selectedCertSizeIndex}"
+	    hide="listHideHandler(event)"
 		>
 	<fx:Script>
 		<![CDATA[
 			import model.AppData;
+			//
+			protected function listHideHandler(event:Event):void
+			{
+				//Avoid list flash
+				this.selectedIndex = -1;
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>

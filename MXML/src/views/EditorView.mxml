@@ -38,8 +38,6 @@
 			override protected function id_list_changeHandler(event:IndexChangeEvent):void
 			{
 				super.id_list_changeHandler(event);
-				//
-//				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;
 				///Upldate UI images.
 				this.updateImageViews();
 				///Align Image Views.
@@ -84,9 +82,6 @@
 				this.id_group.y = id_group_point.y;
 				this.id_group.maxWidth = this.getRequiredCertPhotoWidth();
 				this.id_group.maxHeight = this.getRequiredCertPhotoHeight();
-				//Alignment
-				//id_list selectedIndex
-				this.id_list.selectedIndex = AppData.selectedCertSizeIndex;
 				///
 				this.selectUITransformTool(new MouseEvent(MouseEvent.CLICK));
 			}
@@ -125,11 +120,11 @@
 //					this.id_image_edit.maxHeight = requiredH + (AppData.MAX_UIT_WIDTH_DEFAULT-this.id_image_edit.width) * contentH/contentW;
 //					this.id_image_edit.maxWidth = AppData.MAX_UIT_WIDTH_DEFAULT;
 				}
+				var scaleX:Number = this.id_image_edit.width/contentW;
+				var scaleY:Number = this.id_image_edit.height/contentH;
 				//
-				AppData.savedImageMatrix.scale(this.id_image_edit.width/contentW,this.id_image_edit.height/contentH);
-				//
-				AppData.savedImageOpts.sX = this.id_image_edit.width/contentW;
-				AppData.savedImageOpts.sY = this.id_image_edit.height/contentH;
+				trace("AppData.savedImageMatrix.scale:[scaleX]=",scaleX," [scaleY]=",scaleY);
+				AppData.savedImageMatrix.scale(scaleX,scaleY);
 			}
 			
 			protected function reupload_button_clickHandler(event:MouseEvent):void
@@ -243,8 +238,6 @@
 				target.transform.matrix = matrix; 
 				//Update tool
 				this.updateUITransformTools();
-				//Save data
-				AppData.savedImageOpts.r = this.id_image_edit.rotation;
 			}
 			private function applyZoom(target:DisplayObject,ratio:Number):void
 			{
@@ -272,8 +265,6 @@
 				{
 					case TransformationType.RESIZE:
 						AppData.savedImageMatrix.scale(this.id_image_edit.scaleX,this.id_image_edit.scaleY);
-						AppData.savedImageOpts.sX = this.id_image_edit.scaleX;
-						AppData.savedImageOpts.sY = this.id_image_edit.scaleY;
 //						this.autoResizeImageView();
 						break;
 					case TransformationType.ROTATE:
@@ -288,13 +279,9 @@
 						AppData.savedImageMatrix.rotate(radians);
 						AppData.savedImageMatrix.translate(+offsetWidth, +offsetHeight);
 						AppData.savedImageMatrix.concat(this.id_image_edit.transform.matrix);
-						//
-						AppData.savedImageOpts.r = this.id_image_edit.rotation;
 						break;
 					case TransformationType.MOVE:
 						AppData.savedImageMatrix.translate(event.data.matrix.tx,event.data.matrix.ty);
-						AppData.savedImageOpts.tX = event.data.matrix.tx;
-						AppData.savedImageOpts.tY = event.data.matrix.ty;
 						break;
 					default:
 						break;
@@ -313,7 +300,7 @@
 			{
 				//Update tool
 				this.id_uit_tool.updateTool(true);
-	
+/*	
 				//Update tool guide lines
 				var guidelines:Vector.<Guideline> = new Vector.<Guideline>();
 				
@@ -342,6 +329,7 @@
 					}
 				}
 				id_uit_tool.guidelines = guidelines;
+*/				
 			}
 			protected function tool_guidelinesUpdateHandler(event:GuidelineEvent):void
 			{

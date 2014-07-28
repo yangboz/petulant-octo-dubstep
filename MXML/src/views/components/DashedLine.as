@@ -26,6 +26,11 @@ package views.components
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.geom.Point;
+	
+	import spark.components.SkinnableContainer;
+	import spark.components.supportClasses.Skin;
+	import spark.components.supportClasses.SkinnableComponent;
+
 	/**
 	 * DashedLine.as class. 
 	 * @author yangboz

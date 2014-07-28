@@ -11,19 +11,15 @@
 			import model.AppData;
 			
 			import mx.events.FlexEvent;
+			
+			protected function id_image_completeHandler(event:Event):void
+			{
+				this.id_image.transform.matrix = AppData.savedImageMatrix;
+			}
 			/*
 			import views.components.ImageWithBorder;
 			
 			private var id_image:ImageWithBorder = null;
-			
-			protected function id_image_completeHandler(event:Event):void
-			{
-				this.id_image.x = data.x;
-				this.id_image.y = data.y;
-				this.id_image.scaleX = data.sX;
-				this.id_image.scaleY = data.sY;
-//				this.id_image.rotation = data.r;
-			}
 			
 			override public function set data( value:Object ) : void 
 			{
@@ -76,14 +72,15 @@
 			</s:Animate>
 		</mx:Transition>
 	</s:transitions>    -->
+	<!--x="{data.x}" y="{data.y}" scaleX="{data.sX}" scaleY="{data.sY}" rotation="{data.r}"-->
 	<components:ImageWithBorder id="id_image" 
-		source="{data.source}" scaleX="{data.sX}" scaleY="{data.sY}" rotation="{data.r}"
+		source="{data.source}" 
 		borderAlpha="1"
 		borderWidth="5"
 		borderColor="black"
-		x="{data.x}" y="{data.y}"
 		horizontalCenter="0" verticalCenter="0" 
 	    smoothBitmapContent="true"
+	    complete="id_image_completeHandler(event)"
 	/>
 	<!--
 	<s:Group id="id_group" clipAndEnableScrolling="true" width="{data.w}" height="{data.h}">

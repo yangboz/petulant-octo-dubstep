@@ -80,8 +80,8 @@
 				//
 				var definedImageWidth:Number;
 				var definedImageHeight:Number;
-				var definedImageSource:Object = AppData.savedImageFie.nativePath;
-//				var definedImageSource:Object = AppData.uploadedImageFile.nativePath;
+//				var definedImageSource:Object = AppData.savedImageFie.nativePath;
+				var definedImageSource:Object = AppData.uploadedImageFile.nativePath;
 				if(resizeForDisplay)
 				{
 					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w ;
@@ -104,8 +104,8 @@
 				var definedImageScaleX:Number = definedContainerScaleX;
 				var definedImageScaleY:Number = definedContainerScaleY;
 				//
-				var definedImageTx:Number = AppData.savedImageOpts.tX;
-				var definedImageTy:Number = AppData.savedImageOpts.tY;
+				var definedImageTx:Number = AppData.savedImageMatrix.tx
+				var definedImageTy:Number = AppData.savedImageMatrix.ty;
 				//Trace info:
 				trace("definedImageWidth:",definedImageWidth,
 					"definedImageHeight:",definedImageHeight,
@@ -167,7 +167,8 @@
 				var flexPrintJob:FlexPrintJob = new FlexPrintJob();
 				//
 				var option:PrintJobOptions = new PrintJobOptions();
-				//				option.pixelsPerInch = 72;
+//				option.pixelsPerInch = 72;
+				//
 				flexPrintJob.printJob.orientation = PrintJobOrientation.LANDSCAPE;
 				//PageSize setting manually
 				flexPrintJob.printJob.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
@@ -185,6 +186,9 @@
 					flexPrintJob.printJob.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
 				} 
 				*/
+				//
+//				var bitMapData:BitmapData  = new BitmapData(this.id_list_tile.width,this.id_list_tile.height);
+//				bitMapData.drawWithQuality(this.id_list_tile,null,null,null,new Rectangle(0,0,this.id_list_tile.width,this.id_list_tile.height),true,StageQuality.BEST);
 				//
 				var printRect:Rectangle = new Rectangle(requestedOffsetX,requestedOffsetY,this.id_list_tile.width,this.id_list_tile.height);
 				//				//
@@ -210,7 +214,7 @@
 	<s:BorderContainer width="100%" height="100%" contentBackgroundAlpha="0"
 					   backgroundImage="{viewBackgroundImage}"
 					   >
-		<components:HW_List_Typeset id="id_list_typeset" height="105" selectedIndex="{AppData.selectedTypesetSizeIndex}"
+		<components:HW_List_Typeset id="id_list_typeset" height="105"
 									change="id_list_typeset_changeHandler(event)"/>
 		
 		<s:Image id="id_image_frame" left="200" top="40" />
@@ -228,7 +232,7 @@
 				<s:TileLayout
 				 requestedRowCount="{this.requestedRowCount}" requestedColumnCount="{this.requestedColumnCount}" 
 							  verticalGap="10" horizontalGap="10"
-							  paddingLeft="1" paddingBottom="1" paddingRight="1" paddingTop="1" 
+							  paddingLeft="2.5" paddingBottom="2.5" paddingRight="2.5" paddingTop="2.5" 
 							  useVirtualLayout="false"
 							  />
 			</s:layout>

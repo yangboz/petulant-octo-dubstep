@@ -82,6 +82,8 @@ package views.components
 				var y:Number=-(getStyle('borderWidth'));
 				var width:Number=contentWidth-2*getStyle('borderWidth');
 				var height:Number=contentHeight-2*getStyle('borderWidth');
+//				var width:Number=this.bitmapData.width-2*getStyle('borderWidth');
+//				var height:Number=this.bitmapData.height-2*getStyle('borderWidth');
 //				graphics.clear();
 //				graphics.lineStyle(1,getStyle('borderColor'),getStyle('borderAlpha'),false);
 //				graphics.drawRect(x,y,width,height);
@@ -91,14 +93,16 @@ package views.components
 				if(this.dashy)
 				{
 					this.removeChild(dashy);
+//					(this as SkinnableContainer).removeElement(dashy);
 				}
-				this.dashy = new DashedLine(0.3,getStyle('borderColor'),new Array(2,2,2,2));
+				this.dashy = new DashedLine(0.5,getStyle('borderColor'),new Array(4,4,4,4));
 //				dashy.moveTo(dX,dY);
 //				dashy.lineTo(width-4*dX,dY);
-				dashy.moveTo(width-4*dX,height-4*dY);
-				dashy.lineTo(dX,height-4*dY);
+				dashy.moveTo(width-2.5*dX,height-2.5*dY);
+				dashy.lineTo(dX,height-2.5*dY);
 				dashy.lineTo(dX,dY);
 				addChild(dashy);
+//				(this as SkinnableContainer).addElement(dashy);
 			}
 		}
 		

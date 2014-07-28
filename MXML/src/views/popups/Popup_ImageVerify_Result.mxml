@@ -2,12 +2,20 @@
 <components:PopupBase xmlns:components="views.components.*"
 					  xmlns:fx="http://ns.adobe.com/mxml/2009"
 					  xmlns:s="library://ns.adobe.com/flex/spark"
-					  backgroundAlpha="0" >
+					  backgroundAlpha="0" show="popupbase_showHandler(event)">
 	<fx:Script>
 		<![CDATA[
+			import flash.utils.setTimeout;
+			
 			import model.AppData;
-//			[Bindable]
-//			public var image_source:Object;
+			
+			import mx.events.FlexEvent;
+			
+			protected function popupbase_showHandler(event:FlexEvent):void
+			{
+				flash.utils.setTimeout(close,2000);//Auto dismiss
+			}
+			
 		]]>
 	</fx:Script>
 	

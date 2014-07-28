@@ -29,7 +29,6 @@ package model
 	// Imports
 	//
 	//--------------------------------------------------------------------------
-//	[Bindable]
 	/**
 	 * AppData.as class. 
 	 * @author yangboz
@@ -48,6 +47,7 @@ package model
 		//--------------------------------------------------------------------------
 		public static var mainApp:Main;
 		//
+		[Bindable]
 		public static var selectedCertSizeIndex:int = -1;
 		public static var selectedTypesetSizeIndex:int = 0;
 		//
@@ -64,7 +64,6 @@ package model
 		public static var savedImageMatrix:Matrix = new Matrix();
 		//
 		public static var uploadedImageFileCopy:File;
-		public static var savedImageOpts:Object = {sX:1,sY:1,tX:0,tY:0,r:0};//ScaleX/ScaleY,TraslateX,TranslateY,Rotation
 		//
 		public static var ppi2dpi:Number = 0.3;
 		//
@@ -236,7 +235,7 @@ package model
 			{row:2,col:5,offsetX:0,offsetY:0,shiftIndex:[]},
 			{row:2,col:5,offsetX:0,offsetY:0,shiftIndex:[]},
 			{row:1,col:3,offsetX:0,offsetY:0,shiftIndex:[4,5]},//Modified
-			{row:2,col:3,offsetX:0,offsetY:0,shiftIndex:[]},
+			{row:1,col:3,offsetX:0,offsetY:0,shiftIndex:[]},
 			{row:1,col:3,offsetX:0,offsetY:0,shiftIndex:[4,5]},//Modified
 			{row:1,col:2,offsetX:0,offsetY:0,shiftIndex:[]}
 //			new Point(2,5),new Point(2,5),new Point(1,4),//row,column
@@ -245,8 +244,8 @@ package model
 		//mm*0.3937008*DPI
 		//2.8368
 		private static var ARRAY_TYPESET_TILE_POINT_4x6:Array = [
-			{x:300,y:166,w:70,h:105,w_:25,h_:35,r:0},{x:305,y:166,w:66,h:96,w_:22,h_:32,r:0},{x:322,y:180,w:99,h:150,w_:33,h_:48,r:0},
-			{x:325,y:130,w:105,h:135,w_:35,h_:45,r:0},{x:335,y:205,w:96,h:135,w_:35,h_:50,r:0},{x:340,y:190,w:150,h:150,w_:50,h_:50,r:0},
+			{x:300,y:166,w:70,h:105,w_:25,h_:35,r:0},{x:305,y:166,w:66,h:96,w_:22,h_:32,r:0},{x:322,y:185,w:99,h:150,w_:33,h_:48,r:0},
+			{x:325,y:190,w:105,h:135,w_:35,h_:45,r:0},{x:335,y:205,w:96,h:135,w_:35,h_:50,r:0},{x:340,y:190,w:150,h:150,w_:50,h_:50,r:0},
 //			{x:101,y:128,w:25*2.8368,h:35*2.8368,r:0},{x:126,y:125,w:22*2.8368,h:32*2.8362,r:0},{x:96,y:96,w:33*2.8368,h:48*2.8368,r:0},
 //			{x:97,y:108,w:35*2.8368,h:45*2.8368,r:0},{x:82,y:91,w:35*2.8368,h:50*2.8368,r:0},{x:143,y:158,w:50*2.8368,h:50*2.8368,r:0},
 		];
@@ -363,7 +362,7 @@ package model
 			PopUpManager.centerPopUp(popup);
 		}
 		//
-		public static function saveImageFile(bitmapData:BitmapData,dialog:Boolean=false,extension:String=".jpg",autoCloseWindow:Boolean=false):Boolean
+		public static function saveImageFile(bitmapData:BitmapData,dialog:Boolean=false,extension:String=".png",autoCloseWindow:Boolean=false):Boolean
 		{
 			//
 			AppData.autoCloseWindow = autoCloseWindow;
