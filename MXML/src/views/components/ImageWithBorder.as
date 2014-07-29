@@ -78,29 +78,30 @@ package views.components
 			//
 			if(width && height)
 			{
+				var lineWeight:Number = 0.2;
 				var x:Number=-(getStyle('borderWidth'));
 				var y:Number=-(getStyle('borderWidth'));
-				var width:Number=contentWidth-2*getStyle('borderWidth');
-				var height:Number=contentHeight-2*getStyle('borderWidth');
+				var width:Number=contentWidth+2*getStyle('borderWidth');
+				var height:Number=contentHeight+2*getStyle('borderWidth');
 //				var width:Number=this.bitmapData.width-2*getStyle('borderWidth');
 //				var height:Number=this.bitmapData.height-2*getStyle('borderWidth');
 //				graphics.clear();
 //				graphics.lineStyle(1,getStyle('borderColor'),getStyle('borderAlpha'),false);
 //				graphics.drawRect(x,y,width,height);
-				//
-				var dX:Number = -getStyle('borderWidth');
-				var dY:Number = -getStyle('borderWidth');
+				//Offset
+				var dX:Number = lineWeight*4;
+				var dY:Number = lineWeight*4;
 				if(this.dashy)
 				{
 					this.removeChild(dashy);
 //					(this as SkinnableContainer).removeElement(dashy);
 				}
-				this.dashy = new DashedLine(0.5,getStyle('borderColor'),new Array(4,4,4,4));
-				dashy.moveTo(dX,dY);
-				dashy.lineTo(width-3*dX,dY);
-				dashy.moveTo(width-3*dX,height-3*dY);
-				dashy.lineTo(dX,height-3*dY);
-				dashy.lineTo(dX,dY);
+				this.dashy = new DashedLine(lineWeight,getStyle('borderColor'),new Array(2,2,2,2));
+				dashy.moveTo(x,y);
+				dashy.lineTo(width-dX,y);
+				dashy.lineTo(width-dX,height-dY);
+				dashy.lineTo(x,height-dY);
+				dashy.lineTo(x,y);
 				addChild(dashy);
 //				(this as SkinnableContainer).addElement(dashy);
 			}

@@ -81,7 +81,7 @@
 	<components:ImageWithBorder id="id_image" 
 								source="{data.source}"
 								borderAlpha="1"
-								borderWidth="5"
+								borderWidth="7"
 								borderColor="black"
 								horizontalCenter="0" verticalCenter="0" 
 								smoothBitmapContent="true"

@@ -15,6 +15,7 @@
 			import mx.graphics.BitmapSmoothingQuality;
 			import mx.graphics.ImageSnapshot;
 			import mx.printing.FlexPrintJobScaleType;
+			import mx.utils.ObjectUtil;
 			
 			import spark.events.IndexChangeEvent;
 			
@@ -167,8 +168,8 @@
 			private function printOut():void
 			{
 				//Adding snapshot file
-				var snapshot:BitmapData = ImageSnapshot.captureBitmapData(this.id_list_tile);
-				AppData.saveImageFile(snapshot,false,false,false);
+//				var snapshot:BitmapData = ImageSnapshot.captureBitmapData(this.id_list_tile);
+//				AppData.saveImageFile(snapshot,false,false,false);
 				//
 				var flexPrintJob:FlexPrintJob = new FlexPrintJob();
 				//
@@ -179,14 +180,14 @@
 				//PageSize setting manually
 				flexPrintJob.printJob.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
 //				flexPrintJob.printJob.printer = "";//TODO:use the stored printer name;
-				/*
 				//Auto select papersize(Optional)
+				/*
 				if (PrintJob.supportsPageSetupDialog)
 				{
 				//					////					var uiOption:PrintUIOptions = new PrintUIOptions();
 					flexPrintJob.printJob.showPageSetupDialog();
 				//					//
-					trace(flexPrintJob.printJob);
+					trace("flexPrintJob.printJob:", ObjectUtil.toString(flexPrintJob.printJob) );
 				}else
 				{
 					flexPrintJob.printJob.selectPaperSize(AppData.getPrintPlainText(AppData.selectedTypesetSizeIndex));//4x6
@@ -200,6 +201,8 @@
 				//				//
 				if(flexPrintJob.start())
 				{
+					//Save printer name for the next operation.
+					AppData.savedPrinterName = flexPrintJob.printJob.printer;
 					//					flexPrintJob.addObject(this.id_list_tile,FlexPrintJobScaleType.NONE);
 					//@see http://stackoverflow.com/questions/1642008/how-to-dynamically-set-print-page-margins-in-flash-cs3
 					flexPrintJob.printJob.addPage(this.id_list_tile,printRect,option);
@@ -231,6 +234,7 @@
 				horizontalScrollPolicy="off" verticalScrollPolicy="off"
 				itemRenderer="views.renderers.ImageRenderer"
 				useVirtualLayout="false" 
+				borderVisible="false"
 		>
 			<s:layout>
 				<!--<utils:HW_TileLayout-->

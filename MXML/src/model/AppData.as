@@ -79,6 +79,10 @@ package model
 		public static var uploadFileBitmapData:BitmapData;
 		//
 		public static var DPI_DEFAULT:Number = 300;
+		//Typeset result for print out
+		public static var savedImageListFie:File;
+		//
+		public static var savedPrinterName:String;
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
@@ -418,10 +422,19 @@ package model
 			}
 			var randomFolderName:String = getRandomWorkspaceDirName();
 			trace("getRandomWorkspaceDirName:",randomFolderName);
-			AppData.savedImageFie = File.createTempDirectory().resolvePath(randomFolderName);
-//			AppData.savedImageFie = File.documentsDirectory.resolvePath(randomFolderName);
-			AppData.savedImageFie.createDirectory();
-			AppData.savedWorkspaceFolders.push(AppData.savedImageFie);
+			if(standalone)
+			{
+				AppData.savedImageFie = File.createTempDirectory().resolvePath(randomFolderName);
+				//			AppData.savedImageFie = File.documentsDirectory.resolvePath(randomFolderName);
+				AppData.savedImageFie.createDirectory();
+				AppData.savedWorkspaceFolders.push(AppData.savedImageFie);
+			}else
+			{
+				AppData.savedImageListFie = File.createTempDirectory().resolvePath(randomFolderName);
+				//			AppData.savedImageFie = File.documentsDirectory.resolvePath(randomFolderName);
+				AppData.savedImageListFie.createDirectory();
+				AppData.savedWorkspaceFolders.push(AppData.savedImageListFie);
+			}
 			//create the file
 			//
 			if(dialog)
@@ -515,7 +528,7 @@ package model
 			fileStream.removeEventListener(Event.CLOSE, fileStreamCloseHandler);
 		}  	
 		//
-		private static function getClassifiedFileName():String
+		public static function getClassifiedFileName():String
 		{
 			var fileName:String = FILE_NAME_DEFAULT;
 //			fileName = fileName.concat(getCertPlainText(selectedCertSizeIndex),"_",getPrintPlainText(selectedTypesetSizeIndex),"_");
