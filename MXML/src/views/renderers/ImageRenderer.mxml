@@ -12,14 +12,22 @@
 			import mx.events.FlexEvent;
 			import mx.utils.ObjectUtil;
 			
+			import utils.MatrixTransformer;
+			
 			protected function id_image_completeHandler(event:Event):void
 			{
-				this.id_image.transform.matrix.identity();
+//				this.id_image.transform.matrix.identity();
+				trace("Applied image matrix:",ObjectUtil.toString(AppData.mainApp.id_eitor_view.id_uit_tool.transform.matrix));
 				trace("AppData.savedImageMatrix:",ObjectUtil.toString(AppData.savedImageMatrix));
 				this.id_image.transform.matrix = AppData.savedImageMatrix;
-				this.id_image.x = 0;
-				this.id_image.y = 0;
-				this.id_image.source = "";
+//				this.id_image.scaleX = AppData.savedImageMatrix.a;
+//				this.id_image.scaleY = AppData.savedImageMatrix.d;
+//				this.id_image.x = data.x;
+//				this.id_image.y = data.y;
+//				var sourceMatrix:Matrix = new Matrix();
+//				sourceMatrix.concat(AppData.mainApp.id_eitor_view.id_image_edit.transform.matrix);
+//				var tempMatrix:Matrix =  MatrixTransformer.transform(sourceMatrix,data.sX,data.sY,sourceMatrix.a,sourceMatrix.d,data.r);
+//				this.id_image.transform.matrix = tempMatrix;
 			}
 			/*
 			import views.components.ImageWithBorder;
@@ -78,7 +86,7 @@
 		</mx:Transition>
 	</s:transitions>    -->
 	<!--x="{data.x}" y="{data.y}" scaleX="{data.sX}" scaleY="{data.sY}" rotation="{data.r}"-->
-	<components:ImageWithBorder id="id_image" 
+	<!--<components:ImageWithBorder id="id_image" 
 								source="{data.source}"
 								borderAlpha="1"
 								borderWidth="7"
@@ -86,9 +94,10 @@
 								horizontalCenter="0" verticalCenter="0" 
 								smoothBitmapContent="true"
 								scaleX="{data.sX}" scaleY="{data.sY}" rotation="{data.r}"
-								/>
-	<!--<s:Group id="id_group" clipAndEnableScrolling="true" width="{data.w}" height="{data.h}" >
-		<s:BorderContainer color="black" borderWeight="5" borderStyle="inset">
+								width="{data.w}" height="{data.h}"
+								/>-->
+	<!--<s:BorderContainer color="black" borderWeight="5" borderStyle="inset"> </s:BorderContainer>-->
+	<s:Group id="id_group" clipAndEnableScrolling="true" width="{data.w}" height="{data.h}" >
 		<components:ImageWithBorder id="id_image" 
 			source="{data.source}"
 			borderAlpha="1"
@@ -97,7 +106,7 @@
 			horizontalCenter="0" verticalCenter="0" 
 		    smoothBitmapContent="true"
 		    complete="id_image_completeHandler(event)"
+		    cachePolicy="off"
 		/>
-		</s:BorderContainer>
-	</s:Group>-->
+	</s:Group>
 </s:ItemRenderer>

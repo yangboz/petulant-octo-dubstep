@@ -78,7 +78,7 @@ package model
 		//
 		public static var uploadFileBitmapData:BitmapData;
 		//
-		public static var DPI_DEFAULT:Number = 300;
+		public static var DPI_DEFAULT:Number = 600;
 		//Typeset result for print out
 		public static var savedImageListFie:File;
 		//

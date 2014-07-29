@@ -82,8 +82,8 @@
 				//
 				var definedImageWidth:Number;
 				var definedImageHeight:Number;
-				var definedImageSource:Object = AppData.savedImageFie.nativePath;
-//				var definedImageSource:Object = AppData.uploadedImageFile.nativePath;
+//				var definedImageSource:Object = AppData.savedImageFie.nativePath;
+				var definedImageSource:Object = AppData.uploadedImageFile.nativePath;
 				if(resizeForDisplay)
 				{
 					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w ;
@@ -101,7 +101,7 @@
 				var definedContainerScaleX:Number = definedImageWidth/this.getRequiredCertPhotoWidth();
 				var definedContainerScaleY:Number = definedImageHeight/this.getRequiredCertPhotoHeight();
 				//
-				AppData.savedImageMatrix.scale(definedContainerScaleX,definedContainerScaleY);
+//				AppData.savedImageMatrix.scale(definedContainerScaleX,definedContainerScaleY);
 				//
 //				var definedImageScaleX:Number = AppData.savedImageOpts.sX * definedContainerScaleX;
 //				var definedImageScaleY:Number = AppData.savedImageOpts.sY * definedContainerScaleY;
@@ -174,7 +174,7 @@
 				var flexPrintJob:FlexPrintJob = new FlexPrintJob();
 				//
 				var option:PrintJobOptions = new PrintJobOptions();
-//				option.pixelsPerInch = 180;
+				option.pixelsPerInch = 600;
 				//
 				flexPrintJob.printJob.orientation = PrintJobOrientation.LANDSCAPE;
 				//PageSize setting manually
@@ -203,11 +203,12 @@
 				{
 					//Save printer name for the next operation.
 					AppData.savedPrinterName = flexPrintJob.printJob.printer;
+					trace("AppData.savedPrinterName:",AppData.savedPrinterName);
 					//					flexPrintJob.addObject(this.id_list_tile,FlexPrintJobScaleType.NONE);
 					//@see http://stackoverflow.com/questions/1642008/how-to-dynamically-set-print-page-margins-in-flash-cs3
-					flexPrintJob.printJob.addPage(this.id_list_tile,printRect,option);
+//					flexPrintJob.printJob.addPage(this.id_list_tile,printRect,option);
 					//					flexPrintJob.addObject(this.id_list_tile_real,FlexPrintJobScaleType.NONE);
-					flexPrintJob.send();
+//					flexPrintJob.send();
 				}
 				//Rollback to display
 				this.updateTileList();

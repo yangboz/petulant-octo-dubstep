@@ -151,9 +151,9 @@
 				var requiredPhotoWidth:Number = this.getRequiredCertPhotoWidth();
 				var requiredPhotoHeight:Number = this.getRequiredCertPhotoHeight();
 				var bitMapData:BitmapData = new BitmapData(requiredPhotoWidth,requiredPhotoHeight,true); 
-//				var bitMapData:BitmapData = ImageUtil.resample(AppData.uploadFileBitmapData,requiredPhotoWidth,requiredPhotoHeight,
-//					AppData.savedImageOpts.tX,AppData.savedImageOpts.tY,AppData.savedImageOpts.r,
-//					StageQuality.BEST);
+				/* var bitMapData:BitmapData = ImageUtil.resample(AppData.uploadFileBitmapData,requiredPhotoWidth,requiredPhotoHeight,
+					AppData.savedImageMatrix.a,AppData.savedImageMatrix.d,0,
+					StageQuality.BEST); */
 				/*
 				AppData.savedImageMatrix = new Matrix();
 				AppData.savedImageMatrix.scale(requiredPhotoWidth/this.id_image_edit.contentWidth,requiredPhotoHeight/this.id_image_edit.contentHeight);
