@@ -17,6 +17,7 @@
 			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
 			import mx.managers.DragManager;
+			import mx.utils.ObjectUtil;
 			
 			import spark.events.IndexChangeEvent;
 			import spark.primitives.supportClasses.FilledElement;
@@ -135,7 +136,8 @@
 				this.id_image_upload.addEventListener(Event.COMPLETE,loadImageCompleteHandler);
 				function loadImageCompleteHandler(event:Event):void
 				{
-					AppData.uploadFileBitmapData = id_image_upload.bitmapData;
+					AppData.uploadFileBitmapData = id_image_upload.bitmapData.clone();
+					trace("AppData.uploadFileBitmapData:", ObjectUtil.toString(AppData.uploadFileBitmapData) );
 					//
 					AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;
 					//Avoid back cache issue.

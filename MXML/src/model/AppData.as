@@ -83,6 +83,8 @@ package model
 		public static var savedImageListFie:File;
 		//
 		public static var savedPrinterName:String;
+		//
+		public static var savedImageOperation:ImageOprVO =new ImageOprVO();
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
@@ -451,15 +453,29 @@ package model
 				}
 			}else
 			{
-				AppData.savedImageFie=AppData.savedImageFie.resolvePath(AppData.selectedFileName);  
-				//
-				fileStream = new FileStream();  
-				fileStream.open(AppData.savedImageFie, FileMode.WRITE);  
-				fileStream.writeBytes(imageByteArray);
-//				fileStream.writeUTFBytes("Hi this file was saved from AIR application without dialog");  
-				fileStream.addEventListener(Event.CLOSE, fileStreamCloseHandler);  
-				fileStream.close();  
-				trace("AppData.savedImageFie(without dialog):",AppData.savedImageFie.nativePath);
+				if(standalone)
+				{
+					AppData.savedImageFie=AppData.savedImageFie.resolvePath(AppData.selectedFileName);  
+					//
+					fileStream = new FileStream();  
+					fileStream.open(AppData.savedImageFie, FileMode.WRITE);  
+					fileStream.writeBytes(imageByteArray);
+					//				fileStream.writeUTFBytes("Hi this file was saved from AIR application without dialog");  
+					fileStream.addEventListener(Event.CLOSE, fileStreamCloseHandler);  
+					fileStream.close();  
+					trace("AppData.savedImageFie(without dialog):",AppData.savedImageFie.nativePath);
+				}else
+				{
+					AppData.savedImageListFie=AppData.savedImageListFie.resolvePath(AppData.selectedFileName);  
+					//
+					fileStream = new FileStream();  
+					fileStream.open(AppData.savedImageFie, FileMode.WRITE);  
+					fileStream.writeBytes(imageByteArray);
+					//				fileStream.writeUTFBytes("Hi this file was saved from AIR application without dialog");  
+					fileStream.addEventListener(Event.CLOSE, fileStreamCloseHandler);  
+					fileStream.close();  
+					trace("AppData.savedImageListFie(without dialog):",AppData.savedImageListFie.nativePath);
+				}
 			}
 //			
 			//

@@ -16,7 +16,6 @@
 			
 			protected function id_image_completeHandler(event:Event):void
 			{
-//				this.id_image.transform.matrix.identity();
 				trace("Applied image matrix:",ObjectUtil.toString(AppData.mainApp.id_eitor_view.id_uit_tool.transform.matrix));
 				trace("AppData.savedImageMatrix:",ObjectUtil.toString(AppData.savedImageMatrix));
 				this.id_image.transform.matrix = AppData.savedImageMatrix;
@@ -86,7 +85,7 @@
 		</mx:Transition>
 	</s:transitions>    -->
 	<!--x="{data.x}" y="{data.y}" scaleX="{data.sX}" scaleY="{data.sY}" rotation="{data.r}"-->
-	<!--<components:ImageWithBorder id="id_image" 
+	<components:ImageWithBorder id="id_image" 
 								source="{data.source}"
 								borderAlpha="1"
 								borderWidth="7"
@@ -94,10 +93,9 @@
 								horizontalCenter="0" verticalCenter="0" 
 								smoothBitmapContent="true"
 								scaleX="{data.sX}" scaleY="{data.sY}" rotation="{data.r}"
-								width="{data.w}" height="{data.h}"
-								/>-->
+								/>
 	<!--<s:BorderContainer color="black" borderWeight="5" borderStyle="inset"> </s:BorderContainer>-->
-	<s:Group id="id_group" clipAndEnableScrolling="true" width="{data.w}" height="{data.h}" >
+	<!--<s:Group id="id_group" clipAndEnableScrolling="true" width="{data.w}" height="{data.h}" >
 		<components:ImageWithBorder id="id_image" 
 			source="{data.source}"
 			borderAlpha="1"
@@ -108,5 +106,5 @@
 		    complete="id_image_completeHandler(event)"
 		    cachePolicy="off"
 		/>
-	</s:Group>
+	</s:Group>-->
 </s:ItemRenderer>

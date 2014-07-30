@@ -28,6 +28,8 @@
 			protected function button_save_clickHandler(event:MouseEvent):void
 			{
 				AppData.saveImageFile(AppData.savedImageBitmapData,true,true,false);
+//				AppData.savedImageFie.browseForSave(AppData.getClassifiedFileName());
+//				AppData.savedImageListFie.browseForSave(AppData.getClassifiedFileName());
 //				AppData.uploadedImageFileCopy.browseForSave(AppData.getClassifiedFileName());
 //				AppData.uploadedImageFileCopy.save(AppData.uploadFileBitmapData,AppData.getClassifiedFileName());
 			}

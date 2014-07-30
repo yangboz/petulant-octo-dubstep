@@ -10,6 +10,10 @@
 				>
 	<fx:Script>
 		<![CDATA[
+			import com.godpaper.as3.ImageMagick.AS3ImageMagick;
+			import com.godpaper.as3.ImageMagick.ImageMagickEvent;
+			import com.godpaper.as3.ImageMagick.ImageMagickFacts;
+			import com.godpaper.as3.ImageMagick.ImageMagickFactsBuilder;
 			import com.vstyran.transform.consts.GuidelineType;
 			import com.vstyran.transform.consts.TransformationType;
 			import com.vstyran.transform.events.GuidelineEvent;
@@ -22,10 +26,20 @@
 			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
 			import mx.graphics.BitmapSmoothingQuality;
+			import mx.utils.ObjectUtil;
 			
 			import spark.events.IndexChangeEvent;
 			
 			import utils.ImageUtil;
+			
+			import model.ImageOprVO;
+			//AS3ImageMagick
+			private var as3ImageMagick:AS3ImageMagick;
+			//
+			public function get process():NativeProcess
+			{
+				return as3ImageMagick.nativeProcess;
+			}
 			//UITransformTools: @see http://vstyran-flex.ho.ua/
 			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
@@ -126,6 +140,13 @@
 				//
 				trace("AppData.savedImageMatrix.scale:[scaleX]=",scaleX," [scaleY]=",scaleY);
 				AppData.savedImageMatrix.scale(scaleX,scaleY);
+				//
+				AppData.savedImageOperation.sX = scaleX;
+				AppData.savedImageOperation.sY = scaleY;
+				AppData.savedImageOperation.oX = (requiredW-this.id_image_edit.width)/AppData.uploadFileBitmapData.width;
+				AppData.savedImageOperation.oY = (requiredH-this.id_image_edit.height)/AppData.uploadFileBitmapData.height; 
+				//
+				trace("AppData.savedImageOperation:",AppData.savedImageOperation);
 			}
 			
 			protected function reupload_button_clickHandler(event:MouseEvent):void
@@ -172,6 +193,44 @@
 //				trace("this.id_uit_tool.transform:",this.id_uit_tool.transform);
 				//
 				AppData.saveImageFile(bitMapData);
+//				var oprString:String = String("-crop,").concat(AppData.savedImageOperation
+				//Crop the origianl photo with ImageMagick
+				var exePath:String = "convert.exe";
+				var facts:ImageMagickFacts = new ImageMagickFactsBuilder(AppData.uploadedImageFile.nativePath,AppData.savedImageFie.nativePath)
+					.with_command("-crop,960x960-10-10")
+					.build();
+				//Execute the ImageMagick native process here.
+				as3ImageMagick = new AS3ImageMagick(exePath,facts);
+				//
+				as3ImageMagick.start();
+				//Event listeners to the ImageMagick.
+				as3ImageMagick.addEventListener(ImageMagickEvent.STANDARD_OUTPUT_DATA, dataHandler); 
+				as3ImageMagick.addEventListener(ImageMagickEvent.STANDARD_ERROR_DATA, errorDataHandler); 
+				as3ImageMagick.addEventListener(ImageMagickEvent.STANDARD_OUTPUT_CLOSE,outputCloseHandler);
+				//
+				var dataBytes:ByteArray = new ByteArray(); 
+				var errorBytes:ByteArray = new ByteArray(); 
+				//
+				function dataHandler(event:ProgressEvent):void
+				{ 
+					trace("dataHandler(event):",event.toString());
+					var bytes:IDataInput = process.standardOutput as IDataInput;
+		            var outputString: String = bytes.readUTFBytes(bytes.bytesAvailable).toString();
+		            trace(outputString);
+				}
+				function errorDataHandler(event:ProgressEvent):void
+				{ 
+					trace("errorDataHandler(event):",event.toString());
+					var bytes:IDataInput = process.standardError as IDataInput;
+					            var outputString: String = bytes.readUTFBytes(bytes.bytesAvailable).toString();
+					//					            trace("errorDataHandler:",outputString);
+					//					errorBytes.writeBytes(process.standardError.readBytes(process.standardError.bytesAvailable)); 
+					//					trace("errorBytes:",errorBytes.toString());
+				}
+				function outputCloseHandler(event:Event):void
+				{
+					trace("outputCloseHandler:",event.toString());
+				}
 				//
 				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;	
 			}
@@ -479,7 +538,7 @@
 				   change="onEditorRotateSliderChange(event)" stepSize="1" minimum="-180" maximum="180" value="0"
 				   width="200" visible="false" includeInLayout="false"
 				   />
-		<s:Button x="349" y="425" label="ROTATE" skinClass="skins.button.HW_RotateButton_Skin" click="rotate90ButtonClickHandler(event)"/>
+		<s:Button x="349" y="425" label="ROTATE" skinClass="skins.button.HW_RotateButton_Skin" click="rotate90ButtonClickHandler(event)" visible="false" includeInLayout="false"/>
 <!--		<s:Button x="625" y="198" label="ZOOM_IN" skinClass="skins.button.HW_ZoomInButton_Skin" click="zoomInButtonClickHandler(event)"/>
 		<s:Button x="625" y="373" label="ZOOM_OUT" skinClass="skins.button.HW_ZoomOutButton_Skin" click="zoomOutButtonClickHandler(event)"/>
 		<spark:VSlider id="id_vslider_scale" x="638" y="230"
@@ -500,4 +559,5 @@
 			</s:stroke>
 		</s:Line>
 	</s:BorderContainer>
+	
 </views:ViewBase>

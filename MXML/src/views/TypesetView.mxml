@@ -82,13 +82,13 @@
 				//
 				var definedImageWidth:Number;
 				var definedImageHeight:Number;
-//				var definedImageSource:Object = AppData.savedImageFie.nativePath;
-				var definedImageSource:Object = AppData.uploadedImageFile.nativePath;
+				var definedImageSource:Object = AppData.savedImageFie.nativePath;
+//				var definedImageSource:Object = AppData.uploadedImageFile.nativePath;
 				if(resizeForDisplay)
 				{
 					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w ;
 					definedImageHeight = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h ;
-//					definedImageSource =  AppData.uploadedImageFileCopy.nativePath;
+//					definedImageSource =  AppData.savedImageFie.nativePath;
 				}else
 				{
 					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w_ *AppData.PIXEL_2_PRINT ;
@@ -105,10 +105,10 @@
 				//
 //				var definedImageScaleX:Number = AppData.savedImageOpts.sX * definedContainerScaleX;
 //				var definedImageScaleY:Number = AppData.savedImageOpts.sY * definedContainerScaleY;
-				var definedImageScaleX:Number = definedContainerScaleX;
-				var definedImageScaleY:Number = definedContainerScaleY;
+				var definedImageScaleX:Number = definedContainerScaleX * AppData.savedImageOperation.sX;
+				var definedImageScaleY:Number = definedContainerScaleY * AppData.savedImageOperation.sY;
 				//
-				var definedImageTx:Number = AppData.savedImageMatrix.tx
+				var definedImageTx:Number = AppData.savedImageMatrix.tx;
 				var definedImageTy:Number = AppData.savedImageMatrix.ty;
 				//Trace info:
 				trace("definedImageWidth:",definedImageWidth,
@@ -174,7 +174,7 @@
 				var flexPrintJob:FlexPrintJob = new FlexPrintJob();
 				//
 				var option:PrintJobOptions = new PrintJobOptions();
-				option.pixelsPerInch = 600;
+//				option.pixelsPerInch = 600;
 				//
 				flexPrintJob.printJob.orientation = PrintJobOrientation.LANDSCAPE;
 				//PageSize setting manually
@@ -206,9 +206,9 @@
 					trace("AppData.savedPrinterName:",AppData.savedPrinterName);
 					//					flexPrintJob.addObject(this.id_list_tile,FlexPrintJobScaleType.NONE);
 					//@see http://stackoverflow.com/questions/1642008/how-to-dynamically-set-print-page-margins-in-flash-cs3
-//					flexPrintJob.printJob.addPage(this.id_list_tile,printRect,option);
+					flexPrintJob.printJob.addPage(this.id_list_tile,printRect,option);
 					//					flexPrintJob.addObject(this.id_list_tile_real,FlexPrintJobScaleType.NONE);
-//					flexPrintJob.send();
+					flexPrintJob.send();
 				}
 				//Rollback to display
 				this.updateTileList();
