@@ -34,6 +34,7 @@ package model
 	// Imports
 	//
 	//--------------------------------------------------------------------------
+	[Bindable]
 	/**
 	 * AppData.as class. 
 	 * @author yangboz
@@ -52,11 +53,10 @@ package model
 		//--------------------------------------------------------------------------
 		public static var mainApp:Main;
 		//
-		[Bindable]
 		public static var selectedCertSizeIndex:int = -1;
 		public static var selectedTypesetSizeIndex:int = 0;
 		//
-		private static var savedWorkspaceFolders:Array = [];
+		public static var savedWorkspaceFolders:Array = [];
 		private static const FILE_FOLDER_NAME:String = "HP_ID_PRINT";
 		private static const FILE_NAME_DEFAULT:String = "HP_ID_Print_";
 		private static const FILE_ANME_EXT_DEFAULT:String = ".jpg";
@@ -330,7 +330,6 @@ package model
 			ARRAY_TYPESET_TILE_POINT_5x7,
 			ARRAY_TYPESET_TILE_POINT_A4
 		];
-		[Bindable]
 		///ImageVerify notifications
 		[Embed(source="assets/images/notification/pattern_notification_01.png")]
 		public static var NOTIFY_IMG_VERIFY_RESULT_0:Class;

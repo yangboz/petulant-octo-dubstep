@@ -309,6 +309,8 @@
 						AppData.savedImageMatrix.concat(this.id_image_edit.transform.matrix);
 						//
 						AppData.savedImgOprOV.r = angle;
+						AppData.savedImgOprOV.tX += this.id_group.x-this.id_image_edit.x;
+						AppData.savedImgOprOV.tY += this.id_group.y-this.id_image_edit.y;
 						break;
 					case TransformationType.MOVE:
 						AppData.savedImageMatrix.translate(event.data.matrix.tx,event.data.matrix.ty);
@@ -427,13 +429,16 @@
 			private function cropOriginalImage():void
 			{
 				AppData.savedImageFie = File.createTempDirectory().resolvePath(AppData.getRandomWorkspaceDirName());
-				//
-				//"-crop,960x960-10-10"
-				var cropString:String = String("-crop,").concat(
-					AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
-					AppData.savedImgOprOV.oX,
-					AppData.savedImgOprOV.oY,
-					",-rotate,", AppData.savedImgOprOV.r);
+				//@example: convert C:\\image.JPG  -rotate 30 -crop 333x333+0+0 C:\\output_distory_viewport_rotate_crop.png
+				var cropString:String = String("").concat(
+//					"-define,distort:viewport=,",AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
+//					AppData.savedImgOprOV.oX,AppData.savedImgOprOV.oY,
+					"-rotate,",AppData.savedImgOprOV.r,
+					",-crop,",AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,"+0+0"
+//					",-distort SRT,",AppData.savedImgOprOV.r
+//					",-geometry,", AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
+//					AppData.savedImgOprOV.gX,AppData.savedImgOprOV.gY
+				);
 				trace("ImageMagick-crop string:",cropString);
 				//Crop the origianl photo with ImageMagick
 				var exePath:String = "convert.exe";
@@ -472,6 +477,7 @@
 				{
 					trace("outputCloseHandler:",event.toString());
 					//Load result file's bitmapdata
+					trace("AppData.savedImageFie.nativePath:",AppData.savedImageFie.nativePath);
 					var req:URLRequest = new URLRequest(AppData.savedImageFie.nativePath);
 					var ldr:Loader = new Loader();
 					ldr.contentLoaderInfo.addEventListener(Event.COMPLETE, completeHandler);
@@ -480,9 +486,9 @@
 						var ldr:Loader = Loader(event.target.loader);
 						var b:Bitmap = Bitmap(ldr.content);
 						AppData.savedImageBitmapData = b.bitmapData;
+						//Then go to next view.
+						AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;	
 					}
-					//Then go to next view.
-					AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;	
 				}
 			}
 		]]>

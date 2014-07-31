@@ -41,14 +41,13 @@ package model
 		//Notice:crop image without quality loss as required.
 		public function get cH():Number
 		{
-			return oH;
 			//Ratio check
 			if(oW<=oH)
 			{
 				_cH = oW;//requiredW * contentH/contentW;
 			}else
 			{
-				_cH = oH *(dH/rH);
+				_cH = oH;
 			}
 			
 			return _cH;
@@ -56,11 +55,10 @@ package model
 		//
 		public function get cW():Number
 		{
-			return oW;
 			//Ratio check
 			if(oW<=oH)
 			{
-				_cW = oW *(dW/rW);
+				_cW = oW;
 			}else
 			{
 				_cW = oH;//requiredH * contentW/contentH;
@@ -68,7 +66,20 @@ package model
 			
 			return _cW;
 		}
-
+		//ImageMagick gemotry offset values
+		private var _gX:Number=50;//OffsetX
+		private var _gY:Number=50;//OffsetY
+		//
+		public function get gY():String
+		{
+//			return _gY;
+			return _gY>=0?String("+").concat(_gY):_gY.toString();
+		}
+		public function get gX():String
+		{
+//			return _gX;
+			return _gX>=0?String("+").concat(_gX):_gX.toString();
+		}
 		//
 		public function toString():String
 		{
