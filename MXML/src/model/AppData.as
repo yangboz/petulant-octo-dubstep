@@ -83,8 +83,8 @@ package model
 		public static var savedImageListFie:File;
 		//
 		public static var savedPrinterName:String;
-		//
-		public static var savedImageOperation:ImageOprVO =new ImageOprVO();
+		//ImageOperationVO for storage.
+		public static var savedImgOprOV:ImageOprVO =new ImageOprVO();
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
@@ -582,7 +582,7 @@ package model
 			return certText;
 		}
 		//
-		private static function getRandomWorkspaceDirName():String
+		public static function getRandomWorkspaceDirName():String
 		{
 			var CurrentDateTime:Date = new Date();
 			var CurrentDF:DateFormatter = new DateFormatter();

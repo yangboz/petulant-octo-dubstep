@@ -45,6 +45,9 @@
 					var id_image_saved_point:Point = AppData.ARRAY_EDITOR_POINT_PHOTOS[AppData.selectedCertSizeIndex] as Point;
 					id_image_saved.x = id_image_saved_point.x+1;
 					id_image_saved.y = id_image_saved_point.y+1;
+					//
+//					id_image_saved.width = this.getRequiredCertPhotoWidth();
+//					id_image_saved.height = this.getRequiredCertPhotoHeight();
 					/*
 					id_image_group.x = id_image_saved_point.x+1;
 					id_image_group.y = id_image_saved_point.y+1;
@@ -55,8 +58,8 @@
 					id_image_saved.y = AppData.savedImageOpts.tY;
 					id_image_saved.rotation = AppData.savedImageOpts.r;
 					*/
-					id_image_saved.scaleX = AppData.savedImageOperation.sX;
-					id_image_saved.scaleY = AppData.savedImageOperation.sY;
+					id_image_saved.scaleX = AppData.savedImgOprOV.sX;
+					id_image_saved.scaleY = AppData.savedImgOprOV.sY;
 				}
 			}
 		]]>

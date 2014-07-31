@@ -27,11 +27,45 @@
 			
 			protected function button_save_clickHandler(event:MouseEvent):void
 			{
-				AppData.saveImageFile(AppData.savedImageBitmapData,true,true,false);
+//				AppData.saveImageFile(AppData.savedImageBitmapData,true,true,false);
 //				AppData.savedImageFie.browseForSave(AppData.getClassifiedFileName());
 //				AppData.savedImageListFie.browseForSave(AppData.getClassifiedFileName());
 //				AppData.uploadedImageFileCopy.browseForSave(AppData.getClassifiedFileName());
 //				AppData.uploadedImageFileCopy.save(AppData.uploadFileBitmapData,AppData.getClassifiedFileName());
+				
+				/*
+				AppData.savedImageFie.addEventListener(Event.SELECT, savingFileHandler);
+				AppData.savedImageFie.browseForSave("Save as");
+				//
+				function savingFileHandler(event:Event):void
+				{
+//					var selectedFile:FileReference = FileReference(event.target);
+					var selectedFile:File = new File(event.target.nativePath);
+					selectedFile = selectedFile.resolvePath(event.target.nativePath);
+					//To ensure the file is still loaded
+					AppData.savedImageFie.copyTo(selectedFile, true);
+//					AppData.savedImageFie.moveTo(selectedFile, true);
+					//
+					AppData.mainApp.nativeWindow.close();
+				}
+				*/
+				var docsDir:File = File.documentsDirectory;
+				try
+				{
+					docsDir.browseForSave("Save As");
+					docsDir.addEventListener(Event.SELECT, saveData);
+				}
+				catch (error:Error)
+				{
+					trace("Failed:", error.message)
+				}
+				
+				function saveData(event:Event):void
+				{
+					var newFile:File = new File(event.target.nativePath);
+					//
+					AppData.savedImageFie.copyTo(newFile, true);
+				}
 			}
 		]]>
 	</fx:Script>

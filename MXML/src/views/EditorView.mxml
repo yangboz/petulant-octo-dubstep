@@ -141,12 +141,14 @@
 				trace("AppData.savedImageMatrix.scale:[scaleX]=",scaleX," [scaleY]=",scaleY);
 				AppData.savedImageMatrix.scale(scaleX,scaleY);
 				//
-				AppData.savedImageOperation.sX = scaleX;
-				AppData.savedImageOperation.sY = scaleY;
-				AppData.savedImageOperation.oX = (requiredW-this.id_image_edit.width)/AppData.uploadFileBitmapData.width;
-				AppData.savedImageOperation.oY = (requiredH-this.id_image_edit.height)/AppData.uploadFileBitmapData.height; 
+				AppData.savedImgOprOV.sX = scaleX;
+				AppData.savedImgOprOV.sY = scaleY;
+				AppData.savedImgOprOV.oX = (requiredW-this.id_image_edit.width)/scaleX;
+				AppData.savedImgOprOV.oY = (requiredH-this.id_image_edit.height)/scaleY; 
+				AppData.savedImgOprOV.oW = this.id_image_edit.width/scaleX;
+				AppData.savedImgOprOV.oH = this.id_image_edit.height/scaleY;
 				//
-				trace("AppData.savedImageOperation:",AppData.savedImageOperation);
+				trace("AppData.savedImageOperation:",AppData.savedImgOprOV);
 			}
 			
 			protected function reupload_button_clickHandler(event:MouseEvent):void
@@ -187,52 +189,13 @@
 				bitMapData.draw(bufferBitmapData,this.id_uit_tool.transform.matrix); 
 				*/
 //				bitMapData.draw(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true); 
-				bitMapData.drawWithQuality(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true,StageQuality.BEST);
+//				bitMapData.drawWithQuality(this.id_image_edit.bitmapData,null,null,null,null,true,StageQuality.BEST);
 //				bitMapData.drawWithQuality(AppData.uploadFileBitmapData,AppData.savedImageMatrix,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true,StageQuality.BEST);
 				//
 //				trace("this.id_uit_tool.transform:",this.id_uit_tool.transform);
 				//
-				AppData.saveImageFile(bitMapData);
-//				var oprString:String = String("-crop,").concat(AppData.savedImageOperation
-				//Crop the origianl photo with ImageMagick
-				var exePath:String = "convert.exe";
-				var facts:ImageMagickFacts = new ImageMagickFactsBuilder(AppData.uploadedImageFile.nativePath,AppData.savedImageFie.nativePath)
-					.with_command("-crop,960x960-10-10")
-					.build();
-				//Execute the ImageMagick native process here.
-				as3ImageMagick = new AS3ImageMagick(exePath,facts);
-				//
-				as3ImageMagick.start();
-				//Event listeners to the ImageMagick.
-				as3ImageMagick.addEventListener(ImageMagickEvent.STANDARD_OUTPUT_DATA, dataHandler); 
-				as3ImageMagick.addEventListener(ImageMagickEvent.STANDARD_ERROR_DATA, errorDataHandler); 
-				as3ImageMagick.addEventListener(ImageMagickEvent.STANDARD_OUTPUT_CLOSE,outputCloseHandler);
-				//
-				var dataBytes:ByteArray = new ByteArray(); 
-				var errorBytes:ByteArray = new ByteArray(); 
-				//
-				function dataHandler(event:ProgressEvent):void
-				{ 
-					trace("dataHandler(event):",event.toString());
-					var bytes:IDataInput = process.standardOutput as IDataInput;
-		            var outputString: String = bytes.readUTFBytes(bytes.bytesAvailable).toString();
-		            trace(outputString);
-				}
-				function errorDataHandler(event:ProgressEvent):void
-				{ 
-					trace("errorDataHandler(event):",event.toString());
-					var bytes:IDataInput = process.standardError as IDataInput;
-					            var outputString: String = bytes.readUTFBytes(bytes.bytesAvailable).toString();
-					//					            trace("errorDataHandler:",outputString);
-					//					errorBytes.writeBytes(process.standardError.readBytes(process.standardError.bytesAvailable)); 
-					//					trace("errorBytes:",errorBytes.toString());
-				}
-				function outputCloseHandler(event:Event):void
-				{
-					trace("outputCloseHandler:",event.toString());
-				}
-				//
-				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;	
+//				AppData.saveImageFile(bitMapData);
+				this.cropOriginalImage();
 			}
 			//
 			private function deselectUITransformTool(event:MouseEvent):void
@@ -319,13 +282,16 @@
 			{
 //				trace("(before transformationComplete)toolData.matrix:",event.toolData.matrix);
 				trace("(before transformationComplete)data.matrix:",event.data.matrix);
+				trace("(before transformationComplete)savedImgOprOV:",ObjectUtil.toString(AppData.savedImgOprOV));
 				//
 //				AppData.savedImageMatrix = event.data.matrix;
 				switch(event.transformationType)
 				{
 					case TransformationType.RESIZE:
 						AppData.savedImageMatrix.scale(this.id_image_edit.scaleX,this.id_image_edit.scaleY);
-//						this.autoResizeImageView();
+//						
+						AppData.savedImgOprOV.sX = this.id_image_edit.scaleX;
+						AppData.savedImgOprOV.sY = this.id_image_edit.scaleY;
 						break;
 					case TransformationType.ROTATE:
 //						AppData.savedImageMatrix.rotate(this.id_image_edit.rotation);
@@ -339,15 +305,21 @@
 						AppData.savedImageMatrix.rotate(radians);
 						AppData.savedImageMatrix.translate(+offsetWidth, +offsetHeight);
 						AppData.savedImageMatrix.concat(this.id_image_edit.transform.matrix);
+						//
+						AppData.savedImgOprOV.r = angle;
 						break;
 					case TransformationType.MOVE:
 						AppData.savedImageMatrix.translate(event.data.matrix.tx,event.data.matrix.ty);
+						//
+						AppData.savedImgOprOV.tX = event.data.matrix.tx;
+						AppData.savedImgOprOV.tY = event.data.matrix.ty;
 						break;
 					default:
 						break;
 				}
 //				trace("(after transformationComplete)toolData.matrix:",event.toolData.matrix);
 				trace("(after transformationComplete)data.matrix:",event.data.matrix);
+				trace("(after transformationComplete)savedImgOprOV:",ObjectUtil.toString(AppData.savedImgOprOV));
 			}
 			
 			protected function tool_transformationHandler(event:TransformEvent):void
@@ -448,6 +420,57 @@
 				this.autoResizeImageView();
 				///
 				this.selectUITransformTool(new MouseEvent(MouseEvent.CLICK));
+			}
+			//
+			private function cropOriginalImage():void
+			{
+				AppData.savedImageFie = File.createTempDirectory().resolvePath(AppData.getRandomWorkspaceDirName());
+				//
+				//"-crop,960x960-10-10"
+				var cropString:String = String("-crop,").concat(
+					AppData.savedImgOprOV.oW,"x",AppData.savedImgOprOV.oH,
+					AppData.savedImgOprOV.oX>=0?String("+").concat(AppData.savedImgOprOV.oX):AppData.savedImgOprOV.oX,
+					AppData.savedImgOprOV.oY>=0?String("+").concat(AppData.savedImgOprOV.oY):AppData.savedImgOprOV.oY);
+				trace("ImageMagick-crop string:",cropString);
+				//Crop the origianl photo with ImageMagick
+				var exePath:String = "convert.exe";
+				var facts:ImageMagickFacts = new ImageMagickFactsBuilder(AppData.uploadedImageFile.nativePath,AppData.savedImageFie.nativePath)
+					.with_command(cropString)
+					.build();
+				//Execute the ImageMagick native process here.
+				as3ImageMagick = new AS3ImageMagick(exePath,facts);
+				//
+				as3ImageMagick.start();
+				//Event listeners to the ImageMagick.
+				as3ImageMagick.addEventListener(ImageMagickEvent.STANDARD_OUTPUT_DATA, dataHandler); 
+				as3ImageMagick.addEventListener(ImageMagickEvent.STANDARD_ERROR_DATA, errorDataHandler); 
+				as3ImageMagick.addEventListener(ImageMagickEvent.STANDARD_OUTPUT_CLOSE,outputCloseHandler);
+				//
+				var dataBytes:ByteArray = new ByteArray(); 
+				var errorBytes:ByteArray = new ByteArray(); 
+				//
+				function dataHandler(event:ProgressEvent):void
+				{ 
+					trace("dataHandler(event):",event.toString());
+					var bytes:IDataInput = process.standardOutput as IDataInput;
+					            var outputString: String = bytes.readUTFBytes(bytes.bytesAvailable).toString();
+					            trace(outputString);
+				}
+				function errorDataHandler(event:ProgressEvent):void
+				{ 
+					trace("errorDataHandler(event):",event.toString());
+					var bytes:IDataInput = process.standardError as IDataInput;
+					            var outputString: String = bytes.readUTFBytes(bytes.bytesAvailable).toString();
+					//					            trace("errorDataHandler:",outputString);
+					//					errorBytes.writeBytes(process.standardError.readBytes(process.standardError.bytesAvailable)); 
+					//					trace("errorBytes:",errorBytes.toString());
+				}
+				function outputCloseHandler(event:Event):void
+				{
+					trace("outputCloseHandler:",event.toString());
+					//Then go to next view.
+					AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;	
+				}
 			}
 		]]>
 	</fx:Script>

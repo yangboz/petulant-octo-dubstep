@@ -13,8 +13,8 @@ package model
 		public var oX:Number=0;//OffsetX
 		public var oY:Number=0;//OffsetY
 		//Original image size
-//		public var oW:Number=0;
-//		public var oH:Number=0;
+		public var oW:Number=0;
+		public var oH:Number=0;
 		//
 		public function toString():String
 		{

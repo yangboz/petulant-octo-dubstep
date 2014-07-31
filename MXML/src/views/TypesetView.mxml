@@ -105,8 +105,8 @@
 				//
 //				var definedImageScaleX:Number = AppData.savedImageOpts.sX * definedContainerScaleX;
 //				var definedImageScaleY:Number = AppData.savedImageOpts.sY * definedContainerScaleY;
-				var definedImageScaleX:Number = definedContainerScaleX * AppData.savedImageOperation.sX;
-				var definedImageScaleY:Number = definedContainerScaleY * AppData.savedImageOperation.sY;
+				var definedImageScaleX:Number = definedContainerScaleX * AppData.savedImgOprOV.sX;
+				var definedImageScaleY:Number = definedContainerScaleY * AppData.savedImgOprOV.sY;
 				//
 				var definedImageTx:Number = AppData.savedImageMatrix.tx;
 				var definedImageTy:Number = AppData.savedImageMatrix.ty;
