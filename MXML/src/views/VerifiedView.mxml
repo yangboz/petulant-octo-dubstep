@@ -78,7 +78,7 @@
 		
 		<s:Image id="id_image_saved" smooth="true" smoothingQuality="{BitmapSmoothingQuality.HIGH}"/>
 		<!--<s:Group id="id_image_group" clipAndEnableScrolling="true" width="{id_image_frame.width}" height="{id_image_frame.height}">
-			<components:ImageAdjustRotate id="id_image_saved" />
+			<s:Image id="id_image_saved" smooth="true" smoothingQuality="{BitmapSmoothingQuality.HIGH}"/>
 		</s:Group>-->
 		<s:Image id="id_image_frame" />
 		

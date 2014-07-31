@@ -432,7 +432,8 @@
 				var cropString:String = String("-crop,").concat(
 					AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
 					AppData.savedImgOprOV.oX,
-					AppData.savedImgOprOV.oY);
+					AppData.savedImgOprOV.oY,
+					",-rotate,", AppData.savedImgOprOV.r);
 				trace("ImageMagick-crop string:",cropString);
 				//Crop the origianl photo with ImageMagick
 				var exePath:String = "convert.exe";
@@ -455,8 +456,8 @@
 				{ 
 					trace("dataHandler(event):",event.toString());
 					var bytes:IDataInput = process.standardOutput as IDataInput;
-					            var outputString: String = bytes.readUTFBytes(bytes.bytesAvailable).toString();
-					            trace(outputString);
+		            var outputString: String = bytes.readUTFBytes(bytes.bytesAvailable).toString();
+		            trace(outputString);
 				}
 				function errorDataHandler(event:ProgressEvent):void
 				{ 
@@ -470,6 +471,16 @@
 				function outputCloseHandler(event:Event):void
 				{
 					trace("outputCloseHandler:",event.toString());
+					//Load result file's bitmapdata
+					var req:URLRequest = new URLRequest(AppData.savedImageFie.nativePath);
+					var ldr:Loader = new Loader();
+					ldr.contentLoaderInfo.addEventListener(Event.COMPLETE, completeHandler);
+					ldr.load(req);
+					function completeHandler(event:Event):void {
+						var ldr:Loader = Loader(event.target.loader);
+						var b:Bitmap = Bitmap(ldr.content);
+						AppData.savedImageBitmapData = b.bitmapData;
+					}
 					//Then go to next view.
 					AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;	
 				}
