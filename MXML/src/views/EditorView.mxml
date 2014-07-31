@@ -143,10 +143,12 @@
 				//
 				AppData.savedImgOprOV.sX = scaleX;
 				AppData.savedImgOprOV.sY = scaleY;
-				AppData.savedImgOprOV.oX = (requiredW-this.id_image_edit.width)/scaleX;
-				AppData.savedImgOprOV.oY = (requiredH-this.id_image_edit.height)/scaleY; 
-				AppData.savedImgOprOV.oW = this.id_image_edit.width/scaleX;
-				AppData.savedImgOprOV.oH = this.id_image_edit.height/scaleY;
+				AppData.savedImgOprOV.oW = this.id_image_edit.bitmapData.width;
+				AppData.savedImgOprOV.oH = this.id_image_edit.bitmapData.height;
+				AppData.savedImgOprOV.rW = requiredW;
+				AppData.savedImgOprOV.rH = requiredH;
+				AppData.savedImgOprOV.dW = this.id_image_edit.width;
+				AppData.savedImgOprOV.dH = this.id_image_edit.height;
 				//
 				trace("AppData.savedImageOperation:",AppData.savedImgOprOV);
 			}
@@ -428,9 +430,9 @@
 				//
 				//"-crop,960x960-10-10"
 				var cropString:String = String("-crop,").concat(
-					AppData.savedImgOprOV.oW,"x",AppData.savedImgOprOV.oH,
-					AppData.savedImgOprOV.oX>=0?String("+").concat(AppData.savedImgOprOV.oX):AppData.savedImgOprOV.oX,
-					AppData.savedImgOprOV.oY>=0?String("+").concat(AppData.savedImgOprOV.oY):AppData.savedImgOprOV.oY);
+					AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
+					AppData.savedImgOprOV.oX,
+					AppData.savedImgOprOV.oY);
 				trace("ImageMagick-crop string:",cropString);
 				//Crop the origianl photo with ImageMagick
 				var exePath:String = "convert.exe";
