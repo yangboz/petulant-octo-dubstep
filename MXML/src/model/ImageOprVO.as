@@ -27,7 +27,7 @@ package model
 		public function get oY():String
 		{
 			_oY = tY*(oH/dH);
-			return _oY>=0?String("-").concat(_oY):String("+").concat(-_oY);
+			return _oY>=0?String("+").concat(_oY):String("-").concat(-_oY);
 		}
 		//Percisely calculate the original relative offset value of X axis.
 		public function get oX():String
