@@ -432,8 +432,8 @@
 //					"-define,distort:viewport=,",AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
 //					AppData.savedImgOprOV.oX,AppData.savedImgOprOV.oY,
 					"-rotate,",AppData.savedImgOprOV.r,
-					",-page,",AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
-					AppData.savedImgOprOV.oX,AppData.savedImgOprOV.oY,
+					",-page,",AppData.savedImgOprOV.pW,"x",AppData.savedImgOprOV.pH,
+					AppData.savedImgOprOV.pX,AppData.savedImgOprOV.pY,
 					",-crop,",AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
 					AppData.savedImgOprOV.oX,AppData.savedImgOprOV.oY,
 					",-background,white,-flatten"
@@ -441,7 +441,7 @@
 //					",-geometry,", AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
 //					AppData.savedImgOprOV.gX,AppData.savedImgOprOV.gY
 				);
-				trace("ImageMagick-crop string:",cropString);
+				trace("ImageMagick-crop(pageViewPoint) string:",cropString);
 				//Crop the origianl photo with ImageMagick
 				var exePath:String = "convert.exe";
 				var facts:ImageMagickFacts = new ImageMagickFactsBuilder(AppData.uploadedImageFile.nativePath,AppData.savedImageFie.nativePath)

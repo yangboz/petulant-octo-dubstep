@@ -1,7 +1,11 @@
 package model
 {
 	import mx.utils.ObjectUtil;
-	//
+	/**
+	 * Image Operation Value Objects related to ImageMagick command and parameters.
+	 * @author yangboz
+	 * @see:http://www.imagemagick.org/Usage/
+	 */	
 	public class ImageOprVO extends Object
 	{
 		public var sX:Number=1;//ScaleX
@@ -17,7 +21,7 @@ package model
 		//Original image size
 		public var oW:Number=0;
 		public var oH:Number=0;
-		//Required area size
+		//Required area size,equal to ImageMagick's -page size
 		public var rW:Number=0;
 		public var rH:Number=0;
 		//Display area size
@@ -35,7 +39,7 @@ package model
 			_oX = tX*(oW/dW);
 			return _oX>=0?String("+").concat(_oX):String("-").concat(-_oX);
 		}
-		//Crop value for ImageMagick -crop
+		//Crop value for ImageMagick -crop,@see http://www.imagemagick.org/Usage/crop/#crop_viewport
 		private var _cW:Number=0;//Crop width
 		private var _cH:Number=0;//Crop height
 		//Notice:crop image without quality loss as required.
@@ -49,8 +53,12 @@ package model
 			{
 				_cH = oH;
 			}
-			
-			return _cH;
+			//Too heighty with exception:
+			var _eY:Number = (dH-rH) - tY*(oH/rH);
+			_eY = (_eY>0)?_eY:0;
+			_eY = (tY<0)?_eY:0;
+			//
+			return _cH + _eY;
 		}
 		//
 		public function get cW():Number
@@ -63,24 +71,60 @@ package model
 			{
 				_cW = oH;//requiredH * contentW/contentH;
 			}
+			//Too widthy with exception:
+			var _eX:Number = (dW-rW) - tX*(oW/rW);
+			_eX = (_eX>0)?_eX:0;
+			_eX = (tX<0)?_eX:0;
+			//
+			return _cW + _eX;
+		}
+		//Page(viewPoint) value for ImageMagick -page,@see http://www.imagemagick.org/Usage/layers/#flatten
+		private var _pW:Number=0;//Page view width
+		private var _pH:Number=0;//Page view height
+		public function get pH():Number
+		{
+			//Ratio check
+			if(oW<=oH)
+			{
+				_pH = oW;//requiredW * contentH/contentW;
+			}else
+			{
+				_pH = oH;
+			}
 			
-			return _cW;
-		}
-		//ImageMagick gemotry offset values
-		private var _gX:Number=50;//OffsetX
-		private var _gY:Number=50;//OffsetY
-		//
-		public function get gY():String
-		{
-//			return _gY;
-			return _gY>=0?String("+").concat(_gY):_gY.toString();
-		}
-		public function get gX():String
-		{
-//			return _gX;
-			return _gX>=0?String("+").concat(_gX):_gX.toString();
+			return _pH;
 		}
 		//
+		public function get pW():Number
+		{
+			//Ratio check
+			if(oW<=oH)
+			{
+				_pW = oW;
+			}else
+			{
+				_pW = oH;//requiredH * contentW/contentH;
+			}
+			
+			return _pW;
+		}
+		//ImageMagick -page offset values
+		private var _pX:Number=0;//OffsetX
+		private var _pY:Number=0;//OffsetY
+		//
+		public function get pY():String
+		{
+			//
+			_pY = tY*(oH/dH);
+			return _pY>=0?String("+").concat(_pY):_pY.toString();
+		}
+		public function get pX():String
+		{
+			//
+			_pX = tX*(oW/dW);
+			return _pX>=0?String("+").concat(_pX):String("-").concat(-_pX);
+		}
+		//For debugging
 		public function toString():String
 		{
 			return ObjectUtil.toString(this);
