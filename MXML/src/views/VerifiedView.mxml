@@ -20,6 +20,8 @@
 			
 			protected function cancelVerify_button_clickHandler(event:MouseEvent):void
 			{
+				id_image_saved.source = "";
+				//
 				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_EIDTOR;			
 			}
 			
@@ -39,7 +41,6 @@
 				}
 				if(id_image_saved)
 				{
-					id_image_saved.source = "";
 					id_image_saved.source = AppData.savedImageFie.nativePath;
 //					id_image_saved.source = AppData.uploadedImageFile.nativePath;
 					var id_image_saved_point:Point = AppData.ARRAY_EDITOR_POINT_PHOTOS[AppData.selectedCertSizeIndex] as Point;
@@ -58,8 +59,8 @@
 					id_image_saved.y = AppData.savedImageOpts.tY;
 					id_image_saved.rotation = AppData.savedImageOpts.r;
 					*/
-					id_image_saved.scaleX = AppData.savedImgOprOV.sX;
-					id_image_saved.scaleY = AppData.savedImgOprOV.sY;
+					id_image_saved.scaleX = AppData.savedImgOprOV.osX;
+					id_image_saved.scaleY = AppData.savedImgOprOV.osY;
 				}
 			}
 		]]>

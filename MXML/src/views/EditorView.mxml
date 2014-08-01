@@ -22,6 +22,7 @@
 			import com.vstyran.transform.utils.DataUtil;
 			
 			import model.AppData;
+			import model.ImageOprVO;
 			
 			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
@@ -31,8 +32,6 @@
 			import spark.events.IndexChangeEvent;
 			
 			import utils.ImageUtil;
-			
-			import model.ImageOprVO;
 			//AS3ImageMagick
 			private var as3ImageMagick:AS3ImageMagick;
 			//
@@ -110,10 +109,10 @@
 			protected function autoResizeImageView():void
 			{
 				//
-//				var contentW:Number = this.id_image_edit.contentWidth;
-//				var contentH:Number = this.id_image_edit.contentHeight;
-				var contentW:Number = this.id_image_edit.bitmapData.width;
-				var contentH:Number = this.id_image_edit.bitmapData.height;
+				var contentW:Number = this.id_image_edit.contentWidth;
+				var contentH:Number = this.id_image_edit.contentHeight;
+//				var contentW:Number = this.id_image_edit.bitmapData.width;
+//				var contentH:Number = this.id_image_edit.bitmapData.height;
 				var contentWHratio:Number = contentW/contentH;
 				//
 				var requiredW:Number = getRequiredCertPhotoWidth();
@@ -138,13 +137,10 @@
 				var scaleX:Number = this.id_image_edit.width/contentW;
 				var scaleY:Number = this.id_image_edit.height/contentH;
 				//
-				trace("AppData.savedImageMatrix.scale:[scaleX]=",scaleX," [scaleY]=",scaleY);
-				AppData.savedImageMatrix.scale(scaleX,scaleY);
-				//
-				AppData.savedImgOprOV.sX = scaleX;
-				AppData.savedImgOprOV.sY = scaleY;
-				AppData.savedImgOprOV.oW = this.id_image_edit.bitmapData.width;
-				AppData.savedImgOprOV.oH = this.id_image_edit.bitmapData.height;
+				AppData.savedImgOprOV.osX = scaleX;
+				AppData.savedImgOprOV.osY = scaleY;
+				AppData.savedImgOprOV.oW = contentW;
+				AppData.savedImgOprOV.oH = contentH;
 				AppData.savedImgOprOV.rW = requiredW;
 				AppData.savedImgOprOV.rH = requiredH;
 				AppData.savedImgOprOV.dW = this.id_image_edit.width;
@@ -166,12 +162,12 @@
 				this.deselectUITransformTool(new MouseEvent(MouseEvent.CLICK));
 				//Avoid cache issue.
 				this.id_image_edit.source = "";
+				//Reset image operation
+				AppData.savedImgOprOV = new ImageOprVO();
 			}
 			
 			protected function editnext_button_clickHandler(event:MouseEvent):void
 			{
-				//Save transformed image here:
-				trace("AppData.savedImageMatrix(in saving):",AppData.savedImageMatrix);
 				//Draw bitmap data, then save to file
 				var requiredPhotoWidth:Number = this.getRequiredCertPhotoWidth();
 				var requiredPhotoHeight:Number = this.getRequiredCertPhotoHeight();
@@ -282,36 +278,31 @@
 			
 			protected function tool_transformationCompleteHandler(event:TransformEvent):void
 			{
-//				trace("(before transformationComplete)toolData.matrix:",event.toolData.matrix);
-				trace("(before transformationComplete)data.matrix:",event.data.matrix);
 				trace("(before transformationComplete)savedImgOprOV:",ObjectUtil.toString(AppData.savedImgOprOV));
 				//
 //				AppData.savedImageMatrix = event.data.matrix;
 				switch(event.transformationType)
 				{
 					case TransformationType.RESIZE:
-						AppData.savedImageMatrix.scale(this.id_image_edit.scaleX,this.id_image_edit.scaleY);
-//						
-						AppData.savedImgOprOV.sX = this.id_image_edit.scaleX;
-						AppData.savedImgOprOV.sY = this.id_image_edit.scaleY;
+						var scaleX:Number = this.id_image_edit.width/this.id_image_edit.content.width;
+						var scaleY:Number = this.id_image_edit.height/this.id_image_edit.content.height;
+						//
+						AppData.savedImgOprOV.usX = scaleX / AppData.savedImgOprOV.osX;
+						AppData.savedImgOprOV.usY = scaleY / AppData.savedImgOprOV.osY;
+						//
+						AppData.savedImgOprOV.dW = event.data.width;
+						AppData.savedImgOprOV.dH = event.data.height;
+						AppData.savedImgOprOV.tX = event.data.matrix.tx;
+						AppData.savedImgOprOV.tY = event.data.matrix.ty;
 						break;
 					case TransformationType.ROTATE:
-//						AppData.savedImageMatrix.rotate(this.id_image_edit.rotation);
 						var angle:Number = this.id_image_edit.rotation;
-						// Calculate rotation and offsets
-						var radians:Number = angle * (Math.PI / 180.0);
-						var offsetWidth:Number = this.id_image_edit.width/2.0;
-						var offsetHeight:Number =  this.id_image_edit.height/2.0;
-						// Perform rotation
-						AppData.savedImageMatrix.translate(-offsetWidth, -offsetHeight);
-						AppData.savedImageMatrix.rotate(radians);
-						AppData.savedImageMatrix.translate(+offsetWidth, +offsetHeight);
-						AppData.savedImageMatrix.concat(this.id_image_edit.transform.matrix);
 						//
 						AppData.savedImgOprOV.r = angle;
+						AppData.savedImgOprOV.tX = event.data.matrix.tx;
+						AppData.savedImgOprOV.tY = event.data.matrix.ty;
 						break;
 					case TransformationType.MOVE:
-						AppData.savedImageMatrix.translate(event.data.matrix.tx,event.data.matrix.ty);
 						//
 						AppData.savedImgOprOV.tX = event.data.matrix.tx;
 						AppData.savedImgOprOV.tY = event.data.matrix.ty;
@@ -319,8 +310,6 @@
 					default:
 						break;
 				}
-//				trace("(after transformationComplete)toolData.matrix:",event.toolData.matrix);
-				trace("(after transformationComplete)data.matrix:",event.data.matrix);
 				trace("(after transformationComplete)savedImgOprOV:",ObjectUtil.toString(AppData.savedImgOprOV));
 			}
 			
@@ -365,6 +354,7 @@
 				id_uit_tool.guidelines = guidelines;
 */				
 			}
+			/*
 			protected function tool_guidelinesUpdateHandler(event:GuidelineEvent):void
 			{
 				if(event.cross && event.cross.vGuideline)
@@ -412,7 +402,7 @@
 					}
 				}
 			}	
-			
+			*/
 			private function id_image_edit_completeHandler(event:Event):void
 			{
 				trace("id_image_edit_completeHandler!");
@@ -431,7 +421,8 @@
 				var cropString:String = String("").concat(
 //					"-define,distort:viewport=,",AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
 //					AppData.savedImgOprOV.oX,AppData.savedImgOprOV.oY,
-					"-rotate,",AppData.savedImgOprOV.r,
+					"-resize,",AppData.savedImgOprOV.zW,"x",AppData.savedImgOprOV.zH,
+					",-rotate,",AppData.savedImgOprOV.r,
 					",-page,",AppData.savedImgOprOV.pW,"x",AppData.savedImgOprOV.pH,
 					AppData.savedImgOprOV.pX,AppData.savedImgOprOV.pY,
 					",-crop,",AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
@@ -547,21 +538,20 @@
 		<s:Image id="id_image_instruction" x="200" y="60" cachePolicy="off"/>
 		
 		<s:Group id="id_group" clipAndEnableScrolling="true">
-			<!--<s:Image />-->
-			<!--<mx:Image maintainAspectRatio="true"-->
-			<!--<mx:Image id="id_image_edit" maintainAspectRatio="true"/>-->
+			<mx:Image id="id_image_edit" maintainAspectRatio="true"
+					  maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smoothBitmapContent="true"/>
 			<!--<components:ImageWithSmooth--> 
-			<s:Image
-				id="id_image_edit" maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smooth="true" smoothingQuality="{BitmapSmoothingQuality.HIGH}"/>
+			<!--<s:Image
+				id="id_image_edit" maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smooth="true" smoothingQuality="{BitmapSmoothingQuality.HIGH}"/>-->
 		</s:Group>
 		
 		<s:Image id="id_image_frame" enabled="false"/>
 		<s:Image id="id_image_guide" enabled="false"/>
 		<!--<s:Image id="id_image_mask" x="{id_image_frame.x}" y="{id_image_frame.y}" enabled="false"/>-->
-		
+		<!--guidelinesUpdate="tool_guidelinesUpdateHandler(event)"-->
 		<view:UITransformTool id="id_uit_tool" skinClass="skins.uiTransformTool.TransformToolSkin3" 
 							  transformationComplete="tool_transformationCompleteHandler(event)"
-							  guidelinesUpdate="tool_guidelinesUpdateHandler(event)"
+							  
 							  transformation="tool_transformationHandler(event)"
 							  maintainProjectionCenter="true" maintainMoveShortcuts="true"
 							  >

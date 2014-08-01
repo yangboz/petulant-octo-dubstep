@@ -105,11 +105,11 @@
 				//
 //				var definedImageScaleX:Number = AppData.savedImageOpts.sX * definedContainerScaleX;
 //				var definedImageScaleY:Number = AppData.savedImageOpts.sY * definedContainerScaleY;
-				var definedImageScaleX:Number = definedContainerScaleX * AppData.savedImgOprOV.sX;
-				var definedImageScaleY:Number = definedContainerScaleY * AppData.savedImgOprOV.sY;
+				var definedImageScaleX:Number = definedContainerScaleX * AppData.savedImgOprOV.osX;
+				var definedImageScaleY:Number = definedContainerScaleY * AppData.savedImgOprOV.osY;
 				//
-				var definedImageTx:Number = AppData.savedImageMatrix.tx;
-				var definedImageTy:Number = AppData.savedImageMatrix.ty;
+				var definedImageTx:Number = AppData.savedImgOprOV.tX;
+				var definedImageTy:Number = AppData.savedImgOprOV.tY;
 				//Trace info:
 				trace("definedImageWidth:",definedImageWidth,
 					"definedImageHeight:",definedImageHeight,

@@ -8,8 +8,10 @@ package model
 	 */	
 	public class ImageOprVO extends Object
 	{
-		public var sX:Number=1;//ScaleX
-		public var sY:Number=1;//ScaleY
+		public var osX:Number=1;//Default/orignal ScaleX
+		public var osY:Number=1;//Default/orignal ScaleY
+		public var usX:Number=1;//User ScaleX
+		public var usY:Number=1;//User ScaleY
 		//
 		public var tX:Number=0;//TranslateX
 		public var tY:Number=0;//TranslateY
@@ -30,13 +32,13 @@ package model
 		//Percisely calculate the original relative offset value of Y axis.
 		public function get oY():String
 		{
-			_oY = tY*(oH/dH);
+			_oY = tY*(oH/dH)*usY;
 			return _oY>=0?String("+").concat(_oY):String("-").concat(-_oY);
 		}
 		//Percisely calculate the original relative offset value of X axis.
 		public function get oX():String
 		{
-			_oX = tX*(oW/dW);
+			_oX = tX*(oW/dW)*usX;
 			return _oX>=0?String("+").concat(_oX):String("-").concat(-_oX);
 		}
 		//Crop value for ImageMagick -crop,@see http://www.imagemagick.org/Usage/crop/#crop_viewport
@@ -56,9 +58,9 @@ package model
 			//Too heighty with exception:
 			var _eY:Number = (dH-rH) - tY*(oH/rH);
 			_eY = (_eY>0)?_eY:0;
-			_eY = (tY<0)?_eY:0;
+			_eY = (tY<0)?_eY*usY:0;
 			//
-			return _cH + _eY;
+			return (_cH + _eY);
 		}
 		//
 		public function get cW():Number
@@ -74,9 +76,9 @@ package model
 			//Too widthy with exception:
 			var _eX:Number = (dW-rW) - tX*(oW/rW);
 			_eX = (_eX>0)?_eX:0;
-			_eX = (tX<0)?_eX:0;
+			_eX = (tX<0)?_eX*usY:0;
 			//
-			return _cW + _eX;
+			return (_cW + _eX);
 		}
 		//Page(viewPoint) value for ImageMagick -page,@see http://www.imagemagick.org/Usage/layers/#flatten
 		private var _pW:Number=0;//Page view width
@@ -123,6 +125,16 @@ package model
 			//
 			_pX = tX*(oW/dW);
 			return _pX>=0?String("+").concat(_pX):String("-").concat(-_pX);
+		}
+		//ImageMagick -resize(zoomIn/Out) values
+		public function get zH():Number
+		{
+			return oH*usY;
+		}
+		//
+		public function get zW():Number
+		{
+			return oW*usX;
 		}
 		//For debugging
 		public function toString():String

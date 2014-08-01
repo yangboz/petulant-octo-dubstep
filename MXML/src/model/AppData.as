@@ -66,7 +66,7 @@ package model
 		public static var uploadedImageFile:File;
 		public static var savedImageFie:File;
 		public static var savedImageBitmapData:BitmapData;
-		public static var savedImageMatrix:Matrix = new Matrix();
+//		public static var savedImageMatrix:Matrix = new Matrix();
 		//
 		public static var uploadedImageFileCopy:File;
 		//

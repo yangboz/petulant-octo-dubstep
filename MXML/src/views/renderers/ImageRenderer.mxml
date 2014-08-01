@@ -16,9 +16,6 @@
 			
 			protected function id_image_completeHandler(event:Event):void
 			{
-				trace("Applied image matrix:",ObjectUtil.toString(AppData.mainApp.id_eitor_view.id_uit_tool.transform.matrix));
-				trace("AppData.savedImageMatrix:",ObjectUtil.toString(AppData.savedImageMatrix));
-				this.id_image.transform.matrix = AppData.savedImageMatrix;
 //				this.id_image.scaleX = AppData.savedImageMatrix.a;
 //				this.id_image.scaleY = AppData.savedImageMatrix.d;
 //				this.id_image.x = data.x;
