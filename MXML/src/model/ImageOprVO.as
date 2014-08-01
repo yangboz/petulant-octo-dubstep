@@ -4,7 +4,8 @@ package model
 	/**
 	 * Image Operation Value Objects related to ImageMagick command and parameters.
 	 * @author yangboz
-	 * @see:http://www.imagemagick.org/Usage/
+	 * @see http://www.imagemagick.org/Usage/
+	 * @example: convert C:\\image.JPG -resize 333x500 -page 333x333+0+0 -rotate 30 -crop 333x333+0+0 -background white -flatten C:\\output_resize_page_rotate_crop.png
 	 */	
 	public class ImageOprVO extends Object
 	{
@@ -118,12 +119,14 @@ package model
 		{
 			//
 			_pY = tY*(oH/dH);
+			_pY = r!=0?0:_pY;
 			return _pY>=0?String("+").concat(_pY):_pY.toString();
 		}
 		public function get pX():String
 		{
 			//
 			_pX = tX*(oW/dW);
+			_pX = r!=0?0:_pX;
 			return _pX>=0?String("+").concat(_pX):String("-").concat(-_pX);
 		}
 		//ImageMagick -resize(zoomIn/Out) values

@@ -168,6 +168,9 @@
 			
 			protected function editnext_button_clickHandler(event:MouseEvent):void
 			{
+				if(!AppData.USE_IMAGE_MAGICK)
+				{
+					
 				//Draw bitmap data, then save to file
 				var requiredPhotoWidth:Number = this.getRequiredCertPhotoWidth();
 				var requiredPhotoHeight:Number = this.getRequiredCertPhotoHeight();
@@ -186,14 +189,20 @@
 //				bufferMatix.scale(requiredPhotoWidth/this.id_image_edit.contentWidth,requiredPhotoHeight/this.id_image_edit.contentHeight);
 				bitMapData.draw(bufferBitmapData,this.id_uit_tool.transform.matrix); 
 				*/
-//				bitMapData.draw(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true); 
+				bitMapData.draw(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true); 
 //				bitMapData.drawWithQuality(this.id_image_edit.bitmapData,null,null,null,null,true,StageQuality.BEST);
 //				bitMapData.drawWithQuality(AppData.uploadFileBitmapData,AppData.savedImageMatrix,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true,StageQuality.BEST);
 				//
 //				trace("this.id_uit_tool.transform:",this.id_uit_tool.transform);
 				//
-//				AppData.saveImageFile(bitMapData);
-				this.cropOriginalImage();
+				AppData.saveImageFile(bitMapData);
+				//Then go to next view.
+				AppData.mainApp.id_viewStack.selectedIndex = AppData.VIEW_VERIFING;	
+				}else
+				{
+					//Using AIR native process call on ImageMagick.
+					this.originalImageOperation();
+				}
 			}
 			//
 			private function deselectUITransformTool(event:MouseEvent):void
@@ -414,10 +423,10 @@
 				this.selectUITransformTool(new MouseEvent(MouseEvent.CLICK));
 			}
 			//
-			private function cropOriginalImage():void
+			private function originalImageOperation():void
 			{
 				AppData.savedImageFie = File.createTempDirectory().resolvePath(AppData.getRandomWorkspaceDirName());
-				//@example: convert C:\\image.JPG  -rotate 30 -crop 333x333+0+0 C:\\output_distory_viewport_rotate_crop.png
+				//@example: convert C:\\image.JPG -resize 333x500 -page 333x333+0+0 -rotate 30 -crop 333x333+0+0 -background white -flatten C:\\output_resize_page_rotate_crop.png
 				var cropString:String = String("").concat(
 //					"-define,distort:viewport=,",AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
 //					AppData.savedImgOprOV.oX,AppData.savedImgOprOV.oY,

@@ -59,8 +59,8 @@
 					id_image_saved.y = AppData.savedImageOpts.tY;
 					id_image_saved.rotation = AppData.savedImageOpts.r;
 					*/
-					id_image_saved.scaleX = AppData.savedImgOprOV.osX;
-					id_image_saved.scaleY = AppData.savedImgOprOV.osY;
+					id_image_saved.scaleX = AppData.USE_IMAGE_MAGICK? AppData.savedImgOprOV.osX:1;
+					id_image_saved.scaleY = AppData.USE_IMAGE_MAGICK?AppData.savedImgOprOV.osY:1;
 				}
 			}
 		]]>
