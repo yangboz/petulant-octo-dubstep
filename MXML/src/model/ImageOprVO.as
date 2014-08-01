@@ -26,14 +26,14 @@ package model
 		//Percisely calculate the original relative offset value of Y axis.
 		public function get oY():String
 		{
-			_oY = (rH-dH)/sY + tY*(rH/oH);
-			return _oY>=0?String("+").concat(_oY):_oY.toString();
+			_oY = tY*(oH/dH);
+			return _oY>=0?String("-").concat(_oY):String("+").concat(-_oY);
 		}
 		//Percisely calculate the original relative offset value of X axis.
 		public function get oX():String
 		{
-			_oX = (rW-dW)/sX + tX*(rW/oW);
-			return _oX>=0?String("+").concat(_oX):_oX.toString();
+			_oX = tX*(oW/dW);
+			return _oX>=0?String("+").concat(_oX):String("-").concat(-_oX);
 		}
 		//Crop value for ImageMagick -crop
 		private var _cW:Number=0;//Crop width

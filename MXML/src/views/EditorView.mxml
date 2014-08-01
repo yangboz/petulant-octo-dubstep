@@ -309,8 +309,6 @@
 						AppData.savedImageMatrix.concat(this.id_image_edit.transform.matrix);
 						//
 						AppData.savedImgOprOV.r = angle;
-						AppData.savedImgOprOV.tX += this.id_group.x-this.id_image_edit.x;
-						AppData.savedImgOprOV.tY += this.id_group.y-this.id_image_edit.y;
 						break;
 					case TransformationType.MOVE:
 						AppData.savedImageMatrix.translate(event.data.matrix.tx,event.data.matrix.ty);
@@ -434,7 +432,8 @@
 //					"-define,distort:viewport=,",AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
 //					AppData.savedImgOprOV.oX,AppData.savedImgOprOV.oY,
 					"-rotate,",AppData.savedImgOprOV.r,
-					",-crop,",AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,"+0+0"
+					",-crop,",AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
+					AppData.savedImgOprOV.oX,AppData.savedImgOprOV.oY
 //					",-distort SRT,",AppData.savedImgOprOV.r
 //					",-geometry,", AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
 //					AppData.savedImgOprOV.gX,AppData.savedImgOprOV.gY
