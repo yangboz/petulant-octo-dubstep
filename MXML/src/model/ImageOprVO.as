@@ -49,13 +49,7 @@ package model
 		public function get cH():Number
 		{
 			//Ratio check
-			if(oW<=oH)
-			{
-				_cH = oW;//requiredW * contentH/contentW;
-			}else
-			{
-				_cH = oH;
-			}
+			_cH = dH/osY;
 			//Too heighty with exception:
 			var _eY:Number = (dH-rH) - tY*(oH/rH);
 			_eY = (_eY>0)?_eY:0;
@@ -67,13 +61,7 @@ package model
 		public function get cW():Number
 		{
 			//Ratio check
-			if(oW<=oH)
-			{
-				_cW = oW;
-			}else
-			{
-				_cW = oH;//requiredH * contentW/contentH;
-			}
+			_cW = dW/osX;
 			//Too widthy with exception:
 			var _eX:Number = (dW-rW) - tX*(oW/rW);
 			_eX = (_eX>0)?_eX:0;
@@ -89,7 +77,7 @@ package model
 			//Ratio check
 			if(oW<=oH)
 			{
-				_pH = oW;//requiredW * contentH/contentW;
+				_pH = (oW * rH/rW);
 			}else
 			{
 				_pH = oH;
@@ -106,7 +94,7 @@ package model
 				_pW = oW;
 			}else
 			{
-				_pW = oH;//requiredH * contentW/contentH;
+				_pW = (oW * rH/rW);
 			}
 			
 			return _pW;

@@ -83,8 +83,8 @@ package model
 		public static var savedImageListFie:File;
 		//
 		public static var savedPrinterName:String;
-		//ImageOperationVO for storage.
-		public static var savedImgOprOV:ImageOprVO =new ImageOprVO();
+		//ImageOperationValueObject for storage.
+		public static var savedImgOprVO:ImageOprVO =new ImageOprVO();
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------

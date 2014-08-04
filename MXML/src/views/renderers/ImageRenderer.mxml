@@ -82,6 +82,11 @@
 		</mx:Transition>
 	</s:transitions>    -->
 	<!--x="{data.x}" y="{data.y}" scaleX="{data.sX}" scaleY="{data.sY}" rotation="{data.r}"-->
+	<!--<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:BitmapFill source="@Embed('/assets/images/background/dot.png')" fillMode="repeat"/>
+		</s:fill>
+	</s:Rect>-->
 	<components:ImageWithBorder id="id_image" 
 								source="{data.source}"
 								borderAlpha="1"

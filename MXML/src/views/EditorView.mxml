@@ -137,16 +137,17 @@
 				var scaleX:Number = this.id_image_edit.width/contentW;
 				var scaleY:Number = this.id_image_edit.height/contentH;
 				//
-				AppData.savedImgOprOV.osX = scaleX;
-				AppData.savedImgOprOV.osY = scaleY;
-				AppData.savedImgOprOV.oW = contentW;
-				AppData.savedImgOprOV.oH = contentH;
-				AppData.savedImgOprOV.rW = requiredW;
-				AppData.savedImgOprOV.rH = requiredH;
-				AppData.savedImgOprOV.dW = this.id_image_edit.width;
-				AppData.savedImgOprOV.dH = this.id_image_edit.height;
+				AppData.savedImgOprVO = new ImageOprVO();
+				AppData.savedImgOprVO.osX = scaleX;
+				AppData.savedImgOprVO.osY = scaleY;
+				AppData.savedImgOprVO.oW = contentW;
+				AppData.savedImgOprVO.oH = contentH;
+				AppData.savedImgOprVO.rW = requiredW;
+				AppData.savedImgOprVO.rH = requiredH;
+				AppData.savedImgOprVO.dW = this.id_image_edit.width;
+				AppData.savedImgOprVO.dH = this.id_image_edit.height;
 				//
-				trace("AppData.savedImageOperation:",AppData.savedImgOprOV);
+				trace("(after autoResizeImageView)AppData.savedImageOperation:",AppData.savedImgOprVO);
 			}
 			
 			protected function reupload_button_clickHandler(event:MouseEvent):void
@@ -163,7 +164,7 @@
 				//Avoid cache issue.
 				this.id_image_edit.source = "";
 				//Reset image operation
-				AppData.savedImgOprOV = new ImageOprVO();
+				AppData.savedImgOprVO = new ImageOprVO();
 			}
 			
 			protected function editnext_button_clickHandler(event:MouseEvent):void
@@ -287,7 +288,7 @@
 			
 			protected function tool_transformationCompleteHandler(event:TransformEvent):void
 			{
-				trace("(before transformationComplete)savedImgOprOV:",ObjectUtil.toString(AppData.savedImgOprOV));
+				trace("(before transformationComplete)savedImgOprOV:",ObjectUtil.toString(AppData.savedImgOprVO));
 				//
 //				AppData.savedImageMatrix = event.data.matrix;
 				switch(event.transformationType)
@@ -296,30 +297,30 @@
 						var scaleX:Number = this.id_image_edit.width/this.id_image_edit.content.width;
 						var scaleY:Number = this.id_image_edit.height/this.id_image_edit.content.height;
 						//
-						AppData.savedImgOprOV.usX = scaleX / AppData.savedImgOprOV.osX;
-						AppData.savedImgOprOV.usY = scaleY / AppData.savedImgOprOV.osY;
+						AppData.savedImgOprVO.usX = scaleX / AppData.savedImgOprVO.osX;
+						AppData.savedImgOprVO.usY = scaleY / AppData.savedImgOprVO.osY;
 						//
-						AppData.savedImgOprOV.dW = event.data.width;
-						AppData.savedImgOprOV.dH = event.data.height;
-						AppData.savedImgOprOV.tX = event.data.matrix.tx;
-						AppData.savedImgOprOV.tY = event.data.matrix.ty;
+						AppData.savedImgOprVO.dW = event.data.width;
+						AppData.savedImgOprVO.dH = event.data.height;
+						AppData.savedImgOprVO.tX = event.data.matrix.tx;
+						AppData.savedImgOprVO.tY = event.data.matrix.ty;
 						break;
 					case TransformationType.ROTATE:
 						var angle:Number = this.id_image_edit.rotation;
 						//
-						AppData.savedImgOprOV.r = angle;
-						AppData.savedImgOprOV.tX = event.data.matrix.tx;
-						AppData.savedImgOprOV.tY = event.data.matrix.ty;
+						AppData.savedImgOprVO.r = angle;
+						AppData.savedImgOprVO.tX = event.data.matrix.tx;
+						AppData.savedImgOprVO.tY = event.data.matrix.ty;
 						break;
 					case TransformationType.MOVE:
 						//
-						AppData.savedImgOprOV.tX = event.data.matrix.tx;
-						AppData.savedImgOprOV.tY = event.data.matrix.ty;
+						AppData.savedImgOprVO.tX = event.data.matrix.tx;
+						AppData.savedImgOprVO.tY = event.data.matrix.ty;
 						break;
 					default:
 						break;
 				}
-				trace("(after transformationComplete)savedImgOprOV:",ObjectUtil.toString(AppData.savedImgOprOV));
+				trace("(after transformationComplete)savedImgOprOV:",ObjectUtil.toString(AppData.savedImgOprVO));
 			}
 			
 			protected function tool_transformationHandler(event:TransformEvent):void
@@ -430,12 +431,12 @@
 				var cropString:String = String("").concat(
 //					"-define,distort:viewport=,",AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
 //					AppData.savedImgOprOV.oX,AppData.savedImgOprOV.oY,
-					"-resize,",AppData.savedImgOprOV.zW,"x",AppData.savedImgOprOV.zH,
-					",-rotate,",AppData.savedImgOprOV.r,
-					",-page,",AppData.savedImgOprOV.pW,"x",AppData.savedImgOprOV.pH,
-					AppData.savedImgOprOV.pX,AppData.savedImgOprOV.pY,
-					",-crop,",AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
-					AppData.savedImgOprOV.oX,AppData.savedImgOprOV.oY,
+					"-resize,",AppData.savedImgOprVO.zW,"x",AppData.savedImgOprVO.zH,
+					",-rotate,",AppData.savedImgOprVO.r,
+					",-page,",AppData.savedImgOprVO.pW,"x",AppData.savedImgOprVO.pH,
+					AppData.savedImgOprVO.pX,AppData.savedImgOprVO.pY,
+					",-crop,",AppData.savedImgOprVO.cW,"x",AppData.savedImgOprVO.cH,
+					AppData.savedImgOprVO.oX,AppData.savedImgOprVO.oY,
 					",-background,white,-flatten"
 //					",-distort SRT,",AppData.savedImgOprOV.r
 //					",-geometry,", AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,

@@ -7,6 +7,8 @@
 		<![CDATA[
 			import flash.utils.setTimeout;
 			
+			import flex.utils.GraphicsUtils;
+			
 			import model.AppData;
 			
 			import mx.collections.ArrayList;
@@ -15,6 +17,7 @@
 			import mx.graphics.BitmapSmoothingQuality;
 			import mx.graphics.ImageSnapshot;
 			import mx.printing.FlexPrintJobScaleType;
+			import mx.utils.GraphicsUtil;
 			import mx.utils.ObjectUtil;
 			
 			import spark.events.IndexChangeEvent;
@@ -105,11 +108,11 @@
 				//
 //				var definedImageScaleX:Number = AppData.savedImageOpts.sX * definedContainerScaleX;
 //				var definedImageScaleY:Number = AppData.savedImageOpts.sY * definedContainerScaleY;
-				var definedImageScaleX:Number = definedContainerScaleX * (AppData.USE_IMAGE_MAGICK?AppData.savedImgOprOV.osX:1);
-				var definedImageScaleY:Number = definedContainerScaleY * (AppData.USE_IMAGE_MAGICK?AppData.savedImgOprOV.osY:1);
+				var definedImageScaleX:Number = definedContainerScaleX * (AppData.USE_IMAGE_MAGICK?AppData.savedImgOprVO.osX:1);
+				var definedImageScaleY:Number = definedContainerScaleY * (AppData.USE_IMAGE_MAGICK?AppData.savedImgOprVO.osY:1);
 				//
-				var definedImageTx:Number = AppData.savedImgOprOV.tX;
-				var definedImageTy:Number = AppData.savedImgOprOV.tY;
+				var definedImageTx:Number = AppData.savedImgOprVO.tX;
+				var definedImageTy:Number = AppData.savedImgOprVO.tY;
 				//Trace info:
 				trace("definedImageWidth:",definedImageWidth,
 					"definedImageHeight:",definedImageHeight,
@@ -216,6 +219,13 @@
 				this.id_list_tile.visible = true;
 				this.id_list_tile_snapshot.source = "";
 			}
+			
+			protected function id_list_tile_creationCompleteHandler(event:FlexEvent):void
+			{
+				//
+				GraphicsUtils.drawLine(id_list_tile.graphics,new Point(0,0),new Point(100,100),true);
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -235,7 +245,7 @@
 				horizontalScrollPolicy="off" verticalScrollPolicy="off"
 				itemRenderer="views.renderers.ImageRenderer"
 				useVirtualLayout="false" 
-				borderVisible="false"
+				borderVisible="true"
 		>
 			<s:layout>
 				<!--<utils:HW_TileLayout-->
@@ -250,7 +260,6 @@
 		<s:Image id="id_list_tile_snapshot" x="{id_list_tile.x}" y="{id_list_tile.y}" visible="{id_list_tile_snapshot.source!=''}"/>
 		<!--<s:Image id="id_list_tile_print" x="{id_list_tile.x}" y="{id_list_tile.y}" visible="{id_list_tile_print.source!=''}" smooth="true" smoothingQuality="{BitmapSmoothingQuality.HIGH}"/>-->
 		<!--</s:BorderContainer>-->
-		
 		<s:Button x="383" y="500" label="Back2Verify" skinClass="skins.button.HW_Back2VerifyButton_Skin" click="cancelTypeset_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
 		<s:Button x="505" y="500" label="PRINT_OUT" skinClass="skins.button.HW_PrintButton_Skin" click="printOut_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
 		
