@@ -99,6 +99,7 @@ package model
 //		private static const INCH_2_PIXEL:Number = 60;
 		public static const PIXEL_2_PRINT:Number = 2.8368;
 //		public static const PIXEL_2_PRINT:Number = 23.622;
+		public static const SCALE_4_DISPLAY:Number = 0.88;
 		//
 		public static const VIEW_INTRO:int = 0;
 		public static const VIEW_UPLOAD:int = 1;
@@ -310,7 +311,7 @@ package model
 //			new Point(5,2),new Point(5,2),new Point(3,2)
 		];
 		private static var ARRAY_TYPESET_TILE_POINT_A4:Array = [
-			{x:292,y:120,w:42,h:58,w_:25,h_:35,r:270},{x:276,y:115,w:36,h:53,w_:22,h_:32,r:270},{x:273,y:115,w:55,h:80,w_:33,h_:48,r:270},
+			{x:292,y:120,w:42,h:58,w_:25,h_:35,r:270},{x:276,y:111,w:36,h:53,w_:22,h_:32,r:270},{x:273,y:115,w:55,h:80,w_:33,h_:48,r:270},
 			{x:287,y:143,w:58,h:75,w_:35,h_:45,r:270},{x:264,y:136,w:58,h:83,w_:35,h_:50,r:270},{x:263,y:136,w:83,h:83,w_:50,h_:50,r:270},
 //			{x:95,y:100,w:25*2.8368,h:35*2.8368,r:270},{x:71,y:78,w:22*2.8368,h:32*2.8362,r:270},{x:79,y:94,w:33*2.8368,h:48*2.8368,r:270},
 //			{x:95,y:100,w:35*2.8368,h:45*2.8368,r:270},{x:81,y:83,w:35*2.8368,h:50*2.8368,r:270},{x:80,y:93,w:50*2.8368,h:50*2.8368,r:270},

@@ -309,8 +309,15 @@
 						var angle:Number = this.id_image_edit.rotation;
 						//
 						AppData.savedImgOprVO.r = angle;
-						AppData.savedImgOprVO.tX = event.data.matrix.tx;
-						AppData.savedImgOprVO.tY = event.data.matrix.ty;
+						var rectangle:Rectangle = this.id_image_edit.getRect(this);
+						AppData.savedImgOprVO.dW = rectangle.width;
+						AppData.savedImgOprVO.dH = rectangle.height;
+//						var tX:Number = (rectangle.width-event.data.width)/2;
+//						var tY:Number = (rectangle.height-event.data.height)/2;
+//						AppData.savedImgOprVO.tX = -tX;
+//						AppData.savedImgOprVO.tY = -tY;
+//						AppData.savedImgOprVO.tX = event.data.topLeft.x;
+//						AppData.savedImgOprVO.tY = event.data.topLeft.y;
 						break;
 					case TransformationType.MOVE:
 						//

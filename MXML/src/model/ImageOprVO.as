@@ -1,6 +1,9 @@
 package model
 {
+	import flash.geom.Rectangle;
+	
 	import mx.utils.ObjectUtil;
+
 	/**
 	 * Image Operation Value Objects related to ImageMagick command and parameters.
 	 * @author yangboz
@@ -107,15 +110,23 @@ package model
 		{
 			//
 			_pY = tY*(oH/dH);
-			_pY = r!=0?0:_pY;
+			_pY -= opY;
 			return _pY>=0?String("+").concat(_pY):_pY.toString();
 		}
 		public function get pX():String
 		{
 			//
 			_pX = tX*(oW/dW);
-			_pX = r!=0?0:_pX;
+			_pX -= opX;
 			return _pX>=0?String("+").concat(_pX):String("-").concat(-_pX);
+		}
+		public function get opY():Number
+		{
+			return r!=0?(dH-rH)/2:0;
+		}
+		public function get opX():Number
+		{
+			return r!=0?(dW-rW)/2:0;
 		}
 		//ImageMagick -resize(zoomIn/Out) values
 		public function get zH():Number

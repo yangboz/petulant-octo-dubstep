@@ -89,8 +89,8 @@
 //				var definedImageSource:Object = AppData.uploadedImageFile.nativePath;
 				if(resizeForDisplay)
 				{
-					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w ;
-					definedImageHeight = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h ;
+					definedImageWidth = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].w *AppData.SCALE_4_DISPLAY;
+					definedImageHeight = AppData.ARRAY_TYPESET_TILE_POINT[AppData.selectedTypesetSizeIndex][AppData.selectedCertSizeIndex].h *AppData.SCALE_4_DISPLAY;
 //					definedImageSource =  AppData.savedImageFie.nativePath;
 				}else
 				{

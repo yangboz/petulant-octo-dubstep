@@ -110,7 +110,7 @@ package com.godpaper.as3.ImageMagick
 				processArgs.push(parts[i]);
 			}
 //			return new Vector.<String>();
-//			LOG.info("Native Process Arguments:{0}",processArgs.toString());
+//			trace("Native Process Arguments:{0}",processArgs.toString());
 			trace("Native Process Arguments:",processArgs.toString());
 			return processArgs;
 		}

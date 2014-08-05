@@ -179,11 +179,11 @@ package com.godpaper.as3.ImageMagick
 		//
 		private function standardOutputDataHandler(event:ProgressEvent):void
 		{ 
-//			LOG.info("standardOutputDataHandler(event):{0}",event.toString());
+//			trace("standardOutputDataHandler(event):{0}",event.toString());
 //			trace("standardOutputDataHandler(event):",event.toString());
 			var bytes : IDataInput = this._nativeProcess.standardOutput as IDataInput;
             var outputString: String = bytes.readUTFBytes(bytes.bytesAvailable).toString();
-//            LOG.info("standardOutputDataHandler(output):{0}",outputString);
+//            trace("standardOutputDataHandler(output):{0}",outputString);
 // 			trace("standardOutputDataHandler(output):",outputString);
 			//dispatch event
 			this.dispatchEvent(new ImageMagickEvent(ImageMagickEvent.STANDARD_OUTPUT_DATA));
@@ -191,7 +191,7 @@ package com.godpaper.as3.ImageMagick
 		//
 		private function standardOutputCloseHandler(event:Event):void
 		{
-//			LOG.info("standardOutputCloseHandler:{0}",event.toString());
+//			trace("standardOutputCloseHandler:{0}",event.toString());
 //			trace("standardOutputCloseHandler:",event.toString());
 			//dispatch event
 			this.dispatchEvent(new ImageMagickEvent(ImageMagickEvent.STANDARD_OUTPUT_CLOSE));
@@ -202,11 +202,11 @@ package com.godpaper.as3.ImageMagick
 		//
 		private function standardErrorDataHandler(event:ProgressEvent):void
 		{ 
-//			LOG.info("standardErrorDataHandler(event):{0}",event.toString());
+//			trace("standardErrorDataHandler(event):{0}",event.toString());
 //			trace("standardErrorDataHandler(event):{0}",event.toString());
 			var bytes : IDataInput = this._nativeProcess.standardError as IDataInput;
             var outputString: String = bytes.readUTFBytes(bytes.bytesAvailable).toString();
-//            LOG.info("standardErrorDataHandler:{0}",outputString);
+//            trace("standardErrorDataHandler:{0}",outputString);
 //			trace("standardErrorDataHandler:{0}",outputString);
 			//dispatch event
 			this.dispatchEvent(new ImageMagickEvent(ImageMagickEvent.STANDARD_ERROR_DATA));
@@ -215,7 +215,7 @@ package com.godpaper.as3.ImageMagick
 		//
 		private function standardErrorCloseHandler(event:Event):void
 		{
-//			LOG.info("standardErrorCloseHandler:{0}",event.toString());
+//			trace("standardErrorCloseHandler:{0}",event.toString());
 //			trace("standardErrorCloseHandler:{0}",event.toString());
 			//dispatch event
 			this.dispatchEvent(new ImageMagickEvent(ImageMagickEvent.STANDARD_OUTPUT_ERROR));
@@ -226,7 +226,7 @@ package com.godpaper.as3.ImageMagick
 		//
 		private function standardInputHandler(event:Event):void
 		{
-//			LOG.info("standardInputHandler:{0}",event.toString());
+//			trace("standardInputHandler:{0}",event.toString());
 			trace("standardInputHandler:{0}",event.toString());
 			//dispatch event
 			this.dispatchEvent(new ImageMagickEvent(ImageMagickEvent.STANDARD_INPUT_PROGRESS));
@@ -234,7 +234,7 @@ package com.godpaper.as3.ImageMagick
 		//
 		private function standardInputProgressHandler(event:Event):void
 		{
-//			LOG.info("standardInputProgressHandler:{0}",event.toString());
+//			trace("standardInputProgressHandler:{0}",event.toString());
 			trace("standardInputProgressHandler:{0}",event.toString());
 			//dispatch event
 			this.dispatchEvent(new ImageMagickEvent(ImageMagickEvent.STANDARD_INPUT_PROGRESS));

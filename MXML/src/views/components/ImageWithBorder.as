@@ -81,10 +81,10 @@ package views.components
 			if(width && height)
 			{
 				var lineWeight:Number = 0.2;
-				var x:Number=(getStyle('borderWidth'));
+				var x:Number=(getStyle('borderWidth')) ;
 				var y:Number=(getStyle('borderWidth'));
-				var width:Number=contentWidth+2*x;
-				var height:Number=contentHeight+2*y;
+				var width:Number=contentWidth+2*x/AppData.savedImgOprVO.osX;
+				var height:Number=contentHeight+2*y/AppData.savedImgOprVO.osY;
 //				var width:Number=this.bitmapData.width-2*getStyle('borderWidth');
 //				var height:Number=this.bitmapData.height-2*getStyle('borderWidth');
 //				graphics.clear();
