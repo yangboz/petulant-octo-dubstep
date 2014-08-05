@@ -290,6 +290,7 @@
 			{
 				trace("(before transformationComplete)savedImgOprOV:",ObjectUtil.toString(AppData.savedImgOprVO));
 				//
+				var rectangle:Rectangle = this.id_image_edit.getRect(this);
 //				AppData.savedImageMatrix = event.data.matrix;
 				switch(event.transformationType)
 				{
@@ -297,11 +298,12 @@
 						var scaleX:Number = this.id_image_edit.width/this.id_image_edit.content.width;
 						var scaleY:Number = this.id_image_edit.height/this.id_image_edit.content.height;
 						//
-						AppData.savedImgOprVO.usX = scaleX / AppData.savedImgOprVO.osX;
-						AppData.savedImgOprVO.usY = scaleY / AppData.savedImgOprVO.osY;
+//						AppData.savedImgOprVO.usX = scaleX / AppData.savedImgOprVO.osX;
+//						AppData.savedImgOprVO.usY = scaleY / AppData.savedImgOprVO.osY;
 						//
-						AppData.savedImgOprVO.dW = event.data.width;
-						AppData.savedImgOprVO.dH = event.data.height;
+						AppData.savedImgOprVO.dW = rectangle.width;
+						AppData.savedImgOprVO.dH = rectangle.height;
+						
 						AppData.savedImgOprVO.tX = event.data.matrix.tx;
 						AppData.savedImgOprVO.tY = event.data.matrix.ty;
 						break;
@@ -309,7 +311,6 @@
 						var angle:Number = this.id_image_edit.rotation;
 						//
 						AppData.savedImgOprVO.r = angle;
-						var rectangle:Rectangle = this.id_image_edit.getRect(this);
 						AppData.savedImgOprVO.dW = rectangle.width;
 						AppData.savedImgOprVO.dH = rectangle.height;
 //						var tX:Number = (rectangle.width-event.data.width)/2;
@@ -422,7 +423,7 @@
 			*/
 			private function id_image_edit_completeHandler(event:Event):void
 			{
-				trace("id_image_edit_completeHandler!");
+//				trace("id_image_edit_completeHandler!");
 				///Align Image Views.
 				this.alignImageView();
 				///Image autosize
@@ -440,7 +441,7 @@
 //					AppData.savedImgOprOV.oX,AppData.savedImgOprOV.oY,
 					"-resize,",AppData.savedImgOprVO.zW,"x",AppData.savedImgOprVO.zH,
 					",-rotate,",AppData.savedImgOprVO.r,
-					",-page,",AppData.savedImgOprVO.pW,"x",AppData.savedImgOprVO.pH,
+					",+repage,-page,",AppData.savedImgOprVO.pW,"x",AppData.savedImgOprVO.pH,
 					AppData.savedImgOprVO.pX,AppData.savedImgOprVO.pY,
 					",-crop,",AppData.savedImgOprVO.cW,"x",AppData.savedImgOprVO.cH,
 					AppData.savedImgOprVO.oX,AppData.savedImgOprVO.oY,

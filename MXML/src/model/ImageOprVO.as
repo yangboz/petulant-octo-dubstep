@@ -14,8 +14,8 @@ package model
 	{
 		public var osX:Number=1;//Default/orignal ScaleX
 		public var osY:Number=1;//Default/orignal ScaleY
-		public var usX:Number=1;//User ScaleX
-		public var usY:Number=1;//User ScaleY
+//		public var usX:Number=1;//User ScaleX
+//		public var usY:Number=1;//User ScaleY
 		//
 		public var tX:Number=0;//TranslateX
 		public var tY:Number=0;//TranslateY
@@ -137,6 +137,16 @@ package model
 		public function get zW():Number
 		{
 			return oW*usX;
+		}
+		//ImageMagick -resize(zoomIn/Out) values
+		public function get usX():Number
+		{
+			return dW/rW;
+		}
+		//
+		public function get usY():Number
+		{
+			return dH/rH;
 		}
 		//For debugging
 		public function toString():String

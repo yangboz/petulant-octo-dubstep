@@ -246,6 +246,7 @@
 				itemRenderer="views.renderers.ImageRenderer"
 				useVirtualLayout="false" 
 				borderVisible="true"
+				borderColor="#5e6468" 
 		>
 			<s:layout>
 				<!--<utils:HW_TileLayout-->
