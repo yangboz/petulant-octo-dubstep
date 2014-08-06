@@ -12,10 +12,16 @@ package model
 	 */	
 	public class ImageOprVO extends Object
 	{
-		public var osX:Number=1;//Default/orignal ScaleX
-		public var osY:Number=1;//Default/orignal ScaleY
-//		public var usX:Number=1;//User ScaleX
-//		public var usY:Number=1;//User ScaleY
+		//Default/orignal ScaleX
+		public function get osX():Number
+		{
+			return iW/oW;
+		}
+		//Default/orignal ScaleY
+		public function get osY():Number
+		{
+			return iH/oH;
+		}
 		//
 		public var tX:Number=0;//TranslateX
 		public var tY:Number=0;//TranslateY
@@ -33,6 +39,9 @@ package model
 		//Display area size
 		public var dW:Number=0;
 		public var dH:Number=0;
+		//TopLeft point value
+		public var tpX:Number=0;
+		public var tpY:Number=0;
 		//Percisely calculate the original relative offset value of Y axis.
 		public function get oY():String
 		{
@@ -109,15 +118,17 @@ package model
 		public function get pY():String
 		{
 			//
+			tY -= opY; 
 			_pY = tY*(oH/dH);
-			_pY -= opY;
+//			_pY -= opY;
 			return _pY>=0?String("+").concat(_pY):_pY.toString();
 		}
 		public function get pX():String
 		{
 			//
+			tX -= opX; 
 			_pX = tX*(oW/dW);
-			_pX -= opX;
+//			_pX -= opX;
 			return _pX>=0?String("+").concat(_pX):String("-").concat(-_pX);
 		}
 		public function get opY():Number
@@ -139,14 +150,30 @@ package model
 			return oW*usX;
 		}
 		//ImageMagick -resize(zoomIn/Out) values
+		public var iW:Number;//Initialized width,write only once.
+		public var iH:Number;//Initialized height,write only once.
+		//
 		public function get usX():Number
 		{
-			return dW/rW;
+			return dW/iW;
 		}
 		//
 		public function get usY():Number
 		{
-			return dH/rH;
+			return dH/iH;
+		}
+		///Flags
+		public function get resized():Boolean
+		{
+			return (dW!=iW||dH!=iH);
+		}
+		public function get rotated():Boolean
+		{
+			return r!=0;
+		}
+		public function get moved():Boolean
+		{
+			return (tpX!=0||tpY!=0);
 		}
 		//For debugging
 		public function toString():String
