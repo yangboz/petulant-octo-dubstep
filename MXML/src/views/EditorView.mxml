@@ -140,6 +140,8 @@
 				AppData.savedImgOprVO.oH = contentH;//Initialize only once;
 				AppData.savedImgOprVO.rW = requiredW;//Initialize only once;
 				AppData.savedImgOprVO.rH = requiredH;//Initialize only once;
+				AppData.savedImgOprVO.odW = this.id_image_edit.width;//Initialize only once;
+				AppData.savedImgOprVO.odH = this.id_image_edit.height;//Initialize only once;
 				AppData.savedImgOprVO.dW = this.id_image_edit.width;//Changed if neccessary;
 				AppData.savedImgOprVO.dH = this.id_image_edit.height;//Changed if neccessary;
 				AppData.savedImgOprVO.iW = this.id_image_edit.width;//Initialize only once;
@@ -299,15 +301,22 @@
 						//
 						AppData.savedImgOprVO.tX = event.data.matrix.tx;
 						AppData.savedImgOprVO.tY = event.data.matrix.ty;
+						//
+						AppData.savedImgOprVO.odW = this.id_image_edit.width;
+						AppData.savedImgOprVO.odH = this.id_image_edit.height;
 						break;
 					case TransformationType.ROTATE:
-						var angle:Number = this.id_image_edit.rotation;
 						//
-						AppData.savedImgOprVO.r = angle;
+						AppData.savedImgOprVO.r = this.id_image_edit.rotation;
+						//
 						AppData.savedImgOprVO.dW = rectangle.width;
 						AppData.savedImgOprVO.dH = rectangle.height;
+						//
 						AppData.savedImgOprVO.tpX = event.data.topLeft.x;
 						AppData.savedImgOprVO.tpY = event.data.topLeft.y;
+						//
+						AppData.savedImgOprVO.tX = event.data.matrix.tx;
+						AppData.savedImgOprVO.tY = event.data.matrix.ty;
 						break;
 					case TransformationType.MOVE:
 						//

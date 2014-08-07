@@ -101,10 +101,10 @@ package views.components
 				}
 				this.dashy = new DashedLine(lineWeight,getStyle('borderColor'),new Array(4/AppData.savedImgOprVO.osX,4/AppData.savedImgOprVO.osX,4/AppData.savedImgOprVO.osX,4/AppData.savedImgOprVO.osX));
 //				dashy.moveTo(-x,-y);
-				dashy.moveTo(width,-y);
+				dashy.moveTo(width-dX,-y);
 //				dashy.lineTo(width,-y);
-				dashy.lineTo(width,height);
-				dashy.lineTo(-x,height);
+				dashy.lineTo(width-dX,height-dY);
+				dashy.lineTo(-x,height-dY);
 //				dashy.lineTo(-x,-y);
 				addChild(dashy);
 //				(this as SkinnableContainer).addElement(dashy);

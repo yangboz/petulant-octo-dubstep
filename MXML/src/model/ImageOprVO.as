@@ -37,8 +37,12 @@ package model
 		public var rW:Number=0;
 		public var rH:Number=0;
 		//Display area size
+		///Without rotation
 		public var dW:Number=0;
 		public var dH:Number=0;
+		///With rotation
+		public var odW:Number=0;
+		public var odH:Number=0;
 		//TopLeft point value
 		public var tpX:Number=0;
 		public var tpY:Number=0;
@@ -120,7 +124,6 @@ package model
 			//
 			tY -= opY; 
 			_pY = tY*(oH/dH);
-//			_pY -= opY;
 			return _pY>=0?String("+").concat(_pY):_pY.toString();
 		}
 		public function get pX():String
@@ -128,16 +131,15 @@ package model
 			//
 			tX -= opX; 
 			_pX = tX*(oW/dW);
-//			_pX -= opX;
 			return _pX>=0?String("+").concat(_pX):String("-").concat(-_pX);
 		}
 		public function get opY():Number
 		{
-			return r!=0?(dH-rH)/2:0;
+			return resized?(dH-rH)/2:0;
 		}
 		public function get opX():Number
 		{
-			return r!=0?(dW-rW)/2:0;
+			return resized?(dW-rW)/2:0;
 		}
 		//ImageMagick -resize(zoomIn/Out) values
 		public function get zH():Number
@@ -165,7 +167,7 @@ package model
 		///Flags
 		public function get resized():Boolean
 		{
-			return (dW!=iW||dH!=iH);
+			return (odW!=iW||odH!=iH);
 		}
 		public function get rotated():Boolean
 		{
