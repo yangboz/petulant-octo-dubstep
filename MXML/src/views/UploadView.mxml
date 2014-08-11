@@ -4,7 +4,7 @@
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
 				width="800" height="600" 
 				xmlns:views="views.*"
-				xmlns:components="views.components.*"
+				xmlns:components="views.components.*" xmlns:controls="com.devaldi.controls.*"
 				>
 	<fx:Script>
 		<![CDATA[

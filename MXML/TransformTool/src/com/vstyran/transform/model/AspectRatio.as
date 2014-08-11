@@ -11,8 +11,11 @@ package com.vstyran.transform.model
 		/**
 		 * Constructor. 
 		 */		
-		public function AspectRatio()
+		public function AspectRatio(wAspect:Number,hAspect:Number,frac:Number=0)
 		{
+			widthAspect = wAspect;
+			heightAspect = hAspect;
+			fraction = frac;
 		}
 		
 		/**

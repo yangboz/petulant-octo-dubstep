@@ -27,9 +27,6 @@ package com.godpaper.as3.ImageMagick
 	//
 	//--------------------------------------------------------------------------
 	
-	import com.godpaper.as3.configs.LoggerConfig;
-	import com.godpaper.as3.utils.LogUtil;
-	
 	import flash.desktop.NativeProcess;
 	import flash.desktop.NativeProcessStartupInfo;
 	import flash.events.Event;
@@ -37,9 +34,6 @@ package com.godpaper.as3.ImageMagick
 	import flash.events.ProgressEvent;
 	import flash.filesystem.File;
 	import flash.utils.IDataInput;
-	
-	import mx.logging.ILogger;
-	import mx.logging.LogEventLevel;
 	
 	//event metdata declare
 	/** Dispatched when a standard ImageMagick input is clos-ed. */
