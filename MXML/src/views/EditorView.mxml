@@ -32,6 +32,8 @@
 			import spark.events.IndexChangeEvent;
 			
 			import utils.ImageUtil;
+			///Variables
+			
 			//AS3ImageMagick
 			private var as3ImageMagick:AS3ImageMagick;
 			//
@@ -80,23 +82,24 @@
 				this.id_image_frame.source = AppData.ARRAY_EDITOR_PHOTO_FRAMES[AppData.selectedCertSizeIndex];
 				//
 				var id_image_frame_point:Point = AppData.ARRAY_EDITOR_POINT_FRAMES[AppData.selectedCertSizeIndex] as Point;
-				this.id_image_frame.x = id_image_frame_point.x;
-				this.id_image_frame.y = id_image_frame_point.y;
+//				this.id_image_frame.x = id_image_frame_point.x;
+//				this.id_image_frame.y = id_image_frame_point.y;
 				//
 				this.id_image_guide.source = AppData.ARRAY_EDITOR_PHOTO_GUIDES[AppData.selectedCertSizeIndex];
 				var id_image_guide_point:Point = AppData.ARRAY_EDITOR_POINT_GUIDES[AppData.selectedCertSizeIndex] as Point;
-				this.id_image_guide.x = id_image_guide_point.x;
-				this.id_image_guide.y = id_image_guide_point.y;
+//				this.id_image_guide.x = id_image_guide_point.x;
+//				this.id_image_guide.y = id_image_guide_point.y;
+				//
+				this.id_uit_group.x = id_image_guide_point.x;
+				this.id_uit_group.y = id_image_guide_point.y;
+				this.id_uit_group.width = this.getRequiredCertPhotoWidth();
+				this.id_uit_group.height = this.getRequiredCertPhotoHeight();
 				//Image group
-//				this.id_group.width = this.getRequiredCertPhotoWidth();
-//				this.id_group.height = this.getRequiredCertPhotoHeight();
 				var id_group_point:Point = AppData.ARRAY_EDITOR_POINT_PHOTOS[AppData.selectedCertSizeIndex] as Point;
 				this.id_group.x = id_group_point.x;
 				this.id_group.y = id_group_point.y;
 				this.id_group.maxWidth = this.getRequiredCertPhotoWidth();
 				this.id_group.maxHeight = this.getRequiredCertPhotoHeight();
-				///
-				this.selectUITransformTool(new MouseEvent(MouseEvent.CLICK));
 			}
 			
 			protected function alignImageView():void
@@ -148,6 +151,8 @@
 				AppData.savedImgOprVO.iH = this.id_image_edit.height;//Initialize only once;
 				//
 				trace("(after autoResizeImageView)AppData.savedImageOperation:",AppData.savedImgOprVO);
+				//
+				this.renderCroppedImg();
 			}
 			
 			protected function reupload_button_clickHandler(event:MouseEvent):void
@@ -215,7 +220,8 @@
 			
 			private function selectUITransformTool(event:MouseEvent):void
 			{
-				id_uit_tool.targets = [id_image_edit];
+//				id_uit_tool.targets = [id_image_edit];
+				id_uit_tool.targets = [id_uit_group];
 				id_uit_tool.visible = true;
 				id_uit_tool.includeInLayout = true;
 				//UITransformTool
@@ -288,6 +294,7 @@
 			
 			protected function tool_transformationCompleteHandler(event:TransformEvent):void
 			{
+				this.renderCroppedImg();
 				trace("(before transformationComplete)savedImgOprOV:",ObjectUtil.toString(AppData.savedImgOprVO));
 				//
 				var rectangle:Rectangle = this.id_image_edit.getRect(this);
@@ -500,6 +507,43 @@
 					}
 				}
 			}
+			
+			protected function renderCroppedImg():void
+			{
+				/* var _x:int = Math.max(0, (img_masked.x - img_original.x));
+				var _y:int = Math.max(0, (img_masked.y - img_original.y)); */
+				var _x:int = id_image_masked.x - id_image_edit.x;
+				var _y:int = id_image_masked.y - id_image_edit.y;
+				var maskRec:Rectangle = new Rectangle(_x, _y, _maskWidth, _maskHeight);
+				
+				if(_maskWidth > 0 && _maskHeight > 0)
+					id_image_masked.source = new Bitmap(clipFromBitMapData(maskRec), 'auto', true);
+			}
+			
+			private function clipFromBitMapData(rec:Rectangle):BitmapData
+			{
+				if(id_image_edit.content == null)
+					return null;
+				
+				var transMatrix:Matrix = new Matrix();
+				transMatrix.scale(AppData.savedImgOprVO.osX, AppData.savedImgOprVO.osY);
+				var bitMapData:BitmapData = new BitmapData(id_image_edit.width, id_image_edit.height, true);
+				bitMapData.draw(id_image_edit.content, transMatrix);
+				
+				var maskedBitMapData:BitmapData = new BitmapData(_maskWidth, _maskHeight);
+				maskedBitMapData.copyPixels(bitMapData, rec, new Point());
+				return maskedBitMapData;
+			}
+			
+			protected function get _maskWidth():Number
+			{
+				return this.id_image_masked.width;
+			}
+			
+			protected function get _maskHeight():Number
+			{
+				return this.id_image_masked.height;
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>                                                                                                     
@@ -553,16 +597,22 @@
 		
 		<s:Image id="id_image_instruction" x="200" y="60" cachePolicy="off"/>
 		
-		<s:Group id="id_group" clipAndEnableScrolling="true">
+		<s:Group id="id_group" clipAndEnableScrolling="false">
 			<mx:Image id="id_image_edit" maintainAspectRatio="true"
 					  maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smoothBitmapContent="true"/>
-			<!--<components:ImageWithSmooth--> 
+			<!--<components:MaskedImage id="id_image_edit" maintainProjectionCenter="true" maskImage="{this.id_image_guide.source}"
+									maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smooth="true" smoothingQuality="{BitmapSmoothingQuality.HIGH}"/>-->
 			<!--<s:Image
 				id="id_image_edit" maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smooth="true" smoothingQuality="{BitmapSmoothingQuality.HIGH}"/>-->
+			<s:BorderContainer id="id_shadowContainer" backgroundColor="#525252" backgroundAlpha="0.85" width="{id_image_edit.width}" height="{id_image_edit.height}" />
 		</s:Group>
 		
-		<s:Image id="id_image_frame" enabled="false"/>
-		<s:Image id="id_image_guide" enabled="false"/>
+		<s:Group id="id_uit_group" clipAndEnableScrolling="false">
+			<mx:Image id="id_image_masked" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" />
+			<s:Image id="id_image_frame" enabled="false" width="100%" height="100%"/>
+			<s:Image id="id_image_guide" enabled="false" width="100%" height="100%"/>
+		</s:Group>
+		
 		<!--<s:Image id="id_image_mask" x="{id_image_frame.x}" y="{id_image_frame.y}" enabled="false"/>-->
 		<!--guidelinesUpdate="tool_guidelinesUpdateHandler(event)"-->
 		<view:UITransformTool id="id_uit_tool" skinClass="skins.uiTransformTool.TransformToolSkin3" 
