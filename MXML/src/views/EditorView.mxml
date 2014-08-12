@@ -512,12 +512,12 @@
 			{
 				/* var _x:int = Math.max(0, (img_masked.x - img_original.x));
 				var _y:int = Math.max(0, (img_masked.y - img_original.y)); */
-				var _x:int = id_image_masked.x - id_image_edit.x;
-				var _y:int = id_image_masked.y - id_image_edit.y;
+				var _x:int = this.id_uit_group.x - this.id_group.x;
+				var _y:int = this.id_uit_group.y - this.id_group.y;
 				var maskRec:Rectangle = new Rectangle(_x, _y, _maskWidth, _maskHeight);
 				
 				if(_maskWidth > 0 && _maskHeight > 0)
-					id_image_masked.source = new Bitmap(clipFromBitMapData(maskRec), 'auto', true);
+					this.id_image_masked.source = new Bitmap(clipFromBitMapData(maskRec), 'auto', true);
 			}
 			
 			private function clipFromBitMapData(rec:Rectangle):BitmapData
@@ -621,9 +621,9 @@
 							  transformation="tool_transformationHandler(event)"
 							  maintainProjectionCenter="true" maintainMoveShortcuts="true"
 							  >
-			<!--<view:bounds>
-				<model:Bounds width="300" height="300"/>
-			</view:bounds>-->
+			<view:bounds>
+				<model:Bounds x="{this.id_group.x}" y="{this.id_group.y}" width="{this.id_image_edit.width}" height="{this.id_image_edit.height}"/>
+			</view:bounds>
 			<!--<view:guidelines>
 				<model:Guideline type="{GuidelineType.HORIZONTAL_CENTER}" value="400" fraction="3"/>
 				<model:Guideline type="{GuidelineType.VERTICAL_CENTER}" value="300" fraction="3"/>
