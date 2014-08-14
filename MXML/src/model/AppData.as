@@ -88,7 +88,7 @@ package model
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
-		public static const USE_IMAGE_MAGICK:Boolean = true;//Image operation engine,switch AS3 or ImageMagick.
+		public static const USE_IMAGE_MAGICK:Boolean = false;//Image operation engine,switch AS3 or ImageMagick.
 		public static const MAX_UIT_WIDTH_DEFAULT:Number = 390;
 		public static const MAX_UIT_HEIGHT_DEFAULT:Number = 400;
 		//CenterMeter to Inch

@@ -112,14 +112,14 @@
 			protected function autoResizeImageView():void
 			{
 				//
-				var contentW:Number = this.id_image_edit.contentWidth;
-				var contentH:Number = this.id_image_edit.contentHeight;
+				var contentW:Number = this.id_image_edit.content.width;
+				var contentH:Number = this.id_image_edit.content.height;
 //				var contentW:Number = this.id_image_edit.bitmapData.width;
 //				var contentH:Number = this.id_image_edit.bitmapData.height;
 				var contentWHratio:Number = contentW/contentH;
 				//
-				var requiredW:Number = getRequiredCertPhotoWidth();
-				var requiredH:Number = getRequiredCertPhotoHeight();
+				var requiredW:Number = getRequiredCertPhotoWidth()*1.5;
+				var requiredH:Number = getRequiredCertPhotoHeight()*1.5;
 				var requiredWHratio:Number = requiredW/requiredH;
 				//Ratio check
 				if(contentW<=contentH)
@@ -195,7 +195,7 @@
 //				bufferMatix.scale(requiredPhotoWidth/this.id_image_edit.contentWidth,requiredPhotoHeight/this.id_image_edit.contentHeight);
 				bitMapData.draw(bufferBitmapData,this.id_uit_tool.transform.matrix); 
 				*/
-				bitMapData.draw(this.id_group,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true); 
+				bitMapData.draw(this.id_image_masked,null,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true); 
 //				bitMapData.drawWithQuality(this.id_image_edit.bitmapData,null,null,null,null,true,StageQuality.BEST);
 //				bitMapData.drawWithQuality(AppData.uploadFileBitmapData,AppData.savedImageMatrix,null,null,new Rectangle(0,0,requiredPhotoWidth,requiredPhotoHeight),true,StageQuality.BEST);
 				//
@@ -294,7 +294,6 @@
 			
 			protected function tool_transformationCompleteHandler(event:TransformEvent):void
 			{
-				this.renderCroppedImg();
 				trace("(before transformationComplete)savedImgOprOV:",ObjectUtil.toString(AppData.savedImgOprVO));
 				//
 				var rectangle:Rectangle = this.id_image_edit.getRect(this);
@@ -340,6 +339,7 @@
 			{
 //				trace("toolData.matrix(transformation):",event.toolData.matrix);
 //				trace("data.matrix(transformation):",event.data.matrix);
+				this.renderCroppedImg();
 			}
 			
 			private function updateUITransformTools():void
@@ -527,8 +527,12 @@
 				
 				var transMatrix:Matrix = new Matrix();
 				transMatrix.scale(AppData.savedImgOprVO.osX, AppData.savedImgOprVO.osY);
+//				transMatrix.translate(-rec.width/2,-rec.height/2);
+//				transMatrix.rotate(AppData.savedImgOprVO.r);
+//				transMatrix.translate(rec.width/2,rec.height/2);
 				var bitMapData:BitmapData = new BitmapData(id_image_edit.width, id_image_edit.height, true);
-				bitMapData.draw(id_image_edit.content, transMatrix);
+//				bitMapData.draw(id_image_edit.content, transMatrix);
+				bitMapData.drawWithQuality(id_image_edit.content, transMatrix,null,null,null,true,StageQuality.BEST);
 				
 				var maskedBitMapData:BitmapData = new BitmapData(_maskWidth, _maskHeight);
 				maskedBitMapData.copyPixels(bitMapData, rec, new Point());
@@ -604,11 +608,15 @@
 									maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smooth="true" smoothingQuality="{BitmapSmoothingQuality.HIGH}"/>-->
 			<!--<s:Image
 				id="id_image_edit" maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smooth="true" smoothingQuality="{BitmapSmoothingQuality.HIGH}"/>-->
-			<s:BorderContainer id="id_shadowContainer" backgroundColor="#525252" backgroundAlpha="0.85" width="{id_image_edit.width}" height="{id_image_edit.height}" />
+			<s:BorderContainer id="id_shadowContainer" backgroundColor="#525252" backgroundAlpha="0.85" width="{id_image_edit.width}" height="{id_image_edit.height}" >
+				<s:filters>
+					<s:BlurFilter blurX="5.0" blurY="5.0" />
+				</s:filters>
+			</s:BorderContainer>
 		</s:Group>
 		
-		<s:Group id="id_uit_group" clipAndEnableScrolling="false">
-			<mx:Image id="id_image_masked" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" />
+		<s:Group id="id_uit_group" clipAndEnableScrolling="false" maxHeight="{id_image_edit.height}" maxWidth="{id_image_edit.width}">
+			<mx:Image id="id_image_masked" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" mouseChildren="false"/>
 			<s:Image id="id_image_frame" enabled="false" width="100%" height="100%"/>
 			<s:Image id="id_image_guide" enabled="false" width="100%" height="100%"/>
 		</s:Group>
@@ -617,7 +625,6 @@
 		<!--guidelinesUpdate="tool_guidelinesUpdateHandler(event)"-->
 		<view:UITransformTool id="id_uit_tool" skinClass="skins.uiTransformTool.TransformToolSkin3" 
 							  transformationComplete="tool_transformationCompleteHandler(event)"
-							  
 							  transformation="tool_transformationHandler(event)"
 							  maintainProjectionCenter="true" maintainMoveShortcuts="true"
 							  >
@@ -639,13 +646,13 @@
 				   width="200" visible="false" includeInLayout="false"
 				   />
 		<s:Button x="349" y="425" label="ROTATE" skinClass="skins.button.HW_RotateButton_Skin" click="rotate90ButtonClickHandler(event)" visible="false" includeInLayout="false"/>
-<!--		<s:Button x="625" y="198" label="ZOOM_IN" skinClass="skins.button.HW_ZoomInButton_Skin" click="zoomInButtonClickHandler(event)"/>
+		<s:Button x="625" y="198" label="ZOOM_IN" skinClass="skins.button.HW_ZoomInButton_Skin" click="zoomInButtonClickHandler(event)"/>
 		<s:Button x="625" y="373" label="ZOOM_OUT" skinClass="skins.button.HW_ZoomOutButton_Skin" click="zoomOutButtonClickHandler(event)"/>
 		<spark:VSlider id="id_vslider_scale" x="638" y="230"
 					   showTrackHighlight="true" skinClass="skins.slider.HW_EditorScaleVSlider_Skin"
 				   change="onEditorScaleSliderChange(event)" stepSize="0.1" minimum="0.5" maximum="2" value="1"
 				   height="140" 
-				   />-->
+				   />
 		
 		<s:Group id="passiveGuideGroup" top="0" bottom="0" left="0" right="0"/>
 		<s:Line id="vGuide" yFrom="{id_image_frame.y}" yTo="{id_image_frame.height}" depth="3" visible="true">
