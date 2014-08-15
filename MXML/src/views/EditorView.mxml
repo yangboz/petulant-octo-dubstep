@@ -89,17 +89,17 @@
 				var id_image_guide_point:Point = AppData.ARRAY_EDITOR_POINT_GUIDES[AppData.selectedCertSizeIndex] as Point;
 //				this.id_image_guide.x = id_image_guide_point.x;
 //				this.id_image_guide.y = id_image_guide_point.y;
-				//
-				this.id_uit_group.x = id_image_guide_point.x;
-				this.id_uit_group.y = id_image_guide_point.y;
-				this.id_uit_group.width = this.getRequiredCertPhotoWidth();
-				this.id_uit_group.height = this.getRequiredCertPhotoHeight();
 				//Image group
 				var id_group_point:Point = AppData.ARRAY_EDITOR_POINT_PHOTOS[AppData.selectedCertSizeIndex] as Point;
 				this.id_group.x = id_group_point.x;
 				this.id_group.y = id_group_point.y;
-				this.id_group.maxWidth = this.getRequiredCertPhotoWidth();
-				this.id_group.maxHeight = this.getRequiredCertPhotoHeight();
+//				this.id_group.maxWidth = this.getRequiredCertPhotoWidth();
+//				this.id_group.maxHeight = this.getRequiredCertPhotoHeight();
+				//
+//				this.id_uit_group.x = id_group_point.x;
+//				this.id_uit_group.y = id_group_point.y;
+				this.id_uit_group.width = this.getRequiredCertPhotoWidth();
+				this.id_uit_group.height = this.getRequiredCertPhotoHeight();
 			}
 			
 			protected function alignImageView():void
@@ -231,7 +231,7 @@
 			
 			private function onEditorScaleSliderChange(event:Event):void
 			{
-//				this.applyZoom(this.id_image_edit,this.id_vslider_scale.value);
+				this.applyZoom(this.id_group,this.id_vslider_scale.value);
 				//Update tool
 				this.updateUITransformTools();
 			}
@@ -250,14 +250,14 @@
 			
 			protected function zoomInButtonClickHandler(event:MouseEvent):void
 			{
-//				this.id_vslider_scale.value += 0.1; 
-//				this.applyZoom(this.id_image_edit,this.id_vslider_scale.value);
+				this.id_vslider_scale.value += 0.1; 
+				this.applyZoom(this.id_group,this.id_vslider_scale.value);
 			}
 			
 			protected function zoomOutButtonClickHandler(event:MouseEvent):void
 			{
-//				this.id_vslider_scale.value -= 0.1; 
-//				this.applyZoom(this.id_image_edit,this.id_vslider_scale.value);
+				this.id_vslider_scale.value -= 0.1; 
+				this.applyZoom(this.id_group,this.id_vslider_scale.value);
 			}
 			
 			private function applyRotate(target:DisplayObject,angle:Number):void
@@ -278,18 +278,18 @@
 			}
 			private function applyZoom(target:DisplayObject,ratio:Number):void
 			{
-//				target.scaleX = ratio;
-//				target.scaleY = ratio;
-				//
-				var posX:Number = target.x;
-				var posY:Number = target.y;
-				target.x =target.y = 0;
 				target.scaleX = ratio;
 				target.scaleY = ratio;
-				target.x = posX;
-				target.y = posY;
-				//Update tool
-				this.updateUITransformTools();
+//				//
+//				var posX:Number = target.x;
+//				var posY:Number = target.y;
+//				target.x =target.y = 0;
+//				target.scaleX = ratio;
+//				target.scaleY = ratio;
+//				target.x = posX;
+//				target.y = posY;
+//				//Update tool
+//				this.updateUITransformTools();
 			}
 			
 			protected function tool_transformationCompleteHandler(event:TransformEvent):void
@@ -512,8 +512,8 @@
 			{
 				/* var _x:int = Math.max(0, (img_masked.x - img_original.x));
 				var _y:int = Math.max(0, (img_masked.y - img_original.y)); */
-				var _x:int = this.id_uit_group.x - this.id_group.x;
-				var _y:int = this.id_uit_group.y - this.id_group.y;
+				var _x:int = this.id_uit_group.x - this.id_image_edit.x;
+				var _y:int = this.id_uit_group.y - this.id_image_edit.y;
 				var maskRec:Rectangle = new Rectangle(_x, _y, _maskWidth, _maskHeight);
 				
 				if(_maskWidth > 0 && _maskHeight > 0)
@@ -613,13 +613,15 @@
 					<s:BlurFilter blurX="5.0" blurY="5.0" />
 				</s:filters>
 			</s:BorderContainer>
+			
+			<s:Group id="id_uit_group" clipAndEnableScrolling="false" maxHeight="{id_image_edit.height}" maxWidth="{id_image_edit.width}">
+				<mx:Image id="id_image_masked" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" mouseChildren="false"/>
+				<s:Image id="id_image_frame" enabled="false" width="100%" height="100%"/>
+				<s:Image id="id_image_guide" enabled="false" width="100%" height="100%"/>
+			</s:Group>
 		</s:Group>
 		
-		<s:Group id="id_uit_group" clipAndEnableScrolling="false" maxHeight="{id_image_edit.height}" maxWidth="{id_image_edit.width}">
-			<mx:Image id="id_image_masked" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" mouseChildren="false"/>
-			<s:Image id="id_image_frame" enabled="false" width="100%" height="100%"/>
-			<s:Image id="id_image_guide" enabled="false" width="100%" height="100%"/>
-		</s:Group>
+		
 		
 		<!--<s:Image id="id_image_mask" x="{id_image_frame.x}" y="{id_image_frame.y}" enabled="false"/>-->
 		<!--guidelinesUpdate="tool_guidelinesUpdateHandler(event)"-->
@@ -629,7 +631,7 @@
 							  maintainProjectionCenter="true" maintainMoveShortcuts="true"
 							  >
 			<view:bounds>
-				<model:Bounds x="{this.id_group.x}" y="{this.id_group.y}" width="{this.id_image_edit.width}" height="{this.id_image_edit.height}"/>
+				<model:Bounds x="{this.id_group.x}" y="{this.id_group.y}" width="{this.id_group.width*this.id_vslider_scale.value}" height="{this.id_group.height*this.id_vslider_scale.value}"/>
 			</view:bounds>
 			<!--<view:guidelines>
 				<model:Guideline type="{GuidelineType.HORIZONTAL_CENTER}" value="400" fraction="3"/>
@@ -637,6 +639,7 @@
 			</view:guidelines>-->
 			
 		</view:UITransformTool>
+		
 		
 		<s:Button x="383" y="500" label="RE_UPLOAD" skinClass="skins.button.HW_Back2UploadButton_Skin" click="reupload_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
 		<s:Button x="505" y="500" label="EDIT_NEXT" skinClass="skins.button.HW_EditorNextButton_Skin" click="editnext_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
@@ -650,7 +653,7 @@
 		<s:Button x="625" y="373" label="ZOOM_OUT" skinClass="skins.button.HW_ZoomOutButton_Skin" click="zoomOutButtonClickHandler(event)"/>
 		<spark:VSlider id="id_vslider_scale" x="638" y="230"
 					   showTrackHighlight="true" skinClass="skins.slider.HW_EditorScaleVSlider_Skin"
-				   change="onEditorScaleSliderChange(event)" stepSize="0.1" minimum="0.5" maximum="2" value="1"
+				   change="onEditorScaleSliderChange(event)" stepSize="0.1" minimum="0.5" maximum="4" value="1"
 				   height="140" 
 				   />
 		
