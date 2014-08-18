@@ -26,6 +26,7 @@
 			
 			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
+			import mx.events.ResizeEvent;
 			import mx.graphics.BitmapSmoothingQuality;
 			import mx.utils.ObjectUtil;
 			
@@ -518,6 +519,8 @@
 				
 				if(_maskWidth > 0 && _maskHeight > 0)
 					this.id_image_masked.source = new Bitmap(clipFromBitMapData(maskRec), 'auto', true);
+				//
+				this.redrawPreview(0);
 			}
 			
 			private function clipFromBitMapData(rec:Rectangle):BitmapData
@@ -548,6 +551,152 @@
 			{
 				return this.id_image_masked.height;
 			}
+			
+			////
+			// draws the preview in the bottom right corner
+			private function get viewer():Group
+			{
+				return this.id_group;
+			}
+			private function get _maxHorizontalScrollPosition():Number
+			{
+				return viewer.contentWidth - viewer.width;	
+			}
+			private function get _maxVerticalScrollPosition():Number
+			{
+				return 	viewer.contentHeight - viewer.height;
+			}
+			private var _saveScale:Number = 1;
+			internal var _rectSprite:Sprite = new Sprite();
+			internal var _highlightRectSprite:Sprite = new Sprite();
+			internal var _highlightBitmap:Bitmap;
+			
+			private function redrawPreview(i:Number):void{
+				if(_draggingThumbnail){return;}
+				
+				while(id_image_preview.numChildren > 0)
+					delete(id_image_preview.removeChildAt(0));
+				
+				id_image_preview.graphics.clear();
+				id_image_preview.graphics.beginFill(0xdddddd,1);
+				id_image_preview.graphics.drawRect(0,0,id_image_preview.width,id_image_preview.height);
+				id_image_preview.graphics.endFill();
+				
+				var bmd:BitmapData;
+				var bmdscale:Number;
+				
+				if(viewer.height>viewer.width){
+					bmd = new BitmapData((viewer.width/viewer.height)*id_image_preview.height, id_image_preview.height, false, 0xFFFFFF);
+					bmdscale = bmd.height/viewer.height;
+				}else{
+					bmd = new BitmapData(id_image_preview.width, (viewer.height/viewer.width) * id_image_preview.width, false, 0xFFFFFF);
+					bmdscale = bmd.width/viewer.width;
+				}
+				
+				bmd.draw(viewer,new Matrix(bmdscale, 0, 0, bmdscale),null,null,null,true);
+				_highlightBitmap = new Bitmap(bmd);
+				_highlightBitmap.x = (_highlightBitmap.width<id_image_preview.width)?(id_image_preview.width-_highlightBitmap.width)/2:0;
+				_highlightBitmap.y = (_highlightBitmap.height<id_image_preview.height)?(id_image_preview.height-_highlightBitmap.height)/2:0;
+				
+				id_image_preview.addChild(_highlightBitmap);
+				
+				var rectPosXAdj:Number = id_image_preview.width * ((viewer.width * 0.96 - viewer.width) / viewer.width);rectPosXAdj = (rectPosXAdj<0)?0:rectPosXAdj/2;
+				var rectPosYAdj:Number = id_image_preview.height * ((viewer.height - viewer.height) / viewer.height);rectPosYAdj = (rectPosYAdj<0)?0:rectPosYAdj/2;
+				var rectSizeWidth:Number = _highlightBitmap.width * (viewer.width / viewer.width); // ok
+				var rectSizeHeight:Number = _highlightBitmap.height * (viewer.height / viewer.height); // ok
+				
+				var rectPosX:Number = ((_highlightBitmap.width - rectSizeWidth) * (viewer.horizontalScrollPosition / _maxHorizontalScrollPosition));
+				var rectPosY:Number = ((_highlightBitmap.height - rectSizeHeight) * (viewer.verticalScrollPosition / _maxVerticalScrollPosition));
+				
+				rectPosX = _highlightBitmap.x + rectPosX - rectPosXAdj;
+				
+				if(rectPosX<0 || isNaN(rectPosX)){
+					rectPosX = _highlightBitmap.x - rectPosXAdj;
+				}
+				
+				rectPosY = _highlightBitmap.y + rectPosY - rectPosYAdj;
+				
+				if(rectPosY<0 || isNaN(rectPosY)){
+					rectPosY = _highlightBitmap.y - rectPosYAdj;
+				}
+				
+				rectSizeWidth = rectSizeWidth + rectPosXAdj*2;
+				if(rectSizeWidth > id_image_preview.width){
+					rectSizeWidth = id_image_preview.width;
+				}
+				
+				rectSizeHeight = rectSizeHeight + rectPosYAdj*2;
+				if(rectSizeHeight > id_image_preview.height){
+					rectSizeHeight = id_image_preview.height;
+				}
+				
+				if(rectPosX<0){rectPosX = 0;}if(rectPosY<0){rectPosY = 0;}
+				
+				if(rectSizeWidth > 0 && rectSizeHeight > 0){
+					_rectSprite.graphics.clear();
+					
+					_rectSprite.graphics.lineStyle(1, 1, 1);
+					_rectSprite.graphics.drawRect(0,0,id_image_preview.width,id_image_preview.height);
+					if(_rectSprite.parent != id_image_preview)
+						id_image_preview.addChild(_rectSprite);
+					
+					_highlightRectSprite.graphics.clear();
+					_highlightRectSprite.graphics.beginFill(0xffffff,0);
+					_highlightRectSprite.graphics.drawRect(0, 0, rectSizeWidth, rectSizeHeight);
+					_highlightRectSprite.graphics.endFill();
+					
+					_highlightRectSprite.graphics.beginFill(0xb4d4f8,0.3);
+					_highlightRectSprite.x = rectPosX;
+					_highlightRectSprite.y = rectPosY;
+					_highlightRectSprite.graphics.drawRect(0, 0, rectSizeWidth, rectSizeHeight);
+					_highlightRectSprite.graphics.endFill();
+					
+					_highlightRectSprite.graphics.lineStyle(1, 0x0000ff, 1);
+					_highlightRectSprite.x = rectPosX;
+					_highlightRectSprite.y = rectPosY;
+					_highlightRectSprite.graphics.drawRect(0, 0, rectSizeWidth, rectSizeHeight);
+					
+					if(_highlightRectSprite.parent != id_image_preview){
+						id_image_preview.addChild(_highlightRectSprite);
+						
+						if(!_highlightRectSprite.hasEventListener(MouseEvent.MOUSE_MOVE)){
+							_highlightRectSprite.addEventListener(MouseEvent.MOUSE_MOVE, thumbMouseMoveHandler);
+							_highlightRectSprite.addEventListener(MouseEvent.MOUSE_DOWN, thumbMouseDownHandler);
+							_highlightRectSprite.addEventListener(MouseEvent.MOUSE_UP, thumbMouseUpHandler);
+							_highlightRectSprite.buttonMode = true;
+						}
+					}
+				}
+			}
+			
+			private var _draggingThumbnail:Boolean = false;
+			protected function thumbMouseDownHandler (e:MouseEvent):void{
+				var r:Rectangle = new Rectangle(_highlightBitmap.x,_highlightBitmap.y,_highlightBitmap.width-_highlightRectSprite.width+1,_highlightBitmap.height-_highlightRectSprite.height+2);
+				
+				e.target.startDrag(false,r);
+				_draggingThumbnail = true;
+			}
+			
+			protected function thumbMouseMoveHandler (e:MouseEvent):void{
+				if(_draggingThumbnail){
+					var pctX:Number = (e.target.x-_highlightBitmap.x)/(_highlightBitmap.width-e.target.width);
+					var pctY:Number = (e.target.y-_highlightBitmap.y)/(_highlightBitmap.height-e.target.height);
+					viewer.horizontalScrollPosition = _maxHorizontalScrollPosition * pctX;
+					viewer.verticalScrollPosition = _maxVerticalScrollPosition * pctY;
+				}
+			}
+			
+			protected function thumbMouseUpHandler (e:MouseEvent):void{
+				e.target.stopDrag();
+				_draggingThumbnail = false;
+				redrawPreview(-1);
+			}
+			
+			protected function id_group_resizeHandler(event:ResizeEvent):void
+			{
+//				id_image_preview.width = viewer.width/5; id_image_preview.height = id_image_preview.width / (viewer.width/viewer.height);
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>                                                                                                     
@@ -600,15 +749,15 @@
 		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)" />
 		
 		<s:Image id="id_image_instruction" x="200" y="60" cachePolicy="off"/>
-		
-		<s:Group id="id_group" clipAndEnableScrolling="false">
+			
+		<s:Group id="id_group" clipAndEnableScrolling="false" resize="id_group_resizeHandler(event)">
 			<mx:Image id="id_image_edit" maintainAspectRatio="true"
 					  maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smoothBitmapContent="true"/>
 			<!--<components:MaskedImage id="id_image_edit" maintainProjectionCenter="true" maskImage="{this.id_image_guide.source}"
 									maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smooth="true" smoothingQuality="{BitmapSmoothingQuality.HIGH}"/>-->
 			<!--<s:Image
 				id="id_image_edit" maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smooth="true" smoothingQuality="{BitmapSmoothingQuality.HIGH}"/>-->
-			<s:BorderContainer id="id_shadowContainer" backgroundColor="#525252" backgroundAlpha="0.85" width="{id_image_edit.width}" height="{id_image_edit.height}" >
+			<s:BorderContainer id="id_shadowContainer" backgroundColor="#B2BCB5" backgroundAlpha="0.8" width="{id_image_edit.width}" height="{id_image_edit.height}" >
 				<s:filters>
 					<s:BlurFilter blurX="5.0" blurY="5.0" />
 				</s:filters>
@@ -621,11 +770,9 @@
 			</s:Group>
 		</s:Group>
 		
-		
-		
 		<!--<s:Image id="id_image_mask" x="{id_image_frame.x}" y="{id_image_frame.y}" enabled="false"/>-->
 		<!--guidelinesUpdate="tool_guidelinesUpdateHandler(event)"-->
-		<view:UITransformTool id="id_uit_tool" skinClass="skins.uiTransformTool.TransformToolSkin3" 
+		<view:UITransformTool id="id_uit_tool" skinClass="skins.uiTransformTool.TransformToolSkin_Edit" 
 							  transformationComplete="tool_transformationCompleteHandler(event)"
 							  transformation="tool_transformationHandler(event)"
 							  maintainProjectionCenter="true" maintainMoveShortcuts="true"
@@ -643,11 +790,12 @@
 		
 		<s:Button x="383" y="500" label="RE_UPLOAD" skinClass="skins.button.HW_Back2UploadButton_Skin" click="reupload_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
 		<s:Button x="505" y="500" label="EDIT_NEXT" skinClass="skins.button.HW_EditorNextButton_Skin" click="editnext_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
-		<spark:HSlider id="id_hslider_rotate" x="393" y="438" 
-					   showTrackHighlight="true" skinClass="skins.slider.HW_EditorRotateHSlider_Skin"
+		<spark:VSlider id="id_hslider_rotate" x="658" y="230" 
+					   showTrackHighlight="true" skinClass="skins.slider.HW_EditorScaleVSlider_Skin"
 				   change="onEditorRotateSliderChange(event)" stepSize="1" minimum="-180" maximum="180" value="0"
-				   width="200" visible="false" includeInLayout="false"
+				   height="140" 
 				   />
+		
 		<s:Button x="349" y="425" label="ROTATE" skinClass="skins.button.HW_RotateButton_Skin" click="rotate90ButtonClickHandler(event)" visible="false" includeInLayout="false"/>
 		<s:Button x="625" y="198" label="ZOOM_IN" skinClass="skins.button.HW_ZoomInButton_Skin" click="zoomInButtonClickHandler(event)"/>
 		<s:Button x="625" y="373" label="ZOOM_OUT" skinClass="skins.button.HW_ZoomOutButton_Skin" click="zoomOutButtonClickHandler(event)"/>
@@ -657,6 +805,25 @@
 				   height="140" 
 				   />
 		
+		<s:BorderContainer id="id_border_contaniner" x="585" y="450" width="100" height="100">
+			<s:Group id="id_group_preview" width="50" height="50" alpha="0.5"/>
+		</s:BorderContainer>
+		<mx:Image id="id_image_preview" x="555" y="450" width="100" height="100" visible="false" includeInLayout="false"/>
+		
+		<view:UITransformTool id="id_uit_tool_preview" skinClass="skins.uiTransformTool.TransformToolSkin_Preview" 
+							  maintainProjectionCenter="true" maintainMoveShortcuts="true"
+							  target="{this.id_group_preview}"
+							  >
+			<view:bounds>
+				<model:Bounds x="{this.id_border_contaniner.x}" y="{this.id_border_contaniner.y}" width="{this.id_border_contaniner.width}" height="{this.id_border_contaniner.height}"/>
+			</view:bounds>
+			<!--<view:guidelines>
+			<model:Guideline type="{GuidelineType.HORIZONTAL_CENTER}" value="400" fraction="3"/>
+			<model:Guideline type="{GuidelineType.VERTICAL_CENTER}" value="300" fraction="3"/>
+			</view:guidelines>-->
+			
+		</view:UITransformTool>
+				  
 		<s:Group id="passiveGuideGroup" top="0" bottom="0" left="0" right="0"/>
 		<s:Line id="vGuide" yFrom="{id_image_frame.y}" yTo="{id_image_frame.height}" depth="3" visible="true">
 			<s:stroke>
