@@ -28,9 +28,9 @@
 	</s:fill>
 	</s:Rect>-->
 	
-	<s:BitmapImage source="@Embed('../../assets/images/editphoto/icon_rotate90.png')" includeIn="up, disabled"/>
-	<s:BitmapImage source="@Embed('../../assets/images/editphoto/icon_rotate90_pd.png')" includeIn="over"/>
-	<s:BitmapImage source="@Embed('../../assets/images/editphoto/icon_rotate90_pd.png')" includeIn="down"/>
+	<s:BitmapImage source="@Embed('../../assets/images/editphoto/ID-editor_rotate.png')" includeIn="up, disabled"/>
+	<s:BitmapImage source="@Embed('../../assets/images/editphoto/ID-editor_rotate.png')" includeIn="over"/>
+	<s:BitmapImage source="@Embed('../../assets/images/editphoto/ID-editor_rotate.png')" includeIn="down"/>
 	
 	
 </s:SparkSkin>
