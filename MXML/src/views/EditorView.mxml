@@ -28,6 +28,7 @@
 			import mx.events.FlexEvent;
 			import mx.events.ResizeEvent;
 			import mx.graphics.BitmapSmoothingQuality;
+			import mx.messaging.events.ChannelEvent;
 			import mx.utils.ObjectUtil;
 			
 			import spark.events.IndexChangeEvent;
@@ -62,6 +63,9 @@
 				this.autoResizeImageView();
 				//Update tool
 				this.updateUITransformTools();
+				//Reset slider value
+				this.id_vslider_scale.value = 1.0;
+				this.id_vslider_rotate.value = 0.0;
 			}
 			
 			override public function get viewBackgroundImage():Bitmap
@@ -238,15 +242,15 @@
 			}
 			private function onEditorRotateSliderChange(event:Event):void
 			{
-				this.applyRotate(this.id_image_edit,this.id_hslider_rotate.value);
+				this.applyRotate(this.id_image_edit,this.id_vslider_rotate.value);
 				//Update tool
 				this.updateUITransformTools();
 			}
 			
 			protected function rotate90ButtonClickHandler(event:MouseEvent):void
 			{
-				this.id_hslider_rotate.value += 90;
-				this.applyRotate(this.id_image_edit,this.id_hslider_rotate.value);		
+				this.id_vslider_rotate.value += 90;
+				this.applyRotate(this.id_image_edit,this.id_vslider_rotate.value);		
 			}
 			
 			protected function zoomInButtonClickHandler(event:MouseEvent):void
@@ -275,7 +279,9 @@
 				matrix.concat(this.id_image_edit.transform.matrix);
 				target.transform.matrix = matrix; 
 				//Update tool
-				this.updateUITransformTools();
+//				this.updateUITransformTools();
+				//Update cropper
+				this.renderCroppedImg();
 			}
 			private function applyZoom(target:DisplayObject,ratio:Number):void
 			{
@@ -292,6 +298,8 @@
 				target.y = posY;
 //				//Update tool
 //				this.updateUITransformTools();
+				//Update cropper
+				this.renderCroppedImg();
 			}
 			
 			protected function tool_transformationCompleteHandler(event:TransformEvent):void
@@ -341,6 +349,7 @@
 			{
 //				trace("toolData.matrix(transformation):",event.toolData.matrix);
 //				trace("data.matrix(transformation):",event.data.matrix);
+				//Update cropper
 				this.renderCroppedImg();
 			}
 			
@@ -521,7 +530,7 @@
 				if(_maskWidth > 0 && _maskHeight > 0)
 					this.id_image_masked.source = new Bitmap(clipFromBitMapData(maskRec), 'auto', true);
 				//
-				this.redrawPreview(0);
+//				this.redrawPreview(0);
 			}
 			
 			private function clipFromBitMapData(rec:Rectangle):BitmapData
@@ -530,7 +539,7 @@
 					return null;
 				
 				var transMatrix:Matrix = new Matrix();
-				transMatrix.scale(AppData.savedImgOprVO.osX, AppData.savedImgOprVO.osY);
+				transMatrix.scale(AppData.savedImgOprVO.osX * this.id_vslider_scale.value, AppData.savedImgOprVO.osY* this.id_vslider_scale.value);
 //				transMatrix.translate(-rec.width/2,-rec.height/2);
 //				transMatrix.rotate(AppData.savedImgOprVO.r);
 //				transMatrix.translate(rec.width/2,rec.height/2);
@@ -703,8 +712,10 @@
 			{
 				//				trace("toolData.matrix(transformation):",event.toolData.matrix);
 				trace("id_uit_tool_preview_transformationHandler->data.matrix(transformation):",event.data.matrix);
-				id_image_edit.x = event.data.matrix.tx;
-				id_image_edit.y = event.data.matrix.ty;
+				id_image_edit.x = event.data.matrix.tx * this.id_group.width/this.id_border_contaniner.width;
+				id_image_edit.y = event.data.matrix.ty * this.id_group.height/this.id_border_contaniner.height;
+				//Update cropper
+				this.renderCroppedImg();
 			}
 			
 		]]>
@@ -753,16 +764,16 @@
 		</fx:Component>                                       
 	</fx:Declarations>               
 	
-	<s:BorderContainer id="id_border_container" width="100%" height="100%" contentBackgroundAlpha="0"
+	<s:BorderContainer width="100%" height="100%" contentBackgroundAlpha="0"
 					   backgroundImage="{viewBackgroundImage}"
 					   >
 		<components:HW_List_Cert id="id_list" change="id_list_changeHandler(event)" />
 		
 		<s:Image id="id_image_instruction" x="200" y="60" cachePolicy="off"/>
 			
-		<s:Group id="id_group" clipAndEnableScrolling="false" width="560" height="400" x="220" y="185">
+		<s:Group id="id_group" clipAndEnableScrolling="true" width="560" height="380" x="220" y="182">
 			<mx:Image id="id_image_edit" maintainAspectRatio="true" resize="id_group_resizeHandler(event)"
-					  maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smoothBitmapContent="true"/>
+					  smoothBitmapContent="true"/>
 			<!--<components:MaskedImage id="id_image_edit" maintainProjectionCenter="true" maskImage="{this.id_image_guide.source}"
 									maxWidth="{AppData.MAX_UIT_WIDTH_DEFAULT}" maxHeight="{AppData.MAX_UIT_HEIGHT_DEFAULT}" smooth="true" smoothingQuality="{BitmapSmoothingQuality.HIGH}"/>-->
 			<!--<s:Image
@@ -788,7 +799,7 @@
 							  maintainProjectionCenter="true" maintainMoveShortcuts="true"
 							  >
 			<view:bounds>
-				<model:Bounds x="{this.id_group.x}" y="{this.id_group.y}" width="{this.id_group.width*this.id_vslider_scale.value}" height="{this.id_group.height*this.id_vslider_scale.value}"/>
+				<model:Bounds x="{this.id_group.x}" y="{this.id_group.y}" width="{this.id_shadowContainer.width}" height="{this.id_shadowContainer.height}"/>
 			</view:bounds>
 			<!--<view:guidelines>
 				<model:Guideline type="{GuidelineType.HORIZONTAL_CENTER}" value="400" fraction="3"/>
@@ -798,31 +809,33 @@
 		</view:UITransformTool>
 		
 		
-		<s:Button x="83" y="500" label="RE_UPLOAD" skinClass="skins.button.HW_Back2UploadButton_Skin" click="reupload_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
-		<s:Button x="205" y="500" label="EDIT_NEXT" skinClass="skins.button.HW_EditorNextButton_Skin" click="editnext_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
-		<spark:VSlider id="id_hslider_rotate" x="690" y="230" 
+		<s:Button x="383" y="500" label="RE_UPLOAD" skinClass="skins.button.HW_Back2UploadButton_Skin" click="reupload_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
+		<s:Button x="505" y="500" label="EDIT_NEXT" skinClass="skins.button.HW_EditorNextButton_Skin" click="editnext_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
+		<spark:VSlider id="id_vslider_rotate" x="690" y="220" 
 					   showTrackHighlight="true" skinClass="skins.slider.HW_EditorScaleVSlider_Skin"
 				   change="onEditorRotateSliderChange(event)" stepSize="1" minimum="-180" maximum="180" value="0"
-				   height="140" 
+				   height="250"
 				   />
 		
-		<s:Button x="685" y="198" label="ROTATE" skinClass="skins.button.HW_RotateButton_Skin" click="rotate90ButtonClickHandler(event)" enabled="false"/>
-		<s:Button x="625" y="198" label="ZOOM_IN" skinClass="skins.button.HW_ZoomInButton_Skin" click="zoomInButtonClickHandler(event)" enabled="false"/>
+		<s:Button x="685" y="185" label="ROTATE" skinClass="skins.button.HW_RotateButton_Skin" click="rotate90ButtonClickHandler(event)" enabled="false"/>
+		<s:Button x="625" y="185" label="ZOOM_IN" skinClass="skins.button.HW_ZoomInButton_Skin" click="zoomInButtonClickHandler(event)" enabled="false"/>
 		<s:Button x="625" y="373" label="ZOOM_OUT" skinClass="skins.button.HW_ZoomOutButton_Skin" click="zoomOutButtonClickHandler(event)" visible="false" includeInLayout="false"/>
-		<spark:VSlider id="id_vslider_scale" x="638" y="230"
+		<spark:VSlider id="id_vslider_scale" x="638" y="220"
 					   showTrackHighlight="true" skinClass="skins.slider.HW_EditorScaleVSlider_Skin"
 				   change="onEditorScaleSliderChange(event)" stepSize="0.1" minimum="0.5" maximum="4" value="1"
-				   height="140" 
+				   height="250" 
 				   />
 		
-		<s:BorderContainer id="id_border_contaniner" x="680" y="480" width="100" height="100">
-			<s:Group id="id_group_preview" width="50" height="50" alpha="0.5"/>
+		<s:BorderContainer id="id_border_contaniner" x="680" y="475" width="100" height="100" visible="false" includeInLayout="false">
+			<s:Group clipAndEnableScrolling="true" width="100%" height="100%">
+				<mx:Image source="{this.id_image_edit.source}" width="{this.id_border_contaniner.width}" height="{this.id_border_contaniner.height}"/>
+			</s:Group>
+			<s:Group id="id_group_preview" width="50" height="50" alpha="0.5" scaleX="{1.0/this.id_vslider_scale.value}" scaleY="{1.0/this.id_vslider_scale.value}"/>
 		</s:BorderContainer>
 		<mx:Image id="id_image_preview" x="555" y="450" width="100" height="100" visible="false" includeInLayout="false"/>
 		
 		<view:UITransformTool id="id_uit_tool_preview" skinClass="skins.uiTransformTool.TransformToolSkin_Preview" 
 							  maintainProjectionCenter="true" maintainMoveShortcuts="true"
-							  target="{this.id_group_preview}"
 							  transformation="id_uit_tool_preview_transformationHandler(event)"
 							  >
 			<view:bounds>
