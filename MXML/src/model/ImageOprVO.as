@@ -121,6 +121,7 @@ package model
 		//
 		public function get pY():String
 		{
+			return "+0";
 			//
 			tY -= opY; 
 			_pY = tY*(oH/dH);
@@ -128,6 +129,7 @@ package model
 		}
 		public function get pX():String
 		{
+			return "+0";
 			//
 			tX -= opX; 
 			_pX = tX*(oW/dW);
@@ -175,7 +177,7 @@ package model
 		}
 		public function get moved():Boolean
 		{
-			return (tpX!=0||tpY!=0);
+			return (tX!=0||tY!=0);
 		}
 		//For debugging
 		public function toString():String
