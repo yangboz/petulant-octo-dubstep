@@ -89,8 +89,8 @@ package model
 		// CONSTANTS
 		//----------------------------------
 		public static const USE_IMAGE_MAGICK:Boolean = true;//Image operation engine,switch AS3 or ImageMagick.
-		public static const MAX_UIT_WIDTH_DEFAULT:Number = 800;
-		public static const MAX_UIT_HEIGHT_DEFAULT:Number = 600;
+		public static const MAX_UIT_WIDTH_DEFAULT:Number = 500;
+		public static const MAX_UIT_HEIGHT_DEFAULT:Number = 500;
 		//CenterMeter to Inch
 		private static const CENTER_METER_2_INCH:Number = 0.3937008;
 		//mm*0.3937008*DPI

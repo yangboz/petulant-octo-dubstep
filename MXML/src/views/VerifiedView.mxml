@@ -2,7 +2,7 @@
 <views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				xmlns:views="views.*" width="800" height="600" xmlns:components="views.components.*" 
+				xmlns:views="views.*" width="100%" height="100%" xmlns:components="views.components.*" 
 				>
 	<fx:Script>
 		<![CDATA[

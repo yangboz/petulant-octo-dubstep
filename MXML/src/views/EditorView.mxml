@@ -2,7 +2,7 @@
 <views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				xmlns:views="views.*" width="800" height="600" 
+				xmlns:views="views.*" width="100%" height="100%" 
 				xmlns:components="views.components.*"
 				xmlns:view="com.vstyran.transform.view.*" 
 				xmlns:model="com.vstyran.transform.model.*" 
@@ -64,8 +64,8 @@
 				//Update tool
 				this.updateUITransformTools();
 				//Reset slider value
-				this.id_vslider_scale.value = 1.0;
-				this.id_vslider_rotate.value = 0.0;
+//				this.id_vslider_scale.value = 1.0;
+//				this.id_vslider_rotate.value = 0.0;
 			}
 			
 			override public function get viewBackgroundImage():Bitmap
@@ -79,8 +79,8 @@
 				this.id_image_edit.source = AppData.uploadedImageFile.nativePath;
 				this.id_image_edit.addEventListener(Event.COMPLETE,id_image_edit_completeHandler);
 				//
-				this.id_image_edit.minHeight = this.getRequiredCertPhotoHeight();
-				this.id_image_edit.minWidth = this.getRequiredCertPhotoWidth();
+//				this.id_image_edit.minHeight = this.getRequiredCertPhotoHeight();
+//				this.id_image_edit.minWidth = this.getRequiredCertPhotoWidth();
 				//
 				this.id_image_instruction.source = AppData.ARRAY_INS_CERT_TEXTS[AppData.selectedCertSizeIndex];
 				//
@@ -109,8 +109,8 @@
 			
 			protected function alignImageView():void
 			{
-				this.id_image_edit.x = 0;
-				this.id_image_edit.y = 0;
+//				this.id_image_edit.x = 0;
+//				this.id_image_edit.y = 0;
 				this.id_image_edit.rotation = 0;
 			}
 			//
@@ -123,9 +123,11 @@
 //				var contentH:Number = this.id_image_edit.bitmapData.height;
 				var contentWHratio:Number = contentW/contentH;
 				//
-				var requiredW:Number = getRequiredCertPhotoWidth();
-				var requiredH:Number = getRequiredCertPhotoHeight();
-				var requiredWHratio:Number = requiredW/requiredH;
+//				var requiredW:Number = getRequiredCertPhotoWidth();
+//				var requiredH:Number = getRequiredCertPhotoHeight();
+				var requiredW:Number = AppData.MAX_UIT_WIDTH_DEFAULT;
+				var requiredH:Number = AppData.MAX_UIT_HEIGHT_DEFAULT;
+//				var requiredWHratio:Number = requiredW/requiredH;
 				//Ratio check
 				if(contentW<=contentH)
 				{
@@ -541,11 +543,11 @@
 				var transMatrix:Matrix = new Matrix();
 				transMatrix.scale(AppData.savedImgOprVO.osX * this.id_vslider_scale.value, AppData.savedImgOprVO.osY* this.id_vslider_scale.value);
 //				transMatrix.translate(-rec.width/2,-rec.height/2);
-//				transMatrix.rotate(AppData.savedImgOprVO.r);
+//				transMatrix.rotate(this.id_vslider_rotate.value);
 //				transMatrix.translate(rec.width/2,rec.height/2);
 				var bitMapData:BitmapData = new BitmapData(id_image_edit.width, id_image_edit.height, true);
-//				bitMapData.draw(id_image_edit.content, transMatrix);
-				bitMapData.drawWithQuality(id_image_edit.content, transMatrix,null,null,null,true,StageQuality.BEST);
+				bitMapData.draw(id_image_edit.content, transMatrix);
+//				bitMapData.drawWithQuality(id_image_edit.content, transMatrix,null,null,null,true,StageQuality.BEST);
 				
 				var maskedBitMapData:BitmapData = new BitmapData(_maskWidth, _maskHeight);
 				maskedBitMapData.copyPixels(bitMapData, rec, new Point());
@@ -771,20 +773,26 @@
 		
 		<s:Image id="id_image_instruction" x="200" y="60" cachePolicy="off"/>
 			
-		<s:Group id="id_group" clipAndEnableScrolling="false" width="560" height="380" x="220" y="182">
-			<mx:Image id="id_image_edit" maintainAspectRatio="true" resize="id_group_resizeHandler(event)" 
-					  smoothBitmapContent="true"/>
-			<s:BorderContainer id="id_shadowContainer" backgroundColor="#B2BCB5" backgroundAlpha="0.8" width="100%" height="100%" >
-				<s:filters>
-					<s:BlurFilter blurX="5.0" blurY="5.0" />
-				</s:filters>
-			</s:BorderContainer>
-			
-			<s:Group id="id_uit_group" clipAndEnableScrolling="false" maxHeight="{id_image_edit.height}" maxWidth="{id_image_edit.width}">
-				<mx:Image id="id_image_masked" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" mouseChildren="false"/>
-				<s:Image id="id_image_frame" enabled="false" width="100%" height="100%"/>
-				<s:Image id="id_image_guide" enabled="false" width="100%" height="100%"/>
+		<s:Group id="id_group" clipAndEnableScrolling="false" width="680" height="540" x="320" y="182">
+			<s:Group width="100%" height="100%">
+				<s:Group width="500" height="500" horizontalCenter="0" verticalCenter="0" clipAndEnableScrolling="true">
+					<mx:Image id="id_image_edit" maintainAspectRatio="true" resize="id_group_resizeHandler(event)" 
+							  smoothBitmapContent="true"/>
+				</s:Group>
+				
+				<s:BorderContainer id="id_shadowContainer" backgroundColor="#B2BCB5" backgroundAlpha="0.8" width="100%" height="100%" >
+					<s:filters>
+						<s:BlurFilter blurX="5.0" blurY="5.0" />
+					</s:filters>
+				</s:BorderContainer>
+				
+				<s:Group id="id_uit_group" clipAndEnableScrolling="false" maxHeight="{id_image_edit.height}" maxWidth="{id_image_edit.width}">
+					<mx:Image id="id_image_masked" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" mouseChildren="false"/>
+					<s:Image id="id_image_frame" enabled="false" width="100%" height="100%"/>
+					<s:Image id="id_image_guide" enabled="false" width="100%" height="100%"/>
+				</s:Group>
 			</s:Group>
+			
 		</s:Group>
 		
 		<!--<s:Image id="id_image_mask" x="{id_image_frame.x}" y="{id_image_frame.y}" enabled="false"/>-->
@@ -805,25 +813,27 @@
 		</view:UITransformTool>
 		
 		
-		<s:Button x="383" y="500" label="RE_UPLOAD" skinClass="skins.button.HW_Back2UploadButton_Skin" click="reupload_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
-		<s:Button x="505" y="500" label="EDIT_NEXT" skinClass="skins.button.HW_EditorNextButton_Skin" click="editnext_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
-		<spark:VSlider id="id_vslider_rotate" x="690" y="220" 
+		<s:Button x="33" y="500" label="RE_UPLOAD" skinClass="skins.button.HW_Back2UploadButton_Skin" click="reupload_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
+		<s:Button x="155" y="500" label="EDIT_NEXT" skinClass="skins.button.HW_EditorNextButton_Skin" click="editnext_button_clickHandler(event)" buttonMode="true" useHandCursor="true"/>
+		<spark:VSlider id="id_vslider_rotate" x="922" y="220" 
 					   showTrackHighlight="true" skinClass="skins.slider.HW_EditorScaleVSlider_Skin"
-				   change="onEditorRotateSliderChange(event)" stepSize="1" minimum="-180" maximum="180" value="0"
+				   change="onEditorRotateSliderChange(event)" stepSize="90" minimum="-180" maximum="180" value="0"
 				   height="250"
 				   />
+		<s:Label x="925" y="475" text="{this.id_vslider_rotate.value.toString().concat('°')}" color="white"/>
 		
-		<s:Button x="685" y="185" label="ROTATE" skinClass="skins.button.HW_RotateButton_Skin" click="rotate90ButtonClickHandler(event)" enabled="false"/>
-		<s:Button x="625" y="185" label="ZOOM_IN" skinClass="skins.button.HW_ZoomInButton_Skin" click="zoomInButtonClickHandler(event)" enabled="false"/>
+		<s:Button x="911" y="182" label="ROTATE" skinClass="skins.button.HW_RotateButton_Skin" click="rotate90ButtonClickHandler(event)" enabled="false"/>
+		<s:Button x="851" y="182" label="ZOOM_IN" skinClass="skins.button.HW_ZoomInButton_Skin" click="zoomInButtonClickHandler(event)" enabled="false"/>
 		<s:Button x="625" y="373" label="ZOOM_OUT" skinClass="skins.button.HW_ZoomOutButton_Skin" click="zoomOutButtonClickHandler(event)" visible="false" includeInLayout="false"/>
-		<spark:VSlider id="id_vslider_scale" x="638" y="220"
+		<spark:VSlider id="id_vslider_scale" x="862" y="220"
 					   showTrackHighlight="true" skinClass="skins.slider.HW_EditorScaleVSlider_Skin"
 				   change="onEditorScaleSliderChange(event)" stepSize="0.1" minimum="0.5" maximum="4" value="1"
 				   height="250" 
 				   />
+		<s:Label x="863" y="475" text="{(this.id_vslider_scale.value*100).toString().concat('%')}" color="white"/>
 		
-		<s:BorderContainer id="id_border_contaniner" x="680" y="475" width="100" height="100" visible="false" includeInLayout="false">
-			<s:Group clipAndEnableScrolling="true" width="100%" height="100%">
+		<s:BorderContainer id="id_border_contaniner" x="887" y="610" width="100" height="100" >
+			<s:Group clipAndEnableScrolling="true" width="100%" height="100%" horizontalCenter="0" verticalCenter="0">
 				<mx:Image source="{this.id_image_edit.source}" width="{this.id_border_contaniner.width}" height="{this.id_border_contaniner.height}"/>
 			</s:Group>
 			<s:Group id="id_group_preview" width="50" height="50" alpha="0.5" scaleX="{1.0/this.id_vslider_scale.value}" scaleY="{1.0/this.id_vslider_scale.value}"/>
@@ -833,6 +843,7 @@
 		<view:UITransformTool id="id_uit_tool_preview" skinClass="skins.uiTransformTool.TransformToolSkin_Preview" 
 							  maintainProjectionCenter="true" maintainMoveShortcuts="true"
 							  transformation="id_uit_tool_preview_transformationHandler(event)"
+							  target="{this.id_group_preview}"
 							  >
 			<view:bounds>
 				<model:Bounds x="{this.id_border_contaniner.x}" y="{this.id_border_contaniner.y}" width="{this.id_border_contaniner.width}" height="{this.id_border_contaniner.height}"/>
@@ -843,7 +854,7 @@
 			</view:guidelines>-->
 			
 		</view:UITransformTool>
-				  
+		<!--		  
 		<s:Group id="passiveGuideGroup" top="0" bottom="0" left="0" right="0"/>
 		<s:Line id="vGuide" yFrom="{id_image_frame.y}" yTo="{id_image_frame.height}" depth="3" visible="true">
 			<s:stroke>
@@ -855,6 +866,7 @@
 				<s:SolidColorStroke color="#AA0000"/>
 			</s:stroke>
 		</s:Line>
+		-->
 	</s:BorderContainer>
 	
 </views:ViewBase>
