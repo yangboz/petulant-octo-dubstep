@@ -112,6 +112,12 @@
 //				this.id_image_edit.x = 0;
 //				this.id_image_edit.y = 0;
 				this.id_image_edit.rotation = 0;
+				//Align the id_group_uit to center.
+				this.id_group_uit.x = this.id_group_edit.width/2 - this.id_group_uit.width/2;
+				this.id_group_uit.y = this.id_group_edit.height/2 - this.id_group_uit.height/2;
+				//Define bounds
+				this.id_bounds_uit.x = this.id_group_edit.x + (this.id_group_edit.width-this.id_group_image.width)/2;
+				this.id_bounds_uit.y = this.id_group_edit.y + (this.id_group_edit.height-this.id_group_image.height)/2;
 			}
 			//
 			protected function autoResizeImageView():void
@@ -158,8 +164,8 @@
 				AppData.savedImgOprVO.iH = this.id_image_edit.height;//Initialize only once;
 				//
 				trace("(after autoResizeImageView)AppData.savedImageOperation:",AppData.savedImgOprVO);
-				//
-				this.renderCroppedImg();
+				//Calllater
+				this.id_image_edit.callLater(renderCroppedImg);
 			}
 			
 			protected function reupload_button_clickHandler(event:MouseEvent):void
@@ -220,17 +226,17 @@
 			//
 			private function deselectUITransformTool(event:MouseEvent):void
 			{
-				id_uit_tool.targets = null;
-				id_uit_tool.visible = false;
-				id_uit_tool.includeInLayout = false;
+				id_uit_cropper.targets = null;
+				id_uit_cropper.visible = false;
+				id_uit_cropper.includeInLayout = false;
 			}
 			
 			private function selectUITransformTool(event:MouseEvent):void
 			{
 //				id_uit_tool.targets = [id_image_edit];
-				id_uit_tool.targets = [id_group_uit];
-				id_uit_tool.visible = true;
-				id_uit_tool.includeInLayout = true;
+				id_uit_cropper.targets = [id_group_uit];
+				id_uit_cropper.visible = true;
+				id_uit_cropper.includeInLayout = true;
 				//UITransformTool
 //				id_uit_tool.width = id_image_edit.bitmapData.width;
 //				id_uit_tool.height = id_image_edit.bitmapData.height;
@@ -358,7 +364,7 @@
 			private function updateUITransformTools():void
 			{
 				//Update tool
-				this.id_uit_tool.updateTool(true);
+				this.id_uit_cropper.updateTool(true);
 /*	
 				//Update tool guide lines
 				var guidelines:Vector.<Guideline> = new Vector.<Guideline>();
@@ -527,6 +533,9 @@
 				var _y:int = Math.max(0, (img_masked.y - img_original.y)); */
 				var _x:int = this.id_group_uit.x - (this.id_group_edit.width-this.id_group_image.width)/2;
 				var _y:int = this.id_group_uit.y - (this.id_group_edit.height-this.id_group_image.height)/2;
+				//
+//				_x += this.id_image_edit_offsetX;
+//				_y += this.id_image_edit_offsetY;
 				var maskRec:Rectangle = new Rectangle(_x, _y, _maskWidth, _maskHeight);
 				
 				if(_maskWidth > 0 && _maskHeight > 0)
@@ -545,8 +554,8 @@
 //				transMatrix.rotate(this.id_vslider_rotate.value);
 //				transMatrix.translate(rec.width/2,rec.height/2);
 				var bitMapData:BitmapData = new BitmapData(id_image_edit.width, id_image_edit.height, true);
-				bitMapData.draw(id_image_edit.content, transMatrix);
-//				bitMapData.drawWithQuality(id_image_edit.content, transMatrix,null,null,null,true,StageQuality.BEST);
+//				bitMapData.draw(id_image_edit.content, transMatrix);
+				bitMapData.drawWithQuality(id_image_edit.content, transMatrix,null,null,null,true,StageQuality.BEST);
 				
 				var maskedBitMapData:BitmapData = new BitmapData(_maskWidth, _maskHeight);
 				maskedBitMapData.copyPixels(bitMapData, rec, new Point());
@@ -713,12 +722,25 @@
 			{
 				//				trace("toolData.matrix(transformation):",event.toolData.matrix);
 				trace("id_uit_tool_preview_transformationHandler->data.matrix(transformation):",event.data.matrix);
-				id_image_edit.x = event.data.matrix.tx * this.id_group_edit.width/this.id_border_contaniner.width;
-				id_image_edit.y = event.data.matrix.ty * this.id_group_edit.height/this.id_border_contaniner.height;
+				_id_image_edit_offsetX = event.data.matrix.tx * this.id_group_edit.width/this.id_border_contaniner.width;
+				_id_image_edit_offsetY = event.data.matrix.ty * this.id_group_edit.height/this.id_border_contaniner.height;
+				//
+				id_image_edit.x = _id_image_edit_offsetX;
+				id_image_edit.y = _id_image_edit_offsetY;
 				//Update cropper
 				this.renderCroppedImg();
 			}
-			
+			///
+			private var _id_image_edit_offsetX:Number;
+			protected function get id_image_edit_offsetX():Number
+			{
+				return _id_image_edit_offsetX;
+			}
+			private var _id_image_edit_offsetY:Number;
+			protected function get id_image_edit_offsetY():Number
+			{
+				return _id_image_edit_offsetY;
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>                                                                                                     
@@ -773,36 +795,35 @@
 		<s:Image id="id_image_instruction" x="200" y="60" cachePolicy="off"/>
 			
 		<s:Group id="id_group_edit" clipAndEnableScrolling="false" width="680" height="540" x="320" y="182">
-			<!--<s:Group width="100%" height="100%">-->
-				<s:Group id="id_group_image" width="500" height="500" horizontalCenter="0" verticalCenter="0" clipAndEnableScrolling="true">
-					<mx:Image id="id_image_edit" maintainAspectRatio="true" resize="id_group_resizeHandler(event)" 
-							  smoothBitmapContent="true"/>
-				</s:Group>
-				
-				<s:BorderContainer id="id_shadowContainer" backgroundColor="#B2BCB5" backgroundAlpha="0.8" width="100%" height="100%" >
-					<s:filters>
-						<s:BlurFilter blurX="5.0" blurY="5.0" />
-					</s:filters>
-				</s:BorderContainer>
-				
-				<s:Group id="id_group_uit" clipAndEnableScrolling="false" maxHeight="{id_image_edit.height}" maxWidth="{id_image_edit.width}">
-					<mx:Image id="id_image_masked" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" mouseChildren="false"/>
-					<s:Image id="id_image_frame" enabled="false" width="100%" height="100%"/>
-					<s:Image id="id_image_guide" enabled="false" width="100%" height="100%"/>
-				</s:Group>
-			<!--</s:Group>-->
+			
+			<s:Group id="id_group_image" width="500" height="500" horizontalCenter="0" verticalCenter="0" clipAndEnableScrolling="true">
+				<mx:Image id="id_image_edit" maintainAspectRatio="true" resize="id_group_resizeHandler(event)" 
+						  smoothBitmapContent="true"/>
+			</s:Group>
+			
+			<s:BorderContainer id="id_shadowContainer" backgroundColor="#B2BCB5" backgroundAlpha="0.8" width="100%" height="100%" >
+				<s:filters>
+					<s:BlurFilter blurX="5.0" blurY="5.0" />
+				</s:filters>
+			</s:BorderContainer>
+			
+			<s:Group id="id_group_uit" clipAndEnableScrolling="false" maxHeight="{id_image_edit.height}" maxWidth="{id_image_edit.width}">
+				<mx:Image id="id_image_masked" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" mouseChildren="false"/>
+				<s:Image id="id_image_frame" enabled="false" width="100%" height="100%"/>
+				<s:Image id="id_image_guide" enabled="false" width="100%" height="100%"/>
+			</s:Group>
 			
 		</s:Group>
 		
 		<!--<s:Image id="id_image_mask" x="{id_image_frame.x}" y="{id_image_frame.y}" enabled="false"/>-->
 		<!--guidelinesUpdate="tool_guidelinesUpdateHandler(event)"-->
-		<view:UITransformTool id="id_uit_tool" skinClass="skins.uiTransformTool.TransformToolSkin_Edit" 
+		<view:UITransformTool id="id_uit_cropper" skinClass="skins.uiTransformTool.TransformToolSkin_Edit" 
 							  transformationComplete="tool_transformationCompleteHandler(event)"
 							  transformation="tool_transformationHandler(event)"
 							  maintainProjectionCenter="true" maintainMoveShortcuts="true"
 							  >
 			<view:bounds>
-				<model:Bounds x="{this.id_group_edit.x}" y="{this.id_group_edit.y}" width="{this.id_shadowContainer.width}" height="{this.id_shadowContainer.height}"/>
+				<model:Bounds id="id_bounds_uit" width="{this.id_group_image.width}" height="{this.id_group_image.height}"/>
 			</view:bounds>
 			<!--<view:guidelines>
 				<model:Guideline type="{GuidelineType.HORIZONTAL_CENTER}" value="400" fraction="3"/>
