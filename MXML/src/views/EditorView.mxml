@@ -103,8 +103,8 @@
 				//
 //				this.id_uit_group.x = id_group_point.x;
 //				this.id_uit_group.y = id_group_point.y;
-				this.id_uit_group.width = this.getRequiredCertPhotoWidth();
-				this.id_uit_group.height = this.getRequiredCertPhotoHeight();
+				this.id_group_uit.width = this.getRequiredCertPhotoWidth();
+				this.id_group_uit.height = this.getRequiredCertPhotoHeight();
 			}
 			
 			protected function alignImageView():void
@@ -228,7 +228,7 @@
 			private function selectUITransformTool(event:MouseEvent):void
 			{
 //				id_uit_tool.targets = [id_image_edit];
-				id_uit_tool.targets = [id_uit_group];
+				id_uit_tool.targets = [id_group_uit];
 				id_uit_tool.visible = true;
 				id_uit_tool.includeInLayout = true;
 				//UITransformTool
@@ -525,8 +525,8 @@
 			{
 				/* var _x:int = Math.max(0, (img_masked.x - img_original.x));
 				var _y:int = Math.max(0, (img_masked.y - img_original.y)); */
-				var _x:int = this.id_uit_group.x - this.id_image_edit.x;
-				var _y:int = this.id_uit_group.y - this.id_image_edit.y;
+				var _x:int = this.id_group_uit.x - (this.id_group_edit.width-this.id_group_image.width)/2;
+				var _y:int = this.id_group_uit.y - (this.id_group_edit.height-this.id_group_image.height)/2;
 				var maskRec:Rectangle = new Rectangle(_x, _y, _maskWidth, _maskHeight);
 				
 				if(_maskWidth > 0 && _maskHeight > 0)
@@ -537,9 +537,8 @@
 			
 			private function clipFromBitMapData(rec:Rectangle):BitmapData
 			{
-				if(id_image_edit.content == null)
-					return null;
-				
+				if(id_image_edit.content == null) return null;
+				//Crop bitmapdata.
 				var transMatrix:Matrix = new Matrix();
 				transMatrix.scale(AppData.savedImgOprVO.osX * this.id_vslider_scale.value, AppData.savedImgOprVO.osY* this.id_vslider_scale.value);
 //				transMatrix.translate(-rec.width/2,-rec.height/2);
@@ -568,7 +567,7 @@
 			// draws the preview in the bottom right corner
 			private function get viewer():Group
 			{
-				return this.id_group;
+				return this.id_group_edit;
 			}
 			private function get _maxHorizontalScrollPosition():Number
 			{
@@ -714,8 +713,8 @@
 			{
 				//				trace("toolData.matrix(transformation):",event.toolData.matrix);
 				trace("id_uit_tool_preview_transformationHandler->data.matrix(transformation):",event.data.matrix);
-				id_image_edit.x = event.data.matrix.tx * this.id_group.width/this.id_border_contaniner.width;
-				id_image_edit.y = event.data.matrix.ty * this.id_group.height/this.id_border_contaniner.height;
+				id_image_edit.x = event.data.matrix.tx * this.id_group_edit.width/this.id_border_contaniner.width;
+				id_image_edit.y = event.data.matrix.ty * this.id_group_edit.height/this.id_border_contaniner.height;
 				//Update cropper
 				this.renderCroppedImg();
 			}
@@ -773,9 +772,9 @@
 		
 		<s:Image id="id_image_instruction" x="200" y="60" cachePolicy="off"/>
 			
-		<s:Group id="id_group" clipAndEnableScrolling="false" width="680" height="540" x="320" y="182">
-			<s:Group width="100%" height="100%">
-				<s:Group width="500" height="500" horizontalCenter="0" verticalCenter="0" clipAndEnableScrolling="true">
+		<s:Group id="id_group_edit" clipAndEnableScrolling="false" width="680" height="540" x="320" y="182">
+			<!--<s:Group width="100%" height="100%">-->
+				<s:Group id="id_group_image" width="500" height="500" horizontalCenter="0" verticalCenter="0" clipAndEnableScrolling="true">
 					<mx:Image id="id_image_edit" maintainAspectRatio="true" resize="id_group_resizeHandler(event)" 
 							  smoothBitmapContent="true"/>
 				</s:Group>
@@ -786,12 +785,12 @@
 					</s:filters>
 				</s:BorderContainer>
 				
-				<s:Group id="id_uit_group" clipAndEnableScrolling="false" maxHeight="{id_image_edit.height}" maxWidth="{id_image_edit.width}">
+				<s:Group id="id_group_uit" clipAndEnableScrolling="false" maxHeight="{id_image_edit.height}" maxWidth="{id_image_edit.width}">
 					<mx:Image id="id_image_masked" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" mouseChildren="false"/>
 					<s:Image id="id_image_frame" enabled="false" width="100%" height="100%"/>
 					<s:Image id="id_image_guide" enabled="false" width="100%" height="100%"/>
 				</s:Group>
-			</s:Group>
+			<!--</s:Group>-->
 			
 		</s:Group>
 		
@@ -803,7 +802,7 @@
 							  maintainProjectionCenter="true" maintainMoveShortcuts="true"
 							  >
 			<view:bounds>
-				<model:Bounds x="{this.id_group.x}" y="{this.id_group.y}" width="{this.id_shadowContainer.width}" height="{this.id_shadowContainer.height}"/>
+				<model:Bounds x="{this.id_group_edit.x}" y="{this.id_group_edit.y}" width="{this.id_shadowContainer.width}" height="{this.id_shadowContainer.height}"/>
 			</view:bounds>
 			<!--<view:guidelines>
 				<model:Guideline type="{GuidelineType.HORIZONTAL_CENTER}" value="400" fraction="3"/>
@@ -832,12 +831,19 @@
 				   />
 		<s:Label x="863" y="475" text="{(this.id_vslider_scale.value*100).toString().concat('%')}" color="white"/>
 		
-		<s:BorderContainer id="id_border_contaniner" x="887" y="610" width="100" height="100" >
-			<s:Group clipAndEnableScrolling="true" width="100%" height="100%" horizontalCenter="0" verticalCenter="0">
+		<s:Group id="id_border_contaniner" x="887" y="610" width="100" height="100">
+			<s:Group clipAndEnableScrolling="true" horizontalCenter="0" verticalCenter="0">
 				<mx:Image source="{this.id_image_edit.source}" width="{this.id_border_contaniner.width}" height="{this.id_border_contaniner.height}"/>
 			</s:Group>
-			<s:Group id="id_group_preview" width="50" height="50" alpha="0.5" scaleX="{1.0/this.id_vslider_scale.value}" scaleY="{1.0/this.id_vslider_scale.value}"/>
-		</s:BorderContainer>
+			<s:BorderContainer backgroundColor="#FEFEFE" backgroundAlpha="0.2" width="100%" height="100%" >
+				<s:filters>
+					<s:BlurFilter blurX="1.0" blurY="1.0" />
+				</s:filters>
+			</s:BorderContainer>
+			<s:Group id="id_group_preview" width="50" height="50" alpha="0.5" horizontalCenter="0"
+					 scaleX="{1.0/this.id_vslider_scale.value}"
+					 scaleY="{1.0/this.id_vslider_scale.value}" verticalCenter="0"/>
+		</s:Group>
 		<mx:Image id="id_image_preview" x="555" y="450" width="100" height="100" visible="false" includeInLayout="false"/>
 		
 		<view:UITransformTool id="id_uit_tool_preview" skinClass="skins.uiTransformTool.TransformToolSkin_Preview" 
