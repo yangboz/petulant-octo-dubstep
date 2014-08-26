@@ -12,19 +12,36 @@ package model
 	 */	
 	public class ImageOprVO extends Object
 	{
+		//RequiredWidth/Height
+		public var requiredWidth:Number;
+		public var requiredHeight:Number;
 		//UITransformTool related.
 		public var tX:Number=0;//TranslateX related on UITransformTool
 		public var tY:Number=0;//TranslateY related on UITransformTool
-		public var scaleX:Number=1;//ScaleX related on UITransformTool
-		public var scaleY:Number=1;//ScaleY related on UITransformTool
-		//Rotation
+		public var scaleX:Number=1;//ScaleX related on UITransformTool or Initialization
+		public var scaleY:Number=1;//ScaleY related on UITransformTool or Initialization
+		//Rotation,UITransformTool or VSlider_rotate.
 		public var r:Number=0;
 		//Crop value for ImageMagick -crop,@see http://www.imagemagick.org/Usage/crop/#crop_viewport
-		public var cropWidth:Number = 0;
-		public var cropHeight:Number = 0;
+		public function get cropHeight():Number
+		{
+			return requiredHeight*scaleY;
+		}
+		
+		public function get cropWidth():Number
+		{
+			return requiredWidth*scaleX;
+		}
 		//Page(viewPoint) value for ImageMagick -page,@see http://www.imagemagick.org/Usage/layers/#flatten
-		public var pageWidth:Number=0;//Page view width
-		public var pageHeight:Number=0;//Page view height
+		public function get pageHeight():Number
+		{
+			return requiredHeight*scaleY;
+		}
+		
+		public function get pageWidth():Number
+		{
+			return requiredWidth*scaleX;
+		}
 		//ImageMagick -page offset values
 		public var offsetPx:String="+0";//OffsetX
 		public var offsetPy:String="+0";//OffsetY

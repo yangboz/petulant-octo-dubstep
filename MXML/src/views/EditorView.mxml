@@ -159,15 +159,10 @@
 				AppData.savedImgOprVO.scaleX = this.id_image_edit.width/contentW;
 				AppData.savedImgOprVO.scaleY = this.id_image_edit.height/contentH;
 				//
-				AppData.savedImgOprVO.pageWidth = getRequiredCertPhotoWidth();
-				AppData.savedImgOprVO.pageHeight = getRequiredCertPhotoHeight();
-				AppData.savedImgOprVO.cropWidth = getRequiredCertPhotoWidth();
-				AppData.savedImgOprVO.cropHeight = getRequiredCertPhotoHeight();
+				AppData.savedImgOprVO.requiredWidth = this.getRequiredCertPhotoWidth();
+				AppData.savedImgOprVO.requiredHeight = this.getRequiredCertPhotoHeight();
 				AppData.savedImgOprVO.resizeWidth = this.id_image_edit.width;
 				AppData.savedImgOprVO.resizeHeight = this.id_image_edit.height;
-				//Update offset value.
-				AppData.savedImgOprVO.tX = this.cropperOffsetX;
-				AppData.savedImgOprVO.tY = this.cropperOffsetY;
 				//
 				trace("(after autoResizeImageView)AppData.savedImageOperation:",AppData.savedImgOprVO);
 				//Calllater
@@ -358,24 +353,20 @@
 //				trace("data.matrix(transformation):",event.data.matrix);
 				//Update cropper
 				this.renderCroppedImg();
-				//Update offset value.
-				AppData.savedImgOprVO.tX = this.cropperOffsetX;
-				AppData.savedImgOprVO.tY = this.cropperOffsetY;
-				trace("AppData.savedImgOprVO.tX/Y:",AppData.savedImgOprVO.tX,AppData.savedImgOprVO.tY);
 			}
 			
 			private function get cropperOffsetX():Number
 			{
 				var id_group_image_point:Point = this.id_image_edit.parent.localToGlobal(new Point(this.id_image_edit.x,this.id_image_edit.y));
 				var id_uit_cropper_point:Point = this.id_uit_cropper.parent.localToGlobal(new Point(this.id_uit_cropper.x,this.id_uit_cropper.y));
-				return id_group_image_point.x - id_uit_cropper_point.x;
+				return id_uit_cropper_point.x - id_group_image_point.x;
 			}
 			
 			private function get cropperOffsetY():Number
 			{
 				var id_group_image_point:Point = this.id_image_edit.parent.localToGlobal(new Point(this.id_image_edit.x,this.id_image_edit.y));
 				var id_uit_cropper_point:Point = this.id_uit_cropper.parent.localToGlobal(new Point(this.id_uit_cropper.x,this.id_uit_cropper.y));
-				return id_group_image_point.y - id_uit_cropper_point.y;
+				return id_uit_cropper_point.y - id_group_image_point.y;
 			}
 			
 			private function updateUITransformTools():void
@@ -559,6 +550,10 @@
 					this.id_image_masked.source = new Bitmap(clipFromBitMapData(maskRec), 'auto', true);
 				//
 //				this.redrawPreview(0);
+				//Update offset value.
+				AppData.savedImgOprVO.tX = this.cropperOffsetX;
+				AppData.savedImgOprVO.tY = this.cropperOffsetY;
+				trace("(after renderCroppedImg)AppData.savedImageOperation:",AppData.savedImgOprVO);
 			}
 			
 			private function clipFromBitMapData(rec:Rectangle):BitmapData
