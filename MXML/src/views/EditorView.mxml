@@ -154,16 +154,20 @@
 				}
 				//
 				AppData.savedImgOprVO = new ImageOprVO();//Changed if neccessary;
-				AppData.savedImgOprVO.oW = contentW;//Initialize only once;
-				AppData.savedImgOprVO.oH = contentH;//Initialize only once;
-				AppData.savedImgOprVO.rW = requiredW;//Initialize only once;
-				AppData.savedImgOprVO.rH = requiredH;//Initialize only once;
-				AppData.savedImgOprVO.odW = this.id_image_edit.width;//Initialize only once;
-				AppData.savedImgOprVO.odH = this.id_image_edit.height;//Initialize only once;
-				AppData.savedImgOprVO.dW = this.id_image_edit.width;//Changed if neccessary;
-				AppData.savedImgOprVO.dH = this.id_image_edit.height;//Changed if neccessary;
-				AppData.savedImgOprVO.iW = this.id_image_edit.width;//Initialize only once;
-				AppData.savedImgOprVO.iH = this.id_image_edit.height;//Initialize only once;
+				//Initialize only once;
+				//Changed if neccessary;
+				AppData.savedImgOprVO.scaleX = this.id_image_edit.width/contentW;
+				AppData.savedImgOprVO.scaleY = this.id_image_edit.height/contentH;
+				//
+				AppData.savedImgOprVO.pageWidth = getRequiredCertPhotoWidth();
+				AppData.savedImgOprVO.pageHeight = getRequiredCertPhotoHeight();
+				AppData.savedImgOprVO.cropWidth = getRequiredCertPhotoWidth();
+				AppData.savedImgOprVO.cropHeight = getRequiredCertPhotoHeight();
+				AppData.savedImgOprVO.resizeWidth = this.id_image_edit.width;
+				AppData.savedImgOprVO.resizeHeight = this.id_image_edit.height;
+				//Update offset value.
+				AppData.savedImgOprVO.tX = this.cropperOffsetX;
+				AppData.savedImgOprVO.tY = this.cropperOffsetY;
 				//
 				trace("(after autoResizeImageView)AppData.savedImageOperation:",AppData.savedImgOprVO);
 				//Calllater
@@ -327,24 +331,12 @@
 				{
 					case TransformationType.RESIZE:
 						//
-						AppData.savedImgOprVO.dW = rectangle.width;
-						AppData.savedImgOprVO.dH = rectangle.height;
-						//
 						AppData.savedImgOprVO.tX = event.data.matrix.tx;
 						AppData.savedImgOprVO.tY = event.data.matrix.ty;
-						//
-						AppData.savedImgOprVO.odW = this.id_image_edit.width;
-						AppData.savedImgOprVO.odH = this.id_image_edit.height;
 						break;
 					case TransformationType.ROTATE:
 						//
 						AppData.savedImgOprVO.r = this.id_image_edit.rotation;
-						//
-						AppData.savedImgOprVO.dW = rectangle.width;
-						AppData.savedImgOprVO.dH = rectangle.height;
-						//
-						AppData.savedImgOprVO.tpX = event.data.topLeft.x;
-						AppData.savedImgOprVO.tpY = event.data.topLeft.y;
 						//
 						AppData.savedImgOprVO.tX = event.data.matrix.tx;
 						AppData.savedImgOprVO.tY = event.data.matrix.ty;
@@ -366,6 +358,24 @@
 //				trace("data.matrix(transformation):",event.data.matrix);
 				//Update cropper
 				this.renderCroppedImg();
+				//Update offset value.
+				AppData.savedImgOprVO.tX = this.cropperOffsetX;
+				AppData.savedImgOprVO.tY = this.cropperOffsetY;
+				trace("AppData.savedImgOprVO.tX/Y:",AppData.savedImgOprVO.tX,AppData.savedImgOprVO.tY);
+			}
+			
+			private function get cropperOffsetX():Number
+			{
+				var id_group_image_point:Point = this.id_image_edit.parent.localToGlobal(new Point(this.id_image_edit.x,this.id_image_edit.y));
+				var id_uit_cropper_point:Point = this.id_uit_cropper.parent.localToGlobal(new Point(this.id_uit_cropper.x,this.id_uit_cropper.y));
+				return id_group_image_point.x - id_uit_cropper_point.x;
+			}
+			
+			private function get cropperOffsetY():Number
+			{
+				var id_group_image_point:Point = this.id_image_edit.parent.localToGlobal(new Point(this.id_image_edit.x,this.id_image_edit.y));
+				var id_uit_cropper_point:Point = this.id_uit_cropper.parent.localToGlobal(new Point(this.id_uit_cropper.x,this.id_uit_cropper.y));
+				return id_group_image_point.y - id_uit_cropper_point.y;
 			}
 			
 			private function updateUITransformTools():void
@@ -470,12 +480,12 @@
 				var cropString:String = String("").concat(
 //					"-define,distort:viewport=,",AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
 //					AppData.savedImgOprOV.oX,AppData.savedImgOprOV.oY,
-					"-resize,",AppData.savedImgOprVO.zW,"x",AppData.savedImgOprVO.zH,
+					"-resize,",AppData.savedImgOprVO.resizeWidth,"x",AppData.savedImgOprVO.resizeHeight,
 					",-rotate,",AppData.savedImgOprVO.r,
-					",+repage,-page,",AppData.savedImgOprVO.pW,"x",AppData.savedImgOprVO.pH,
-					AppData.savedImgOprVO.pX,AppData.savedImgOprVO.pY,
-					",-crop,",AppData.savedImgOprVO.cW,"x",AppData.savedImgOprVO.cH,
-					AppData.savedImgOprVO.oX,AppData.savedImgOprVO.oY,
+					",+repage,-page,",AppData.savedImgOprVO.pageWidth,"x",AppData.savedImgOprVO.pageWidth,
+					AppData.savedImgOprVO.offsetPx,AppData.savedImgOprVO.offsetPy,
+					",-crop,",AppData.savedImgOprVO.cropWidth,"x",AppData.savedImgOprVO.cropHeight,
+					AppData.savedImgOprVO.offsetCx,AppData.savedImgOprVO.offsetCy,
 					",-background,white,-flatten"
 //					",-distort SRT,",AppData.savedImgOprOV.r
 //					",-geometry,", AppData.savedImgOprOV.cW,"x",AppData.savedImgOprOV.cH,
@@ -496,8 +506,8 @@
 				as3ImageMagick.addEventListener(ImageMagickEvent.STANDARD_ERROR_DATA, errorDataHandler); 
 				as3ImageMagick.addEventListener(ImageMagickEvent.STANDARD_OUTPUT_CLOSE,outputCloseHandler);
 				//
-				var dataBytes:ByteArray = new ByteArray(); 
-				var errorBytes:ByteArray = new ByteArray(); 
+				var dataBytes:ByteArray = new ByteArray();
+				var errorBytes:ByteArray = new ByteArray();
 				//
 				function dataHandler(event:ProgressEvent):void
 				{ 
@@ -556,7 +566,7 @@
 				if(id_image_edit.content == null) return null;
 				//Crop bitmapdata.
 				var transMatrix:Matrix = new Matrix();
-				transMatrix.scale(AppData.savedImgOprVO.osX * this.id_vslider_scale.value, AppData.savedImgOprVO.osY* this.id_vslider_scale.value);
+				transMatrix.scale(AppData.savedImgOprVO.scaleX * this.id_vslider_scale.value, AppData.savedImgOprVO.scaleY* this.id_vslider_scale.value);
 //				transMatrix.translate(-rec.width/2,-rec.height/2);
 //				transMatrix.rotate(this.id_vslider_rotate.value);
 //				transMatrix.translate(rec.width/2,rec.height/2);

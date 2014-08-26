@@ -59,8 +59,8 @@
 					id_image_saved.y = AppData.savedImageOpts.tY;
 					id_image_saved.rotation = AppData.savedImageOpts.r;
 					*/
-					id_image_saved.scaleX = AppData.USE_IMAGE_MAGICK? AppData.savedImgOprVO.osX:1;
-					id_image_saved.scaleY = AppData.USE_IMAGE_MAGICK? AppData.savedImgOprVO.osY:1;
+					id_image_saved.scaleX = AppData.USE_IMAGE_MAGICK? AppData.savedImgOprVO.scaleX:1;
+					id_image_saved.scaleY = AppData.USE_IMAGE_MAGICK? AppData.savedImgOprVO.scaleY:1;
 					trace("id_image_saved.scaleX/Y:",id_image_saved.scaleX,id_image_saved.scaleY);
 				}
 			}
