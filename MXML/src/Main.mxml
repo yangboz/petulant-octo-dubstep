@@ -3,7 +3,7 @@
 					   xmlns:s="library://ns.adobe.com/flex/spark" 
 					   xmlns:mx="library://ns.adobe.com/flex/mx"
 					   width="1024"
-					   height="768" xmlns:views="views.*"
+					   height="841" xmlns:views="views.*"
 					   creationComplete="creationCompleteHandler(event)"
 					   showStatusBar="false" xmlns:components="views.components.*" 
 					   >

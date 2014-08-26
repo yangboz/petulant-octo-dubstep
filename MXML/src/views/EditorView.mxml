@@ -63,9 +63,11 @@
 				this.autoResizeImageView();
 				//Update tool
 				this.updateUITransformTools();
-				//Reset slider value
-//				this.id_vslider_scale.value = 1.0;
-//				this.id_vslider_rotate.value = 0.0;
+				//Reset slider values and change id_image_edit.
+				this.id_vslider_rotate.value = 0;
+				this.id_vslider_scale.value = 1.0;
+				this.id_vslider_rotate.dispatchEvent(new Event(Event.CHANGE,false,false));
+				this.id_vslider_scale.dispatchEvent(new Event(Event.CHANGE,false,false));
 			}
 			
 			override public function get viewBackgroundImage():Bitmap
@@ -183,6 +185,11 @@
 				this.id_image_edit.source = "";
 				//Reset image operation
 				AppData.savedImgOprVO = new ImageOprVO();
+				//Reset slider values and change id_image_edit.
+				this.id_vslider_rotate.value = 0;
+				this.id_vslider_scale.value = 1.0;
+				this.id_vslider_rotate.dispatchEvent(new Event(Event.CHANGE,false,false));
+				this.id_vslider_scale.dispatchEvent(new Event(Event.CHANGE,false,false));
 			}
 			
 			protected function editnext_button_clickHandler(event:MouseEvent):void
