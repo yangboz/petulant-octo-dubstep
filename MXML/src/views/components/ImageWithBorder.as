@@ -83,23 +83,23 @@ package views.components
 				var lineWeight:Number = 0.1;
 				var x:Number=(getStyle('borderWidth'));
 				var y:Number=(getStyle('borderWidth'));
-				trace(AppData.savedImgOprVO.scaleX,2*x,2*x/AppData.savedImgOprVO.scaleX,(2*x*1000)/(AppData.savedImgOprVO.scaleX*1000));
-				var width:Number=contentWidth+2*x/AppData.savedImgOprVO.scaleX;
-				var height:Number=contentHeight+2*y/AppData.savedImgOprVO.scaleY;
+				trace(AppData.savedImgOprVO.iScaleX,2*x,2*x/AppData.savedImgOprVO.iScaleX,(2*x*1000)/(AppData.savedImgOprVO.iScaleX*1000));
+				var width:Number=contentWidth+2*x/AppData.savedImgOprVO.iScaleX;
+				var height:Number=contentHeight+2*y/AppData.savedImgOprVO.iScaleY;
 //				var width:Number=this.bitmapData.width-2*getStyle('borderWidth');
 //				var height:Number=this.bitmapData.height-2*getStyle('borderWidth');
 //				graphics.clear();
 //				graphics.lineStyle(1,getStyle('borderColor'),getStyle('borderAlpha'),false);
 //				graphics.drawRect(x,y,width,height);
 				//Offset
-				var dX:Number = 1.4/AppData.savedImgOprVO.scaleX;
-				var dY:Number = 1.4/AppData.savedImgOprVO.scaleY;
+				var dX:Number = 1.4/AppData.savedImgOprVO.iScaleX;
+				var dY:Number = 1.4/AppData.savedImgOprVO.iScaleY;
 				if(this.dashy)
 				{
 					this.removeChild(dashy);
 //					(this as SkinnableContainer).removeElement(dashy);
 				}
-				this.dashy = new DashedLine(lineWeight,getStyle('borderColor'),new Array(4/AppData.savedImgOprVO.scaleX,4/AppData.savedImgOprVO.scaleX,4/AppData.savedImgOprVO.scaleX,4/AppData.savedImgOprVO.scaleX));
+				this.dashy = new DashedLine(lineWeight,getStyle('borderColor'),new Array(4/AppData.savedImgOprVO.iScaleX,4/AppData.savedImgOprVO.iScaleX,4/AppData.savedImgOprVO.iScaleX,4/AppData.savedImgOprVO.iScaleX));
 //				dashy.moveTo(-x,-y);
 				dashy.moveTo(width-dX,-y);
 //				dashy.lineTo(width,-y);

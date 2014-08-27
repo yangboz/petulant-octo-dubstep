@@ -108,8 +108,8 @@
 				//
 //				var definedImageScaleX:Number = AppData.savedImageOpts.sX * definedContainerScaleX;
 //				var definedImageScaleY:Number = AppData.savedImageOpts.sY * definedContainerScaleY;
-				var definedImageScaleX:Number = definedContainerScaleX * (AppData.USE_IMAGE_MAGICK?AppData.savedImgOprVO.scaleX:1);
-				var definedImageScaleY:Number = definedContainerScaleY * (AppData.USE_IMAGE_MAGICK?AppData.savedImgOprVO.scaleY:1);
+				var definedImageScaleX:Number = definedContainerScaleX * (AppData.USE_IMAGE_MAGICK?AppData.savedImgOprVO.iScaleX:1);
+				var definedImageScaleY:Number = definedContainerScaleY * (AppData.USE_IMAGE_MAGICK?AppData.savedImgOprVO.iScaleY:1);
 				//
 				var definedImageTx:Number = AppData.savedImgOprVO.tX;
 				var definedImageTy:Number = AppData.savedImgOprVO.tY;
