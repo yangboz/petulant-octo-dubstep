@@ -338,8 +338,6 @@
 						break;
 					case TransformationType.MOVE:
 						//
-						AppData.savedImgOprVO.tX = event.data.matrix.tx;
-						AppData.savedImgOprVO.tY = event.data.matrix.ty;
 						break;
 					default:
 						break;
@@ -359,6 +357,7 @@
 			{
 				var id_group_image_point:Point = this.id_image_edit.parent.localToGlobal(new Point(this.id_image_edit.x,this.id_image_edit.y));
 				var id_uit_cropper_point:Point = this.id_uit_cropper.parent.localToGlobal(new Point(this.id_uit_cropper.x,this.id_uit_cropper.y));
+				trace("id_group_image_point:",id_group_image_point,"id_uit_cropper_point:",id_uit_cropper_point);
 				return id_uit_cropper_point.x - id_group_image_point.x;
 			}
 			
@@ -366,6 +365,7 @@
 			{
 				var id_group_image_point:Point = this.id_image_edit.parent.localToGlobal(new Point(this.id_image_edit.x,this.id_image_edit.y));
 				var id_uit_cropper_point:Point = this.id_uit_cropper.parent.localToGlobal(new Point(this.id_uit_cropper.x,this.id_uit_cropper.y));
+				trace("id_group_image_point:",id_group_image_point,"id_uit_cropper_point:",id_uit_cropper_point);
 				return id_uit_cropper_point.y - id_group_image_point.y;
 			}
 			

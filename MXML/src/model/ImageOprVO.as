@@ -25,22 +25,22 @@ package model
 		//Crop value for ImageMagick -crop,@see http://www.imagemagick.org/Usage/crop/#crop_viewport
 		public function get cropHeight():Number
 		{
-			return requiredHeight*scaleY;
+			return requiredHeight;
 		}
 		
 		public function get cropWidth():Number
 		{
-			return requiredWidth*scaleX;
+			return requiredWidth;
 		}
 		//Page(viewPoint) value for ImageMagick -page,@see http://www.imagemagick.org/Usage/layers/#flatten
 		public function get pageHeight():Number
 		{
-			return requiredHeight*scaleY;
+			return requiredHeight;
 		}
 		
 		public function get pageWidth():Number
 		{
-			return requiredWidth*scaleX;
+			return requiredWidth;
 		}
 		//ImageMagick -page offset values
 		public var offsetPx:String="+0";//OffsetX
