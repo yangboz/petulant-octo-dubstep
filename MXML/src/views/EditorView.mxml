@@ -187,8 +187,8 @@
 				//Reset slider values and change id_image_edit.
 				this.id_vslider_rotate.value = 0;
 				this.id_vslider_scale.value = 1.0;
-				this.id_vslider_rotate.dispatchEvent(new Event(Event.CHANGE,false,false));
-				this.id_vslider_scale.dispatchEvent(new Event(Event.CHANGE,false,false));
+//				this.id_vslider_rotate.dispatchEvent(new Event(Event.CHANGE,false,false));
+//				this.id_vslider_scale.dispatchEvent(new Event(Event.CHANGE,false,false));
 			}
 			
 			protected function editnext_button_clickHandler(event:MouseEvent):void
@@ -479,7 +479,7 @@
 //					AppData.savedImgOprOV.oX,AppData.savedImgOprOV.oY,
 					"-resize,",AppData.savedImgOprVO.resizeWidth,"x",AppData.savedImgOprVO.resizeHeight,
 					",-rotate,",AppData.savedImgOprVO.r,
-					",+repage,-page,",AppData.savedImgOprVO.pageWidth,"x",AppData.savedImgOprVO.pageWidth,
+					",+repage,-page,",AppData.savedImgOprVO.pageWidth,"x",AppData.savedImgOprVO.pageHeight,
 					AppData.savedImgOprVO.offsetPx,AppData.savedImgOprVO.offsetPy,
 					",-crop,",AppData.savedImgOprVO.cropWidth,"x",AppData.savedImgOprVO.cropHeight,
 					AppData.savedImgOprVO.offsetCx,AppData.savedImgOprVO.offsetCy,
