@@ -20,9 +20,9 @@
 				return new AppData.BG_IMG_00() as Bitmap;
 			}
 			////FIXME: @see http://www.misho.ca/flex-4-viewstack-page-navigation-part-one/
-			protected function creationCompleteHandler(event:FlexEvent):void
+			public function creationCompleteHandler(event:FlexEvent):void
 			{
-				
+				//To be override.
 			}
 			
 			protected function id_list_changeHandler(event:IndexChangeEvent):void

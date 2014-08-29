@@ -34,7 +34,7 @@
 				this.updateImageViews();
 			}
 			
-			override protected function creationCompleteHandler(event:FlexEvent):void
+			override public function creationCompleteHandler(event:FlexEvent):void
 			{
 				//register for the drag enter event
 				addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER, onNativeDragEnter);

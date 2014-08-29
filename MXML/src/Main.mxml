@@ -63,10 +63,11 @@
 			//
 			protected function navigatorcontent_editor_showHandler(event:FlexEvent):void
 			{
-				id_editor_view.updateImageViews();
-				//Manually select the previous selected index.
-//				id_editor_view.id_list.selectedIndex = AppData.selectedCertSizeIndex;
-				id_editor_view.dispatchEvent(new IndexChangeEvent(IndexChangeEvent.CHANGE,false,false,-1,AppData.selectedCertSizeIndex));
+				id_editor_view.creationCompleteHandler(event);
+//				id_editor_view.updateImageViews();
+//				//Manually select the previous selected index.
+////				id_editor_view.id_list.selectedIndex = AppData.selectedCertSizeIndex;
+//				id_editor_view.dispatchEvent(new IndexChangeEvent(IndexChangeEvent.CHANGE,false,false,-1,AppData.selectedCertSizeIndex));
 			}
 			//Auto navigate to View_Verified
 			//@see issue: http://www.misho.ca/flex-4-viewstack-page-navigation-part-one/
@@ -97,7 +98,7 @@
 			}
 			protected function navigatorcontent_upload_showHandler(event:FlexEvent):void
 			{
-				id_upload_view.updateImageViews();
+				id_upload_view.creationCompleteHandler(event);
 				//Manually select the previous selected index.
 				id_upload_view.id_list.selectedIndex = AppData.selectedCertSizeIndex;
 			}
